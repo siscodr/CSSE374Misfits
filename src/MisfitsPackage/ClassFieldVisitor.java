@@ -13,7 +13,6 @@ public class ClassFieldVisitor extends ClassVisitor {
 	
 	public ClassFieldVisitor(int arg0, ClassVisitor arg1) {
 		super(arg0, arg1);
-		// TODO Auto-generated constructor stub
 	}
 
 	public FieldVisitor visitField(int access, String name, String desc, String signature, Object value){

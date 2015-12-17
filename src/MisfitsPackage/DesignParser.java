@@ -19,6 +19,8 @@ public class DesignParser {
 			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor);
 			
 			System.out.println("digraph misfit_diagram{");
+			System.out.println("rankdir=BT;");
+			
 			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 		}
 	}
