@@ -8,9 +8,12 @@ import jdk.internal.org.objectweb.asm.Opcodes;
  
 public class DesignParser {
 	static public StringBuffer buffer = new StringBuffer();
+	static public String classString = new String();
 	
 	public static void main(String[] args) throws IOException{
 		for(String className: args){
+			String[] partsOfName = className.split("/");
+			classString = partsOfName[partsOfName.length - 1];
 			ClassReader reader = new ClassReader(className);
 			
 			ClassVisitor decIVisitor = new ClassDeclarationVisitor(Opcodes.ASM5);
