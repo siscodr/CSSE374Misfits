@@ -40,10 +40,11 @@ public class ClassMethodVisitor extends ClassVisitor {
 			symbol="#";
 		}
 
-		DesignParser.buffer.append("1");
+		
 		
 		if(name.charAt(0)!='<'){
 			System.out.print(symbol + name + "("+ stypes.toString()+") : " + returnType + "\\l ");
+			DesignParser.buffer.append(name +  " -> " +  + "[arrowhead=\"vee\", style=\"dashed\"];\n");
 		}
 		return toDecorate;
 	}
