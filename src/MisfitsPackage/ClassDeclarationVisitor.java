@@ -14,8 +14,8 @@ public class ClassDeclarationVisitor extends ClassVisitor
 		super(arg0,arg1);
 	}
 	public void visit(int version, int access, String name, String signature, String superName, String[] interfaces){
-		String[] partsOfName = name.split("/");
-		String newName = partsOfName[partsOfName.length - 1];
+		String newName = name.replace(".","_");
+		newName = newName.replace("/","_");
 		
 		for(int i = 0; i< interfaces.length; i++){
 		System.out.println(newName + " -> " + interfaces[i] + " [arrowhead=\"onormal\", style=\"dashed\"];");

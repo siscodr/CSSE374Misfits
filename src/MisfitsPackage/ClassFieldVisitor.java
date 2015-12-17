@@ -30,8 +30,10 @@ public class ClassFieldVisitor extends ClassVisitor {
 		else if((access & Opcodes.ACC_PROTECTED)!=0){
 			symbol="#";
 		}
-		DesignParser.buffer.append("1");
+		String type2 = type.replace("/", "_");
+		type2 = type2.replace(".", "_");
 		if(name.charAt(0)!='<'){
+			DesignParser.buffer.append(DesignParser.classString +  " -> " + type2 + " [arrowhead=\"diamond\"];\n");
 			System.out.print(symbol+ " " + name + " : " + type +"\\l");
 		}
 		return toDecorate;

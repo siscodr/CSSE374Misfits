@@ -12,8 +12,9 @@ public class DesignParser {
 	
 	public static void main(String[] args) throws IOException{
 		for(String className: args){
-			String[] partsOfName = className.split("/");
-			classString = partsOfName[partsOfName.length - 1];
+			classString = className.replace(".","_");
+			classString = classString.replace("/","_");
+			
 			ClassReader reader = new ClassReader(className);
 			
 			ClassVisitor decIVisitor = new ClassDeclarationVisitor(Opcodes.ASM5);
