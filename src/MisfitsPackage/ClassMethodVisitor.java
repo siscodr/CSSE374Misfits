@@ -40,8 +40,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 			symbol="#";
 		}
 		
-		System.out.println("     method " + symbol + returnType + " " + name + " "
-				+ stypes.toString());
+		//System.out.println("     method " + symbol + returnType + " " + name + " " + stypes.toString());
 		return toDecorate;
 	}
 

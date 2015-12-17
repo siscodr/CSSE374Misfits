@@ -23,9 +23,18 @@ public class ClassDeclarationVisitor extends ClassVisitor
 		
 		System.out.println("   " + name + " {");
 		System.out.println("     shape=\"record\"");
-		System.out.println("     label = \"{" + name + "|}\"");
+		System.out.print("     label = \"{" + name + "|");
 		
-		System.out.println("Class: "+name+" extends "+superName+" implements "+ Arrays.toString(interfaces));
+//		System.out.print("Class: "+name);
+//		if(superName != null)
+//		System.out.print(" extends "+superName);
+//		if(interfaces.length > 0)
+//		System.out.println(" implements "+ Arrays.toString(interfaces));	
 		super.visit(version,  access,  name,  signature,  superName,  interfaces);
 	}
+	public void postVisit(int version, int access, String name, String signature, String superName, String[] interfaces){
+		System.out.println("}\"");
+		System.out.println("];");
+	}
+	
 }

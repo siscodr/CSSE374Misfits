@@ -20,7 +20,7 @@ public class ClassFieldVisitor extends ClassVisitor {
 		
 		String type = Type.getType(desc).getClassName();
 		
-		System.out.println("      " + type +" "+ name);
+		//System.out.println("      " + type +" "+ name);
 		return toDecorate;
 		
 	}
