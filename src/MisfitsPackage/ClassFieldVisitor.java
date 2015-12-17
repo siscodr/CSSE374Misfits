@@ -30,8 +30,9 @@ public class ClassFieldVisitor extends ClassVisitor {
 		else if((access & Opcodes.ACC_PROTECTED)!=0){
 			symbol="#";
 		}
-		
-		System.out.print(symbol+ " " + name + " : " + type +"\\l");
+		if(name.charAt(0)!='<'){
+			System.out.print(symbol+ " " + name + " : " + type +"\\l");
+		}
 		return toDecorate;
 		
 	}

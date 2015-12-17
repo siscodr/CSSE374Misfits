@@ -39,8 +39,9 @@ public class ClassMethodVisitor extends ClassVisitor {
 		else if((access & Opcodes.ACC_PROTECTED)!=0){
 			symbol="#";
 		}
-		
-		System.out.print(symbol + name + "("+ stypes.toString()+") : " + returnType + "\\l ");
+		if(name.charAt(0)!='<'){
+			System.out.print(symbol + name + "("+ stypes.toString()+") : " + returnType + "\\l ");
+		}
 		return toDecorate;
 	}
 }
