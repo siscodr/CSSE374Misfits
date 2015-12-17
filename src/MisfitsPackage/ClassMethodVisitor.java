@@ -43,5 +43,4 @@ public class ClassMethodVisitor extends ClassVisitor {
 		System.out.print(symbol + name + "("+ stypes.toString()+") : " + returnType + "\\l ");
 		return toDecorate;
 	}
-
 }

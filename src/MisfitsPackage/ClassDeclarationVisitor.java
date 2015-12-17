@@ -1,8 +1,5 @@
 package MisfitsPackage;
 
-
-import java.util.Arrays;
-
 import jdk.internal.org.objectweb.asm.ClassVisitor;
 
 public class ClassDeclarationVisitor extends ClassVisitor
@@ -20,7 +17,6 @@ public class ClassDeclarationVisitor extends ClassVisitor
 		for(int i = 0; i< interfaces.length; i++){
 		System.out.println(name + " -> " + interfaces[i] + " [arrowhead=\"onormal\", style=\"dashed\"];");
 		}
-		
 		System.out.println("   " + name + " [");
 		System.out.println("     shape=\"record\"");
 		System.out.print("     label = \"{" + name + "|");
@@ -31,12 +27,5 @@ public class ClassDeclarationVisitor extends ClassVisitor
 //		if(interfaces.length > 0)
 //		System.out.println(" implements "+ Arrays.toString(interfaces));	
 		super.visit(version,  access,  name,  signature,  superName,  interfaces);
-		postVisit();
 	}
-
-	public void postVisit(){
-		System.out.println("}\"");
-		System.out.println("];");
-	}
-	
 }

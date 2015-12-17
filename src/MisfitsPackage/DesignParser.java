@@ -6,7 +6,6 @@ import jdk.internal.org.objectweb.asm.ClassVisitor;
 import jdk.internal.org.objectweb.asm.Opcodes;
 
 public class DesignParser {
-	private int cheese;
 	
 	public static void main(String[] args) throws IOException{
 		for(String className: args){
@@ -22,6 +21,10 @@ public class DesignParser {
 			System.out.println("rankdir=BT;");
 			
 			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
+
+			System.out.println("}\"");
+			System.out.println("];");
 		}
+	System.out.println("}");
 	}
 }
