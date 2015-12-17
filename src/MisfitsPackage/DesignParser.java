@@ -5,7 +5,9 @@ import jdk.internal.org.objectweb.asm.ClassReader;
 import jdk.internal.org.objectweb.asm.ClassVisitor;
 import jdk.internal.org.objectweb.asm.Opcodes;
 
+ 
 public class DesignParser {
+	static public StringBuffer buffer = new StringBuffer();
 	
 	public static void main(String[] args) throws IOException{
 		for(String className: args){
@@ -21,9 +23,10 @@ public class DesignParser {
 			System.out.println("rankdir=BT;");
 			
 			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
-
 			System.out.println("}\"");
 			System.out.println("];");
+			System.out.println(buffer.toString());
+			buffer = new StringBuffer();
 		}
 	System.out.println("}");
 	}
