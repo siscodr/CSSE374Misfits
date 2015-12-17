@@ -14,12 +14,15 @@ public class ClassDeclarationVisitor extends ClassVisitor
 		super(arg0,arg1);
 	}
 	public void visit(int version, int access, String name, String signature, String superName, String[] interfaces){
+		String[] partsOfName = name.split("/");
+		String newName = partsOfName[partsOfName.length - 1];
+		
 		for(int i = 0; i< interfaces.length; i++){
-		System.out.println(name + " -> " + interfaces[i] + " [arrowhead=\"onormal\", style=\"dashed\"];");
+		System.out.println(newName + " -> " + interfaces[i] + " [arrowhead=\"onormal\", style=\"dashed\"];");
 		}
-		System.out.println("   " + name + " [");
+		System.out.println("   " + newName + " [");
 		System.out.println("     shape=\"record\"");
-		System.out.print("     label = \"{" + name + "|");
+		System.out.print("     label = \"{" + newName + "|");
 		
 //		System.out.print("Class: "+name);
 //		if(superName != null)
