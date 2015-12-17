@@ -1,3 +1,4 @@
+package MisfitsPackage;
 
 
 import java.io.IOException;
@@ -9,7 +10,7 @@ import jdk.internal.org.objectweb.asm.util.TraceClassVisitor;
 
 public class FirstASM {
 	public static void main(String[] args) throws IOException{
-		ClassReader reader = new ClassReader("problem.asm.FirstASM");
+		ClassReader reader = new ClassReader("MisfitsPackage.FirstASM");
 		
 		ClassVisitor visitor = new TraceClassVisitor(new PrintWriter(System.out));
 	
