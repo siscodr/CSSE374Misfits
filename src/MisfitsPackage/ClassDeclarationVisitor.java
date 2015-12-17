@@ -31,8 +31,9 @@ public class ClassDeclarationVisitor extends ClassVisitor
 //		if(interfaces.length > 0)
 //		System.out.println(" implements "+ Arrays.toString(interfaces));	
 		super.visit(version,  access,  name,  signature,  superName,  interfaces);
+		postVisit();
 	}
-	public void postVisit(int version, int access, String name, String signature, String superName, String[] interfaces){
+	public void postVisit(){
 		System.out.println("}\"");
 		System.out.println("];");
 	}
