@@ -1,13 +1,13 @@
 package MisfitsPackage;
 
-
 import java.io.IOException;
-
 import jdk.internal.org.objectweb.asm.ClassReader;
 import jdk.internal.org.objectweb.asm.ClassVisitor;
 import jdk.internal.org.objectweb.asm.Opcodes;
 
 public class DesignParser {
+	private int cheese;
+	
 	public static void main(String[] args) throws IOException{
 		for(String className: args){
 			ClassReader reader = new ClassReader(className);

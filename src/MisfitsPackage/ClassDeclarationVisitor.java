@@ -21,7 +21,7 @@ public class ClassDeclarationVisitor extends ClassVisitor
 		System.out.println(name + " -> " + interfaces[i] + " [arrowhead=\"onormal\", style=\"dashed\"];");
 		}
 		
-		System.out.println("   " + name + " {");
+		System.out.println("   " + name + " [");
 		System.out.println("     shape=\"record\"");
 		System.out.print("     label = \"{" + name + "|");
 		
@@ -33,6 +33,7 @@ public class ClassDeclarationVisitor extends ClassVisitor
 		super.visit(version,  access,  name,  signature,  superName,  interfaces);
 		postVisit();
 	}
+
 	public void postVisit(){
 		System.out.println("}\"");
 		System.out.println("];");
