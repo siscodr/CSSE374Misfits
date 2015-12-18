@@ -1,6 +1,5 @@
 package MisfitsPackage;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,25 +27,26 @@ public class ClassMethodVisitor extends ClassVisitor {
 		for (Type t : argTypes) {
 			stypes.add(t.getClassName());
 		}
-		
+
 		String symbol = "";
-		if((access & Opcodes.ACC_PUBLIC)!= 0){
-			symbol="+";
-		}
-		else if((access & Opcodes.ACC_PRIVATE)!=0){
-			symbol="-";
-		}
-		else if((access & Opcodes.ACC_PROTECTED)!=0){
-			symbol="#";
+		if ((access & Opcodes.ACC_PUBLIC) != 0) {
+			symbol = "+";
+		} else if ((access & Opcodes.ACC_PRIVATE) != 0) {
+			symbol = "-";
+		} else if ((access & Opcodes.ACC_PROTECTED) != 0) {
+			symbol = "#";
 		}
 
-		
-		
-		if(name.charAt(0)!='<'){
-			System.out.print(symbol + name + "("+ stypes.toString()+") : " + returnType + "\\l ");
-			if(returnType!="void"){
-				DesignParser.buffer.append(DesignParser.classString +  " -> " + returnType + " [arrowhead=\"vee\", style=\"dashed\"];\n");
+		for (String types : stypes) {
+			String cleanType = DesignParser.stripFunction(types);
+			if (!DesignParser.uses.contains(cleanType)) {
+				DesignParser.uses.add(cleanType);
 			}
+		}
+
+		if (name.charAt(0) != '<') {
+			System.out.print(symbol + name + "(" + stypes.toString() + ") : "
+					+ returnType + "\\l ");
 		}
 		return toDecorate;
 	}
