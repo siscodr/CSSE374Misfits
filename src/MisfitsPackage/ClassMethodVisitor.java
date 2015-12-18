@@ -18,6 +18,10 @@ public class ClassMethodVisitor extends ClassVisitor {
 			String signature, String[] exceptions) {
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc,
 				signature, exceptions);
+		if(DesignParser.getFirstMethod()){
+			System.out.print("|");
+			DesignParser.setFirstMethod(false);
+		}
 
 		String returnType = Type.getReturnType(desc).getClassName();
 

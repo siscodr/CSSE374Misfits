@@ -11,20 +11,20 @@ public class DesignParser {
 	static public ArrayList<String> fields = new ArrayList<String>();
 	static public ArrayList<String> uses = new ArrayList<String>();
 	static public String classString = new String();
+	static public Boolean firstMethod;
 
 	public static void main(String[] args) throws IOException {
 		for (String className : args) {
 			classString = stripFunction(className);
+			firstMethod = true;
 
 			ClassReader reader = new ClassReader(className);
 
 			ClassVisitor decIVisitor = new ClassDeclarationVisitor(Opcodes.ASM5);
 
-			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5,
-					decIVisitor);
+			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, decIVisitor);
 
-			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5,
-					fieldVisitor);
+			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor);
 
 			System.out.println("digraph misfit_diagram{");
 			System.out.println("rankdir=BT;");
@@ -33,11 +33,9 @@ public class DesignParser {
 			System.out.println("}\"");
 			System.out.println("];");
 			for (String types : uses)
-				System.out.println(classString + " -> " + types
-						+ " [arrowhead=\"vee\", style=\"dashed\"];");
+				System.out.println(classString + " -> " + types + " [arrowhead=\"vee\", style=\"dashed\"];");
 			for (String field : fields)
-				System.out.println(field + " -> " + classString
-						+ " [arrowhead=\"diamond\"];");
+				System.out.println(field + " -> " + classString + " [arrowhead=\"diamond\"];");
 		}
 		System.out.println("}");
 	}
@@ -48,5 +46,13 @@ public class DesignParser {
 		toStrip = toStrip.replace("[", "");
 		toStrip = toStrip.replace("]", "");
 		return toStrip;
+	}
+
+	public static Boolean getFirstMethod() {
+		return firstMethod;
+	}
+
+	public static void setFirstMethod(Boolean firstMethod) {
+		DesignParser.firstMethod = firstMethod;
 	}
 }
