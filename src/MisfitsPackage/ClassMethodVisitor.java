@@ -18,7 +18,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 			String signature, String[] exceptions) {
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc,
 				signature, exceptions);
-		if(DesignParser.getFirstMethod()){
+		if (DesignParser.getFirstMethod()) {
 			System.out.print("|");
 			DesignParser.setFirstMethod(false);
 		}
@@ -40,15 +40,25 @@ public class ClassMethodVisitor extends ClassVisitor {
 		} else if ((access & Opcodes.ACC_PROTECTED) != 0) {
 			symbol = "#";
 		}
-
-		for (String types : stypes) {
-			String cleanType = DesignParser.stripFunction(types);
-			if (!DesignParser.uses.contains(cleanType)) {
-				DesignParser.uses.add(cleanType);
+		if (name.equals("<init>")) {
+			for (String types : stypes) {
+				String cleanType = DesignParser.stripFunction(types);
+				if (DesignParser.fields.contains(cleanType)) {
+					DesignParser.fields.remove(cleanType);
+					DesignParser.takes.add(cleanType);
+				}
+			}
+		} else {
+			for (String types : stypes) {
+				String cleanType = DesignParser.stripFunction(types);
+				if (!DesignParser.uses.contains(cleanType)) {
+					DesignParser.uses.add(cleanType);
+				}
 			}
 		}
 
 		if (name.charAt(0) != '<') {
+			
 			System.out.print(symbol + name + "(" + stypes.toString() + ") : "
 					+ returnType + "\\l ");
 		}
