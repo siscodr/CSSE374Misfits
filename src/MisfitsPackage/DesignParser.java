@@ -12,8 +12,7 @@ public class DesignParser {
 	
 	public static void main(String[] args) throws IOException{
 		for(String className: args){
-			classString = className.replace(".","_");
-			classString = classString.replace("/","_");
+			classString = stripFunction(className);
 			
 			ClassReader reader = new ClassReader(className);
 			
@@ -33,5 +32,10 @@ public class DesignParser {
 			buffer = new StringBuffer();
 		}
 	System.out.println("}");
+	}
+	public static String stripFunction(String toStrip){
+		toStrip=toStrip.replace(".","_");
+		toStrip=toStrip.replace("/","_");
+		return toStrip;
 	}
 }

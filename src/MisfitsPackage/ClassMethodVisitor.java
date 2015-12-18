@@ -44,7 +44,9 @@ public class ClassMethodVisitor extends ClassVisitor {
 		
 		if(name.charAt(0)!='<'){
 			System.out.print(symbol + name + "("+ stypes.toString()+") : " + returnType + "\\l ");
-			DesignParser.buffer.append(DesignParser.classString +  " -> " + name + " [arrowhead=\"vee\", style=\"dashed\"];\n");
+			if(returnType!="void"){
+				DesignParser.buffer.append(DesignParser.classString +  " -> " + returnType + " [arrowhead=\"vee\", style=\"dashed\"];\n");
+			}
 		}
 		return toDecorate;
 	}
