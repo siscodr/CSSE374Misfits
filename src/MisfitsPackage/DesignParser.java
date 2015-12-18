@@ -45,6 +45,8 @@ public class DesignParser {
 	public static String stripFunction(String toStrip) {
 		toStrip = toStrip.replace(".", "_");
 		toStrip = toStrip.replace("/", "_");
+		toStrip = toStrip.replace("[", "");
+		toStrip = toStrip.replace("]", "");
 		return toStrip;
 	}
 }
