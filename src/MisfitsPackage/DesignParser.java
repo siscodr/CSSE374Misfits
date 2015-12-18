@@ -36,7 +36,7 @@ public class DesignParser {
 				System.out.println(classString + " -> " + types
 						+ " [arrowhead=\"vee\", style=\"dashed\"];");
 			for (String field : fields)
-				System.out.println(fields + " -> " + classString
+				System.out.println(field + " -> " + classString
 						+ " [arrowhead=\"diamond\"];");
 		}
 		System.out.println("}");
