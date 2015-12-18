@@ -18,8 +18,18 @@ public class ClassDeclarationVisitor extends ClassVisitor
 		newName = newName.replace("/","_");
 		
 		for(int i = 0; i< interfaces.length; i++){
-		System.out.println(newName + " -> " + interfaces[i] + " [arrowhead=\"onormal\", style=\"dashed\"];");
+		String newInterface = interfaces[i].replace("/", "_");
+		newInterface = newInterface.replace(".", "_");
+		System.out.println(newName + " -> " + newInterface + " [arrowhead=\"onormal\", style=\"dashed\"];");
 		}
+		//Draw extend arrows here
+		if(superName != null) {
+			String newSuper = superName.replace("/", "_");
+			newSuper = newSuper.replace(".", "_");
+			System.out.println(newName + " -> " + newSuper + " [arrowhead=\"onormal\"];");
+		}
+		
+		//Class starts here
 		System.out.println("   " + newName + " [");
 		System.out.println("     shape=\"record\"");
 		System.out.print("     label = \"{" + newName + "|");
