@@ -2,6 +2,7 @@ package MisfitsPackage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import jdk.internal.org.objectweb.asm.ClassReader;
 import jdk.internal.org.objectweb.asm.ClassVisitor;
@@ -11,6 +12,7 @@ public class DesignParser {
 	static public ArrayList<String> fields = new ArrayList<String>();
 	static public ArrayList<String> uses = new ArrayList<String>();
 	static public ArrayList<String> takes = new ArrayList<String>();
+	static public ArrayList<String> toDelete = new ArrayList<String>(Arrays.asList("boolean", "byte", "short", "int", "double", "java_lang_String", "long", "float", "char"));
 	static public String classString = new String();
 	static public Boolean firstMethod;
 
