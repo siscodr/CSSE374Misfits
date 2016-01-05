@@ -18,7 +18,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 			String signature, String[] exceptions) {
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc,
 				signature, exceptions);
-		
+
 		if (DesignParser.getFirstMethod()) {
 			System.out.print("|");
 			DesignParser.setFirstMethod(false);
@@ -47,23 +47,29 @@ public class ClassMethodVisitor extends ClassVisitor {
 				if (DesignParser.fields.contains(cleanType)) {
 					DesignParser.fields.remove(cleanType);
 					DesignParser.takes.add(cleanType);
+				} else if (!DesignParser.uses.contains(cleanType)
+						&& !DesignParser.toDelete.contains(cleanType)) {
+					DesignParser.uses.add(cleanType);
 				}
 			}
 		} else {
 			for (String types : stypes) {
 				String cleanType = DesignParser.stripFunction(types);
-				if (!DesignParser.uses.contains(cleanType) && !DesignParser.fields.contains(cleanType) && !DesignParser.takes.contains(cleanType)) {
+				if (!DesignParser.uses.contains(cleanType)
+						&& !DesignParser.fields.contains(cleanType)
+						&& !DesignParser.takes.contains(cleanType)
+						&& !DesignParser.toDelete.contains(cleanType)) {
 					DesignParser.uses.add(cleanType);
 				}
 			}
 		}
 
 		if (name.charAt(0) != '<') {
-			
+
 			System.out.print(symbol + name + "(" + stypes.toString() + ") : "
 					+ returnType + "\\l ");
 		}
-		
+
 		return toDecorate;
 	}
 }

@@ -31,7 +31,8 @@ public class ClassFieldVisitor extends ClassVisitor {
 		}
 		String type2 = DesignParser.stripFunction(type);
 
-		if (!DesignParser.fields.contains(type2)) {
+		if (!DesignParser.fields.contains(type2)
+				&& !DesignParser.toDelete.contains(type2)) {
 			DesignParser.fields.add(type2);
 		}
 
