@@ -18,6 +18,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 			String signature, String[] exceptions) {
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc,
 				signature, exceptions);
+		MethodVisitor toReturn = new MyMethodVisitor(Opcodes.ASM5, toDecorate);
 
 		if (DesignParser.getFirstMethod()) {
 			System.out.print("|");
@@ -70,6 +71,6 @@ public class ClassMethodVisitor extends ClassVisitor {
 					+ returnType + "\\l ");
 		}
 
-		return toDecorate;
+		return toReturn;
 	}
 }
