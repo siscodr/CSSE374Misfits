@@ -10,6 +10,10 @@ import jdk.internal.org.objectweb.asm.Type;
 
 public class ClassMethodVisitor extends ClassVisitor {
 
+	public ClassMethodVisitor(int arg0) {
+		super(arg0);
+	}
+	
 	public ClassMethodVisitor(int arg0, ClassVisitor arg1) {
 		super(arg0, arg1);
 	}
