@@ -1,6 +1,7 @@
 package MisfitsPackage;
 
 import jdk.internal.org.objectweb.asm.MethodVisitor;
+import jdk.internal.org.objectweb.asm.Type;
 
 public class MyMethodVisitor extends MethodVisitor {
 
@@ -23,6 +24,19 @@ public class MyMethodVisitor extends MethodVisitor {
 			DesignParser.uses.add(cleanType);
 		}
 
+	}
+
+	@Override
+	public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean bool) {
+		super.visitMethodInsn(opcode, owner, name, desc, bool);
+		String toClean = Type.getReturnType(desc).getClassName();
+		if (toClean.length() != 1) {
+			String cleanType = DesignParser.stripFunction(toClean);
+			if (!DesignParser.uses.contains(cleanType) && !DesignParser.fields.contains(cleanType)
+					&& !DesignParser.takes.contains(cleanType) && !DesignParser.toDelete.contains(cleanType)) {
+				DesignParser.uses.add(cleanType);
+			}
+		}
 	}
 
 }
