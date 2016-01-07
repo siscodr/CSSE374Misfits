@@ -19,6 +19,8 @@ public class DesignParser {
 	static public Boolean firstMethod;
 
 	public static void main(String[] args) throws IOException {
+		System.out.println("digraph misfit_diagram{");
+		System.out.println("rankdir=BT;");
 		for (String className : args) {
 			classString = stripFunction(className);
 			firstMethod = true;
@@ -33,9 +35,6 @@ public class DesignParser {
 			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5,
 					fieldVisitor);
 
-			System.out.println("digraph misfit_diagram{");
-			System.out.println("rankdir=BT;");
-
 			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 			System.out.println("}\"");
 			System.out.println("];");
@@ -48,11 +47,11 @@ public class DesignParser {
 			for (String field : takes)
 				System.out.println(field + " -> " + classString
 						+ " [arrowhead=\"odiamond\"];");
-			System.out.println("}");
 			DesignParser.fields = new ArrayList<String>();
 			DesignParser.uses = new ArrayList<String>();
 			DesignParser.takes = new ArrayList<String>();
 		}
+		System.out.println("}");
 	}
 
 	public static String stripFunction(String toStrip) {
