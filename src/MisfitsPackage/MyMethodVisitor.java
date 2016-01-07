@@ -37,6 +37,12 @@ public class MyMethodVisitor extends MethodVisitor {
 				DesignParser.uses.add(cleanType);
 			}
 		}
+		String toClean2 = owner;
+		String cleanType = DesignParser.stripFunction(toClean2);
+		if (!DesignParser.uses.contains(cleanType) && !DesignParser.fields.contains(cleanType)
+				&& !DesignParser.takes.contains(cleanType) && !DesignParser.toDelete.contains(cleanType)) {
+			DesignParser.uses.add(cleanType);
+		}
 	}
 
 }
