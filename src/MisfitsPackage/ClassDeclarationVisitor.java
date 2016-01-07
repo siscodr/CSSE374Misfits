@@ -9,25 +9,22 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ClassDeclarationVisitor(int arg0, ClassVisitor arg1) {
-		super(arg0, arg1);
-	}
+//	public ClassDeclarationVisitor(int arg0, ClassVisitor arg1) {
+//		super(arg0, arg1);
+//	}
 
 	public void visit(int version, int access, String name, String signature,
-			String superName, String[] interfaces) {
-		String newName = name.replace(".", "_");
-		newName = newName.replace("/", "_");
+		String superName, String[] interfaces) {
+		String newName = DesignParser.stripFunction(name);
 
 		for (int i = 0; i < interfaces.length; i++) {
-			String newInterface = interfaces[i].replace("/", "_");
-			newInterface = newInterface.replace(".", "_");
+			String newInterface = DesignParser.stripFunction(interfaces[i]);
 			System.out.println(newName + " -> " + newInterface
 					+ " [arrowhead=\"onormal\", style=\"dashed\"];");
 		}
 		// Draw extend arrows here
 		if (superName != null) {
-			String newSuper = superName.replace("/", "_");
-			newSuper = newSuper.replace(".", "_");
+			String newSuper = DesignParser.stripFunction(superName);
 			System.out.println(newName + " -> " + newSuper
 					+ " [arrowhead=\"onormal\"];");
 		}
