@@ -9,24 +9,28 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 		// TODO Auto-generated constructor stub
 	}
 
-//	public ClassDeclarationVisitor(int arg0, ClassVisitor arg1) {
-//		super(arg0, arg1);
-//	}
+	// public ClassDeclarationVisitor(int arg0, ClassVisitor arg1) {
+	// super(arg0, arg1);
+	// }
 
 	public void visit(int version, int access, String name, String signature,
-		String superName, String[] interfaces) {
+			String superName, String[] interfaces) {
 		String newName = DesignParser.stripFunction(name);
 
 		for (int i = 0; i < interfaces.length; i++) {
 			String newInterface = DesignParser.stripFunction(interfaces[i]);
-			System.out.println(newName + " -> " + newInterface
-					+ " [arrowhead=\"onormal\", style=\"dashed\"];");
+			if (DesignParser.unwantedTypes(newInterface)) {
+				System.out.println(newName + " -> " + newInterface
+						+ " [arrowhead=\"onormal\", style=\"dashed\"];");
+			}
 		}
 		// Draw extend arrows here
 		if (superName != null) {
 			String newSuper = DesignParser.stripFunction(superName);
-			System.out.println(newName + " -> " + newSuper
-					+ " [arrowhead=\"onormal\"];");
+			if (DesignParser.unwantedTypes(newSuper)) {
+				System.out.println(newName + " -> " + newSuper
+						+ " [arrowhead=\"onormal\"];");
+			}
 		}
 
 		// Class starts here

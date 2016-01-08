@@ -13,8 +13,8 @@ public class DesignParser {
 	static public ArrayList<String> uses = new ArrayList<String>();
 	static public ArrayList<String> takes = new ArrayList<String>();
 	static public ArrayList<String> toDelete = new ArrayList<String>(
-			Arrays.asList("boolean", "byte", "short", "int", "double",
-					"java_lang_String", "long", "float", "char", "void"));
+			Arrays.asList("boolean", "java_lang", "java_util", "void", "char",
+					"int")); // TODO: Make it remove all that contains these
 	static public String classString = new String();
 	static public Boolean firstMethod;
 
@@ -68,5 +68,14 @@ public class DesignParser {
 
 	public static void setFirstMethod(Boolean firstMethod) {
 		DesignParser.firstMethod = firstMethod;
+	}
+
+	public static boolean unwantedTypes(String cleanType) {
+		for (String text : toDelete) {
+			if (cleanType.contains(text)) {
+				return false;
+			}
+		}
+		return true;
 	}
 }

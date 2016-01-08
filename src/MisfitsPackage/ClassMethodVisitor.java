@@ -53,7 +53,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 					DesignParser.fields.remove(cleanType);
 					DesignParser.takes.add(cleanType);
 				} else if (!DesignParser.uses.contains(cleanType)
-						&& !DesignParser.toDelete.contains(cleanType)) {
+						&& DesignParser.unwantedTypes(cleanType)) {
 					DesignParser.uses.add(cleanType);
 				}
 			}
@@ -63,7 +63,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 				if (!DesignParser.uses.contains(cleanType)
 						&& !DesignParser.fields.contains(cleanType)
 						&& !DesignParser.takes.contains(cleanType)
-						&& !DesignParser.toDelete.contains(cleanType)) {
+						&& DesignParser.unwantedTypes(cleanType)) {
 					DesignParser.uses.add(cleanType);
 				}
 			}
