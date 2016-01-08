@@ -13,7 +13,11 @@ public class DesignParser {
 	static public ArrayList<String> uses = new ArrayList<String>();
 	static public ArrayList<String> takes = new ArrayList<String>();
 	static public ArrayList<String> toDelete = new ArrayList<String>(
-			Arrays.asList("boolean", "java_lang", "java_util")); // TODO: Make it remove all that contains these
+			Arrays.asList("boolean", "java_lang", "java_util")); // TODO: Make
+																	// it remove
+																	// all that
+																	// contains
+																	// these
 	static public String classString = new String();
 	static public Boolean firstMethod;
 
@@ -37,16 +41,24 @@ public class DesignParser {
 			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 			System.out.println("}\"");
 			System.out.println("];");
-			for (String types : uses){
-				if(types.contains("_")){
-				System.out.println(classString + " -> " + types
-						+ " [arrowhead=\"vee\", style=\"dashed\"];");}}
-			for (String field : fields)
-				System.out.println(field + " -> " + classString
-						+ " [arrowhead=\"diamond\"];");
-			for (String field : takes)
-				System.out.println(field + " -> " + classString
-						+ " [arrowhead=\"odiamond\"];");
+			for (String types : uses) {
+				if (types.contains("_")) {
+					System.out.println(classString + " -> " + types
+							+ " [arrowhead=\"vee\", style=\"dashed\"];");
+				}
+			}
+			for (String field : fields) {
+				if (field.contains("_")) {
+					System.out.println(field + " -> " + classString
+							+ " [arrowhead=\"diamond\"];");
+				}
+			}
+			for (String field : takes) {
+				if (field.contains("_")) {
+					System.out.println(field + " -> " + classString
+							+ " [arrowhead=\"odiamond\"];");
+				}
+			}
 			DesignParser.fields = new ArrayList<String>();
 			DesignParser.uses = new ArrayList<String>();
 			DesignParser.takes = new ArrayList<String>();
