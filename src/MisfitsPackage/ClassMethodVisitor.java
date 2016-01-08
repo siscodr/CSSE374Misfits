@@ -49,7 +49,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 		if (name.equals("<init>")) {
 			for (String types : stypes) {
 				String cleanType = DesignParser.stripFunction(types);
-				if (DesignParser.fields.contains(cleanType)) {
+				if (DesignParser.fields.contains(cleanType) && DesignParser.unwantedTypes(cleanType)) {
 					DesignParser.fields.remove(cleanType);
 					DesignParser.takes.add(cleanType);
 				} else if (!DesignParser.uses.contains(cleanType)
