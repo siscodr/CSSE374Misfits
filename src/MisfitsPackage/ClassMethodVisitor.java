@@ -13,7 +13,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 	public ClassMethodVisitor(int arg0) {
 		super(arg0);
 	}
-	
+
 	public ClassMethodVisitor(int arg0, ClassVisitor arg1) {
 		super(arg0, arg1);
 	}
@@ -49,12 +49,14 @@ public class ClassMethodVisitor extends ClassVisitor {
 		if (name.equals("<init>")) {
 			for (String types : stypes) {
 				String cleanType = DesignParser.stripFunction(types);
-				if (DesignParser.fields.contains(cleanType) && DesignParser.unwantedTypes(cleanType)) {
-					DesignParser.fields.remove(cleanType);
-					DesignParser.takes.add(cleanType);
-				} else if (!DesignParser.uses.contains(cleanType)
-						&& DesignParser.unwantedTypes(cleanType)) {
-					DesignParser.uses.add(cleanType);
+				if (DesignParser.unwantedTypes(cleanType)) {
+					if (DesignParser.fields.contains(cleanType)) {
+						DesignParser.fields.remove(cleanType);
+						DesignParser.takes.add(cleanType);
+					} else if (!DesignParser.uses.contains(cleanType)
+							&& DesignParser.unwantedTypes(cleanType)) {
+						DesignParser.uses.add(cleanType);
+					}
 				}
 			}
 		} else {
