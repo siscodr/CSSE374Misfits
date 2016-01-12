@@ -2,6 +2,12 @@ package MisfitsPackage;
 
 import jdk.internal.org.objectweb.asm.ClassVisitor;
 
+/**
+ * InterfaceDeclarationVisitor Decorates ClassVisitor so the interface Arrows
+ * can be drawn
+ * 
+ * @author TheMisfits
+ */
 public class InterfaceDeclarationVisitor extends ClassVisitor {
 
 	/**

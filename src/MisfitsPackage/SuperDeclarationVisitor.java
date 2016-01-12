@@ -2,6 +2,12 @@ package MisfitsPackage;
 
 import jdk.internal.org.objectweb.asm.ClassVisitor;
 
+/**
+ * SuperDeclarationVisitor decorates ClassVisitor so the extends Arrows
+ * can be drawn
+ * 
+ * @author TheMisfits
+ */
 public class SuperDeclarationVisitor extends ClassVisitor {
 
 	/**
@@ -31,7 +37,7 @@ public class SuperDeclarationVisitor extends ClassVisitor {
 
 	/**
 	 * This method decorates the ClassVisitor's visit function to add
-	 * functionality to pass interfaces to UMLArrow in order to create a UML
+	 * functionality to pass Super classes (Class Extensions) to UMLArrow in order to create a UML
 	 *
 	 * @param version
 	 *            the class version
