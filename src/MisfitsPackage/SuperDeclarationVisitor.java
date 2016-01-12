@@ -5,7 +5,7 @@ import jdk.internal.org.objectweb.asm.ClassVisitor;
 public class SuperDeclarationVisitor extends ClassVisitor {
 
 	/**
-	 * Constructs a new ClassDeclarationVisitor
+	 * Constructs a new SuperDeclarationVisitor
 	 * 
 	 * @param arg0
 	 *            the ASM API version implemented by this visitor. Must be one
@@ -14,7 +14,17 @@ public class SuperDeclarationVisitor extends ClassVisitor {
 	public SuperDeclarationVisitor(int api) {
 		super(api);
 	}
-	
+
+	/**
+	 * Constructs a new SuperDeclarationVisitor that decorates the old
+	 * ClassVisitor.
+	 * 
+	 * @param api
+	 *            the ASM API version implemented by this visitor. Must be one
+	 *            of Opcodes.ASM4.
+	 * @param toDecorate
+	 *            A ClassVisitor for this class to Decorate
+	 */
 	public SuperDeclarationVisitor(int api, ClassVisitor toDecorate) {
 		super(api, toDecorate);
 	}
