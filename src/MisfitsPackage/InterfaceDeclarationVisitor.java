@@ -13,7 +13,7 @@ public class InterfaceDeclarationVisitor extends ClassVisitor {
 	/**
 	 * Constructs a new InterfaceDeclarationVisitor
 	 * 
-	 * @param arg0
+	 * @param api
 	 *            the ASM API version implemented by this visitor. Must be one
 	 *            of Opcodes.ASM4.
 	 */
