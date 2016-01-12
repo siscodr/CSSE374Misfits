@@ -41,20 +41,15 @@ public class DesignParser {
 
 			ClassReader reader = new ClassReader(className);
 
-			ClassVisitor InterfaceVisitor = new InterfaceDeclarationVisitor(
-					Opcodes.ASM5);
-
-			ClassVisitor SuperVisitor = new SuperDeclarationVisitor(
-					Opcodes.ASM5, InterfaceVisitor);
+			ClassVisitor InterfaceVisitor = new InterfaceDeclarationVisitor(Opcodes.ASM5);
+			
+			ClassVisitor SuperVisitor = new SuperDeclarationVisitor(Opcodes.ASM5, InterfaceVisitor);
 
 			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5,
 					SuperVisitor);
 
-			ClassVisitor fieldUsesVisitor = new ClassFieldDeclarationVisitor(
-					Opcodes.ASM5, fieldVisitor);
-
 			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5,
-					fieldUsesVisitor);
+					fieldVisitor);
 
 			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 
