@@ -5,25 +5,28 @@ import jdk.internal.org.objectweb.asm.FieldVisitor;
 import jdk.internal.org.objectweb.asm.Type;
 
 /**
- * ClassFieldVisitor Decorates ClassVisitor so the field is checked for use arrows if needed
+ * ClassFieldDeclarationVisitor Decorates ClassVisitor so the field will be
+ * shown in the class in the UML
  * 
  * @author TheMisfits
  */
-public class ClassFieldVisitor extends ClassVisitor {
+public class ClassFieldDeclarationVisitor extends ClassVisitor {
 
 	/**
-	 * Constructs a new ClassFieldVisitor that decorates the old ClassVisitor.
+	 * Constructs a new ClassFieldDeclarationVisitor that decorates the old
+	 * ClassVisitor.
 	 * 
 	 * @param api
 	 *            the ASM API version implemented by this visitor. Must be one
 	 *            of Opcodes.ASM4.
 	 */
-	public ClassFieldVisitor(int arg0) {
+	public ClassFieldDeclarationVisitor(int arg0) {
 		super(arg0);
 	}
 
 	/**
-	 * Constructs a new ClassFieldVisitor that decorates the old ClassVisitor.
+	 * Constructs a new ClassFieldDeclarationVisitor that decorates the old
+	 * ClassVisitor.
 	 * 
 	 * @param api
 	 *            the ASM API version implemented by this visitor. Must be one
@@ -31,13 +34,13 @@ public class ClassFieldVisitor extends ClassVisitor {
 	 * @param toDecorate
 	 *            A ClassVisitor for this class to Decorate
 	 */
-	public ClassFieldVisitor(int arg0, ClassVisitor arg1) {
+	public ClassFieldDeclarationVisitor(int arg0, ClassVisitor arg1) {
 		super(arg0, arg1);
 	}
 
 	/**
 	 * This method decorates the ClassVisitor's visitField function to add
-	 * functionality to pass field types to UMLArrow in order to create a UML
+	 * functionality to pass fields to UMLArrow in order to create a UML
 	 * 
 	 * @param access
 	 *            the field's access flags
@@ -57,7 +60,8 @@ public class ClassFieldVisitor extends ClassVisitor {
 		FieldVisitor toDecorate = super.visitField(access, name, desc,
 				signature, value);
 		String type = Type.getType(desc).getClassName();
-		UMLArrows.getInstance().addField(type); //Adds field to UML to allow for use arrows to be drawn
+		// Adds a field in the UML for given class
+		UMLArrows.getInstance().addFieldToBuffer(access, name, type);
 		return toDecorate;
 	}
 
