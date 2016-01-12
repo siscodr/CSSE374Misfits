@@ -7,9 +7,26 @@ import jdk.internal.org.objectweb.asm.ClassVisitor;
 import jdk.internal.org.objectweb.asm.Opcodes;
 
 public class DesignParser {
+	
+	/**
+	 * Main just calls makeUML (Split for better design and testing)
+	 * 
+	 * @param args Class names for the classes to be turned into an UML
+	 * @throws IOException Exception where string doesn't link to a class
+	 */
 	public static void main(String[] args) throws IOException {
+		makeUML(args); //Runs the program
+	}
+
+	/**
+	 * Makes a UML diagram code appear in the console for GraphViz for the given classes.
+	 * 
+	 * @param classes lass names for the classes to be turned into an UML
+	 * @throws IOException Exception where string doesn't link to a class
+	 */
+	public static void makeUML(String[] classes) throws IOException{
 		startDiagram("misfit_diagram");
-		for (String className : args) {
+		for (String className : classes) {
 
 			ClassReader reader = new ClassReader(className);
 
@@ -27,12 +44,19 @@ public class DesignParser {
 		}
 		endDiagram();
 	}
-
+	
+	/**
+	 * Makes the initial diagram starting code with given name (Should only be ran once per diagram).
+	 * 
+	 * @param nameOfDiagram The name in which the diagram is to be titled.
+	 */
 	public static void startDiagram(String nameOfDiagram) {
-		System.out.println("digraph " + nameOfDiagram + "{");
-		System.out.println("rankdir=BT;");
+		System.out.println("digraph " + nameOfDiagram + "{\nrankdir=BT");
 	}
 
+	/**
+	 * Makes the end diagram code (Should only be ran once per diagram).
+	 */
 	public static void endDiagram() {
 		System.out.println("}");
 	}
