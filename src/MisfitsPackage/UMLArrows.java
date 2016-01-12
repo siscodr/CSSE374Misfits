@@ -1,5 +1,4 @@
 package MisfitsPackage;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -113,6 +112,7 @@ public class UMLArrows {
 		printFields(classString);
 		printInterfaces(classString);
 		printSupers(classString);
+		UMLArrows.getInstance().clearArrows();
 	}
 
 	private void printUses(String className) {
@@ -193,7 +193,6 @@ public class UMLArrows {
 					+ returnType + "\\l ";
 			
 			this.addToMethodBuffer(temp);
-			
 		}
 	}
 }
