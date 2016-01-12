@@ -6,25 +6,36 @@ import jdk.internal.org.objectweb.asm.ClassReader;
 import jdk.internal.org.objectweb.asm.ClassVisitor;
 import jdk.internal.org.objectweb.asm.Opcodes;
 
+/**
+ * This purpose of this class to be used in conjunction with Decorators to
+ * create a UML diagram
+ * 
+ * @author TheMisfits
+ */
 public class DesignParser {
-	
+
 	/**
 	 * Main just calls makeUML (Split for better design and testing)
 	 * 
-	 * @param args Class names for the classes to be turned into an UML
-	 * @throws IOException Exception where string doesn't link to a class
+	 * @param args
+	 *            Class names for the classes to be turned into an UML
+	 * @throws IOException
+	 *             Exception where string doesn't link to a class
 	 */
 	public static void main(String[] args) throws IOException {
-		makeUML(args); //Runs the program
+		makeUML(args); // Runs the program
 	}
 
 	/**
-	 * Makes a UML diagram code appear in the console for GraphViz for the given classes.
+	 * Makes a UML diagram code appear in the console for GraphViz for the given
+	 * classes using the Decorator and Visitor design patterns.
 	 * 
-	 * @param classes lass names for the classes to be turned into an UML
-	 * @throws IOException Exception where string doesn't link to a class
+	 * @param classes
+	 *            lass names for the classes to be turned into an UML
+	 * @throws IOException
+	 *             Exception where string doesn't link to a class
 	 */
-	public static void makeUML(String[] classes) throws IOException{
+	public static void makeUML(String[] classes) throws IOException {
 		startDiagram("misfit_diagram");
 		for (String className : classes) {
 
@@ -44,11 +55,13 @@ public class DesignParser {
 		}
 		endDiagram();
 	}
-	
+
 	/**
-	 * Makes the initial diagram starting code with given name (Should only be ran once per diagram).
+	 * Makes the initial diagram starting code with given name (Should only be
+	 * ran once per diagram).
 	 * 
-	 * @param nameOfDiagram The name in which the diagram is to be titled.
+	 * @param nameOfDiagram
+	 *            The name in which the diagram is to be titled.
 	 */
 	public static void startDiagram(String nameOfDiagram) {
 		System.out.println("digraph " + nameOfDiagram + "{\nrankdir=BT");
