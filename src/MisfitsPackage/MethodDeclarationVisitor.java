@@ -5,17 +5,18 @@ import jdk.internal.org.objectweb.asm.MethodVisitor;
 import jdk.internal.org.objectweb.asm.Opcodes;
 
 /**
- * ClassMethodVisitor Decorates ClassVisitor so the Use Arrows can be drawn
+ * ClassMethodVisitor Decorates ClassVisitor so the methods are shown inside of
+ * classes in the UML
  * 
  * @author TheMisfits
  */
-public class ClassMethodVisitor extends ClassVisitor {
+public class MethodDeclarationVisitor extends ClassVisitor {
 
-	public ClassMethodVisitor(int arg0) {
+	public MethodDeclarationVisitor(int arg0) {
 		super(arg0);
 	}
 
-	public ClassMethodVisitor(int arg0, ClassVisitor arg1) {
+	public MethodDeclarationVisitor(int arg0, ClassVisitor arg1) {
 		super(arg0, arg1);
 	}
 
@@ -27,7 +28,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 
 		MethodVisitor toReturn = new MyMethodVisitor(Opcodes.ASM5, toDecorate);
 
-		UMLArrows.getInstance().addUses(desc);
+		UMLArrows.getInstance().addMethodToBuffer(access, name, desc);
 		return toReturn;
 	}
 }
