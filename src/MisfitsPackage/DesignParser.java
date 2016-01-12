@@ -41,10 +41,12 @@ public class DesignParser {
 
 			ClassReader reader = new ClassReader(className);
 
-			ClassVisitor decIVisitor = new ClassDeclarationVisitor(Opcodes.ASM5);
+			ClassVisitor InterfaceVisitor = new InterfaceDeclarationVisitor(Opcodes.ASM5);
+			
+			ClassVisitor SuperVisitor = new SuperDeclarationVisitor(Opcodes.ASM5, InterfaceVisitor);
 
 			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5,
-					decIVisitor);
+					SuperVisitor);
 
 			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5,
 					fieldVisitor);
