@@ -2,7 +2,6 @@ package MisfitsPackage;
 
 import jdk.internal.org.objectweb.asm.ClassVisitor;
 import jdk.internal.org.objectweb.asm.FieldVisitor;
-import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.Type;
 
 public class ClassFieldVisitor extends ClassVisitor {
@@ -20,26 +19,10 @@ public class ClassFieldVisitor extends ClassVisitor {
 		FieldVisitor toDecorate = super.visitField(access, name, desc,
 				signature, value);
 		String type = Type.getType(desc).getClassName();
-
-		String symbol = "";
-		if ((access & Opcodes.ACC_PUBLIC) != 0) {
-			symbol = "+";
-		} else if ((access & Opcodes.ACC_PRIVATE) != 0) {
-			symbol = "-";
-		} else if ((access & Opcodes.ACC_PROTECTED) != 0) {
-			symbol = "#";
-		}
-		String type2 = DesignParser.stripFunction(type);
-
-		if (!DesignParser.fields.contains(type2)
-				&& DesignParser.unwantedTypes(type2)) {
-			DesignParser.fields.add(type2);
-		}
-
-		if (name.charAt(0) != '<') {
-			System.out.print(symbol + " " + name + " : " + type2 + "\\l");
-		}
+		UMLArrows arrows = UMLArrows.getInstance();
+		arrows.addField(type);
+		arrows.addFieldToBuffer(access, name, type);
 		return toDecorate;
-
 	}
+
 }
