@@ -1,9 +1,11 @@
 package MisfitsPackage;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import jdk.internal.org.objectweb.asm.Opcodes;
+import jdk.internal.org.objectweb.asm.Type;
 
 public class UMLArrows {
 	private static UMLArrows ourArrows = new UMLArrows();
@@ -52,15 +54,6 @@ public class UMLArrows {
 		supers = new ArrayList<String>();
 	}
 
-	private boolean unwantedTypes(String cleanType) {
-		for (String text : toDelete) {
-			if (cleanType.contains(text)) {
-				return false;
-			}
-		}
-		return true;
-	}
-
 	public void addToFieldBuffer(String toAppend) {
 		this.fieldBuffer.append(toAppend);
 	}
@@ -73,6 +66,13 @@ public class UMLArrows {
 		String cleanType = stripFunction(currentType);
 		if (checkExistingArrow(cleanType))
 			uses.add(cleanType);
+	}
+
+	public void addUses(String desc) {
+		List<String> stypes = getTypesFromDesc(desc);
+		for (String types : stypes) {
+			addUse(types);
+		}
 	}
 
 	public void addField(String currentType) {
@@ -93,6 +93,70 @@ public class UMLArrows {
 			interfaces.add(cleanType);
 	}
 
+	public void printClass(String name) {
+		String newName = stripFunction(name);
+		System.out.println("   " + newName
+				+ " [\n     shape=\"record\"     label = \"{" + newName + "|"
+				+ fieldBuffer.toString() + "|" + methodBuffer.toString()
+				+ "\n}\"\n];");
+		printArrows(newName);
+	}
+
+	public void addFieldToBuffer(int access, String name, String type) {
+		if (name.charAt(0) != '<') {
+			String symbol = "";
+			if ((access & Opcodes.ACC_PUBLIC) != 0) {
+				symbol = "+";
+			} else if ((access & Opcodes.ACC_PRIVATE) != 0) {
+				symbol = "-";
+			} else if ((access & Opcodes.ACC_PROTECTED) != 0) {
+				symbol = "#";
+			}
+			String type2 = stripFunction(type);
+			String temp = symbol + " " + name + " : " + type2 + "\\l";
+			this.addToFieldBuffer(temp);
+		}
+	}
+
+	public void addMethodToBuffer(int access, String name, String desc) {
+		if (name.charAt(0) != '<') {
+
+			String rType = Type.getReturnType(desc).getClassName();
+			List<String> stypes = getTypesFromDesc(desc);
+			String symbol = "";
+			if ((access & Opcodes.ACC_PUBLIC) != 0) {
+				symbol = "+";
+			} else if ((access & Opcodes.ACC_PRIVATE) != 0) {
+				symbol = "-";
+			} else if ((access & Opcodes.ACC_PROTECTED) != 0) {
+				symbol = "#";
+			}
+			String returnType = stripFunction(rType);
+			String temp = symbol + name + "(" + stypes.toString() + ") : "
+					+ returnType + "\\l ";
+
+			this.addToMethodBuffer(temp);
+		}
+	}
+
+	private boolean unwantedTypes(String cleanType) {
+		for (String text : toDelete) {
+			if (cleanType.contains(text)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private List<String> getTypesFromDesc(String desc) {
+		Type[] argTypes = Type.getArgumentTypes(desc);
+		List<String> stypes = new ArrayList<String>();
+		for (Type t : argTypes) {
+			stypes.add(t.getClassName());
+		}
+		return stypes;
+	}
+
 	private boolean checkExistingArrow(String cleanType) {
 		return !uses.contains(cleanType) && !fields.contains(cleanType)
 				&& !supers.contains(cleanType)
@@ -107,7 +171,7 @@ public class UMLArrows {
 		return toStrip;
 	}
 
-	public void printArrows(String classString) {
+	private void printArrows(String classString) {
 		printUses(classString);
 		printFields(classString);
 		printInterfaces(classString);
@@ -151,48 +215,4 @@ public class UMLArrows {
 		}
 	}
 
-	public void printClass(String name) {
-		String newName = stripFunction(name);
-		System.out.println("   " + newName
-				+ " [\n     shape=\"record\"     label = \"{" + newName + "|"
-				+ fieldBuffer.toString() + "|" + methodBuffer.toString()
-				+ "\n}\"\n];");
-		printArrows(newName);
-	}
-
-	public void addFieldToBuffer(int access, String name, String type) {
-		if (name.charAt(0) != '<') {
-			String symbol = "";
-			if ((access & Opcodes.ACC_PUBLIC) != 0) {
-				symbol = "+";
-			} else if ((access & Opcodes.ACC_PRIVATE) != 0) {
-				symbol = "-";
-			} else if ((access & Opcodes.ACC_PROTECTED) != 0) {
-				symbol = "#";
-			}
-			String type2 = stripFunction(type);
-			String temp = symbol + " " + name + " : " + type2 + "\\l";
-			this.addToFieldBuffer(temp);
-		}
-	}
-
-	public void addMethodToBuffer(int access, String name, List<String> stypes,
-			String rType) {
-		if (name.charAt(0) != '<') {
-			
-			String symbol = "";
-			if ((access & Opcodes.ACC_PUBLIC) != 0) {
-				symbol = "+";
-			} else if ((access & Opcodes.ACC_PRIVATE) != 0) {
-				symbol = "-";
-			} else if ((access & Opcodes.ACC_PROTECTED) != 0) {
-				symbol = "#";
-			}
-			String returnType = stripFunction(rType);
-			String temp = symbol + name + "(" + stypes.toString() + ") : "
-					+ returnType + "\\l ";
-			
-			this.addToMethodBuffer(temp);
-		}
-	}
 }
