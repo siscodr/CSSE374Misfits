@@ -2,7 +2,7 @@ package MisfitsPackage;
 
 import jdk.internal.org.objectweb.asm.ClassVisitor;
 
-public class ClassDeclarationVisitor extends ClassVisitor {
+public class SuperDeclarationVisitor extends ClassVisitor {
 
 	/**
 	 * Constructs a new ClassDeclarationVisitor
@@ -11,13 +11,17 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 	 *            the ASM API version implemented by this visitor. Must be one
 	 *            of Opcodes.ASM4.
 	 */
-	public ClassDeclarationVisitor(int api) {
+	public SuperDeclarationVisitor(int api) {
 		super(api);
+	}
+	
+	public SuperDeclarationVisitor(int api, ClassVisitor toDecorate) {
+		super(api, toDecorate);
 	}
 
 	/**
 	 * This method decorates the ClassVisitor's visit function to add
-	 * functionality to pass information to UMLArrow inOrder to create a UML
+	 * functionality to pass interfaces to UMLArrow in order to create a UML
 	 *
 	 * @param version
 	 *            the class version
@@ -41,11 +45,6 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 
 		UMLArrows arrows = UMLArrows.getInstance(); // Get the Singleton
 													// Instance of UMLArrows
-
-		for (int i = 0; i < interfaces.length; i++) {
-			arrows.addInterface(interfaces[i]); // Store interface arrows into
-												// UMLArrows
-		}
 
 		if (superName != null) {
 			arrows.addSuper(superName); // Store super arrows (class extensions)
