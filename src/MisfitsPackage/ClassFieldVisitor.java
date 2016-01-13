@@ -2,7 +2,6 @@ package MisfitsPackage;
 
 import jdk.internal.org.objectweb.asm.ClassVisitor;
 import jdk.internal.org.objectweb.asm.FieldVisitor;
-import jdk.internal.org.objectweb.asm.Type;
 
 /**
  * ClassFieldVisitor Decorates ClassVisitor so the field is checked for
