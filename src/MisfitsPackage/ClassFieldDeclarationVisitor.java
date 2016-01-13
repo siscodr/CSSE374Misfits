@@ -2,7 +2,6 @@ package MisfitsPackage;
 
 import jdk.internal.org.objectweb.asm.ClassVisitor;
 import jdk.internal.org.objectweb.asm.FieldVisitor;
-import jdk.internal.org.objectweb.asm.Type;
 
 /**
  * ClassFieldDeclarationVisitor Decorates ClassVisitor so the field will be
@@ -20,8 +19,8 @@ public class ClassFieldDeclarationVisitor extends ClassVisitor {
 	 *            the ASM API version implemented by this visitor. Must be one
 	 *            of Opcodes.ASM4.
 	 */
-	public ClassFieldDeclarationVisitor(int arg0) {
-		super(arg0);
+	public ClassFieldDeclarationVisitor(int api) {
+		super(api);
 	}
 
 	/**
@@ -34,8 +33,8 @@ public class ClassFieldDeclarationVisitor extends ClassVisitor {
 	 * @param toDecorate
 	 *            A ClassVisitor for this class to Decorate
 	 */
-	public ClassFieldDeclarationVisitor(int arg0, ClassVisitor arg1) {
-		super(arg0, arg1);
+	public ClassFieldDeclarationVisitor(int api, ClassVisitor toDecorate) {
+		super(api, toDecorate);
 	}
 
 	/**
@@ -59,9 +58,8 @@ public class ClassFieldDeclarationVisitor extends ClassVisitor {
 			String signature, Object value) {
 		FieldVisitor toDecorate = super.visitField(access, name, desc,
 				signature, value);
-		String type = Type.getType(desc).getClassName();
 		// Adds a field in the UML for given class
-		UMLArrows.getInstance().addFieldToBuffer(access, name, type);
+		UMLArrows.getInstance().addFieldToBuffer(access, name, desc);
 		return toDecorate;
 	}
 

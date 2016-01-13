@@ -237,11 +237,12 @@ public class UMLArrows {
 	 *            The field's access flags.
 	 * @param name
 	 *            The Internal name of the field.
-	 * @param type
-	 *            A String representation of the type for the field.
+	 * @param desc
+	 *            The field's descriptor.
 	 * @return No return value.
 	 */
-	public void addFieldToBuffer(int access, String name, String type) {
+	public void addFieldToBuffer(int access, String name, String desc) {
+		String type = Type.getType(desc).getClassName();
 		if (name.charAt(0) != '<') {
 			String symbol = "";
 			if ((access & Opcodes.ACC_PUBLIC) != 0) {
