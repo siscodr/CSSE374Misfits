@@ -369,6 +369,63 @@ public class UMLArrowsTest {
 		assertEquals(newBuffer, methodBuffer.get(arrows).toString());
 	}
 
+	@SuppressWarnings("unchecked")
+	@Test
+	public void testaddUseEmptyString() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
+		UMLArrows arrows = UMLArrows.getInstance();
+		Field whitelist = UMLArrows.class.getDeclaredField("whitelist");
+		whitelist.setAccessible(true);
+		ArrayList<String> whitelistv1 = new ArrayList<String>(Arrays.asList(""));
+		whitelist.set(arrows, whitelistv1);
+		Field uses = UMLArrows.class.getDeclaredField("uses");
+		uses.setAccessible(true);
+		ArrayList<String> usesarray = (ArrayList<String>) uses.get(arrows);
+		String toAdd = "";
+		usesarray.add(toAdd);
+		arrows.addUse(toAdd);
+		assertEquals(usesarray, uses.get(arrows));
+	}
+
+	@SuppressWarnings("unchecked")
+	@Test
+	public void testaddUseNumerics() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
+		UMLArrows arrows = UMLArrows.getInstance();
+		Field whitelist = UMLArrows.class.getDeclaredField("whitelist");
+		whitelist.setAccessible(true);
+		ArrayList<String> whitelistv1 = new ArrayList<String>(
+				Arrays.asList("12093174120"));
+		whitelist.set(arrows, whitelistv1);
+		Field uses = UMLArrows.class.getDeclaredField("uses");
+		uses.setAccessible(true);
+		ArrayList<String> usesarray = (ArrayList<String>) uses.get(arrows);
+		String toAdd = "12093174120";
+		usesarray.add(toAdd);
+		arrows.addUse(toAdd);
+		assertEquals(usesarray, uses.get(arrows));
+	}
+
+	@SuppressWarnings("unchecked")
+	@Test
+	public void testaddUseString() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
+		UMLArrows arrows = UMLArrows.getInstance();
+		Field whitelist = UMLArrows.class.getDeclaredField("whitelist");
+		whitelist.setAccessible(true);
+		ArrayList<String> whitelistv1 = new ArrayList<String>(
+				Arrays.asList("HeyHeyHeyThisisaCoolTest"));
+		whitelist.set(arrows, whitelistv1);
+		Field uses = UMLArrows.class.getDeclaredField("uses");
+		uses.setAccessible(true);
+		ArrayList<String> usesarray = (ArrayList<String>) uses.get(arrows);
+		// We must avoid having the stripper from touching this string
+		String toAdd = "HeyHeyHeyThisisaCoolTest";
+		usesarray.add(toAdd);
+		arrows.addUse(toAdd);
+		assertEquals(usesarray, uses.get(arrows));
+	}
+
 	@Test
 	public void testunwantedTypesInWhitelist() throws NoSuchFieldException,
 			SecurityException, IllegalArgumentException,
