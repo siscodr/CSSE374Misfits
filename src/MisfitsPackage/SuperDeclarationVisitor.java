@@ -3,8 +3,8 @@ package MisfitsPackage;
 import jdk.internal.org.objectweb.asm.ClassVisitor;
 
 /**
- * SuperDeclarationVisitor decorates ClassVisitor so the extends Arrows
- * can be drawn
+ * SuperDeclarationVisitor decorates ClassVisitor so the extends Arrows can be
+ * drawn
  * 
  * @author TheMisfits
  */
@@ -13,7 +13,7 @@ public class SuperDeclarationVisitor extends ClassVisitor {
 	/**
 	 * Constructs a new SuperDeclarationVisitor
 	 * 
-	 * @param arg0
+	 * @param api
 	 *            the ASM API version implemented by this visitor. Must be one
 	 *            of Opcodes.ASM4.
 	 */
@@ -37,7 +37,8 @@ public class SuperDeclarationVisitor extends ClassVisitor {
 
 	/**
 	 * This method decorates the ClassVisitor's visit function to add
-	 * functionality to pass Super classes (Class Extensions) to UMLArrow in order to create a UML
+	 * functionality to pass Super classes (Class Extensions) to UMLArrow in
+	 * order to create a UML
 	 *
 	 * @param version
 	 *            the class version
@@ -59,13 +60,8 @@ public class SuperDeclarationVisitor extends ClassVisitor {
 	public void visit(int version, int access, String name, String signature,
 			String superName, String[] interfaces) {
 
-		UMLArrows arrows = UMLArrows.getInstance(); // Get the Singleton
-													// Instance of UMLArrows
-
-		if (superName != null) {
-			arrows.addSuper(superName); // Store super arrows (class extensions)
-										// into UMLArrows
-		}
+		// Store super arrows (class extensions) into UMLArrows
+		UMLArrows.getInstance().setSuper(superName);
 
 		// Does the decoratee's visit function
 		super.visit(version, access, name, signature, superName, interfaces);
