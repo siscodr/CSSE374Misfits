@@ -707,6 +707,21 @@ public class UMLArrowsTest {
 	}
 	
 	@Test
+	public void testaddMethodToBuffer() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException{
+		UMLArrows arrows= UMLArrows.getInstance();
+		Field whitelist = UMLArrows.class.getDeclaredField("whitelist");
+		whitelist.setAccessible(true);
+		ArrayList<String> whitelistv1 = new ArrayList<String>(
+				Arrays.asList("java_lang_Object"));
+		whitelist.set(arrows, whitelistv1);
+		Field methodbuffer = UMLArrows.class.getDeclaredField("methodBuffer");
+		methodbuffer.setAccessible(true);
+		methodbuffer.set(arrows, new StringBuffer());
+		arrows.addMethodToBuffer(Opcodes.ACC_PUBLIC, "test" , "()Ljava/lang/Object;");
+		assertEquals("+test([]) : java_lang_Object\\l ", methodbuffer.get(arrows).toString());
+	}
+	
+	@Test
 	public void testunwantedTypesInWhitelist() throws NoSuchFieldException,
 			SecurityException, IllegalArgumentException,
 			IllegalAccessException, InvocationTargetException,
