@@ -313,4 +313,55 @@ public class UMLArrowsTest {
 		arrows.addToFieldBuffer(toAdd);
 		assertEquals(newBuffer, fieldBuffer.get(arrows).toString());
 	}
+	
+	@Test
+	public void testaddToMethodBufferSpace() throws IllegalArgumentException,
+			IllegalAccessException, NoSuchFieldException, SecurityException {
+		String toAdd = " ";
+		UMLArrows arrows = UMLArrows.getInstance();
+		Field methodBuffer = UMLArrows.class.getDeclaredField("methodBuffer");
+		methodBuffer.setAccessible(true);
+		StringBuffer currentBuffer = (StringBuffer) methodBuffer.get(arrows);
+		String newBuffer = (currentBuffer.toString() + toAdd);
+		arrows.addToMethodBuffer(toAdd);
+		assertEquals(newBuffer, methodBuffer.get(arrows).toString());
+	}
+
+	@Test
+	public void testaddToMethodBufferString() throws IllegalArgumentException,
+			IllegalAccessException, NoSuchFieldException, SecurityException {
+		String toAdd = "I am a string";
+		UMLArrows arrows = UMLArrows.getInstance();
+		Field methodBuffer = UMLArrows.class.getDeclaredField("methodBuffer");
+		methodBuffer.setAccessible(true);
+		StringBuffer currentBuffer = (StringBuffer) methodBuffer.get(arrows);
+		String newBuffer = (currentBuffer.toString() + toAdd);
+		arrows.addToMethodBuffer(toAdd);
+		assertEquals(newBuffer, methodBuffer.get(arrows).toString());
+	}
+	
+	@Test
+	public void testaddToMethodBufferSymbols() throws IllegalArgumentException,
+			IllegalAccessException, NoSuchFieldException, SecurityException {
+		String toAdd = "(#)^%@#%^@#$)@#$*@#&$)@!_)*";
+		UMLArrows arrows = UMLArrows.getInstance();
+		Field methodBuffer = UMLArrows.class.getDeclaredField("methodBuffer");
+		methodBuffer.setAccessible(true);
+		StringBuffer currentBuffer = (StringBuffer) methodBuffer.get(arrows);
+		String newBuffer = (currentBuffer.toString() + toAdd);
+		arrows.addToMethodBuffer(toAdd);
+		assertEquals(newBuffer, methodBuffer.get(arrows).toString());
+	}
+	@Test
+	public void testaddToMethodBufferNothing() throws IllegalArgumentException,
+			IllegalAccessException, NoSuchFieldException, SecurityException {
+		String toAdd = "";
+		UMLArrows arrows = UMLArrows.getInstance();
+		Field methodBuffer = UMLArrows.class.getDeclaredField("methodBuffer");
+		methodBuffer.setAccessible(true);
+		StringBuffer currentBuffer = (StringBuffer) methodBuffer.get(arrows);
+		String newBuffer = (currentBuffer.toString() + toAdd);
+		arrows.addToMethodBuffer(toAdd);
+		assertEquals(newBuffer, methodBuffer.get(arrows).toString());
+	}
 }
