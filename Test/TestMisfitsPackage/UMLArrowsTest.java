@@ -630,6 +630,66 @@ public class UMLArrowsTest {
 	}
 
 	@Test
+	public void testprintClassNoBuffers() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
+		UMLArrows arrows = UMLArrows.getInstance();
+		Field supers = UMLArrows.class.getDeclaredField("supers");
+		supers.setAccessible(true);
+		Field interfaces = UMLArrows.class.getDeclaredField("interfaces");
+		interfaces.setAccessible(true);
+		Field uses = UMLArrows.class.getDeclaredField("uses");
+		uses.setAccessible(true);
+		Field fields = UMLArrows.class.getDeclaredField("fields");
+		fields.setAccessible(true);
+		Field fieldbuffer = UMLArrows.class.getDeclaredField("fieldBuffer");
+		fieldbuffer.setAccessible(true);
+		Field methodbuffer = UMLArrows.class.getDeclaredField("methodBuffer");
+		methodbuffer.setAccessible(true);
+		supers.set(arrows, "");
+		interfaces.set(arrows, new ArrayList<String>());
+		uses.set(arrows, new ArrayList<String>());
+		fields.set(arrows, new ArrayList<String>());
+		fieldbuffer.set(arrows, new StringBuffer());
+		methodbuffer.set(arrows, new StringBuffer());
+		arrows.printClass("test");
+		assertEquals(
+				"   test [\n     shape=\"record\"     label = \"{test||\n}\"\n];\n",
+				outContent.toString());
+	}
+
+	@Test
+	public void testprintClass() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
+		UMLArrows arrows = UMLArrows.getInstance();
+		Field supers = UMLArrows.class.getDeclaredField("supers");
+		supers.setAccessible(true);
+		Field interfaces = UMLArrows.class.getDeclaredField("interfaces");
+		interfaces.setAccessible(true);
+		Field uses = UMLArrows.class.getDeclaredField("uses");
+		uses.setAccessible(true);
+		Field fields = UMLArrows.class.getDeclaredField("fields");
+		fields.setAccessible(true);
+		Field fieldbuffer = UMLArrows.class.getDeclaredField("fieldBuffer");
+		fieldbuffer.setAccessible(true);
+		Field methodbuffer = UMLArrows.class.getDeclaredField("methodBuffer");
+		methodbuffer.setAccessible(true);
+		supers.set(arrows, "");
+		interfaces.set(arrows, new ArrayList<String>());
+		uses.set(arrows, new ArrayList<String>());
+		fields.set(arrows, new ArrayList<String>());
+		StringBuffer fTemp = new StringBuffer();
+		fTemp.append("I was thinking about this buffer and it was a good idea.");
+		StringBuffer mTemp = new StringBuffer();
+		mTemp.append("This is a powerful MethodBuffer.");
+		fieldbuffer.set(arrows, fTemp);
+		methodbuffer.set(arrows, mTemp);
+		arrows.printClass("test");
+		assertEquals(
+				"   test [\n     shape=\"record\"     label = \"{test|I was thinking about this buffer and it was a good idea.|This is a powerful MethodBuffer.\n}\"\n];\n",
+				outContent.toString());
+	}
+
+	@Test
 	public void testunwantedTypesInWhitelist() throws NoSuchFieldException,
 			SecurityException, IllegalArgumentException,
 			IllegalAccessException, InvocationTargetException,
