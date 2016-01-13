@@ -70,7 +70,7 @@ public class UMLArrowsTest {
 				"String", "cóol", "Understood"));
 		fields.set(arrows, fieldsv1);
 		// Checking for same instance using ==
-		assertEquals(arrows.getFields(), fieldsv1);
+		assertEquals(fieldsv1, arrows.getFields());
 		ArrayList<String> fieldsv2 = new ArrayList<String>();
 		// Checking for different instance using !=
 		assertTrue(!arrows.getFields().equals(fieldsv2));
@@ -101,7 +101,7 @@ public class UMLArrowsTest {
 				"String", "cóol", "Understood"));
 		uses.set(arrows, usesv1);
 		// Checking for same instance using ==
-		assertEquals(arrows.getUses(), usesv1);
+		assertEquals(usesv1, arrows.getUses());
 		ArrayList<String> usesv2 = new ArrayList<String>();
 		// Checking for different instance using !=
 		assertTrue(!arrows.getUses().equals(usesv2));
@@ -132,7 +132,7 @@ public class UMLArrowsTest {
 				"String", "cóol", "Understood"));
 		interfaces.set(arrows, interfacesv1);
 		// Checking for same instance using ==
-		assertEquals(arrows.getInterfaces(), interfacesv1);
+		assertEquals(interfacesv1, arrows.getInterfaces());
 		ArrayList<String> interfacesv2 = new ArrayList<String>();
 		// Checking for different instance using !=
 		assertTrue(!arrows.getInterfaces().equals(interfacesv2));
@@ -159,7 +159,7 @@ public class UMLArrowsTest {
 		String supersv1 = "Understood";
 		supers.set(arrows, supersv1);
 		// Checking for same instance using ==
-		assertEquals(arrows.getSupers(), supersv1);
+		assertEquals(supersv1, arrows.getSupers());
 		String supersv2 = "Hello_World";
 		// Checking for different instance using !=
 		assertTrue(!arrows.getSupers().equals(supersv2));
@@ -190,7 +190,7 @@ public class UMLArrowsTest {
 				"String", "cóol", "Understood"));
 		whitelist.set(arrows, whitelistv1);
 		// Checking for same instance using ==
-		assertEquals(arrows.getWhitelist(), whitelistv1);
+		assertEquals(whitelistv1, arrows.getWhitelist());
 		ArrayList<String> whitelistv2 = new ArrayList<String>();
 		// Checking for different instance using !=
 		assertTrue(!arrows.getWhitelist().equals(whitelistv2));
@@ -211,11 +211,11 @@ public class UMLArrowsTest {
 		uses.setAccessible(true);
 		Field fields = UMLArrows.class.getDeclaredField("fields");
 		fields.setAccessible(true);
-		assertEquals(whitelist.get(arrows), new ArrayList<String>());
-		assertEquals(supers.get(arrows), "");
-		assertEquals(interfaces.get(arrows), new ArrayList<String>());
-		assertEquals(uses.get(arrows), new ArrayList<String>());
-		assertEquals(fields.get(arrows), new ArrayList<String>());
+		assertEquals(new ArrayList<String>(), whitelist.get(arrows));
+		assertEquals("", supers.get(arrows));
+		assertEquals(new ArrayList<String>(), interfaces.get(arrows));
+		assertEquals(new ArrayList<String>(), uses.get(arrows));
+		assertEquals(new ArrayList<String>(), fields.get(arrows));
 	}
 
 	@Test
@@ -256,9 +256,61 @@ public class UMLArrowsTest {
 		arrows.resetUMLArrows();
 		// Test
 		// assertEquals(whitelist.get(arrows), new ArrayList<String>());
-		assertEquals(supers.get(arrows), "");
-		assertEquals(interfaces.get(arrows), new ArrayList<String>());
-		assertEquals(uses.get(arrows), new ArrayList<String>());
-		assertEquals(fields.get(arrows), new ArrayList<String>());
+		assertEquals("", supers.get(arrows));
+		assertEquals(new ArrayList<String>(), interfaces.get(arrows));
+		assertEquals(new ArrayList<String>(), uses.get(arrows));
+		assertEquals(new ArrayList<String>(), fields.get(arrows));
+	}
+
+	@Test
+	public void testaddToFieldBufferSpace() throws IllegalArgumentException,
+			IllegalAccessException, NoSuchFieldException, SecurityException {
+		String toAdd = " ";
+		UMLArrows arrows = UMLArrows.getInstance();
+		Field fieldBuffer = UMLArrows.class.getDeclaredField("fieldBuffer");
+		fieldBuffer.setAccessible(true);
+		StringBuffer currentBuffer = (StringBuffer) fieldBuffer.get(arrows);
+		String newBuffer = (currentBuffer.toString() + toAdd);
+		arrows.addToFieldBuffer(toAdd);
+		assertEquals(newBuffer, fieldBuffer.get(arrows).toString());
+	}
+
+	@Test
+	public void testaddToFieldBufferString() throws IllegalArgumentException,
+			IllegalAccessException, NoSuchFieldException, SecurityException {
+		String toAdd = "I am a string";
+		UMLArrows arrows = UMLArrows.getInstance();
+		Field fieldBuffer = UMLArrows.class.getDeclaredField("fieldBuffer");
+		fieldBuffer.setAccessible(true);
+		StringBuffer currentBuffer = (StringBuffer) fieldBuffer.get(arrows);
+		String newBuffer = (currentBuffer.toString() + toAdd);
+		arrows.addToFieldBuffer(toAdd);
+		assertEquals(newBuffer, fieldBuffer.get(arrows).toString());
+	}
+	
+	@Test
+	public void testaddToFieldBufferSymbols() throws IllegalArgumentException,
+			IllegalAccessException, NoSuchFieldException, SecurityException {
+		String toAdd = "(#)^%@#%^@#$)@#$*@#&$)@!_)*";
+		UMLArrows arrows = UMLArrows.getInstance();
+		Field fieldBuffer = UMLArrows.class.getDeclaredField("fieldBuffer");
+		fieldBuffer.setAccessible(true);
+		StringBuffer currentBuffer = (StringBuffer) fieldBuffer.get(arrows);
+		String newBuffer = (currentBuffer.toString() + toAdd);
+		arrows.addToFieldBuffer(toAdd);
+		assertEquals(newBuffer, fieldBuffer.get(arrows).toString());
+	}
+
+	@Test
+	public void testaddToFieldBufferNothing() throws IllegalArgumentException,
+			IllegalAccessException, NoSuchFieldException, SecurityException {
+		String toAdd = "";
+		UMLArrows arrows = UMLArrows.getInstance();
+		Field fieldBuffer = UMLArrows.class.getDeclaredField("fieldBuffer");
+		fieldBuffer.setAccessible(true);
+		StringBuffer currentBuffer = (StringBuffer) fieldBuffer.get(arrows);
+		String newBuffer = (currentBuffer.toString() + toAdd);
+		arrows.addToFieldBuffer(toAdd);
+		assertEquals(newBuffer, fieldBuffer.get(arrows).toString());
 	}
 }
