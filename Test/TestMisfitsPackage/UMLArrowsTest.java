@@ -3,7 +3,6 @@ package TestMisfitsPackage;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.List;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.Field;
@@ -11,6 +10,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
+import jdk.internal.org.objectweb.asm.Opcodes;
 
 import org.junit.After;
 import org.junit.Before;
@@ -689,6 +691,21 @@ public class UMLArrowsTest {
 				outContent.toString());
 	}
 
+	@Test
+	public void testaddFieldToBuffer() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException{
+		UMLArrows arrows= UMLArrows.getInstance();
+		Field whitelist = UMLArrows.class.getDeclaredField("whitelist");
+		whitelist.setAccessible(true);
+		ArrayList<String> whitelistv1 = new ArrayList<String>(
+				Arrays.asList("java_lang_Object"));
+		whitelist.set(arrows, whitelistv1);
+		Field fieldbuffer = UMLArrows.class.getDeclaredField("fieldBuffer");
+		fieldbuffer.setAccessible(true);
+		fieldbuffer.set(arrows, new StringBuffer());
+		arrows.addFieldToBuffer(Opcodes.ACC_PUBLIC, "test" , "Ljava/lang/Object;");
+		assertEquals("+ test : java_lang_Object\\l", fieldbuffer.get(arrows).toString());
+	}
+	
 	@Test
 	public void testunwantedTypesInWhitelist() throws NoSuchFieldException,
 			SecurityException, IllegalArgumentException,
