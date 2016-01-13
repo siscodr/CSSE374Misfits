@@ -3,6 +3,7 @@ package TestMisfitsPackage;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.Field;
@@ -382,7 +383,7 @@ public class UMLArrowsTest {
 		Method unwantedType = UMLArrows.class.getDeclaredMethod(
 				"unwantedTypes", String.class);
 		unwantedType.setAccessible(true);
-		assertEquals(unwantedType.invoke(arrows, "String"), true);
+		assertEquals(true, unwantedType.invoke(arrows, "String"));
 	}
 
 	@Test
@@ -399,7 +400,7 @@ public class UMLArrowsTest {
 		Method unwantedType = UMLArrows.class.getDeclaredMethod(
 				"unwantedTypes", String.class);
 		unwantedType.setAccessible(true);
-		assertEquals(unwantedType.invoke(arrows, "String2"), false);
+		assertEquals(false, unwantedType.invoke(arrows, "String2"));
 	}
 
 	@Test
@@ -416,7 +417,7 @@ public class UMLArrowsTest {
 		Method unwantedType = UMLArrows.class.getDeclaredMethod(
 				"unwantedTypes", String.class);
 		unwantedType.setAccessible(true);
-		assertEquals(unwantedType.invoke(arrows, "null"), false);
+		assertEquals(false, unwantedType.invoke(arrows, "null"));
 	}
 
 	@Test
@@ -433,7 +434,50 @@ public class UMLArrowsTest {
 		Method unwantedType = UMLArrows.class.getDeclaredMethod(
 				"unwantedTypes", String.class);
 		unwantedType.setAccessible(true);
-		assertEquals(unwantedType.invoke(arrows, ""), false);
+		assertEquals(false, unwantedType.invoke(arrows, ""));
+	}
+
+	@Test
+	public void testgetTypesFromDescPrimatives() throws NoSuchMethodException,
+			SecurityException, IllegalAccessException,
+			IllegalArgumentException, InvocationTargetException {
+		Method getTypesFromDesc = UMLArrows.class.getDeclaredMethod(
+				"getTypesFromDesc", String.class);
+		getTypesFromDesc.setAccessible(true);
+		String desc = "(ID)Ljava/lang/Object";
+		List<String> returns = new ArrayList<String>(Arrays.asList("int",
+				"double"));
+		assertEquals(returns,
+				getTypesFromDesc.invoke(UMLArrows.getInstance(), desc));
+	}
+
+	@Test
+	public void testgetTypesFromDescClasses() throws NoSuchMethodException,
+			SecurityException, IllegalAccessException,
+			IllegalArgumentException, InvocationTargetException {
+		Method getTypesFromDesc = UMLArrows.class.getDeclaredMethod(
+				"getTypesFromDesc", String.class);
+		getTypesFromDesc.setAccessible(true);
+		String desc = "(LTestMisfitsPackage/UMLArrowsTest;Ljava/lang/Thread;)Ljava/lang/Object";
+		List<String> returns = new ArrayList<String>(Arrays.asList(
+				"TestMisfitsPackage.UMLArrowsTest", "java.lang.Thread"));
+		assertEquals(returns,
+				getTypesFromDesc.invoke(UMLArrows.getInstance(), desc));
+	}
+
+	@Test
+	public void testgetTypesFromDescCandP() throws NoSuchMethodException,
+			SecurityException, IllegalAccessException,
+			IllegalArgumentException, InvocationTargetException {
+		Method getTypesFromDesc = UMLArrows.class.getDeclaredMethod(
+				"getTypesFromDesc", String.class);
+		getTypesFromDesc.setAccessible(true);
+		String desc = "(LTestMisfitsPackage/UMLArrowsTest;ILjava/lang/Thread;DB)Ljava/lang/Object";
+		List<String> returns = new ArrayList<String>(Arrays.asList(
+				"TestMisfitsPackage.UMLArrowsTest", "int", "java.lang.Thread",
+				"double", "byte"));
+		assertEquals(returns,
+				getTypesFromDesc.invoke(UMLArrows.getInstance(), desc));
 	}
 
 }
