@@ -223,10 +223,10 @@ public class UMLArrows {
 	 */
 	public void printClass(String name) {
 		String newName = stripFunction(name);
-		System.out.println("   " + newName
+		System.out.print("   " + newName
 				+ " [\n     shape=\"record\"     label = \"{" + newName + "|"
 				+ fieldBuffer.toString() + "|" + methodBuffer.toString()
-				+ "\n}\"\n];");
+				+ "\n}\"\n];\n");
 		printArrows(newName);
 		UMLArrows.getInstance().resetUMLArrows();
 	}
