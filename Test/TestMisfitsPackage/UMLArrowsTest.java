@@ -447,6 +447,48 @@ public class UMLArrowsTest {
 		assertEquals(usesarray, uses.get(arrows));
 	}
 
+	@SuppressWarnings("unchecked")
+	@Test
+	public void testaddFieldObject() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
+		UMLArrows arrows = UMLArrows.getInstance();
+		Field whitelist = UMLArrows.class.getDeclaredField("whitelist");
+		whitelist.setAccessible(true);
+		ArrayList<String> whitelistv1 = new ArrayList<String>(
+				Arrays.asList("java_lang_Object"));
+		whitelist.set(arrows, whitelistv1);
+		Field fields = UMLArrows.class.getDeclaredField("fields");
+		fields.setAccessible(true);
+		ArrayList<String> fieldsarray = (ArrayList<String>) fields.get(arrows);
+		// We must avoid having the stripper from touching this string
+		String toAdd = "HeyHeyHeyThisisaCoolTest";
+		String desc = "Ljava/lang/Object;";
+		fieldsarray.add(toAdd);
+		arrows.addField(desc);
+		assertEquals(fieldsarray, fields.get(arrows));
+	}
+
+	@SuppressWarnings("unchecked")
+	@Test
+	public void testaddFieldUMLArrowsTest() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
+		UMLArrows arrows = UMLArrows.getInstance();
+		Field whitelist = UMLArrows.class.getDeclaredField("whitelist");
+		whitelist.setAccessible(true);
+		ArrayList<String> whitelistv1 = new ArrayList<String>(
+				Arrays.asList("TestMisfitsPackage_UMLArrowsTest"));
+		whitelist.set(arrows, whitelistv1);
+		Field fields = UMLArrows.class.getDeclaredField("fields");
+		fields.setAccessible(true);
+		ArrayList<String> fieldsarray = (ArrayList<String>) fields.get(arrows);
+		// We must avoid having the stripper from touching this string
+		String toAdd = "TestMisfitsPackage_UMLArrowsTest";
+		String desc = "LTestMisfitsPackage/UMLArrowsTest;";
+		fieldsarray.add(toAdd);
+		arrows.addField(desc);
+		assertEquals(fieldsarray, fields.get(arrows));
+	}
+
 	@Test
 	public void testunwantedTypesInWhitelist() throws NoSuchFieldException,
 			SecurityException, IllegalArgumentException,
