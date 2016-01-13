@@ -153,12 +153,13 @@ public class UMLArrows {
 	 * Adds the given class to the List of classes associated with current
 	 * class.
 	 * 
-	 * @param currentType
-	 *            A String to represent a class that is used as a field by the
-	 *            current class.
+	 * @param desc
+	 *            The field's Descriptor.
+	 * 
 	 * @return No return value.
 	 */
-	public void addField(String currentType) {
+	public void addField(String desc) {
+		String currentType = Type.getType(desc).getClassName();
 		String cleanType = stripFunction(currentType);
 		if (checkExistingArrow(cleanType))
 			fields.add(cleanType);

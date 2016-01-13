@@ -5,21 +5,22 @@ import jdk.internal.org.objectweb.asm.FieldVisitor;
 import jdk.internal.org.objectweb.asm.Type;
 
 /**
- * ClassFieldVisitor Decorates ClassVisitor so the field is checked for use arrows if needed
+ * ClassFieldVisitor Decorates ClassVisitor so the field is checked for
+ * association arrows if needed
  * 
  * @author TheMisfits
  */
 public class ClassFieldVisitor extends ClassVisitor {
 
 	/**
-	 * Constructs a new ClassFieldVisitor that decorates the old ClassVisitor.
+	 * Constructs a new ClassFieldVisitor.
 	 * 
 	 * @param api
 	 *            the ASM API version implemented by this visitor. Must be one
 	 *            of Opcodes.ASM4.
 	 */
-	public ClassFieldVisitor(int arg0) {
-		super(arg0);
+	public ClassFieldVisitor(int api) {
+		super(api);
 	}
 
 	/**
@@ -31,13 +32,13 @@ public class ClassFieldVisitor extends ClassVisitor {
 	 * @param toDecorate
 	 *            A ClassVisitor for this class to Decorate
 	 */
-	public ClassFieldVisitor(int arg0, ClassVisitor arg1) {
-		super(arg0, arg1);
+	public ClassFieldVisitor(int api, ClassVisitor toDecorate) {
+		super(api, toDecorate);
 	}
 
 	/**
 	 * This method decorates the ClassVisitor's visitField function to add
-	 * functionality to pass field types to UMLArrow in order to create a UML
+	 * functionality to pass field descriptors to UMLArrow in order to create a UML
 	 * 
 	 * @param access
 	 *            the field's access flags
@@ -52,12 +53,13 @@ public class ClassFieldVisitor extends ClassVisitor {
 	 *            the field's initial value. This parameter, which may be null
 	 *            if the field does not have an initial value
 	 */
+	@Override
 	public FieldVisitor visitField(int access, String name, String desc,
 			String signature, Object value) {
 		FieldVisitor toDecorate = super.visitField(access, name, desc,
 				signature, value);
-		String type = Type.getType(desc).getClassName();
-		UMLArrows.getInstance().addField(type); //Adds field to UML to allow for use arrows to be drawn
+		// Adds field to UML to allow for association arrows to be drawn
+		UMLArrows.getInstance().addField(desc);
 		return toDecorate;
 	}
 
