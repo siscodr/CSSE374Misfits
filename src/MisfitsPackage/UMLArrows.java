@@ -1,71 +1,147 @@
 package MisfitsPackage;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.Type;
 
+/**
+ * UMLArrows is a singleton class used to maintain the output of the UML and to
+ * collect information on the classes used
+ * 
+ * @author TheMisfits
+ */
 public class UMLArrows {
 	private static UMLArrows ourArrows = new UMLArrows();
 	private ArrayList<String> fields;
 	private ArrayList<String> uses;
-	private ArrayList<String> supers;
+	private String supers;
 	private ArrayList<String> interfaces;
 	private StringBuffer fieldBuffer = new StringBuffer();
 	private StringBuffer methodBuffer = new StringBuffer();
 	private ArrayList<String> whitelist = new ArrayList<String>();
 
+	/**
+	 * Constructs a UMLArrows
+	 */
 	private UMLArrows() {
-		clearArrows();
+		resetUMLArrows();
 	}
 
+	/**
+	 * Gets the current instance of UMLArrow
+	 * 
+	 * @return UMLArrow
+	 */
 	public static UMLArrows getInstance() {
 		return ourArrows;
 	}
 
+	/**
+	 * Getter for the fields associated with the current class
+	 * 
+	 * @return ArrayList<String>
+	 */
 	public ArrayList<String> getFields() {
-		return fields;
+		return this.fields;
 	}
 
+	/**
+	 * Getter for the classes that are 'used' by the current class.
+	 * 
+	 * @return ArrayList<String>
+	 */
 	public ArrayList<String> getUses() {
-		return uses;
+		return this.uses;
 	}
 
+	/**
+	 * Getter for the interfaces that the current class implements.
+	 * 
+	 * @return ArrayList<String>
+	 */
 	public ArrayList<String> getInterfaces() {
 		return interfaces;
 	}
 
-	public ArrayList<String> getSupers() {
+	/**
+	 * Getter for the class that the current class extends.
+	 * 
+	 * @return String
+	 */
+	public String getSupers() {
 		return supers;
 	}
 
+	/**
+	 * Getter for the WhiteList for the current set of classes.
+	 * 
+	 * @return ArrayList<String>
+	 */
 	public ArrayList<String> getWhitelist() {
 		return whitelist;
 	}
 
-	public void clearArrows() {
+	/**
+	 * Resets the ArrayLists used to make arrows.
+	 * 
+	 * @return No return value.
+	 */
+	public void resetUMLArrows() {
 		fields = new ArrayList<String>();
 		uses = new ArrayList<String>();
 		interfaces = new ArrayList<String>();
-		supers = new ArrayList<String>();
+		supers = "";
+		fieldBuffer = new StringBuffer();
+		methodBuffer = new StringBuffer();
 	}
 
+	/**
+	 * Append the given string to the end of the FieldBuffer
+	 * 
+	 * @param toAppend
+	 *            A String to append to the current FieldBuffer
+	 * @return No return value.
+	 */
 	public void addToFieldBuffer(String toAppend) {
 		this.fieldBuffer.append(toAppend);
 	}
 
+	/**
+	 * Append the given string to the end of the MethodBuffer
+	 * 
+	 * @param toAppend
+	 *            A String to append to the current MethodBuffer
+	 * @return No return value.
+	 */
 	public void addToMethodBuffer(String toAppend) {
 		this.methodBuffer.append(toAppend);
 	}
 
+	/**
+	 * Adds the given class to the list of classes that the current class uses.
+	 * 
+	 * @param currentType
+	 *            A String to represent the class that is being used by the
+	 *            current class.
+	 * @return No return value.
+	 */
 	public void addUse(String currentType) {
 		String cleanType = stripFunction(currentType);
 		if (checkExistingArrow(cleanType))
 			uses.add(cleanType);
 	}
 
+	/**
+	 * Takes a Method descriptor and adds all the types to the list of classes
+	 * being used by the current class.
+	 * 
+	 * @param desc
+	 *            A method descriptor that can be used to determine the types
+	 *            used by the current class.
+	 * @return No return value.
+	 */
 	public void addUses(String desc) {
 		List<String> stypes = getTypesFromDesc(desc);
 		for (String types : stypes) {
@@ -73,30 +149,77 @@ public class UMLArrows {
 		}
 	}
 
+	/**
+	 * Adds the given class to the List of classes associated with current
+	 * class.
+	 * 
+	 * @param currentType
+	 *            A String to represent a class that is used as a field by the
+	 *            current class.
+	 * @return No return value.
+	 */
 	public void addField(String currentType) {
 		String cleanType = stripFunction(currentType);
 		if (checkExistingArrow(cleanType))
 			fields.add(cleanType);
 	}
 
-	public void addSuper(String currentType) {
-		String cleanType = stripFunction(currentType);
-		if (checkExistingArrow(cleanType))
-			supers.add(cleanType);
+	/**
+	 * Adds the given class to the List of classes that this class extends.
+	 * 
+	 * @param currentType
+	 *            A String to represent a class that is extended by the current
+	 *            class.
+	 * @return No return value.
+	 */
+	public void setSuper(String currentType) {
+		if (currentType != null) {
+			String cleanType = stripFunction(currentType);
+			if (checkExistingArrow(cleanType))
+				supers = (cleanType);
+		}
 	}
 
+	/**
+	 * Adds the given class to the List of classes that interfaces of this class
+	 * .
+	 * 
+	 * @param currentType
+	 *            A String to represent a class that is an interface for the
+	 *            current class.
+	 * @return No return value.
+	 */
 	public void addInterface(String currentType) {
 		String cleanType = stripFunction(currentType);
 		if (checkExistingArrow(cleanType))
 			interfaces.add(cleanType);
 	}
 
+	/**
+	 * This function adds the given strings to the whiteList for the classes
+	 * that the UML should draw
+	 * 
+	 * @param classes
+	 *            the classes to add to the whiteList.
+	 * @return No return value.
+	 */
 	public void addWhitelist(String[] classes) {
 		for (int i = 0; i < classes.length; i++) {
 			this.whitelist.add(stripFunction(classes[i]));
 		}
 	}
 
+	/**
+	 * Print all the Buffers and Arrows to the Console. Then resets fields to
+	 * setup for the next class.
+	 * 
+	 * TODO:Add functionality to allow to export this as a file (Out of project
+	 * scope).
+	 * 
+	 * @param name
+	 *            A String representation of name of the current class
+	 * @return No return value
+	 */
 	public void printClass(String name) {
 		String newName = stripFunction(name);
 		System.out.println("   " + newName
@@ -104,8 +227,20 @@ public class UMLArrows {
 				+ fieldBuffer.toString() + "|" + methodBuffer.toString()
 				+ "\n}\"\n];");
 		printArrows(newName);
+		UMLArrows.getInstance().resetUMLArrows();
 	}
 
+	/**
+	 * Takes the given parameters to add to the field buffer in GraphViz format.
+	 * 
+	 * @param access
+	 *            The field's access flags.
+	 * @param name
+	 *            The Internal name of the field.
+	 * @param type
+	 *            A String representation of the type for the field.
+	 * @return No return value.
+	 */
 	public void addFieldToBuffer(int access, String name, String type) {
 		if (name.charAt(0) != '<') {
 			String symbol = "";
@@ -122,6 +257,18 @@ public class UMLArrows {
 		}
 	}
 
+	/**
+	 * Takes the given parameters to add to the method buffer in GraphViz
+	 * format.
+	 * 
+	 * @param access
+	 *            The method's access flags.
+	 * @param name
+	 *            The Internal name of the method.
+	 * @param desc
+	 *            The method's descriptor.
+	 * @return No return value.
+	 */
 	public void addMethodToBuffer(int access, String name, String desc) {
 		if (name.charAt(0) != '<') {
 
@@ -143,6 +290,13 @@ public class UMLArrows {
 		}
 	}
 
+	/**
+	 * Takes the given string and checks against the whiteList.
+	 * 
+	 * @param cleanType
+	 *            String to be checked against the whiteList
+	 * @return boolean If the given String is whiteListed
+	 */
 	private boolean unwantedTypes(String cleanType) {
 		for (String whitelisted : whitelist) {
 			if (cleanType.contains(whitelisted)) {
@@ -152,6 +306,14 @@ public class UMLArrows {
 		return false;
 	}
 
+	/**
+	 * Takes a method descriptor and returns a list of the parameters
+	 * 
+	 * @param desc
+	 *            A method descriptor.
+	 * @return List<String> A list of the parameter Types from a method
+	 *         descriptors
+	 */
 	private List<String> getTypesFromDesc(String desc) {
 		Type[] argTypes = Type.getArgumentTypes(desc);
 		List<String> stypes = new ArrayList<String>();
@@ -161,12 +323,27 @@ public class UMLArrows {
 		return stypes;
 	}
 
+	/**
+	 * Checks the given string to see if it should be added to the diagram.
+	 * 
+	 * @param cleanType
+	 *            A String that has been Stripped prior to being passed to be
+	 *            checked.
+	 * @return boolean If the arrow should be added to the diagram
+	 */
 	private boolean checkExistingArrow(String cleanType) {
 		return !uses.contains(cleanType) && !fields.contains(cleanType)
 				&& !supers.contains(cleanType)
 				&& !interfaces.contains(cleanType) && unwantedTypes(cleanType);
 	}
 
+	/**
+	 * Takes the given String and puts it in the consistent format.
+	 * 
+	 * @param toStrip
+	 *            A String that needs to be in a consistent format.
+	 * @return String A String without ".""/""[""]"
+	 */
 	private String stripFunction(String toStrip) {
 		toStrip = toStrip.replace(".", "_");
 		toStrip = toStrip.replace("/", "_");
@@ -175,14 +352,29 @@ public class UMLArrows {
 		return toStrip;
 	}
 
+	/**
+	 * Prints all the arrows to the console.
+	 * 
+	 * @param classString
+	 *            A String representation that has been Stripped of the current
+	 *            class
+	 * @return No return value
+	 */
 	private void printArrows(String classString) {
 		printUses(classString);
 		printFields(classString);
 		printInterfaces(classString);
 		printSupers(classString);
-		UMLArrows.getInstance().clearArrows();
 	}
 
+	/**
+	 * Prints all 'Use' arrows with this class.
+	 * 
+	 * @param className
+	 *            A String representation that has been Stripped of the current
+	 *            class
+	 * @return No return type.
+	 */
 	private void printUses(String className) {
 		for (String types : this.uses) {
 			if (types.contains("_")) {
@@ -192,6 +384,14 @@ public class UMLArrows {
 		}
 	}
 
+	/**
+	 * Prints all 'Association' arrows with this class.
+	 * 
+	 * @param className
+	 *            A String representation that has been Stripped of the current
+	 *            class
+	 * @return No return type.
+	 */
 	private void printFields(String className) {
 		for (String field : this.fields) {
 			if (field.contains("_")) {
@@ -201,6 +401,14 @@ public class UMLArrows {
 		}
 	}
 
+	/**
+	 * Prints all 'Interface' arrows with this class.
+	 * 
+	 * @param className
+	 *            A String representation that has been Stripped of the current
+	 *            class
+	 * @return No return type.
+	 */
 	private void printInterfaces(String className) {
 		for (String interf : this.interfaces) {
 			if (interf.contains("_")) {
@@ -210,13 +418,18 @@ public class UMLArrows {
 		}
 	}
 
+	/**
+	 * Prints all 'Extension' arrows with this class.
+	 * 
+	 * @param className
+	 *            A String representation that has been Stripped of the current
+	 *            class
+	 * @return No return type.
+	 */
 	private void printSupers(String className) {
-		for (String extended : this.supers) {
-			if (extended.contains("_")) {
-				System.out.println(className + " -> " + extended
-						+ " [arrowhead=\"onormal\"];");
-			}
+		if (supers.contains("_")) {
+			System.out.println(className + " -> " + supers
+					+ " [arrowhead=\"onormal\"];");
 		}
 	}
-
 }
