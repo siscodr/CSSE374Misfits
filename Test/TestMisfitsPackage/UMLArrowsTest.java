@@ -490,6 +490,57 @@ public class UMLArrowsTest {
 	}
 
 	@Test
+	public void testsetSuperString() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
+		UMLArrows arrows = UMLArrows.getInstance();
+		Field whitelist = UMLArrows.class.getDeclaredField("whitelist");
+		whitelist.setAccessible(true);
+		ArrayList<String> whitelistv1 = new ArrayList<String>(
+				Arrays.asList("HeyHeyHeyThisisaCoolTest"));
+		whitelist.set(arrows, whitelistv1);
+		Field supers = UMLArrows.class.getDeclaredField("supers");
+		supers.setAccessible(true);
+		// We must avoid having the stripper from touching this string
+		String theSuper = "HeyHeyHeyThisisaCoolTest";
+		arrows.setSuper(theSuper);
+		assertEquals(theSuper, supers.get(arrows));
+	}
+
+	@Test
+	public void testsetSuperNumerics() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
+		UMLArrows arrows = UMLArrows.getInstance();
+		Field whitelist = UMLArrows.class.getDeclaredField("whitelist");
+		whitelist.setAccessible(true);
+		ArrayList<String> whitelistv1 = new ArrayList<String>(
+				Arrays.asList("56789987655678"));
+		whitelist.set(arrows, whitelistv1);
+		Field supers = UMLArrows.class.getDeclaredField("supers");
+		supers.setAccessible(true);
+		// We must avoid having the stripper from touching this string
+		String theSuper = "56789987655678";
+		arrows.setSuper(theSuper);
+		assertEquals(theSuper, supers.get(arrows));
+	}
+
+	@Test
+	public void testsetSuperSpecial() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
+		UMLArrows arrows = UMLArrows.getInstance();
+		Field whitelist = UMLArrows.class.getDeclaredField("whitelist");
+		whitelist.setAccessible(true);
+		ArrayList<String> whitelistv1 = new ArrayList<String>(
+				Arrays.asList("#$%^&*(<>?:\"{}';'"));
+		whitelist.set(arrows, whitelistv1);
+		Field supers = UMLArrows.class.getDeclaredField("supers");
+		supers.setAccessible(true);
+		// We must avoid having the stripper from touching this string
+		String theSuper = "#$%^&*(<>?:\"{}';'";
+		arrows.setSuper(theSuper);
+		assertEquals(theSuper, supers.get(arrows));
+	}
+
+	@Test
 	public void testunwantedTypesInWhitelist() throws NoSuchFieldException,
 			SecurityException, IllegalArgumentException,
 			IllegalAccessException, InvocationTargetException,
