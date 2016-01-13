@@ -84,6 +84,6 @@ public class DesignParser {
 	 * Makes the end diagram code (Should only be ran once per diagram).
 	 */
 	public static void endDiagram() {
-		System.out.println("}");
+		System.out.print("}\n");
 	}
 }
