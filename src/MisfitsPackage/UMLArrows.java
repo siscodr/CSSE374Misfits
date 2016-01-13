@@ -301,7 +301,7 @@ public class UMLArrows {
 	 */
 	private boolean unwantedTypes(String cleanType) {
 		for (String whitelisted : whitelist) {
-			if (cleanType.contains(whitelisted)) {
+			if (cleanType.equals(whitelisted)) {
 				return true;
 			}
 		}

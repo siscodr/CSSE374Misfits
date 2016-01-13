@@ -6,6 +6,8 @@ import static org.junit.Assert.assertTrue;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -201,8 +203,8 @@ public class UMLArrowsTest {
 			SecurityException, IllegalArgumentException, IllegalAccessException {
 		UMLArrows arrows = UMLArrows.getInstance();
 		arrows.resetUMLArrows();
-		Field whitelist = UMLArrows.class.getDeclaredField("whitelist");
-		whitelist.setAccessible(true);
+		// Field whitelist = UMLArrows.class.getDeclaredField("whitelist");
+		// whitelist.setAccessible(true);
 		Field supers = UMLArrows.class.getDeclaredField("supers");
 		supers.setAccessible(true);
 		Field interfaces = UMLArrows.class.getDeclaredField("interfaces");
@@ -211,7 +213,7 @@ public class UMLArrowsTest {
 		uses.setAccessible(true);
 		Field fields = UMLArrows.class.getDeclaredField("fields");
 		fields.setAccessible(true);
-		assertEquals(new ArrayList<String>(), whitelist.get(arrows));
+		// assertEquals(new ArrayList<String>(), whitelist.get(arrows));
 		assertEquals("", supers.get(arrows));
 		assertEquals(new ArrayList<String>(), interfaces.get(arrows));
 		assertEquals(new ArrayList<String>(), uses.get(arrows));
@@ -287,7 +289,7 @@ public class UMLArrowsTest {
 		arrows.addToFieldBuffer(toAdd);
 		assertEquals(newBuffer, fieldBuffer.get(arrows).toString());
 	}
-	
+
 	@Test
 	public void testaddToFieldBufferSymbols() throws IllegalArgumentException,
 			IllegalAccessException, NoSuchFieldException, SecurityException {
@@ -313,7 +315,7 @@ public class UMLArrowsTest {
 		arrows.addToFieldBuffer(toAdd);
 		assertEquals(newBuffer, fieldBuffer.get(arrows).toString());
 	}
-	
+
 	@Test
 	public void testaddToMethodBufferSpace() throws IllegalArgumentException,
 			IllegalAccessException, NoSuchFieldException, SecurityException {
@@ -339,7 +341,7 @@ public class UMLArrowsTest {
 		arrows.addToMethodBuffer(toAdd);
 		assertEquals(newBuffer, methodBuffer.get(arrows).toString());
 	}
-	
+
 	@Test
 	public void testaddToMethodBufferSymbols() throws IllegalArgumentException,
 			IllegalAccessException, NoSuchFieldException, SecurityException {
@@ -352,6 +354,7 @@ public class UMLArrowsTest {
 		arrows.addToMethodBuffer(toAdd);
 		assertEquals(newBuffer, methodBuffer.get(arrows).toString());
 	}
+
 	@Test
 	public void testaddToMethodBufferNothing() throws IllegalArgumentException,
 			IllegalAccessException, NoSuchFieldException, SecurityException {
@@ -364,4 +367,73 @@ public class UMLArrowsTest {
 		arrows.addToMethodBuffer(toAdd);
 		assertEquals(newBuffer, methodBuffer.get(arrows).toString());
 	}
+
+	@Test
+	public void testunwantedTypesInWhitelist() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException,
+			IllegalAccessException, InvocationTargetException,
+			NoSuchMethodException {
+		UMLArrows arrows = UMLArrows.getInstance();
+		Field whitelist = UMLArrows.class.getDeclaredField("whitelist");
+		whitelist.setAccessible(true);
+		ArrayList<String> whitelistv1 = new ArrayList<String>(
+				Arrays.asList("String"));
+		whitelist.set(arrows, whitelistv1);
+		Method unwantedType = UMLArrows.class.getDeclaredMethod(
+				"unwantedTypes", String.class);
+		unwantedType.setAccessible(true);
+		assertEquals(unwantedType.invoke(arrows, "String"), true);
+	}
+
+	@Test
+	public void testunwantedTypesSubstringInWhiteList()
+			throws NoSuchFieldException, SecurityException,
+			IllegalArgumentException, IllegalAccessException,
+			InvocationTargetException, NoSuchMethodException {
+		UMLArrows arrows = UMLArrows.getInstance();
+		Field whitelist = UMLArrows.class.getDeclaredField("whitelist");
+		whitelist.setAccessible(true);
+		ArrayList<String> whitelistv1 = new ArrayList<String>(
+				Arrays.asList("String"));
+		whitelist.set(arrows, whitelistv1);
+		Method unwantedType = UMLArrows.class.getDeclaredMethod(
+				"unwantedTypes", String.class);
+		unwantedType.setAccessible(true);
+		assertEquals(unwantedType.invoke(arrows, "String2"), false);
+	}
+
+	@Test
+	public void testunwantedTypesNull() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException,
+			IllegalAccessException, InvocationTargetException,
+			NoSuchMethodException {
+		UMLArrows arrows = UMLArrows.getInstance();
+		Field whitelist = UMLArrows.class.getDeclaredField("whitelist");
+		whitelist.setAccessible(true);
+		ArrayList<String> whitelistv1 = new ArrayList<String>(
+				Arrays.asList("String"));
+		whitelist.set(arrows, whitelistv1);
+		Method unwantedType = UMLArrows.class.getDeclaredMethod(
+				"unwantedTypes", String.class);
+		unwantedType.setAccessible(true);
+		assertEquals(unwantedType.invoke(arrows, "null"), false);
+	}
+
+	@Test
+	public void testunwantedTypesEmptyString() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException,
+			IllegalAccessException, InvocationTargetException,
+			NoSuchMethodException {
+		UMLArrows arrows = UMLArrows.getInstance();
+		Field whitelist = UMLArrows.class.getDeclaredField("whitelist");
+		whitelist.setAccessible(true);
+		ArrayList<String> whitelistv1 = new ArrayList<String>(
+				Arrays.asList("String"));
+		whitelist.set(arrows, whitelistv1);
+		Method unwantedType = UMLArrows.class.getDeclaredMethod(
+				"unwantedTypes", String.class);
+		unwantedType.setAccessible(true);
+		assertEquals(unwantedType.invoke(arrows, ""), false);
+	}
+
 }
