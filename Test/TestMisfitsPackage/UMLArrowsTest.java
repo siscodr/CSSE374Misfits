@@ -600,6 +600,36 @@ public class UMLArrowsTest {
 	}
 
 	@Test
+	public void testaddWhiteListEmpty() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
+		UMLArrows arrows = UMLArrows.getInstance();
+		Field whitelist = UMLArrows.class.getDeclaredField("whitelist");
+		whitelist.setAccessible(true);
+		ArrayList<String> whitelistv1 = new ArrayList<String>();
+		whitelist.set(arrows, whitelistv1);
+		String[] classesToAdd = { "" };
+		arrows.addWhitelist(classesToAdd);
+		assertEquals(new ArrayList<String>(Arrays.asList("")),
+				whitelist.get(arrows));
+	}
+
+	@Test
+	public void testaddWhiteListStrings() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
+		UMLArrows arrows = UMLArrows.getInstance();
+		Field whitelist = UMLArrows.class.getDeclaredField("whitelist");
+		whitelist.setAccessible(true);
+		ArrayList<String> whitelistv1 = new ArrayList<String>();
+		whitelist.set(arrows, whitelistv1);
+		String[] classesToAdd = { "hello", "IReallyWantToBeWhiteListed", "foo" };
+		arrows.addWhitelist(classesToAdd);
+		assertEquals(
+				new ArrayList<String>(Arrays.asList("hello",
+						"IReallyWantToBeWhiteListed", "foo")),
+				whitelist.get(arrows));
+	}
+
+	@Test
 	public void testunwantedTypesInWhitelist() throws NoSuchFieldException,
 			SecurityException, IllegalArgumentException,
 			IllegalAccessException, InvocationTargetException,
