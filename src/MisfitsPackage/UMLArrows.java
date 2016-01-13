@@ -15,9 +15,7 @@ public class UMLArrows {
 	private ArrayList<String> interfaces;
 	private StringBuffer fieldBuffer = new StringBuffer();
 	private StringBuffer methodBuffer = new StringBuffer();
-
-	private ArrayList<String> toDelete = new ArrayList<String>(Arrays.asList(
-			"boolean", "java_lang", "java_util"));
+	private ArrayList<String> whitelist = new ArrayList<String>();
 
 	private UMLArrows() {
 		clearArrows();
@@ -43,8 +41,8 @@ public class UMLArrows {
 		return supers;
 	}
 
-	public ArrayList<String> getToDelete() {
-		return toDelete;
+	public ArrayList<String> getWhitelist() {
+		return whitelist;
 	}
 
 	public void clearArrows() {
@@ -91,6 +89,12 @@ public class UMLArrows {
 		String cleanType = stripFunction(currentType);
 		if (checkExistingArrow(cleanType))
 			interfaces.add(cleanType);
+	}
+
+	public void addWhitelist(String[] classes) {
+		for (int i = 0; i < classes.length; i++) {
+			this.whitelist.add(stripFunction(classes[i]));
+		}
 	}
 
 	public void printClass(String name) {
@@ -140,12 +144,12 @@ public class UMLArrows {
 	}
 
 	private boolean unwantedTypes(String cleanType) {
-		for (String text : toDelete) {
-			if (cleanType.contains(text)) {
-				return false;
+		for (String whitelisted : whitelist) {
+			if (cleanType.contains(whitelisted)) {
+				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 
 	private List<String> getTypesFromDesc(String desc) {

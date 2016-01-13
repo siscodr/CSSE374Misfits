@@ -37,27 +37,30 @@ public class DesignParser {
 	 */
 	public static void makeUML(String[] classes) throws IOException {
 		startDiagram("misfit_diagram");
+		//Creates whiteList for the classes to draw on UML
+		UMLArrows.getInstance().addWhitelist(classes);
+		
 		for (String className : classes) {
 
 			ClassReader reader = new ClassReader(className);
 
 			ClassVisitor InterfaceVisitor = new InterfaceDeclarationVisitor(
-					Opcodes.ASM5);
+					Opcodes.ASM5); // Interface Arrows
 
 			ClassVisitor SuperVisitor = new SuperDeclarationVisitor(
-					Opcodes.ASM5, InterfaceVisitor);
+					Opcodes.ASM5, InterfaceVisitor); // Extends Arrows
 
 			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5,
-					SuperVisitor);
+					SuperVisitor); // Fields for Classes
 
 			ClassVisitor fieldUsesVisitor = new ClassFieldDeclarationVisitor(
-					Opcodes.ASM5, fieldVisitor);
+					Opcodes.ASM5, fieldVisitor); //Field's Association arrows
 
 			ClassVisitor methodUsesVisitor = new ClassMethodVisitor(
-					Opcodes.ASM5, fieldUsesVisitor);
+					Opcodes.ASM5, fieldUsesVisitor); //Method's Uses arrows
 
 			ClassVisitor methodVisitor = new MethodDeclarationVisitor(
-					Opcodes.ASM5, methodUsesVisitor);
+					Opcodes.ASM5, methodUsesVisitor); // Method for Classes
 
 			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 
