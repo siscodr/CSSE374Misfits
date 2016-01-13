@@ -77,7 +77,7 @@ public class DesignParser {
 	 *            The name in which the diagram is to be titled.
 	 */
 	public static void startDiagram(String nameOfDiagram) {
-		System.out.println("digraph " + nameOfDiagram + "{\nrankdir=BT");
+		System.out.print("digraph " + nameOfDiagram + "{\nrankdir=BT\n");
 	}
 
 	/**
