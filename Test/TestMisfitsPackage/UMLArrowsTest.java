@@ -540,6 +540,65 @@ public class UMLArrowsTest {
 		assertEquals(theSuper, supers.get(arrows));
 	}
 
+	@SuppressWarnings("unchecked")
+	@Test
+	public void testaddInterfaceEmptyString() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
+		UMLArrows arrows = UMLArrows.getInstance();
+		Field whitelist = UMLArrows.class.getDeclaredField("whitelist");
+		whitelist.setAccessible(true);
+		ArrayList<String> whitelistv1 = new ArrayList<String>(Arrays.asList(""));
+		whitelist.set(arrows, whitelistv1);
+		Field interfaces = UMLArrows.class.getDeclaredField("interfaces");
+		interfaces.setAccessible(true);
+		ArrayList<String> interfacesarray = (ArrayList<String>) interfaces
+				.get(arrows);
+		String toAdd = "";
+		interfacesarray.add(toAdd);
+		arrows.addInterface(toAdd);
+		assertEquals(interfacesarray, interfaces.get(arrows));
+	}
+
+	@SuppressWarnings("unchecked")
+	@Test
+	public void testaddInterfaceString() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
+		UMLArrows arrows = UMLArrows.getInstance();
+		Field whitelist = UMLArrows.class.getDeclaredField("whitelist");
+		whitelist.setAccessible(true);
+		ArrayList<String> whitelistv1 = new ArrayList<String>(
+				Arrays.asList("MegaInterface"));
+		whitelist.set(arrows, whitelistv1);
+		Field interfaces = UMLArrows.class.getDeclaredField("interfaces");
+		interfaces.setAccessible(true);
+		ArrayList<String> interfacesarray = (ArrayList<String>) interfaces
+				.get(arrows);
+		String toAdd = "MegaInterface";
+		interfacesarray.add(toAdd);
+		arrows.addInterface(toAdd);
+		assertEquals(interfacesarray, interfaces.get(arrows));
+	}
+
+	@SuppressWarnings("unchecked")
+	@Test
+	public void testaddInterfaceNumerics() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
+		UMLArrows arrows = UMLArrows.getInstance();
+		Field whitelist = UMLArrows.class.getDeclaredField("whitelist");
+		whitelist.setAccessible(true);
+		ArrayList<String> whitelistv1 = new ArrayList<String>(
+				Arrays.asList("0937240432"));
+		whitelist.set(arrows, whitelistv1);
+		Field interfaces = UMLArrows.class.getDeclaredField("interfaces");
+		interfaces.setAccessible(true);
+		ArrayList<String> interfacesarray = (ArrayList<String>) interfaces
+				.get(arrows);
+		String toAdd = "0937240432";
+		interfacesarray.add(toAdd);
+		arrows.addInterface(toAdd);
+		assertEquals(interfacesarray, interfaces.get(arrows));
+	}
+
 	@Test
 	public void testunwantedTypesInWhitelist() throws NoSuchFieldException,
 			SecurityException, IllegalArgumentException,
