@@ -15,18 +15,6 @@ import jdk.internal.org.objectweb.asm.Opcodes;
 public class DesignParser {
 
 	/**
-	 * Main just calls makeUML (Split for better design and testing)
-	 * 
-	 * @param args
-	 *            Class names for the classes to be turned into an UML
-	 * @throws IOException
-	 *             Exception where string doesn't link to a class
-	 */
-	public static void main(String[] args) throws IOException {
-		makeUML(args); // Runs the program
-	}
-
-	/**
 	 * Makes a UML diagram code appear in the console for GraphViz for the given
 	 * classes using the Decorator and Visitor design patterns.
 	 * 

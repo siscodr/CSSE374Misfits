@@ -29,11 +29,6 @@ public class TestDesignParser {
 	}
 
 	@Test
-	public void testMain() throws Exception {
-
-	}
-
-	@Test
 	public void testMakeUML() {
 
 	}
