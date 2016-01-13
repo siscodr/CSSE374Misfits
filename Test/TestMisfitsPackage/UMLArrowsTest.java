@@ -692,8 +692,9 @@ public class UMLArrowsTest {
 	}
 
 	@Test
-	public void testaddFieldToBuffer() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException{
-		UMLArrows arrows= UMLArrows.getInstance();
+	public void testaddFieldToBuffer() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
+		UMLArrows arrows = UMLArrows.getInstance();
 		Field whitelist = UMLArrows.class.getDeclaredField("whitelist");
 		whitelist.setAccessible(true);
 		ArrayList<String> whitelistv1 = new ArrayList<String>(
@@ -702,13 +703,16 @@ public class UMLArrowsTest {
 		Field fieldbuffer = UMLArrows.class.getDeclaredField("fieldBuffer");
 		fieldbuffer.setAccessible(true);
 		fieldbuffer.set(arrows, new StringBuffer());
-		arrows.addFieldToBuffer(Opcodes.ACC_PUBLIC, "test" , "Ljava/lang/Object;");
-		assertEquals("+ test : java_lang_Object\\l", fieldbuffer.get(arrows).toString());
+		arrows.addFieldToBuffer(Opcodes.ACC_PUBLIC, "test",
+				"Ljava/lang/Object;");
+		assertEquals("+ test : java_lang_Object\\l", fieldbuffer.get(arrows)
+				.toString());
 	}
-	
+
 	@Test
-	public void testaddMethodToBuffer() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException{
-		UMLArrows arrows= UMLArrows.getInstance();
+	public void testaddMethodToBuffer() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
+		UMLArrows arrows = UMLArrows.getInstance();
 		Field whitelist = UMLArrows.class.getDeclaredField("whitelist");
 		whitelist.setAccessible(true);
 		ArrayList<String> whitelistv1 = new ArrayList<String>(
@@ -717,10 +721,12 @@ public class UMLArrowsTest {
 		Field methodbuffer = UMLArrows.class.getDeclaredField("methodBuffer");
 		methodbuffer.setAccessible(true);
 		methodbuffer.set(arrows, new StringBuffer());
-		arrows.addMethodToBuffer(Opcodes.ACC_PUBLIC, "test" , "()Ljava/lang/Object;");
-		assertEquals("+test([]) : java_lang_Object\\l ", methodbuffer.get(arrows).toString());
+		arrows.addMethodToBuffer(Opcodes.ACC_PUBLIC, "test",
+				"()Ljava/lang/Object;");
+		assertEquals("+test([]) : java_lang_Object\\l ",
+				methodbuffer.get(arrows).toString());
 	}
-	
+
 	@Test
 	public void testunwantedTypesInWhitelist() throws NoSuchFieldException,
 			SecurityException, IllegalArgumentException,
