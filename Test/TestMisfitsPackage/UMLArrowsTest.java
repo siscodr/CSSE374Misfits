@@ -426,6 +426,27 @@ public class UMLArrowsTest {
 		assertEquals(usesarray, uses.get(arrows));
 	}
 
+	@SuppressWarnings("unchecked")
+	@Test
+	public void testaddUses() throws NoSuchFieldException, SecurityException,
+			IllegalArgumentException, IllegalAccessException {
+		UMLArrows arrows = UMLArrows.getInstance();
+		Field whitelist = UMLArrows.class.getDeclaredField("whitelist");
+		whitelist.setAccessible(true);
+		ArrayList<String> whitelistv1 = new ArrayList<String>(Arrays.asList(
+				"int", "double", "byte"));
+		whitelist.set(arrows, whitelistv1);
+		Field uses = UMLArrows.class.getDeclaredField("uses");
+		uses.setAccessible(true);
+		ArrayList<String> usesarray = (ArrayList<String>) uses.get(arrows);
+		ArrayList<String> toAdd = new ArrayList<String>(Arrays.asList("int",
+				"double", "byte"));
+		usesarray.addAll(toAdd);
+		String desc = "(IDB)Ljava/lang/Object";
+		arrows.addUses(desc);
+		assertEquals(usesarray, uses.get(arrows));
+	}
+
 	@Test
 	public void testunwantedTypesInWhitelist() throws NoSuchFieldException,
 			SecurityException, IllegalArgumentException,
