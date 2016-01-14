@@ -2,6 +2,9 @@ package MisfitsPackage;
 
 import jdk.internal.org.objectweb.asm.ClassVisitor;
 import jdk.internal.org.objectweb.asm.FieldVisitor;
+import jdk.internal.org.objectweb.asm.Opcodes;
+import jdk.internal.org.objectweb.asm.signature.SignatureReader;
+import jdk.internal.org.objectweb.asm.signature.SignatureVisitor;
 
 /**
  * ClassFieldVisitor Decorates ClassVisitor so the field is checked for
@@ -37,7 +40,8 @@ public class ClassFieldVisitor extends ClassVisitor {
 
 	/**
 	 * This method decorates the ClassVisitor's visitField function to add
-	 * functionality to pass field descriptors to UMLArrow in order to create a UML
+	 * functionality to pass field descriptors to UMLArrow in order to create a
+	 * UML
 	 * 
 	 * @param access
 	 *            the field's access flags
@@ -57,8 +61,13 @@ public class ClassFieldVisitor extends ClassVisitor {
 			String signature, Object value) {
 		FieldVisitor toDecorate = super.visitField(access, name, desc,
 				signature, value);
-		// Adds field to UML to allow for association arrows to be drawn
-		UMLArrows.getInstance().addField(desc);
+		if (signature != null) {
+			SignatureReader reader = new SignatureReader(signature);
+			SignatureVisitor visitor = new mySignatureVisitor(Opcodes.ASM5);
+			// Adds field to UML to allow for association arrows to be drawn
+			reader.accept(visitor);
+		}
+		UMLArrows.getInstance().addFieldDesc(desc);
 		return toDecorate;
 	}
 

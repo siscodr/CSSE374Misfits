@@ -440,16 +440,14 @@ public class UMLArrowsTest {
 		whitelist.set(arrows, whitelistv1);
 		Field uses = UMLArrows.class.getDeclaredField("uses");
 		uses.setAccessible(true);
-		ArrayList<String> usesarray = (ArrayList<String>) uses.get(arrows);
-		ArrayList<String> toAdd = new ArrayList<String>(Arrays.asList("int",
+		uses.set(arrows, new ArrayList<String>());
+		ArrayList<String> usesarray = new ArrayList<String>(Arrays.asList("int",
 				"double", "byte"));
-		usesarray.addAll(toAdd);
 		String desc = "(IDB)Ljava/lang/Object";
 		arrows.addUses(desc);
 		assertEquals(usesarray, uses.get(arrows));
 	}
 
-	@SuppressWarnings("unchecked")
 	@Test
 	public void testaddFieldObject() throws NoSuchFieldException,
 			SecurityException, IllegalArgumentException, IllegalAccessException {
@@ -461,18 +459,18 @@ public class UMLArrowsTest {
 		whitelist.set(arrows, whitelistv1);
 		Field fields = UMLArrows.class.getDeclaredField("fields");
 		fields.setAccessible(true);
-		ArrayList<String> fieldsarray = (ArrayList<String>) fields.get(arrows);
+		ArrayList<String> fieldsarray = new ArrayList<String>();
+		fields.set(arrows, new ArrayList<String>());
 		// We must avoid having the stripper from touching this string
-		String toAdd = "HeyHeyHeyThisisaCoolTest";
-		String desc = "Ljava/lang/Object;";
+		String toAdd = "java_lang_Object";
+		String type = "java/lang/Object";
 		fieldsarray.add(toAdd);
-		arrows.addField(desc);
+		arrows.addField(type);
 		assertEquals(fieldsarray, fields.get(arrows));
 	}
-
-	@SuppressWarnings("unchecked")
+	
 	@Test
-	public void testaddFieldUMLArrowsTest() throws NoSuchFieldException,
+	public void testaddFieldUMLArrows() throws NoSuchFieldException,
 			SecurityException, IllegalArgumentException, IllegalAccessException {
 		UMLArrows arrows = UMLArrows.getInstance();
 		Field whitelist = UMLArrows.class.getDeclaredField("whitelist");
@@ -482,12 +480,55 @@ public class UMLArrowsTest {
 		whitelist.set(arrows, whitelistv1);
 		Field fields = UMLArrows.class.getDeclaredField("fields");
 		fields.setAccessible(true);
-		ArrayList<String> fieldsarray = (ArrayList<String>) fields.get(arrows);
+		ArrayList<String> fieldsarray = new ArrayList<String>();
+		fields.set(arrows, new ArrayList<String>());
+		// We must avoid having the stripper from touching this string
+		String toAdd = "TestMisfitsPackage_UMLArrowsTest";
+		String type = "TestMisfitsPackage/UMLArrowsTest";
+		fieldsarray.add(toAdd);
+		arrows.addField(type);
+		assertEquals(fieldsarray, fields.get(arrows));
+	}
+	
+	@Test
+	public void testaddFieldDescObject() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
+		UMLArrows arrows = UMLArrows.getInstance();
+		Field whitelist = UMLArrows.class.getDeclaredField("whitelist");
+		whitelist.setAccessible(true);
+		ArrayList<String> whitelistv1 = new ArrayList<String>(
+				Arrays.asList("java_lang_Object"));
+		whitelist.set(arrows, whitelistv1);
+		Field fields = UMLArrows.class.getDeclaredField("fields");
+		fields.setAccessible(true);
+		ArrayList<String> fieldsarray = new ArrayList<String>();
+		fields.set(arrows, new ArrayList<String>());
+		// We must avoid having the stripper from touching this string
+		String toAdd = "java_lang_Object";
+		String desc = "Ljava/lang/Object;";
+		fieldsarray.add(toAdd);
+		arrows.addFieldDesc(desc);
+		assertEquals(fieldsarray, fields.get(arrows));
+	}
+
+	@Test
+	public void testaddFieldDescUMLArrowsTest() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
+		UMLArrows arrows = UMLArrows.getInstance();
+		Field whitelist = UMLArrows.class.getDeclaredField("whitelist");
+		whitelist.setAccessible(true);
+		ArrayList<String> whitelistv1 = new ArrayList<String>(
+				Arrays.asList("TestMisfitsPackage_UMLArrowsTest"));
+		whitelist.set(arrows, whitelistv1);
+		Field fields = UMLArrows.class.getDeclaredField("fields");
+		fields.setAccessible(true);
+		ArrayList<String> fieldsarray = new ArrayList<String>();
+		fields.set(arrows, new ArrayList<String>());
 		// We must avoid having the stripper from touching this string
 		String toAdd = "TestMisfitsPackage_UMLArrowsTest";
 		String desc = "LTestMisfitsPackage/UMLArrowsTest;";
 		fieldsarray.add(toAdd);
-		arrows.addField(desc);
+		arrows.addFieldDesc(desc);
 		assertEquals(fieldsarray, fields.get(arrows));
 	}
 
