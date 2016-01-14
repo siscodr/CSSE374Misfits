@@ -57,8 +57,6 @@ public class ClassMethodVisitor extends ClassVisitor {
 				signature, exceptions);
 		// Add use arrows
 		UMLArrows.getInstance().addUses(desc);
-		
-		SDArrows.getInstance().addMethod(name);
 		return methodVisitor;
 	}
 }
