@@ -143,16 +143,29 @@ public class UMLArrows {
 	 * Adds the given class to the List of classes associated with current
 	 * class.
 	 * 
+	 * @param type
+	 *            The type to add to fields.
+	 * 
+	 * @return No return value.
+	 */
+	public void addField(String type) {
+		String cleanType = WorkerForArrows.stripFunction(type);
+		if (checkExistingArrow(cleanType))
+			fields.add(cleanType);
+	}
+
+	/**
+	 * Adds the given class to the List of classes associated with current
+	 * class.
+	 * 
 	 * @param desc
 	 *            The field's Descriptor.
 	 * 
 	 * @return No return value.
 	 */
-	public void addField(String desc) {
+	public void addFieldDesc(String desc) {
 		String currentType = Type.getType(desc).getClassName();
-		String cleanType = WorkerForArrows.stripFunction(currentType);
-		if (checkExistingArrow(cleanType))
-			fields.add(cleanType);
+		addField(currentType);
 	}
 
 	/**
@@ -199,8 +212,10 @@ public class UMLArrows {
 	 */
 	public void printClass(String name) {
 		String newName = WorkerForArrows.stripFunction(name);
-		System.out.print("   " + newName + " [\n     shape=\"record\"     label = \"{" + newName + "|"
-				+ fieldBuffer.toString() + "|" + methodBuffer.toString() + "\n}\"\n];\n");
+		System.out.print("   " + newName
+				+ " [\n     shape=\"record\"     label = \"{" + newName + "|"
+				+ fieldBuffer.toString() + "|" + methodBuffer.toString()
+				+ "\n}\"\n];\n");
 		printArrows(newName);
 		UMLArrows.getInstance().resetUMLArrows();
 	}
@@ -245,7 +260,8 @@ public class UMLArrows {
 			List<String> stypes = WorkerForArrows.getTypesFromDesc(desc);
 			String symbol = WorkerForArrows.makeSymbol(access);
 			String returnType = WorkerForArrows.stripFunction(rType);
-			String temp = symbol + name + "(" + stypes.toString() + ") : " + returnType + "\\l ";
+			String temp = symbol + name + "(" + stypes.toString() + ") : "
+					+ returnType + "\\l ";
 
 			this.addToMethodBuffer(temp);
 		}
@@ -260,8 +276,10 @@ public class UMLArrows {
 	 * @return boolean If the arrow should be added to the diagram
 	 */
 	private boolean checkExistingArrow(String cleanType) {
-		return !uses.contains(cleanType) && !fields.contains(cleanType) && !supers.contains(cleanType)
-				&& !interfaces.contains(cleanType) && WorkerForArrows.unwantedTypes(cleanType);
+		return !uses.contains(cleanType) && !fields.contains(cleanType)
+				&& !supers.contains(cleanType)
+				&& !interfaces.contains(cleanType)
+				&& WorkerForArrows.unwantedTypes(cleanType);
 	}
 
 	/**
@@ -290,7 +308,8 @@ public class UMLArrows {
 	private void printUses(String className) {
 		for (String types : this.uses) {
 			if (types.contains("_")) {
-				System.out.println(className + " -> " + types + " [arrowhead=\"vee\", style=\"dashed\"];");
+				System.out.println(className + " -> " + types
+						+ " [arrowhead=\"vee\", style=\"dashed\"];");
 			}
 		}
 	}
@@ -306,7 +325,8 @@ public class UMLArrows {
 	private void printFields(String className) {
 		for (String field : this.fields) {
 			if (field.contains("_")) {
-				System.out.println(field + " -> " + className + " [arrowhead=\"vee\"];");
+				System.out.println(className + " -> " + field
+						+ " [arrowhead=\"vee\"];");
 			}
 		}
 	}
@@ -322,7 +342,8 @@ public class UMLArrows {
 	private void printInterfaces(String className) {
 		for (String interf : this.interfaces) {
 			if (interf.contains("_")) {
-				System.out.println(className + " -> " + interf + " [arrowhead=\"onormal\", style=\"dashed\"];");
+				System.out.println(className + " -> " + interf
+						+ " [arrowhead=\"onormal\", style=\"dashed\"];");
 			}
 		}
 	}
@@ -337,7 +358,8 @@ public class UMLArrows {
 	 */
 	private void printSupers(String className) {
 		if (supers.contains("_")) {
-			System.out.println(className + " -> " + supers + " [arrowhead=\"onormal\"];");
+			System.out.println(className + " -> " + supers
+					+ " [arrowhead=\"onormal\"];");
 		}
 	}
 }
