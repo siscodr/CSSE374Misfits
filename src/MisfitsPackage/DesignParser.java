@@ -49,7 +49,8 @@ public class DesignParser {
 	public static void makeSD(String[] classes) throws IOException {
 
 		for (String className : classes) {
-
+			SDArrows.getInstance().setCurrentClass(className);
+			
 			makeReader(className);
 
 		}

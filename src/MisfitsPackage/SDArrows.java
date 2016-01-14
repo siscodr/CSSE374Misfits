@@ -7,7 +7,9 @@ public class SDArrows {
 	//TODO: DEAL WITH FOR LOOPS
 	private static SDArrows ourArrows = new SDArrows();
 	//need methods
-	private HashMap<String,HashMap<String, String>> varNames = new HashMap<String,HashMap<String,String>>();
+	private HashMap<String,ArrayList<Instruction>> varNames = new HashMap<String, ArrayList<Instruction>>();
+	
+	private String currentClass;
 	
 	public SDArrows() {
 		resetSDArrows();
@@ -37,9 +39,6 @@ public class SDArrows {
 		
 	}
 
-	public HashMap<String,HashMap<String, String>> getVarNames() {
-		return varNames;
-	}
 
 	public void setVarNames(HashMap<String,String> variableNames) {
 		//TODO: figure out which method is the key & add the hashmap
@@ -47,7 +46,11 @@ public class SDArrows {
 	}
 
 	public void addMethod(String name) {
-		this.varNames.put(name, null);
+		this.varNames.put(currentClass+"."+name, null);
+	}
+
+	public void setCurrentClass(String className) {
+		currentClass=className;
 	}
 
 
