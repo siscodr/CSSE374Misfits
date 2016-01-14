@@ -1,12 +1,14 @@
 package MisfitsPackage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SDArrows {
 	//TODO: DEAL WITH FOR LOOPS
 	private static SDArrows ourArrows = new SDArrows();
 	//need methods
-
+	private HashMap<String,HashMap<String, String>> varNames = new HashMap<String,HashMap<String,String>>();
+	
 	public SDArrows() {
 		resetSDArrows();
 	}
@@ -34,6 +36,19 @@ public class SDArrows {
 		System.out.print("< > :" + "<" + cleanName + ">");
 		
 	}
-	
+
+	public HashMap<String,HashMap<String, String>> getVarNames() {
+		return varNames;
+	}
+
+	public void setVarNames(String methodName, HashMap<String,String> variableNames) {
+		//TODO: implement
+	}
+
+	public void addMethod(String name) {
+		this.varNames.put(name, null);
+	}
+
+
 	
 }

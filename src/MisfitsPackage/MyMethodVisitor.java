@@ -1,5 +1,6 @@
 package MisfitsPackage;
 
+import jdk.internal.org.objectweb.asm.Label;
 import jdk.internal.org.objectweb.asm.MethodVisitor;
 import jdk.internal.org.objectweb.asm.Type;
 
@@ -79,5 +80,11 @@ public class MyMethodVisitor extends MethodVisitor {
 		arrows.addUse(toClean);
 		// Adds second use arrow here
 		arrows.addUse(owner);
+	}
+	@Override
+	public void visitLocalVariable(String name, String desc, String signature, Label start, Label end, int index){
+		super.visitLocalVariable(name, desc, signature, start, end, index);
+		//TODO
+		//SDArrows.getInstance().setVarNames(name, null);
 	}
 }
