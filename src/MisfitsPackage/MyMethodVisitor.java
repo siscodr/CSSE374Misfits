@@ -51,6 +51,39 @@ public class MyMethodVisitor extends MethodVisitor {
 	 * is constructed
 	 * 
 	 * @param opcode
+	 *            the opcode of the type instruction to be visited.
+	 * @param owner
+	 *            the internal name of the method's owner class.
+	 * @param name
+	 *            the method's name.
+	 * @param desc
+	 *            the method's descriptor.
+	 * @param bool
+	 *            if the method's owner class is an interface.
+	 */
+	@Override
+	public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean bool) {
+		super.visitMethodInsn(opcode, owner, name, desc, bool);
+
+		String toClean = Type.getReturnType(desc).getClassName();
+
+		UMLArrows arrows = UMLArrows.getInstance();
+		// Adds first use arrow here
+		arrows.addUse(toClean);
+		// Adds second use arrow here
+		arrows.addUse(owner);
+
+		// For SD
+		Instruction instr = new MethodInstruction(owner, name, desc);
+		instructions.add(instr);
+
+	}
+
+	/**
+	 * Decorates the visitTypeInsn method to get an use arrow for when a class
+	 * is constructed
+	 * 
+	 * @param opcode
 	 *            the opcode of the type instruction to be visited
 	 * @param val
 	 *            the operand of the instruction to be visited. This operand
@@ -59,19 +92,11 @@ public class MyMethodVisitor extends MethodVisitor {
 	@Override
 	public void visitTypeInsn(int opCode, String val) {
 		super.visitTypeInsn(opCode, val);
-		// TODO: add TypeInstruction
 		Instruction instr = new TypeInstruction(opCode, val);
 		instructions.add(instr);
 
 		// Creates an use arrow
 		UMLArrows.getInstance().addUse(val);
-	}
-
-	// Not used for current implementation
-	@Override
-	public void visitFieldInsn(int opCode, String owner, String name, String desc) {
-		//// Instruction fieldInsn()
-		super.visitFieldInsn(opCode, owner, name, desc);
 	}
 
 	@Override
@@ -99,37 +124,11 @@ public class MyMethodVisitor extends MethodVisitor {
 		super.visitEnd();
 	}
 
-	/**
-	 * Decorates the visitTypeInsn method to get an use arrow for when a class
-	 * is constructed
-	 * 
-	 * @param opcode
-	 *            the opcode of the type instruction to be visited.
-	 * @param owner
-	 *            the internal name of the method's owner class.
-	 * @param name
-	 *            the method's name.
-	 * @param desc
-	 *            the method's descriptor.
-	 * @param bool
-	 *            if the method's owner class is an interface.
-	 */
+	// Not used for current implementation
 	@Override
-	public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean bool) {
-		super.visitMethodInsn(opcode, owner, name, desc, bool);
-
-		String toClean = Type.getReturnType(desc).getClassName();
-
-		UMLArrows arrows = UMLArrows.getInstance();
-		// Adds first use arrow here
-		arrows.addUse(toClean);
-		// Adds second use arrow here
-		arrows.addUse(owner);
-
-		// For SD
-		Instruction instr = new MethodInstruction(owner, name, desc);
-		instructions.add(instr);
-
+	public void visitFieldInsn(int opCode, String owner, String name, String desc) {
+		//// Instruction fieldInsn()
+		super.visitFieldInsn(opCode, owner, name, desc);
 	}
 
 	// Unnecessary for our implementation

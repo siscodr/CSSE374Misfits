@@ -3,12 +3,12 @@ package MisfitsPackage;
 public class TypeInstruction implements Instruction {
 
 	int opCode;
-	String var;
+	String type;
 
-	public TypeInstruction(int opCode, String var) {
+	public TypeInstruction(int opCode, String type) {
 		super();
 		this.opCode = opCode;
-		this.var = var;
+		this.type = type;
 	}
 
 	@Override
@@ -19,12 +19,13 @@ public class TypeInstruction implements Instruction {
 
 	@Override
 	public void execute() {
-		// Do nothing?
+		// Do nothing!
 	}
 
 	@Override
 	public String toString() {
-		return null;
+		String currentClass = SDArrows.getInstance().getCurrentClass();
+		return currentClass + ":" + type + ".create()";
 	}
 
 }

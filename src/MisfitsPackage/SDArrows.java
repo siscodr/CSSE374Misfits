@@ -35,6 +35,14 @@ public class SDArrows {
 	public void addItemsToHashMap(String methodName, ArrayList<Instruction> instructions) {
 		instructionSets.put(currentClass + "." + methodName, instructions);
 	}
+	
+	public HashMap getHashMap() {
+		return instructionSets;
+	}
+	
+	public String getCurrentClass() {
+		return currentClass;
+	}
 
 
 	
