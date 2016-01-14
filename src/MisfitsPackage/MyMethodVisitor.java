@@ -19,6 +19,7 @@ import jdk.internal.org.objectweb.asm.TypePath;
 public class MyMethodVisitor extends MethodVisitor {
 
 	private ArrayList<Instruction> instructions;
+
 	/**
 	 * Constructs a new MyMethodVisitor.
 	 * 
@@ -58,47 +59,45 @@ public class MyMethodVisitor extends MethodVisitor {
 	@Override
 	public void visitTypeInsn(int opCode, String val) {
 		super.visitTypeInsn(opCode, val);
-		//TODO: add TypeInstruction
-		Instruction instr=new TypeInstruction(opCode, val);
+		// TODO: add TypeInstruction
+		Instruction instr = new TypeInstruction(opCode, val);
 		instructions.add(instr);
-		
-		
+
 		// Creates an use arrow
 		UMLArrows.getInstance().addUse(val);
 	}
-	
-	//Not used for current implementation
+
+	// Not used for current implementation
 	@Override
 	public void visitFieldInsn(int opCode, String owner, String name, String desc) {
-		////Instruction fieldInsn()
+		//// Instruction fieldInsn()
 		super.visitFieldInsn(opCode, owner, name, desc);
 	}
-	
+
 	@Override
 	public void visitVarInsn(int opCode, int var) {
-		Instruction instr = new variableInstruction(Opcode)
-		instructions.add(instr);
-		//aLoad is for references, the others are primitives (iLoad, fload, dload, lload)
-		//aStore is for references, the others are primitives (iStore, fStore, dStore, lStore)
-		//ret is a Return instruction
+		// Instruction instr = new VariableInstruction(Opcode)
+		// instructions.add(instr);
+		//// aLoad is for references, the others are primitives (iLoad, fload,
+		// dload, lload)
+		//// aStore is for references, the others are primitives (iStore,
+		// fStore, dStore, lStore)
+		//// ret is a Return instruction
 		super.visitVarInsn(opCode, var);
 	}
-	
-	//Not used in current implementation
+
+	// Not used in current implementation
 	public AnnotationVisitor VisitAnnotation(String desc, boolean visible) {
 		return super.visitAnnotation(desc, visible);
 	}
-	
-	
-	
+
 	public void visitCode() {
 		super.visitCode();
 	}
-	
+
 	public void visitEnd() {
 		super.visitEnd();
 	}
-	
 
 	/**
 	 * Decorates the visitTypeInsn method to get an use arrow for when a class
@@ -116,8 +115,7 @@ public class MyMethodVisitor extends MethodVisitor {
 	 *            if the method's owner class is an interface.
 	 */
 	@Override
-	public void visitMethodInsn(int opcode, String owner, String name,
-			String desc, boolean bool) {
+	public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean bool) {
 		super.visitMethodInsn(opcode, owner, name, desc, bool);
 
 		String toClean = Type.getReturnType(desc).getClassName();
@@ -127,37 +125,38 @@ public class MyMethodVisitor extends MethodVisitor {
 		arrows.addUse(toClean);
 		// Adds second use arrow here
 		arrows.addUse(owner);
-		
-		//For SD
-		Instruction instr= new MethodInstruction(owner, name, desc);
+
+		// For SD
+		Instruction instr = new MethodInstruction(owner, name, desc);
 		instructions.add(instr);
-		
+
 	}
-	
-	//Unnecessary for our implementation
+
+	// Unnecessary for our implementation
 	@Override
-	public void visitLocalVariable(String name, String desc, String signature, Label start, Label end, int index){
+	public void visitLocalVariable(String name, String desc, String signature, Label start, Label end, int index) {
 		super.visitLocalVariable(name, desc, signature, start, end, index);
 	}
 
-	//Unnecessary for our implementation
+	// Unnecessary for our implementation
 	@Override
 	public AnnotationVisitor visitAnnotation(String desc, boolean visible) {
 		return super.visitAnnotation(desc, visible);
 	}
 
-	//Unnecessary for our implementation
+	// Unnecessary for our implementation
 	@Override
 	public AnnotationVisitor visitAnnotationDefault() {
 		return super.visitAnnotationDefault();
 	}
-	//Unnecessary for our implementation
+
+	// Unnecessary for our implementation
 	@Override
 	public void visitAttribute(Attribute attr) {
 		super.visitAttribute(attr);
 	}
 
-	//Unnecessary for our implementation
+	// Unnecessary for our implementation
 	@Override
 	public void visitFrame(int type, int nLocal, Object[] local, int nStack, Object[] stack) {
 		super.visitFrame(type, nLocal, local, nStack, stack);
@@ -175,7 +174,7 @@ public class MyMethodVisitor extends MethodVisitor {
 		super.visitInsn(opCode);
 	}
 
-	//Unnecessary for our implementation
+	// Unnecessary for our implementation
 	@Override
 	public AnnotationVisitor visitInsnAnnotation(int typeRef, TypePath typePath, String desc, boolean visible) {
 		return super.visitInsnAnnotation(typeRef, typePath, desc, visible);
@@ -278,5 +277,4 @@ public class MyMethodVisitor extends MethodVisitor {
 		return super.visitTypeAnnotation(typeRef, typePath, desc, visible);
 	}
 
-	
 }

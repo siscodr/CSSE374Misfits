@@ -2,6 +2,15 @@ package MisfitsPackage;
 
 public class TypeInstruction implements Instruction {
 
+	int opCode;
+	String var;
+
+	public TypeInstruction(int opCode, String var) {
+		super();
+		this.opCode = opCode;
+		this.var = var;
+	}
+
 	@Override
 	public void printInstruction() {
 		// TODO Auto-generated method stub
@@ -10,11 +19,11 @@ public class TypeInstruction implements Instruction {
 
 	@Override
 	public void execute() {
-		//Do nothing?
+		// Do nothing?
 	}
-	
+
 	@Override
-	public String toString(){
+	public String toString() {
 		return null;
 	}
 
