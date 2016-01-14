@@ -19,42 +19,72 @@ public class DesignParser {
 	 * classes using the Decorator and Visitor design patterns.
 	 * 
 	 * @param classes
-	 *            lass names for the classes to be turned into an UML
+	 *            class names for the classes to be turned into an UML
 	 * @throws IOException
 	 *             Exception where string doesn't link to a class
 	 */
 	public static void makeUML(String[] classes) throws IOException {
 		startDiagram("misfit_diagram");
-		//Creates whiteList for the classes to draw on UML
+		// Creates whiteList for the classes to draw on UML
 		UMLArrows.getInstance().addWhitelist(classes);
-		
+
 		for (String className : classes) {
 
-			ClassReader reader = new ClassReader(className);
-
-			ClassVisitor InterfaceVisitor = new InterfaceDeclarationVisitor(
-					Opcodes.ASM5); // Interface Arrows
-
-			ClassVisitor SuperVisitor = new SuperDeclarationVisitor(
-					Opcodes.ASM5, InterfaceVisitor); // Extends Arrows
-
-			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5,
-					SuperVisitor); // Fields for Classes
-
-			ClassVisitor fieldUsesVisitor = new ClassFieldDeclarationVisitor(
-					Opcodes.ASM5, fieldVisitor); //Field's Association arrows
-
-			ClassVisitor methodUsesVisitor = new ClassMethodVisitor(
-					Opcodes.ASM5, fieldUsesVisitor); //Method's Uses arrows
-
-			ClassVisitor methodVisitor = new MethodDeclarationVisitor(
-					Opcodes.ASM5, methodUsesVisitor); // Method for Classes
-
-			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
+			makeReader(className);
 
 			UMLArrows.getInstance().printClass(className);
 		}
 		endDiagram();
+	}
+
+	/**
+	 * Makes a SD diagram code appear in the console for SDEdit for the given
+	 * classes using the Decorator and Visitor design patterns.
+	 * 
+	 * @param classes
+	 *            class names for the classes to be turned into an UML
+	 * @throws IOException
+	 *             Exception where string doesn't link to a class
+	 */
+	public static void makeSD(String[] classes) throws IOException {
+
+		for (String className : classes) {
+
+			makeReader(className);
+
+		}
+	}
+
+	/**
+	 * Makes the Decorated ClassVisitor with all the Visitor Decorators
+	 * 
+	 * @param classes
+	 *            class names for the classes to be turned into an UML
+	 * @throws IOException
+	 *             Exception where string doesn't link to a class
+	 */
+	private static void makeReader(String className) throws IOException {
+		ClassReader reader = new ClassReader(className);
+
+		ClassVisitor InterfaceVisitor = new InterfaceDeclarationVisitor(
+				Opcodes.ASM5); // Interface Arrows
+
+		ClassVisitor SuperVisitor = new SuperDeclarationVisitor(Opcodes.ASM5,
+				InterfaceVisitor); // Extends Arrows
+
+		ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5,
+				SuperVisitor); // Fields for Classes
+
+		ClassVisitor fieldUsesVisitor = new ClassFieldDeclarationVisitor(
+				Opcodes.ASM5, fieldVisitor); // Field's Association arrows
+
+		ClassVisitor methodUsesVisitor = new ClassMethodVisitor(Opcodes.ASM5,
+				fieldUsesVisitor); // Method's Uses arrows
+
+		ClassVisitor methodVisitor = new MethodDeclarationVisitor(Opcodes.ASM5,
+				methodUsesVisitor); // Method for Classes
+
+		reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 	}
 
 	/**
