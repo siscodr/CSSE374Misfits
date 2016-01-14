@@ -162,15 +162,15 @@ public class MyMethodVisitor extends MethodVisitor {
 		super.visitFrame(type, nLocal, local, nStack, stack);
 	}
 
+	// Unnecessary for our implementation
 	@Override
 	public void visitIincInsn(int var, int increment) {
-		// TODO increments
 		super.visitIincInsn(var, increment);
 	}
 
+	// Unnecessary for our implementation
 	@Override
 	public void visitInsn(int opCode) {
-		// TODO review opcodes
 		super.visitInsn(opCode);
 	}
 
@@ -180,100 +180,100 @@ public class MyMethodVisitor extends MethodVisitor {
 		return super.visitInsnAnnotation(typeRef, typePath, desc, visible);
 	}
 
+	// Unnecessary for our implementation
 	@Override
 	public void visitIntInsn(int opCode, int operand) {
-		// TODO Auto-generated method stub
 		super.visitIntInsn(opCode, operand);
 	}
 
+	// Unnecessary for our implementation
 	@Override
 	public void visitInvokeDynamicInsn(String name, String desc, Handle bsm, Object... bsmArgs) {
-		// TODO Auto-generated method stub
 		super.visitInvokeDynamicInsn(name, desc, bsm, bsmArgs);
 	}
 
+	// Unnecessary for our implementation (deals with ifs)
 	@Override
 	public void visitJumpInsn(int opCode, Label label) {
-		// TODO Auto-generated method stub
 		super.visitJumpInsn(opCode, label);
 	}
 
+	// Unnecessary for our implementation
 	@Override
 	public void visitLabel(Label label) {
-		// TODO Auto-generated method stub
 		super.visitLabel(label);
 	}
 
+	// Unnecessary for our implementation
 	@Override
 	public void visitLdcInsn(Object cst) {
-		// TODO Auto-generated method stub
 		super.visitLdcInsn(cst);
 	}
 
+	// Unnecessary for our implementation
 	@Override
 	public void visitLineNumber(int line, Label start) {
-		// TODO Auto-generated method stub
 		super.visitLineNumber(line, start);
 	}
 
+	// Unnecessary for our implementation
 	@Override
 	public AnnotationVisitor visitLocalVariableAnnotation(int typeRef, TypePath typePath, Label[] start, Label[] end,
 			int[] index, String desc, boolean visible) {
-		// TODO Auto-generated method stub
 		return super.visitLocalVariableAnnotation(typeRef, typePath, start, end, index, desc, visible);
 	}
 
+	// Unnecessary for our implementation (deals with switch statements)
 	@Override
 	public void visitLookupSwitchInsn(Label dflt, int[] keys, Label[] labels) {
-		// TODO Auto-generated method stub
 		super.visitLookupSwitchInsn(dflt, keys, labels);
 	}
 
+	// Unnecessary for our implementation
 	@Override
 	public void visitMaxs(int maxStack, int maxLocals) {
-		// TODO Auto-generated method stub
 		super.visitMaxs(maxStack, maxLocals);
 	}
 
+	// Might be useful - makes new arrays
 	@Override
 	public void visitMultiANewArrayInsn(String desc, int dims) {
-		// TODO Auto-generated method stub
 		super.visitMultiANewArrayInsn(desc, dims);
 	}
 
+	// Unnecessary for our implementation
 	@Override
 	public void visitParameter(String name, int access) {
-		// TODO Auto-generated method stub
 		super.visitParameter(name, access);
 	}
 
+	// Unnecessary for our implementation
 	@Override
 	public AnnotationVisitor visitParameterAnnotation(int parameter, String desc, boolean visible) {
-		// TODO Auto-generated method stub
 		return super.visitParameterAnnotation(parameter, desc, visible);
 	}
 
+	// Unnecessary for our implementation
 	@Override
 	public void visitTableSwitchInsn(int min, int max, Label dflt, Label... labels) {
-		// TODO Auto-generated method stub
 		super.visitTableSwitchInsn(min, max, dflt, labels);
 	}
 
+	// Unnecessary for our implementation
 	@Override
 	public AnnotationVisitor visitTryCatchAnnotation(int typeRef, TypePath typePath, String desc, boolean visible) {
-		// TODO Auto-generated method stub
 		return super.visitTryCatchAnnotation(typeRef, typePath, desc, visible);
 	}
 
+	// Unnecessary for our implementation
 	@Override
 	public void visitTryCatchBlock(Label start, Label end, Label handler, String type) {
-		// TODO Auto-generated method stub
 		super.visitTryCatchBlock(start, end, handler, type);
 	}
 
+	// Unnecessary for our implementation
 	@Override
 	public AnnotationVisitor visitTypeAnnotation(int typeRef, TypePath typePath, String desc, boolean visible) {
-		// TODO Auto-generated method stub
 		return super.visitTypeAnnotation(typeRef, typePath, desc, visible);
 	}
 
