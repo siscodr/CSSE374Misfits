@@ -2,27 +2,30 @@ package MisfitsPackage;
 
 import jdk.internal.org.objectweb.asm.ClassVisitor;
 import jdk.internal.org.objectweb.asm.MethodVisitor;
+import jdk.internal.org.objectweb.asm.Opcodes;
 
 /**
- * ClassMethodVisitor Decorates ClassVisitor so the Use Arrows can be drawn
+ * MethodDeclarationVisitor Decorates ClassVisitor so the methods are shown
+ * inside of classes in the UML
  * 
  * @author TheMisfits
  */
-public class ClassMethodVisitor extends ClassVisitor {
+public class MethodDeclarationVisitor extends ClassVisitor {
 
 	/**
-	 * Constructs a new ClassMethodVisitor
+	 * Constructs a new MethodDeclarationVisitor
 	 * 
 	 * @param api
 	 *            the ASM API version implemented by this visitor. Must be one
 	 *            of Opcodes.ASM4.
 	 */
-	public ClassMethodVisitor(int api) {
+	public MethodDeclarationVisitor(int api) {
 		super(api);
 	}
 
 	/**
-	 * Constructs a new ClassMethodVisitor that decorates the old ClassVisitor.
+	 * Constructs a new MethodDeclarationVisitor that decorates the old
+	 * ClassVisitor.
 	 * 
 	 * @param api
 	 *            the ASM API version implemented by this visitor. Must be one
@@ -30,13 +33,15 @@ public class ClassMethodVisitor extends ClassVisitor {
 	 * @param toDecorate
 	 *            A ClassVisitor for this class to Decorate
 	 */
-	public ClassMethodVisitor(int api, ClassVisitor toDecorate) {
+	public MethodDeclarationVisitor(int api, ClassVisitor toDecorate) {
 		super(api, toDecorate);
 	}
 
 	/**
 	 * This method decorates the ClassVisitor's visitMethod function to add
-	 * functionality to pass types to create use arrows in the UML
+	 * functionality to put methods in the UML in their respective classes
+	 * 
+	 * TODO: Currently it also decorates MethodVisitor with a new MethodVisitor
 	 * 
 	 * @param access
 	 *            the method's access flags.
@@ -53,11 +58,14 @@ public class ClassMethodVisitor extends ClassVisitor {
 	public MethodVisitor visitMethod(int access, String name, String desc,
 			String signature, String[] exceptions) {
 
-		MethodVisitor methodVisitor = super.visitMethod(access, name, desc,
+		MethodVisitor toDecorate = super.visitMethod(access, name, desc,
 				signature, exceptions);
-		// Add use arrows
-		UMLArrows.getInstance().addUses(desc);
 
-		return methodVisitor;
+		// Decorates the current MethodVisitor
+		MethodVisitor toReturn = new MyMethodVisitor(Opcodes.ASM5, toDecorate);
+
+		// Sends required variables to UMLArrows to add the method to the class
+		UMLArrows.getInstance().addMethodToBuffer(access, name, desc);
+		return toReturn;
 	}
 }

@@ -1,93 +1,77 @@
 package MisfitsPackage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import jdk.internal.org.objectweb.asm.ClassReader;
 import jdk.internal.org.objectweb.asm.ClassVisitor;
 import jdk.internal.org.objectweb.asm.Opcodes;
 
+/**
+ * This purpose of this class to be used in conjunction with Decorators to
+ * create a UML diagram
+ * 
+ * @author TheMisfits
+ */
 public class DesignParser {
-	static public ArrayList<String> fields = new ArrayList<String>();
-	static public ArrayList<String> uses = new ArrayList<String>();
-	static public ArrayList<String> takes = new ArrayList<String>();
-	static public ArrayList<String> toDelete = new ArrayList<String>(
-			Arrays.asList("boolean", "java_lang", "java_util")); // TODO: Make
-																	// it remove
-																	// all that
-																	// contains
-																	// these
-	static public String classString = new String();
-	static public Boolean firstMethod;
 
-	public static void main(String[] args) throws IOException {
-		System.out.println("digraph misfit_diagram{");
-		System.out.println("rankdir=BT;");
-		for (String className : args) {
-			classString = stripFunction(className);
-			firstMethod = true;
+	/**
+	 * Makes a UML diagram code appear in the console for GraphViz for the given
+	 * classes using the Decorator and Visitor design patterns.
+	 * 
+	 * @param classes
+	 *            lass names for the classes to be turned into an UML
+	 * @throws IOException
+	 *             Exception where string doesn't link to a class
+	 */
+	public static void makeUML(String[] classes) throws IOException {
+		startDiagram("misfit_diagram");
+		//Creates whiteList for the classes to draw on UML
+		UMLArrows.getInstance().addWhitelist(classes);
+		
+		for (String className : classes) {
 
 			ClassReader reader = new ClassReader(className);
 
-			ClassVisitor decIVisitor = new ClassDeclarationVisitor(Opcodes.ASM5);
+			ClassVisitor InterfaceVisitor = new InterfaceDeclarationVisitor(
+					Opcodes.ASM5); // Interface Arrows
+
+			ClassVisitor SuperVisitor = new SuperDeclarationVisitor(
+					Opcodes.ASM5, InterfaceVisitor); // Extends Arrows
 
 			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5,
-					decIVisitor);
+					SuperVisitor); // Fields for Classes
 
-			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5,
-					fieldVisitor);
+			ClassVisitor fieldUsesVisitor = new ClassFieldDeclarationVisitor(
+					Opcodes.ASM5, fieldVisitor); //Field's Association arrows
+
+			ClassVisitor methodUsesVisitor = new ClassMethodVisitor(
+					Opcodes.ASM5, fieldUsesVisitor); //Method's Uses arrows
+
+			ClassVisitor methodVisitor = new MethodDeclarationVisitor(
+					Opcodes.ASM5, methodUsesVisitor); // Method for Classes
 
 			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
-			System.out.println("}\"");
-			System.out.println("];");
-			for (String types : uses) {
-				if (types.contains("_")) {
-					System.out.println(classString + " -> " + types
-							+ " [arrowhead=\"vee\", style=\"dashed\"];");
-				}
-			}
-			for (String field : fields) {
-				if (field.contains("_")) {
-					System.out.println(field + " -> " + classString
-							+ " [arrowhead=\"diamond\"];");
-				}
-			}
-			for (String field : takes) {
-				if (field.contains("_")) {
-					System.out.println(field + " -> " + classString
-							+ " [arrowhead=\"odiamond\"];");
-				}
-			}
-			DesignParser.fields = new ArrayList<String>();
-			DesignParser.uses = new ArrayList<String>();
-			DesignParser.takes = new ArrayList<String>();
+
+			UMLArrows.getInstance().printClass(className);
 		}
-		System.out.println("}");
+		endDiagram();
 	}
 
-	public static String stripFunction(String toStrip) {
-		toStrip = toStrip.replace(".", "_");
-		toStrip = toStrip.replace("/", "_");
-		toStrip = toStrip.replace("[", "");
-		toStrip = toStrip.replace("]", "");
-		return toStrip;
+	/**
+	 * Makes the initial diagram starting code with given name (Should only be
+	 * ran once per diagram).
+	 * 
+	 * @param nameOfDiagram
+	 *            The name in which the diagram is to be titled.
+	 */
+	public static void startDiagram(String nameOfDiagram) {
+		System.out.print("digraph " + nameOfDiagram + "{\nrankdir=BT\n");
 	}
 
-	public static Boolean getFirstMethod() {
-		return firstMethod;
-	}
-
-	public static void setFirstMethod(Boolean firstMethod) {
-		DesignParser.firstMethod = firstMethod;
-	}
-
-	public static boolean unwantedTypes(String cleanType) {
-		for (String text : toDelete) {
-			if (cleanType.contains(text)) {
-				return false;
-			}
-		}
-		return true;
+	/**
+	 * Makes the end diagram code (Should only be ran once per diagram).
+	 */
+	public static void endDiagram() {
+		System.out.print("}\n");
 	}
 }
