@@ -58,13 +58,38 @@ public class MyMethodVisitor extends MethodVisitor {
 	@Override
 	public void visitTypeInsn(int opCode, String val) {
 		super.visitTypeInsn(opCode, val);
+		//TODO: add TypeInstruction
+		Instruction instr=new TypeInstruction(opCode, val);
+		instructions.add(instr);
+		
+		
 		// Creates an use arrow
 		UMLArrows.getInstance().addUse(val);
 	}
 	
+	//Not used for current implementation
+	@Override
+	public void visitFieldInsn(int opCode, String owner, String name, String desc) {
+		////Instruction fieldInsn()
+		super.visitFieldInsn(opCode, owner, name, desc);
+	}
+	
+	@Override
+	public void visitVarInsn(int opCode, int var) {
+		Instruction instr = new variableInstruction(Opcode)
+		instructions.add(instr);
+		//aLoad is for references, the others are primitives (iLoad, fload, dload, lload)
+		//aStore is for references, the others are primitives (iStore, fStore, dStore, lStore)
+		//ret is a Return instruction
+		super.visitVarInsn(opCode, var);
+	}
+	
+	//Not used in current implementation
 	public AnnotationVisitor VisitAnnotation(String desc, boolean visible) {
 		return super.visitAnnotation(desc, visible);
 	}
+	
+	
 	
 	public void visitCode() {
 		super.visitCode();
@@ -102,59 +127,57 @@ public class MyMethodVisitor extends MethodVisitor {
 		arrows.addUse(toClean);
 		// Adds second use arrow here
 		arrows.addUse(owner);
+		
+		//For SD
+		Instruction instr= new MethodInstruction(owner, name, desc);
+		instructions.add(instr);
+		
 	}
+	
+	//Unnecessary for our implementation
 	@Override
 	public void visitLocalVariable(String name, String desc, String signature, Label start, Label end, int index){
 		super.visitLocalVariable(name, desc, signature, start, end, index);
-		//TODO: figure out the sd arrows method that we will pass this into
-		//SDArrows.getInstance().setVarNames(null);
 	}
 
+	//Unnecessary for our implementation
 	@Override
 	public AnnotationVisitor visitAnnotation(String desc, boolean visible) {
-		// TODO Auto-generated method stub
 		return super.visitAnnotation(desc, visible);
 	}
 
+	//Unnecessary for our implementation
 	@Override
 	public AnnotationVisitor visitAnnotationDefault() {
-		// TODO Auto-generated method stub
 		return super.visitAnnotationDefault();
 	}
-
+	//Unnecessary for our implementation
 	@Override
 	public void visitAttribute(Attribute attr) {
-		// TODO Auto-generated method stub
 		super.visitAttribute(attr);
 	}
 
-	@Override
-	public void visitFieldInsn(int opCode, String owner, String name, String desc) {
-		// TODO Auto-generated method stub
-		super.visitFieldInsn(opCode, owner, name, desc);
-	}
-
+	//Unnecessary for our implementation
 	@Override
 	public void visitFrame(int type, int nLocal, Object[] local, int nStack, Object[] stack) {
-		// TODO Auto-generated method stub
 		super.visitFrame(type, nLocal, local, nStack, stack);
 	}
 
 	@Override
 	public void visitIincInsn(int var, int increment) {
-		// TODO Auto-generated method stub
+		// TODO increments
 		super.visitIincInsn(var, increment);
 	}
 
 	@Override
 	public void visitInsn(int opCode) {
-		// TODO Auto-generated method stub
+		// TODO review opcodes
 		super.visitInsn(opCode);
 	}
 
+	//Unnecessary for our implementation
 	@Override
 	public AnnotationVisitor visitInsnAnnotation(int typeRef, TypePath typePath, String desc, boolean visible) {
-		// TODO Auto-generated method stub
 		return super.visitInsnAnnotation(typeRef, typePath, desc, visible);
 	}
 
@@ -255,9 +278,5 @@ public class MyMethodVisitor extends MethodVisitor {
 		return super.visitTypeAnnotation(typeRef, typePath, desc, visible);
 	}
 
-	@Override
-	public void visitVarInsn(int opCode, int var) {
-		// TODO Auto-generated method stub
-		super.visitVarInsn(opCode, var);
-	}
+	
 }

@@ -23,9 +23,9 @@ public class SDArrows {
 		return ourArrows;
 	}
 	
-	public void printClass(String className){
+	public void printClass(String varNames, String className){
 		String cleanName = WorkerForArrows.stripFunction(className);
-		System.out.print("< > :" + "<" + cleanName + ">");		
+		System.out.print(varNames + ":" + cleanName);		
 	}
 
 	public void setCurrentClass(String className) {
