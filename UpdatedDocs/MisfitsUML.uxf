@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.3">
+  <zoom_level>6</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>102</x>
+      <y>42</y>
+      <w>246</w>
+      <h>414</h>
+    </coordinates>
+    <panel_attributes>MisfitsPackage::UMLArrows
+--
+-ourArrows = new UMLArrows(): UMLArrows
+-fields: ArrayList&lt;String&gt;
+-uses: ArrayList&lt;String&gt;
+-supers: String
+-interfaces: ArrayList&lt;String&gt;
+-fieldBuffer = new StringBuffer(): StringBuffer
+-methodBuffer = new StringBuffer(): StringBuffer
+-whitelist = new ArrayList&lt;String&gt;(): ArrayList&lt;String&gt;
+--
+-UMLArrows(): ctor
++getInstance(): UMLArrows
++getFields(): ArrayList&lt;String&gt;
++getUses(): ArrayList&lt;String&gt;
++getInterfaces(): ArrayList&lt;String&gt;
++getSupers(): String
++getWhitelist(): ArrayList&lt;String&gt;
++resetUMLArrows(): void
++addToFieldBuffer(String toAppend): void
++addToMethodBuffer(String toAppend): void
++addUse(String currentType): void
++addUses(String desc): void
++addField(String desc): void
++setSuper(String currentType): void
++addInterface(String currentType): void
++addWhitelist(String[] classes): void
++printClass(String name): void
++addFieldToBuffer(int access, String name, String desc): void
++addMethodToBuffer(int access, String name, String desc): void
+-makeSymbol(int access): String
+-unwantedTypes(String cleanType): boolean
+-getTypesFromDesc(String desc): List&lt;String&gt;
+-checkExistingArrow(String cleanType): boolean
+-stripFunction(String toStrip): String
+-printArrows(String classString): void
+-printUses(String className): void
+-printFields(String className): void
+-printInterfaces(String className): void
+-printSupers(String className): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1050</x>
+      <y>240</y>
+      <w>174</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>MisfitsPackage::DesignParser
+--
+--
++makeUML(String[] classes): void
++makeSD(String[] classes): void
+-makeReader(String className): void
++startDiagram(String nameOfDiagram): void
++endDiagram(): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>240</x>
+      <y>618</y>
+      <w>336</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>MisfitsPackage::MyMethodVisitor
+--
+--
++MyMethodVisitor(int api): ctor
++MyMethodVisitor(int api, MethodVisitor toDecorate): ctor
++visitTypeInsn(int opCode, String val): void
++visitMethodInsn(int opcode, String owner, String name, String desc, boolean bool): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>462</x>
+      <y>204</y>
+      <w>348</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>MisfitsPackage::ClassFieldDeclarationVisitor
+--
+--
++ClassFieldDeclarationVisitor(int api): ctor
++ClassFieldDeclarationVisitor(int api, ClassVisitor toDecorate): ctor
++visitField(int access, String name, String desc, String signature, Object value): FieldVisitor
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>462</x>
+      <y>282</y>
+      <w>348</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>MisfitsPackage::ClassFieldVisitor
+--
+--
++ClassFieldVisitor(int api): ctor
++ClassFieldVisitor(int api, ClassVisitor toDecorate): ctor
++visitField(int access, String name, String desc, String signature, Object value): FieldVisitor
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>462</x>
+      <y>366</y>
+      <w>390</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>MisfitsPackage::ClassMethodVisitor
+--
+--
++ClassMethodVisitor(int api): ctor
++ClassMethodVisitor(int api, ClassVisitor toDecorate): ctor
++visitMethod(int access, String name, String desc, String signature, String[] exceptions): MethodVisitor
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>462</x>
+      <y>30</y>
+      <w>390</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>MisfitsPackage::InterfaceDeclarationVisitor
+--
+--
++InterfaceDeclarationVisitor(int api): ctor
++InterfaceDeclarationVisitor(int api, ClassVisitor toDecorate): ctor
++visit(int version, int access, String name, String signature, String superName, String[] interfaces): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>456</x>
+      <y>444</y>
+      <w>390</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>MisfitsPackage::MethodDeclarationVisitor
+--
+--
++MethodDeclarationVisitor(int api): ctor
++MethodDeclarationVisitor(int api, ClassVisitor toDecorate): ctor
++visitMethod(int access, String name, String desc, String signature, String[] exceptions): MethodVisitor
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>462</x>
+      <y>114</y>
+      <w>390</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>MisfitsPackage::SuperDeclarationVisitor
+--
+--
++SuperDeclarationVisitor(int api): ctor
++SuperDeclarationVisitor(int api, ClassVisitor toDecorate): ctor
++visit(int version, int access, String name, String signature, String superName, String[] interfaces): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1350</x>
+      <y>258</y>
+      <w>138</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>MisfitsPackage::UMLCreatorMain
+--
+--
++main(String[] args): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>846</x>
+      <y>66</y>
+      <w>216</w>
+      <h>186</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;340.0;290.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>846</x>
+      <y>144</y>
+      <w>216</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;340.0;180.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>804</x>
+      <y>216</y>
+      <w>258</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;410.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>804</x>
+      <y>282</y>
+      <w>258</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;40.0;410.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>846</x>
+      <y>306</y>
+      <w>216</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;130.0;340.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>840</x>
+      <y>318</y>
+      <w>240</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;230.0;380.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>432</x>
+      <y>504</y>
+      <w>228</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;190.0;360.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>342</x>
+      <y>48</y>
+      <w>132</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;30.0;200.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>342</x>
+      <y>138</y>
+      <w>132</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;30.0;200.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>342</x>
+      <y>222</y>
+      <w>132</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;30.0;200.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>342</x>
+      <y>306</y>
+      <w>132</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;30.0;200.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>342</x>
+      <y>384</y>
+      <w>132</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;30.0;200.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>342</x>
+      <y>438</y>
+      <w>132</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;30.0;200.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>252</x>
+      <y>450</y>
+      <w>30</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;30.0;280.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>138</x>
+      <y>318</y>
+      <w>972</w>
+      <h>444</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;230.0;110.0;720.0;890.0;710.0;1600.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>42</x>
+      <y>264</y>
+      <w>72</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>60;18;18;18;18;120;60;120</additional_attributes>
+  </element>
+</diagram>
