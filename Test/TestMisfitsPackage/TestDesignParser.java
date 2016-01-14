@@ -29,11 +29,6 @@ public class TestDesignParser {
 	}
 
 	@Test
-	public void testMakeUML() {
-
-	}
-
-	@Test
 	public void testStartDiagramNoSpaces() {
 		DesignParser.startDiagram("BestDiagram");
 		assertEquals("digraph BestDiagram{\nrankdir=BT\n",
@@ -76,10 +71,10 @@ public class TestDesignParser {
 		DesignParser.endDiagram();
 		assertEquals("}\n", outContent.toString());
 	}
-	
+
 	@Test
 	public void testEndDiagramSpace() {
 		DesignParser.endDiagram();
-			assertTrue(!"} \n".equals(outContent.toString()));
+		assertTrue(!"} \n".equals(outContent.toString()));
 	}
 }

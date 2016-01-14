@@ -245,14 +245,7 @@ public class UMLArrows {
 	public void addFieldToBuffer(int access, String name, String desc) {
 		String type = Type.getType(desc).getClassName();
 		if (name.charAt(0) != '<') {
-			String symbol = "";
-			if ((access & Opcodes.ACC_PUBLIC) != 0) {
-				symbol = "+";
-			} else if ((access & Opcodes.ACC_PRIVATE) != 0) {
-				symbol = "-";
-			} else if ((access & Opcodes.ACC_PROTECTED) != 0) {
-				symbol = "#";
-			}
+			String symbol = makeSymbol(access);
 			String type2 = stripFunction(type);
 			String temp = symbol + " " + name + " : " + type2 + "\\l";
 			this.addToFieldBuffer(temp);
@@ -276,20 +269,25 @@ public class UMLArrows {
 
 			String rType = Type.getReturnType(desc).getClassName();
 			List<String> stypes = getTypesFromDesc(desc);
-			String symbol = "";
-			if ((access & Opcodes.ACC_PUBLIC) != 0) {
-				symbol = "+";
-			} else if ((access & Opcodes.ACC_PRIVATE) != 0) {
-				symbol = "-";
-			} else if ((access & Opcodes.ACC_PROTECTED) != 0) {
-				symbol = "#";
-			}
+			String symbol = makeSymbol(access);
 			String returnType = stripFunction(rType);
 			String temp = symbol + name + "(" + stypes.toString() + ") : "
 					+ returnType + "\\l ";
 
 			this.addToMethodBuffer(temp);
 		}
+	}
+
+	private String makeSymbol(int access) {
+		String symbol = "";
+		if ((access & Opcodes.ACC_PUBLIC) != 0) {
+			symbol = "+";
+		} else if ((access & Opcodes.ACC_PRIVATE) != 0) {
+			symbol = "-";
+		} else if ((access & Opcodes.ACC_PROTECTED) != 0) {
+			symbol = "#";
+		}
+		return symbol;
 	}
 
 	/**
