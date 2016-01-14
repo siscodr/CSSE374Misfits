@@ -20,7 +20,6 @@ public class UMLArrows {
 	private ArrayList<String> interfaces;
 	private StringBuffer fieldBuffer = new StringBuffer();
 	private StringBuffer methodBuffer = new StringBuffer();
-	private ArrayList<String> whitelist = new ArrayList<String>();
 
 	/**
 	 * Constructs a UMLArrows
@@ -75,15 +74,6 @@ public class UMLArrows {
 	}
 
 	/**
-	 * Getter for the WhiteList for the current set of classes.
-	 * 
-	 * @return ArrayList<String>
-	 */
-	public ArrayList<String> getWhitelist() {
-		return whitelist;
-	}
-
-	/**
 	 * Resets the ArrayLists used to make arrows.
 	 * 
 	 * @return No return value.
@@ -128,7 +118,7 @@ public class UMLArrows {
 	 * @return No return value.
 	 */
 	public void addUse(String currentType) {
-		String cleanType = stripFunction(currentType);
+		String cleanType = WorkerForArrows.stripFunction(currentType);
 		if (checkExistingArrow(cleanType))
 			uses.add(cleanType);
 	}
@@ -143,7 +133,7 @@ public class UMLArrows {
 	 * @return No return value.
 	 */
 	public void addUses(String desc) {
-		List<String> stypes = getTypesFromDesc(desc);
+		List<String> stypes = WorkerForArrows.getTypesFromDesc(desc);
 		for (String types : stypes) {
 			addUse(types);
 		}
@@ -160,7 +150,7 @@ public class UMLArrows {
 	 */
 	public void addField(String desc) {
 		String currentType = Type.getType(desc).getClassName();
-		String cleanType = stripFunction(currentType);
+		String cleanType = WorkerForArrows.stripFunction(currentType);
 		if (checkExistingArrow(cleanType))
 			fields.add(cleanType);
 	}
@@ -175,7 +165,7 @@ public class UMLArrows {
 	 */
 	public void setSuper(String currentType) {
 		if (currentType != null) {
-			String cleanType = stripFunction(currentType);
+			String cleanType = WorkerForArrows.stripFunction(currentType);
 			if (checkExistingArrow(cleanType))
 				supers = (cleanType);
 		}
@@ -191,23 +181,9 @@ public class UMLArrows {
 	 * @return No return value.
 	 */
 	public void addInterface(String currentType) {
-		String cleanType = stripFunction(currentType);
+		String cleanType = WorkerForArrows.stripFunction(currentType);
 		if (checkExistingArrow(cleanType))
 			interfaces.add(cleanType);
-	}
-
-	/**
-	 * This function adds the given strings to the whiteList for the classes
-	 * that the UML should draw
-	 * 
-	 * @param classes
-	 *            the classes to add to the whiteList.
-	 * @return No return value.
-	 */
-	public void addWhitelist(String[] classes) {
-		for (int i = 0; i < classes.length; i++) {
-			this.whitelist.add(stripFunction(classes[i]));
-		}
 	}
 
 	/**
@@ -222,11 +198,9 @@ public class UMLArrows {
 	 * @return No return value
 	 */
 	public void printClass(String name) {
-		String newName = stripFunction(name);
-		System.out.print("   " + newName
-				+ " [\n     shape=\"record\"     label = \"{" + newName + "|"
-				+ fieldBuffer.toString() + "|" + methodBuffer.toString()
-				+ "\n}\"\n];\n");
+		String newName = WorkerForArrows.stripFunction(name);
+		System.out.print("   " + newName + " [\n     shape=\"record\"     label = \"{" + newName + "|"
+				+ fieldBuffer.toString() + "|" + methodBuffer.toString() + "\n}\"\n];\n");
 		printArrows(newName);
 		UMLArrows.getInstance().resetUMLArrows();
 	}
@@ -245,8 +219,8 @@ public class UMLArrows {
 	public void addFieldToBuffer(int access, String name, String desc) {
 		String type = Type.getType(desc).getClassName();
 		if (name.charAt(0) != '<') {
-			String symbol = makeSymbol(access);
-			String type2 = stripFunction(type);
+			String symbol = WorkerForArrows.makeSymbol(access);
+			String type2 = WorkerForArrows.stripFunction(type);
 			String temp = symbol + " " + name + " : " + type2 + "\\l";
 			this.addToFieldBuffer(temp);
 		}
@@ -268,59 +242,13 @@ public class UMLArrows {
 		if (name.charAt(0) != '<') {
 
 			String rType = Type.getReturnType(desc).getClassName();
-			List<String> stypes = getTypesFromDesc(desc);
-			String symbol = makeSymbol(access);
-			String returnType = stripFunction(rType);
-			String temp = symbol + name + "(" + stypes.toString() + ") : "
-					+ returnType + "\\l ";
+			List<String> stypes = WorkerForArrows.getTypesFromDesc(desc);
+			String symbol = WorkerForArrows.makeSymbol(access);
+			String returnType = WorkerForArrows.stripFunction(rType);
+			String temp = symbol + name + "(" + stypes.toString() + ") : " + returnType + "\\l ";
 
 			this.addToMethodBuffer(temp);
 		}
-	}
-
-	private String makeSymbol(int access) {
-		String symbol = "";
-		if ((access & Opcodes.ACC_PUBLIC) != 0) {
-			symbol = "+";
-		} else if ((access & Opcodes.ACC_PRIVATE) != 0) {
-			symbol = "-";
-		} else if ((access & Opcodes.ACC_PROTECTED) != 0) {
-			symbol = "#";
-		}
-		return symbol;
-	}
-
-	/**
-	 * Takes the given string and checks against the whiteList.
-	 * 
-	 * @param cleanType
-	 *            String to be checked against the whiteList
-	 * @return boolean If the given String is whiteListed
-	 */
-	private boolean unwantedTypes(String cleanType) {
-		for (String whitelisted : whitelist) {
-			if (cleanType.equals(whitelisted)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	/**
-	 * Takes a method descriptor and returns a list of the parameters
-	 * 
-	 * @param desc
-	 *            A method descriptor.
-	 * @return List<String> A list of the parameter Types from a method
-	 *         descriptors
-	 */
-	private List<String> getTypesFromDesc(String desc) {
-		Type[] argTypes = Type.getArgumentTypes(desc);
-		List<String> stypes = new ArrayList<String>();
-		for (Type t : argTypes) {
-			stypes.add(t.getClassName());
-		}
-		return stypes;
 	}
 
 	/**
@@ -332,24 +260,8 @@ public class UMLArrows {
 	 * @return boolean If the arrow should be added to the diagram
 	 */
 	private boolean checkExistingArrow(String cleanType) {
-		return !uses.contains(cleanType) && !fields.contains(cleanType)
-				&& !supers.contains(cleanType)
-				&& !interfaces.contains(cleanType) && unwantedTypes(cleanType);
-	}
-
-	/**
-	 * Takes the given String and puts it in the consistent format.
-	 * 
-	 * @param toStrip
-	 *            A String that needs to be in a consistent format.
-	 * @return String A String without ".""/""[""]"
-	 */
-	private String stripFunction(String toStrip) {
-		toStrip = toStrip.replace(".", "_");
-		toStrip = toStrip.replace("/", "_");
-		toStrip = toStrip.replace("[", "");
-		toStrip = toStrip.replace("]", "");
-		return toStrip;
+		return !uses.contains(cleanType) && !fields.contains(cleanType) && !supers.contains(cleanType)
+				&& !interfaces.contains(cleanType) && WorkerForArrows.unwantedTypes(cleanType);
 	}
 
 	/**
@@ -378,8 +290,7 @@ public class UMLArrows {
 	private void printUses(String className) {
 		for (String types : this.uses) {
 			if (types.contains("_")) {
-				System.out.println(className + " -> " + types
-						+ " [arrowhead=\"vee\", style=\"dashed\"];");
+				System.out.println(className + " -> " + types + " [arrowhead=\"vee\", style=\"dashed\"];");
 			}
 		}
 	}
@@ -395,8 +306,7 @@ public class UMLArrows {
 	private void printFields(String className) {
 		for (String field : this.fields) {
 			if (field.contains("_")) {
-				System.out.println(field + " -> " + className
-						+ " [arrowhead=\"vee\"];");
+				System.out.println(field + " -> " + className + " [arrowhead=\"vee\"];");
 			}
 		}
 	}
@@ -412,8 +322,7 @@ public class UMLArrows {
 	private void printInterfaces(String className) {
 		for (String interf : this.interfaces) {
 			if (interf.contains("_")) {
-				System.out.println(className + " -> " + interf
-						+ " [arrowhead=\"onormal\", style=\"dashed\"];");
+				System.out.println(className + " -> " + interf + " [arrowhead=\"onormal\", style=\"dashed\"];");
 			}
 		}
 	}
@@ -428,8 +337,7 @@ public class UMLArrows {
 	 */
 	private void printSupers(String className) {
 		if (supers.contains("_")) {
-			System.out.println(className + " -> " + supers
-					+ " [arrowhead=\"onormal\"];");
+			System.out.println(className + " -> " + supers + " [arrowhead=\"onormal\"];");
 		}
 	}
 }

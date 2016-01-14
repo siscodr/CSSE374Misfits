@@ -26,7 +26,7 @@ public class DesignParser {
 	public static void makeUML(String[] classes) throws IOException {
 		startDiagram("misfit_diagram");
 		// Creates whiteList for the classes to draw on UML
-		UMLArrows.getInstance().addWhitelist(classes);
+		WorkerForArrows.addWhitelist(classes);
 
 		for (String className : classes) {
 
