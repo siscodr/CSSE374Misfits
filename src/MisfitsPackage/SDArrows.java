@@ -41,8 +41,9 @@ public class SDArrows {
 		return varNames;
 	}
 
-	public void setVarNames(String methodName, HashMap<String,String> variableNames) {
-		//TODO: implement
+	public void setVarNames(HashMap<String,String> variableNames) {
+		//TODO: figure out which method is the key & add the hashmap
+		//TODO: figure out where we are calling the MyMethodVisitor
 	}
 
 	public void addMethod(String name) {

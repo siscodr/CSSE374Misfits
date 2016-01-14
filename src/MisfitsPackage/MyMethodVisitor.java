@@ -84,7 +84,7 @@ public class MyMethodVisitor extends MethodVisitor {
 	@Override
 	public void visitLocalVariable(String name, String desc, String signature, Label start, Label end, int index){
 		super.visitLocalVariable(name, desc, signature, start, end, index);
-		//TODO
-		//SDArrows.getInstance().setVarNames(name, null);
+		//TODO: figure out the sd arrows method that we will pass this into
+		//SDArrows.getInstance().setVarNames(null);
 	}
 }
