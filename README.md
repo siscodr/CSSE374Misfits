@@ -8,6 +8,9 @@ The design of our system is as simple as it can be.  It is made of only four cla
 Milestone 2:
 The design of this system has changed to accommodate use arrows.  To do this, we added an additional class called MyMethodVisitor which can determine which classes are used inside the method that is being visited.  All of the association arrows were made in Milestone 1 and were not touched in this milestone.
 
+Milestone 3:
+For the most part, our design for UMLs stayed the same.  We mostly just added new classes to draw sequence diagrams.  The one major change that we made was that we pulled out several static methods from UMLArrows to make a class of global functions that can be used by UMLArrows and SDArrows.
+
 Who did what 
 Milestone 1:
 Morgan Cook: Wrote code to print the class name in the UML, implemented the ‘use’ and ‘extends’ arrows, wrote code to draw the line between fields and methods, did constant quality assurance and drew the UML diagram 
