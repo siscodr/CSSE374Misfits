@@ -6,13 +6,8 @@ import static org.junit.Assert.assertTrue;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-
-import jdk.internal.org.objectweb.asm.Opcodes;
 
 import org.junit.After;
 import org.junit.Before;
@@ -20,6 +15,7 @@ import org.junit.Test;
 
 import MisfitsPackage.UMLArrows;
 import MisfitsPackage.WorkerForArrows;
+import jdk.internal.org.objectweb.asm.Opcodes;
 
 public class UMLArrowsTest {
 
@@ -378,7 +374,6 @@ public class UMLArrowsTest {
 		assertEquals(usesarray, uses.get(arrows));
 	}
 
-	@SuppressWarnings("unchecked")
 	@Test
 	public void testaddUses()
 			throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {

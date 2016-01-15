@@ -14,7 +14,6 @@ import org.junit.Test;
 
 import com.sun.xml.internal.ws.org.objectweb.asm.Opcodes;
 
-import MisfitsPackage.UMLArrows;
 import MisfitsPackage.WorkerForArrows;
 
 public class TestWorkerForArrows {
