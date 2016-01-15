@@ -11,13 +11,12 @@ public class TypeInstruction implements Instruction {
 		this.type = type;
 	}
 
-	@Override
 	public void printInstruction() {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
+
 	public void execute() {
 		// Do nothing!
 	}

@@ -22,12 +22,12 @@ public class MethodInstruction implements Instruction {
 		}
 	}
 
-	@Override
+	
 	public void printInstruction() {
 		System.out.println(this.toString());
 	}
 
-	@Override
+
 	public void execute() {
 	}
 
