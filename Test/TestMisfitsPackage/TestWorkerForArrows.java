@@ -12,6 +12,8 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.sun.xml.internal.ws.org.objectweb.asm.Opcodes;
+
 import MisfitsPackage.UMLArrows;
 import MisfitsPackage.WorkerForArrows;
 
@@ -155,4 +157,25 @@ public class TestWorkerForArrows {
 				Arrays.asList("TestMisfitsPackage.UMLArrowsTest", "int", "java.lang.Thread", "double", "byte"));
 		assertEquals(returns, getTypesFromDesc.invoke(new WorkerForArrows(), desc));
 	}
+	
+	@Test
+	public void testmakeSymbolPublic(){
+		assertEquals("+", WorkerForArrows.makeSymbol(Opcodes.ACC_PUBLIC));
+	}
+	
+	@Test
+	public void testmakeSymbolPrivate(){
+		assertEquals("-", WorkerForArrows.makeSymbol(Opcodes.ACC_PRIVATE));
+	}
+	
+	@Test
+	public void testmakeSymbolProtected(){
+		assertEquals("#", WorkerForArrows.makeSymbol(Opcodes.ACC_PROTECTED));
+	}
+	
+	@Test
+	public void testmakeSymbolNone(){
+		assertEquals("", WorkerForArrows.makeSymbol(0));
+	}
+	
 }

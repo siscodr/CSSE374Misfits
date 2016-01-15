@@ -39,27 +39,6 @@ public class WorkerForArrows {
 	}
 
 	/**
-	 * Takes an Opcode and turns it into a symbol to be used in the UML to
-	 * determine access of the method/field
-	 * 
-	 * @param access
-	 *            An Opcode representation of a symbol
-	 * @return String The string is a symbol to represent the access of the
-	 *         method/Field
-	 */
-	public static String makeSymbol(int access) {
-		String symbol = "";
-		if ((access & Opcodes.ACC_PUBLIC) != 0) {
-			symbol = "+";
-		} else if ((access & Opcodes.ACC_PRIVATE) != 0) {
-			symbol = "-";
-		} else if ((access & Opcodes.ACC_PROTECTED) != 0) {
-			symbol = "#";
-		}
-		return symbol;
-	}
-
-	/**
 	 * Takes the given string and checks against the whiteList.
 	 * 
 	 * @param cleanType
@@ -90,6 +69,27 @@ public class WorkerForArrows {
 			stypes.add(t.getClassName());
 		}
 		return stypes;
+	}
+
+	/**
+	 * Takes an Opcode and turns it into a symbol to be used in the UML to
+	 * determine access of the method/field
+	 * 
+	 * @param access
+	 *            An Opcode representation of a symbol
+	 * @return String The string is a symbol to represent the access of the
+	 *         method/Field
+	 */
+	public static String makeSymbol(int access) {
+		String symbol = "";
+		if ((access & Opcodes.ACC_PUBLIC) != 0) {
+			symbol = "+";
+		} else if ((access & Opcodes.ACC_PRIVATE) != 0) {
+			symbol = "-";
+		} else if ((access & Opcodes.ACC_PROTECTED) != 0) {
+			symbol = "#";
+		}
+		return symbol;
 	}
 
 	/**
