@@ -16,7 +16,6 @@ public class SDCreatorMain {
 	 */
 	public static void main(String[] args) throws IOException{
 		DesignParser.makeSD(args); // Runs the program
-		WorkerForArrows.stripFunction("hi");
 		}
 
 }
