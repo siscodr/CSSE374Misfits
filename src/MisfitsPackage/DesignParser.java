@@ -47,13 +47,12 @@ public class DesignParser {
 	 *             Exception where string doesn't link to a class
 	 */
 	public static void makeSD(String[] classes) throws IOException {
-
 		for (String className : classes) {
-			SDArrows.getInstance().setCurrentClass(className);
-			
+			SDArrows.getInstance().setCurrentClass(WorkerForArrows.stripFunction(className));
 			makeReader(className);
-
 		}
+		
+		SDArrows.getInstance().executeFromMain(classes[0]);
 	}
 
 	/**

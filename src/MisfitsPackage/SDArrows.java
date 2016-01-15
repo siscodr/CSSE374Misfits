@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SDArrows {
-	//TODO: DEAL WITH FOR LOOPS
+	// TODO: DEAL WITH FOR LOOPS
 	private static SDArrows ourArrows = new SDArrows();
-	//need methods
-	private HashMap<String,ArrayList<Instruction>> instructionSets = new HashMap<String, ArrayList<Instruction>>();
-	
+	// need methods
+	private HashMap<String, ArrayList<Instruction>> instructionSets = new HashMap<String, ArrayList<Instruction>>();
+
 	private String currentClass;
-	
+
 	public SDArrows() {
 	}
-	
+
 	/**
 	 * Gets the current instance of SDArrow
 	 * 
@@ -22,28 +22,39 @@ public class SDArrows {
 	public static SDArrows getInstance() {
 		return ourArrows;
 	}
-	
-	public void printClass(String className){
+
+	public void printClass(String className) {
 		String cleanName = WorkerForArrows.stripFunction(className);
-		System.out.print(":" + cleanName);		
+		System.out.print(":" + cleanName);
 	}
 
 	public void setCurrentClass(String className) {
-		currentClass=className;
+		currentClass = className;
 	}
-	
-	public void addItemsToHashMap(String methodName, ArrayList<Instruction> instructions) {
+
+	public void addItemsToHashMap(String methodName,
+			ArrayList<Instruction> instructions) {
 		instructionSets.put(currentClass + "." + methodName, instructions);
 	}
-	
+
 	public HashMap<String, ArrayList<Instruction>> getHashMap() {
 		return instructionSets;
 	}
-	
+
 	public String getCurrentClass() {
 		return currentClass;
 	}
 
-	
-	
+	// Only to be run when the currentClass is the Main
+	public void executeFromMain(String mainClass) {
+		String cleanClass = WorkerForArrows.stripFunction(mainClass);
+		ArrayList<Instruction> mainInstructions = instructionSets
+				.get(cleanClass + ".main");
+		if (mainInstructions.size() > 0) {
+			for (Instruction instr : mainInstructions) {
+				instr.execute();
+			}
+		}
+	}
+
 }
