@@ -47,6 +47,7 @@ public class DesignParser {
 	 *             Exception where string doesn't link to a class
 	 */
 	public static void makeSD(String[] classes) throws IOException {
+		WorkerForArrows.addWhitelist(classes);
 		for (String className : classes) {
 			SDArrows.getInstance().setCurrentClass(WorkerForArrows.stripFunction(className));
 			makeReader(className);

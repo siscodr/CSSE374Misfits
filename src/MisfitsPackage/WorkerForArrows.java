@@ -91,4 +91,9 @@ public class WorkerForArrows {
 		toStrip = toStrip.replace("]", "");
 		return toStrip;
 	}
+
+	public static boolean grindFunction(String cleanOwner) {
+		
+		return false;
+	}
 }

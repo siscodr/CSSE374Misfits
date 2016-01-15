@@ -18,7 +18,7 @@ public class TypeInstruction implements Instruction {
 
 
 	public void execute() {
-		// Do nothing!
+		System.out.println(toString());
 	}
 
 	@Override

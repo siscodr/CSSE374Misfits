@@ -10,6 +10,7 @@ public class SDArrows {
 	private HashMap<String, ArrayList<Instruction>> instructionSets = new HashMap<String, ArrayList<Instruction>>();
 
 	private String currentClass;
+	private ArrayList<String> classes = new ArrayList<String>();
 
 	public SDArrows() {
 	}
@@ -32,8 +33,7 @@ public class SDArrows {
 		currentClass = className;
 	}
 
-	public void addItemsToHashMap(String methodName,
-			ArrayList<Instruction> instructions) {
+	public void addItemsToHashMap(String methodName, ArrayList<Instruction> instructions) {
 		instructionSets.put(currentClass + "." + methodName, instructions);
 	}
 
@@ -48,13 +48,33 @@ public class SDArrows {
 	// Only to be run when the currentClass is the Main
 	public void executeFromMain(String mainClass) {
 		String cleanClass = WorkerForArrows.stripFunction(mainClass);
-		ArrayList<Instruction> mainInstructions = instructionSets
-				.get(cleanClass + ".main");
+		System.out.println(cleanClass+ ":" +cleanClass+"[a]");
+		ArrayList<Instruction> mainInstructions = instructionSets.get(cleanClass + ".main");
 		if (mainInstructions.size() > 0) {
 			for (Instruction instr : mainInstructions) {
 				instr.execute();
 			}
 		}
+	}
+
+	public void execute(String methodString) {
+		ArrayList<Instruction> methodInstructions = instructionSets.get(methodString);
+		if (methodInstructions != null) {
+			for (Instruction instr : methodInstructions) {
+				instr.execute();
+			}
+		}
+	}
+
+	public void checkClasses(String cleanOwner) {
+		if(!this.classes.contains(cleanOwner)){
+			System.out.println(cleanOwner+":"+cleanOwner+"[a}");
+			addClass(cleanOwner);
+		}
+	}
+
+	private void addClass(String cleanOwner) {
+		this.classes.add(cleanOwner);
 	}
 
 }
