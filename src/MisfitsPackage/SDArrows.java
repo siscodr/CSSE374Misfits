@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SDArrows {
+	private static final int DEPTHLIMIT = 6;
 	// TODO: DEAL WITH FOR LOOPS
 	private static SDArrows ourArrows = new SDArrows();
 	// need methods
@@ -52,16 +53,17 @@ public class SDArrows {
 		ArrayList<Instruction> mainInstructions = instructionSets.get(cleanClass + ".main");
 		if (mainInstructions.size() > 0) {
 			for (Instruction instr : mainInstructions) {
-				instr.execute(cleanClass);
+				instr.execute(cleanClass, 0);
 			}
 		}
 	}
 
-	public void execute(String methodString, String className) {
+	public void execute(String methodString, String className, int depth) {
 		ArrayList<Instruction> methodInstructions = instructionSets.get(methodString);
 		if (methodInstructions != null) {
 			for (Instruction instr : methodInstructions) {
-				instr.execute(className);
+				if (depth < DEPTHLIMIT)
+				instr.execute(className, depth + 1);
 			}
 		}
 	}

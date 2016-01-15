@@ -16,10 +16,9 @@ public class TypeInstruction implements Instruction {
 
 	}
 
-
-	public void execute(String caller) {
-		if(WorkerForArrows.unwantedTypes(type)){
-		System.out.println(caller + toString());
+	public void execute(String caller, int depth) {
+		if (WorkerForArrows.unwantedTypes(type)) {
+			System.out.println(caller + toString());
 		}
 	}
 
