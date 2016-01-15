@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SDArrows {
+	// This is how deep we want to search into the method calls
 	private static final int DEPTHLIMIT = 6;
-	// TODO: DEAL WITH FOR LOOPS
 	private static SDArrows ourArrows = new SDArrows();
-	// need methods
+	// Stores methods
 	private HashMap<String, ArrayList<Instruction>> instructionSets = new HashMap<String, ArrayList<Instruction>>();
 
 	private String currentClass;
@@ -26,9 +26,11 @@ public class SDArrows {
 	}
 
 	/**
-	 * 
+	 * Takes the current method that is being processed and stores it to the
+	 * currentClass variable.
 	 * 
 	 * @param className
+	 *            A String representation of the current class.
 	 * @return No return value.
 	 */
 	public void setCurrentClass(String className) {
@@ -36,6 +38,13 @@ public class SDArrows {
 		System.out.println(className + ":" + className + "[a]");
 	}
 
+	/**
+	 * Strips the given class and appends a semicolon to the front.
+	 * 
+	 * @param className
+	 *            A String representation of the current class.
+	 * @return No return value.
+	 */
 	public void printClass(String className) {
 		String cleanName = WorkerForArrows.stripFunction(className);
 		System.out.print(":" + cleanName);
