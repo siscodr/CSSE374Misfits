@@ -6,6 +6,12 @@ import java.util.List;
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.Type;
 
+/**
+ * The purpose of this class is to do a lot of the processing work, and to
+ * eliminate as much duplicated code.
+ * 
+ * @author TheMisfits
+ */
 public class WorkerForArrows {
 	private static ArrayList<String> whitelist = new ArrayList<String>();
 
@@ -32,6 +38,15 @@ public class WorkerForArrows {
 		}
 	}
 
+	/**
+	 * Takes an Opcode and turns it into a symbol to be used in the UML to
+	 * determine access of the method/field
+	 * 
+	 * @param access
+	 *            An Opcode representation of a symbol
+	 * @return String The string is a symbol to represent the access of the
+	 *         method/Field
+	 */
 	public static String makeSymbol(int access) {
 		String symbol = "";
 		if ((access & Opcodes.ACC_PUBLIC) != 0) {
@@ -90,10 +105,5 @@ public class WorkerForArrows {
 		toStrip = toStrip.replace("[", "");
 		toStrip = toStrip.replace("]", "");
 		return toStrip;
-	}
-
-	public static boolean grindFunction(String cleanOwner) {
-		
-		return false;
 	}
 }
