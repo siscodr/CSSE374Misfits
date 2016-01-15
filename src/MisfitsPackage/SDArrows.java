@@ -31,6 +31,7 @@ public class SDArrows {
 
 	public void setCurrentClass(String className) {
 		currentClass = className;
+		System.out.println(className+":"+className+"[a]");
 	}
 
 	public void addItemsToHashMap(String methodName, ArrayList<Instruction> instructions) {
@@ -48,27 +49,25 @@ public class SDArrows {
 	// Only to be run when the currentClass is the Main
 	public void executeFromMain(String mainClass) {
 		String cleanClass = WorkerForArrows.stripFunction(mainClass);
-		System.out.println(cleanClass+ ":" +cleanClass+"[a]");
 		ArrayList<Instruction> mainInstructions = instructionSets.get(cleanClass + ".main");
 		if (mainInstructions.size() > 0) {
 			for (Instruction instr : mainInstructions) {
-				instr.execute();
+				instr.execute(cleanClass);
 			}
 		}
 	}
 
-	public void execute(String methodString) {
+	public void execute(String methodString, String className) {
 		ArrayList<Instruction> methodInstructions = instructionSets.get(methodString);
 		if (methodInstructions != null) {
 			for (Instruction instr : methodInstructions) {
-				instr.execute();
+				instr.execute(className);
 			}
 		}
 	}
 
 	public void checkClasses(String cleanOwner) {
 		if(!this.classes.contains(cleanOwner)){
-			System.out.println(cleanOwner+":"+cleanOwner+"[a}");
 			addClass(cleanOwner);
 		}
 	}

@@ -26,18 +26,18 @@ public class MethodInstruction implements Instruction {
 		System.out.println(this.toString());
 	}
 
-	public void execute() {
+	public void execute(String caller) {
 		String cleanOwner = WorkerForArrows.stripFunction(owner);
 		if (WorkerForArrows.unwantedTypes(cleanOwner)) {
 			SDArrows.getInstance().checkClasses(cleanOwner);
-			System.out.println(toString());
-			SDArrows.getInstance().execute(cleanOwner + "." + name);
+			System.out.println(caller+ toString());
+			SDArrows.getInstance().execute(cleanOwner + "." + name, cleanOwner);
 		}
 	}
 
 	@Override
 	public String toString() {
-		return  ":" + returns + "=" + owner + "." + name + "(" + getParamString() + ")";
+		return  ":" + returns + "=" + WorkerForArrows.stripFunction(owner) + "." + name + "(" + getParamString() + ")";
 	}
 
 	private String getParamString() {

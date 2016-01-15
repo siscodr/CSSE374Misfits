@@ -52,7 +52,7 @@ public class DesignParser {
 			SDArrows.getInstance().setCurrentClass(WorkerForArrows.stripFunction(className));
 			makeReader(className);
 		}
-		
+		System.out.println();
 		SDArrows.getInstance().executeFromMain(classes[0]);
 	}
 

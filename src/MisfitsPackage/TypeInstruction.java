@@ -17,14 +17,16 @@ public class TypeInstruction implements Instruction {
 	}
 
 
-	public void execute() {
-		System.out.println(toString());
+	public void execute(String caller) {
+		if(WorkerForArrows.unwantedTypes(type)){
+		System.out.println(caller + toString());
+		}
 	}
 
 	@Override
 	public String toString() {
 		String currentClass = SDArrows.getInstance().getCurrentClass();
-		return currentClass + ":" + type + ".create()";
+		return ":" + type + ".create()";
 	}
 
 }
