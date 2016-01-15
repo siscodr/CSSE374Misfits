@@ -19,6 +19,7 @@ import jdk.internal.org.objectweb.asm.TypePath;
 public class MyMethodVisitor extends MethodVisitor {
 
 	private ArrayList<Instruction> instructions;
+	private String name;
 
 	/**
 	 * Constructs a new MyMethodVisitor.
@@ -27,9 +28,10 @@ public class MyMethodVisitor extends MethodVisitor {
 	 *            the ASM API version implemented by this visitor. Must be one
 	 *            of Opcodes.ASM4.
 	 */
-	public MyMethodVisitor(int api, ArrayList<Instruction> instructions) {
+	public MyMethodVisitor(int api, String name) {
 		super(api);
-		this.instructions = instructions;
+		this.instructions = new ArrayList<Instruction>();
+		this.name = name;
 	}
 
 	/**
@@ -41,9 +43,10 @@ public class MyMethodVisitor extends MethodVisitor {
 	 * @param toDecorate
 	 *            A MethodVisitor for this class to Decorate
 	 */
-	public MyMethodVisitor(int api, MethodVisitor toDecorate, ArrayList<Instruction> instructions) {
+	public MyMethodVisitor(int api, MethodVisitor toDecorate, String name) {
 		super(api, toDecorate);
-		this.instructions = instructions;
+		this.instructions = new ArrayList<Instruction>();
+		this.name = name;
 	}
 
 	/**
@@ -66,7 +69,6 @@ public class MyMethodVisitor extends MethodVisitor {
 		super.visitMethodInsn(opcode, owner, name, desc, bool);
 
 		String toClean = Type.getReturnType(desc).getClassName();
-
 		UMLArrows arrows = UMLArrows.getInstance();
 		// Adds first use arrow here
 		arrows.addUse(toClean);
@@ -121,6 +123,7 @@ public class MyMethodVisitor extends MethodVisitor {
 	}
 
 	public void visitEnd() {
+		SDArrows.getInstance().addItemsToHashMap(name, instructions);
 		super.visitEnd();
 	}
 

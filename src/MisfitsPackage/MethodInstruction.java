@@ -29,6 +29,7 @@ public class MethodInstruction implements Instruction {
 
 
 	public void execute() {
+		
 	}
 
 	@Override
