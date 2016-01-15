@@ -37,7 +37,7 @@ public class MethodInstruction implements Instruction {
 
 	@Override
 	public String toString() {
-		return returns + "=" + owner + "." + name + "(" + getParamString() + ")";
+		return  ":" + returns + "=" + owner + "." + name + "(" + getParamString() + ")";
 	}
 
 	private String getParamString() {
