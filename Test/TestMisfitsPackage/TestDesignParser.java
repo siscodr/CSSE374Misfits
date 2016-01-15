@@ -31,22 +31,19 @@ public class TestDesignParser {
 	@Test
 	public void testStartDiagramNoSpaces() {
 		DesignParser.startDiagram("BestDiagram");
-		assertEquals("digraph BestDiagram{\nrankdir=BT\n",
-				outContent.toString());
+		assertEquals("digraph BestDiagram{\nrankdir=BT\n", outContent.toString());
 	}
 
 	@Test
 	public void testStartDiagramSpaces() {
 		DesignParser.startDiagram("This is a Cool Test");
-		assertEquals("digraph This is a Cool Test{\nrankdir=BT\n",
-				outContent.toString());
+		assertEquals("digraph This is a Cool Test{\nrankdir=BT\n", outContent.toString());
 	}
 
 	@Test
 	public void testStartDiagramSpecialCharacters() {
 		DesignParser.startDiagram("OMG!<>*$@^@($@+_21");
-		assertEquals("digraph OMG!<>*$@^@($@+_21{\nrankdir=BT\n",
-				outContent.toString());
+		assertEquals("digraph OMG!<>*$@^@($@+_21{\nrankdir=BT\n", outContent.toString());
 	}
 
 	@Test
@@ -59,8 +56,8 @@ public class TestDesignParser {
 	public void testStartDiagramLargeName() {
 		// Fun fact, this is the Longest word coined by a major author mentioned
 		// in Aristophanes' comedy Assemblywomen (Originally written in Greek).
-		DesignParser
-				.startDiagram("Lopadotemachoselachogaleokranioleipsanodrimhypotrimmatosilphioparaomelitokatakechymenokichlepikossyphophattoperisteralektryonoptekephalliokigklopeleiolagoiosiraiobaphetraganopterygon");
+		DesignParser.startDiagram(
+				"Lopadotemachoselachogaleokranioleipsanodrimhypotrimmatosilphioparaomelitokatakechymenokichlepikossyphophattoperisteralektryonoptekephalliokigklopeleiolagoiosiraiobaphetraganopterygon");
 		assertEquals(
 				"digraph Lopadotemachoselachogaleokranioleipsanodrimhypotrimmatosilphioparaomelitokatakechymenokichlepikossyphophattoperisteralektryonoptekephalliokigklopeleiolagoiosiraiobaphetraganopterygon{\nrankdir=BT\n",
 				outContent.toString());
