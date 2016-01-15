@@ -25,14 +25,20 @@ public class SDArrows {
 		return ourArrows;
 	}
 
+	/**
+	 * 
+	 * 
+	 * @param className
+	 * @return No return value.
+	 */
+	public void setCurrentClass(String className) {
+		currentClass = className;
+		System.out.println(className + ":" + className + "[a]");
+	}
+
 	public void printClass(String className) {
 		String cleanName = WorkerForArrows.stripFunction(className);
 		System.out.print(":" + cleanName);
-	}
-
-	public void setCurrentClass(String className) {
-		currentClass = className;
-		System.out.println(className+":"+className+"[a]");
 	}
 
 	public void addItemsToHashMap(String methodName, ArrayList<Instruction> instructions) {
@@ -63,13 +69,13 @@ public class SDArrows {
 		if (methodInstructions != null) {
 			for (Instruction instr : methodInstructions) {
 				if (depth < DEPTHLIMIT)
-				instr.execute(className, depth + 1);
+					instr.execute(className, depth + 1);
 			}
 		}
 	}
 
 	public void checkClasses(String cleanOwner) {
-		if(!this.classes.contains(cleanOwner)){
+		if (!this.classes.contains(cleanOwner)) {
 			addClass(cleanOwner);
 		}
 	}
