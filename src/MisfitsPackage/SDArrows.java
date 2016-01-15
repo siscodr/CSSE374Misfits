@@ -36,7 +36,7 @@ public class SDArrows {
 		instructionSets.put(currentClass + "." + methodName, instructions);
 	}
 	
-	public HashMap getHashMap() {
+	public HashMap<String, ArrayList<Instruction>> getHashMap() {
 		return instructionSets;
 	}
 	
