@@ -19,10 +19,15 @@ Morgan Cook: created and wrote myMethodVisitor (including visitFieldInsn and vis
 Donald Sisco: took out all primitives listed, fixed duplicating arrows
 Jonathon Soulsby: wrote all tests
 
-Instructions:
+Milestone 3:
+Morgan Cook: Made "WorkerForArrows" class which is used by both UMLArrows and SDArrows, figured out which of the inherited methods of MethodVisitor we need, added ability to add to hashmap from visitors
+Donald Sisco: Fixed design flaws in Milestone 1/2, rewrote tests from Milestone 1/2, created Instruction interface and several classes that implement it, wrote MethodInstruction
+Jonathon Soulsby: figured out which of the inherited methods of MethodVisitor we need, wrote SDCreatorMain, added varNames Container to SDArrows
+
+Instructions for UML:
 1)	Download the code into Eclipse
 2)	Go to MisfitsUMLCreator -> src -> MisfitsPackage
-3)	Right click on DesignParser and select Run As -> Run Configurations
+3)	Right click on UMLCreatorMain and select Run As -> Run Configurations
 4)	In the Arguments tab of the run configurations pop-up, put the name(s) of the class(es) for which you want to create a UML diagram (if that code is not in the MisfitsUMLCreator package, you will need to add the package via the Classpath tab)
 5)	Click run
 6)	Copy the text that is printed in the console
@@ -30,3 +35,15 @@ Instructions:
 8)	Create a new project in gvedit.exe
 9)	Paste the text into that project
 10)	Click the layout button (the running man)
+
+Instructions for SD:
+1)	Download the code into Eclipse
+2)	Go to MisfitsUMLCreator -> src -> MisfitsPackage
+3)	Right click on SDCreatorMain and select Run As -> Run Configurations
+4)	In the Arguments tab of the run configurations pop-up, put the name(s) of the class(es) for which you want to create a sequence diagram (the first class must contain a main function in which the sequence diagram can run).  (If the code is not in the MisfitsUMLCreator package, you will need to add the package via the Classpath tab).
+5)	Click run
+6)	Copy the text that is printed in the console
+7)	Open sdedit-4.2-beta1.exe
+8)	Create a new project in sdedit-4.2-beta1.exe
+9)	Paste the text into that project
+10)	The sequence diagram should automatically appear
