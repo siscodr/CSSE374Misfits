@@ -3,12 +3,8 @@ package MisfitsPackage;
 import java.util.ArrayList;
 
 import jdk.internal.org.objectweb.asm.AnnotationVisitor;
-import jdk.internal.org.objectweb.asm.Attribute;
-import jdk.internal.org.objectweb.asm.Handle;
-import jdk.internal.org.objectweb.asm.Label;
 import jdk.internal.org.objectweb.asm.MethodVisitor;
 import jdk.internal.org.objectweb.asm.Type;
-import jdk.internal.org.objectweb.asm.TypePath;
 
 /**
  * MyMethodVisitor allows the functionality to pull types from inside of a

@@ -25,7 +25,6 @@ public class TypeInstruction implements Instruction {
 
 	@Override
 	public String toString() {
-		String currentClass = SDArrows.getInstance().getCurrentClass();
 		return ":" + type + ".create()";
 	}
 
