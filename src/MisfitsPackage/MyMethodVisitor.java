@@ -128,155 +128,155 @@ public class MyMethodVisitor extends MethodVisitor {
 	}
 
 	// Not used for current implementation
-	@Override
-	public void visitFieldInsn(int opCode, String owner, String name, String desc) {
-		//// Instruction fieldInsn()
-		super.visitFieldInsn(opCode, owner, name, desc);
-	}
-
-	// Unnecessary for our implementation
-	@Override
-	public void visitLocalVariable(String name, String desc, String signature, Label start, Label end, int index) {
-		super.visitLocalVariable(name, desc, signature, start, end, index);
-	}
-
-	// Unnecessary for our implementation
-	@Override
-	public AnnotationVisitor visitAnnotation(String desc, boolean visible) {
-		return super.visitAnnotation(desc, visible);
-	}
-
-	// Unnecessary for our implementation
-	@Override
-	public AnnotationVisitor visitAnnotationDefault() {
-		return super.visitAnnotationDefault();
-	}
-
-	// Unnecessary for our implementation
-	@Override
-	public void visitAttribute(Attribute attr) {
-		super.visitAttribute(attr);
-	}
-
-	// Unnecessary for our implementation
-	@Override
-	public void visitFrame(int type, int nLocal, Object[] local, int nStack, Object[] stack) {
-		super.visitFrame(type, nLocal, local, nStack, stack);
-	}
-
-	// Unnecessary for our implementation
-	@Override
-	public void visitIincInsn(int var, int increment) {
-		super.visitIincInsn(var, increment);
-	}
-
-	// Unnecessary for our implementation
-	@Override
-	public void visitInsn(int opCode) {
-		super.visitInsn(opCode);
-	}
-
-	// Unnecessary for our implementation
-	@Override
-	public AnnotationVisitor visitInsnAnnotation(int typeRef, TypePath typePath, String desc, boolean visible) {
-		return super.visitInsnAnnotation(typeRef, typePath, desc, visible);
-	}
-
-	// Unnecessary for our implementation
-	@Override
-	public void visitIntInsn(int opCode, int operand) {
-		super.visitIntInsn(opCode, operand);
-	}
-
-	// Unnecessary for our implementation
-	@Override
-	public void visitInvokeDynamicInsn(String name, String desc, Handle bsm, Object... bsmArgs) {
-		super.visitInvokeDynamicInsn(name, desc, bsm, bsmArgs);
-	}
-
-	// Unnecessary for our implementation (deals with ifs)
-	@Override
-	public void visitJumpInsn(int opCode, Label label) {
-		super.visitJumpInsn(opCode, label);
-	}
-
-	// Unnecessary for our implementation
-	@Override
-	public void visitLabel(Label label) {
-		super.visitLabel(label);
-	}
-
-	// Unnecessary for our implementation
-	@Override
-	public void visitLdcInsn(Object cst) {
-		super.visitLdcInsn(cst);
-	}
-
-	// Unnecessary for our implementation
-	@Override
-	public void visitLineNumber(int line, Label start) {
-		super.visitLineNumber(line, start);
-	}
-
-	// Unnecessary for our implementation
-	@Override
-	public AnnotationVisitor visitLocalVariableAnnotation(int typeRef, TypePath typePath, Label[] start, Label[] end,
-			int[] index, String desc, boolean visible) {
-		return super.visitLocalVariableAnnotation(typeRef, typePath, start, end, index, desc, visible);
-	}
-
-	// Unnecessary for our implementation (deals with switch statements)
-	@Override
-	public void visitLookupSwitchInsn(Label dflt, int[] keys, Label[] labels) {
-		super.visitLookupSwitchInsn(dflt, keys, labels);
-	}
-
-	// Unnecessary for our implementation
-	@Override
-	public void visitMaxs(int maxStack, int maxLocals) {
-		super.visitMaxs(maxStack, maxLocals);
-	}
-
-	// Might be useful - makes new arrays
-	@Override
-	public void visitMultiANewArrayInsn(String desc, int dims) {
-		super.visitMultiANewArrayInsn(desc, dims);
-	}
-
-	// Unnecessary for our implementation
-	@Override
-	public void visitParameter(String name, int access) {
-		super.visitParameter(name, access);
-	}
-
-	// Unnecessary for our implementation
-	@Override
-	public AnnotationVisitor visitParameterAnnotation(int parameter, String desc, boolean visible) {
-		return super.visitParameterAnnotation(parameter, desc, visible);
-	}
-
-	// Unnecessary for our implementation
-	@Override
-	public void visitTableSwitchInsn(int min, int max, Label dflt, Label... labels) {
-		super.visitTableSwitchInsn(min, max, dflt, labels);
-	}
-
-	// Unnecessary for our implementation
-	@Override
-	public AnnotationVisitor visitTryCatchAnnotation(int typeRef, TypePath typePath, String desc, boolean visible) {
-		return super.visitTryCatchAnnotation(typeRef, typePath, desc, visible);
-	}
-
-	// Unnecessary for our implementation
-	@Override
-	public void visitTryCatchBlock(Label start, Label end, Label handler, String type) {
-		super.visitTryCatchBlock(start, end, handler, type);
-	}
-
-	// Unnecessary for our implementation
-	@Override
-	public AnnotationVisitor visitTypeAnnotation(int typeRef, TypePath typePath, String desc, boolean visible) {
-		return super.visitTypeAnnotation(typeRef, typePath, desc, visible);
-	}
-
+//	@Override
+//	public void visitFieldInsn(int opCode, String owner, String name, String desc) {
+//		//// Instruction fieldInsn()
+//		super.visitFieldInsn(opCode, owner, name, desc);
+//	}
+//
+//	// Unnecessary for our implementation
+//	@Override
+//	public void visitLocalVariable(String name, String desc, String signature, Label start, Label end, int index) {
+//		super.visitLocalVariable(name, desc, signature, start, end, index);
+//	}
+//
+//	// Unnecessary for our implementation
+//	@Override
+//	public AnnotationVisitor visitAnnotation(String desc, boolean visible) {
+//		return super.visitAnnotation(desc, visible);
+//	}
+//
+//	// Unnecessary for our implementation
+//	@Override
+//	public AnnotationVisitor visitAnnotationDefault() {
+//		return super.visitAnnotationDefault();
+//	}
+//
+//	// Unnecessary for our implementation
+//	@Override
+//	public void visitAttribute(Attribute attr) {
+//		super.visitAttribute(attr);
+//	}
+//
+//	// Unnecessary for our implementation
+//	@Override
+//	public void visitFrame(int type, int nLocal, Object[] local, int nStack, Object[] stack) {
+//		super.visitFrame(type, nLocal, local, nStack, stack);
+//	}
+//
+//	// Unnecessary for our implementation
+//	@Override
+//	public void visitIincInsn(int var, int increment) {
+//		super.visitIincInsn(var, increment);
+//	}
+//
+//	// Unnecessary for our implementation
+//	@Override
+//	public void visitInsn(int opCode) {
+//		super.visitInsn(opCode);
+//	}
+//
+//	// Unnecessary for our implementation
+//	@Override
+//	public AnnotationVisitor visitInsnAnnotation(int typeRef, TypePath typePath, String desc, boolean visible) {
+//		return super.visitInsnAnnotation(typeRef, typePath, desc, visible);
+//	}
+//
+//	// Unnecessary for our implementation
+//	@Override
+//	public void visitIntInsn(int opCode, int operand) {
+//		super.visitIntInsn(opCode, operand);
+//	}
+//
+//	// Unnecessary for our implementation
+//	@Override
+//	public void visitInvokeDynamicInsn(String name, String desc, Handle bsm, Object... bsmArgs) {
+//		super.visitInvokeDynamicInsn(name, desc, bsm, bsmArgs);
+//	}
+//
+//	// Unnecessary for our implementation (deals with ifs)
+//	@Override
+//	public void visitJumpInsn(int opCode, Label label) {
+//		super.visitJumpInsn(opCode, label);
+//	}
+//
+//	// Unnecessary for our implementation
+//	@Override
+//	public void visitLabel(Label label) {
+//		super.visitLabel(label);
+//	}
+//
+//	// Unnecessary for our implementation
+//	@Override
+//	public void visitLdcInsn(Object cst) {
+//		super.visitLdcInsn(cst);
+//	}
+//
+//	// Unnecessary for our implementation
+//	@Override
+//	public void visitLineNumber(int line, Label start) {
+//		super.visitLineNumber(line, start);
+//	}
+//
+//	// Unnecessary for our implementation
+//	@Override
+//	public AnnotationVisitor visitLocalVariableAnnotation(int typeRef, TypePath typePath, Label[] start, Label[] end,
+//			int[] index, String desc, boolean visible) {
+//		return super.visitLocalVariableAnnotation(typeRef, typePath, start, end, index, desc, visible);
+//	}
+//
+//	// Unnecessary for our implementation (deals with switch statements)
+//	@Override
+//	public void visitLookupSwitchInsn(Label dflt, int[] keys, Label[] labels) {
+//		super.visitLookupSwitchInsn(dflt, keys, labels);
+//	}
+//
+//	// Unnecessary for our implementation
+//	@Override
+//	public void visitMaxs(int maxStack, int maxLocals) {
+//		super.visitMaxs(maxStack, maxLocals);
+//	}
+//
+//	// Might be useful - makes new arrays
+//	@Override
+//	public void visitMultiANewArrayInsn(String desc, int dims) {
+//		super.visitMultiANewArrayInsn(desc, dims);
+//	}
+//
+//	// Unnecessary for our implementation
+//	@Override
+//	public void visitParameter(String name, int access) {
+//		super.visitParameter(name, access);
+//	}
+//
+//	// Unnecessary for our implementation
+//	@Override
+//	public AnnotationVisitor visitParameterAnnotation(int parameter, String desc, boolean visible) {
+//		return super.visitParameterAnnotation(parameter, desc, visible);
+//	}
+//
+//	// Unnecessary for our implementation
+//	@Override
+//	public void visitTableSwitchInsn(int min, int max, Label dflt, Label... labels) {
+//		super.visitTableSwitchInsn(min, max, dflt, labels);
+//	}
+//
+//	// Unnecessary for our implementation
+//	@Override
+//	public AnnotationVisitor visitTryCatchAnnotation(int typeRef, TypePath typePath, String desc, boolean visible) {
+//		return super.visitTryCatchAnnotation(typeRef, typePath, desc, visible);
+//	}
+//
+//	// Unnecessary for our implementation
+//	@Override
+//	public void visitTryCatchBlock(Label start, Label end, Label handler, String type) {
+//		super.visitTryCatchBlock(start, end, handler, type);
+//	}
+//
+//	// Unnecessary for our implementation
+//	@Override
+//	public AnnotationVisitor visitTypeAnnotation(int typeRef, TypePath typePath, String desc, boolean visible) {
+//		return super.visitTypeAnnotation(typeRef, typePath, desc, visible);
+//	}
+//
 }
