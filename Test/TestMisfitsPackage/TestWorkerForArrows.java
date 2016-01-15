@@ -178,4 +178,26 @@ public class TestWorkerForArrows {
 		assertEquals("", WorkerForArrows.makeSymbol(0));
 	}
 	
+	@Test
+	public void teststripFunctionSlash(){
+		assertEquals("java_lang_Object", WorkerForArrows.stripFunction("java/lang/Object"));
+	}
+	@Test
+	public void teststripFunctionDor(){
+		assertEquals("java_lang_Object", WorkerForArrows.stripFunction("java.lang.Object"));
+	}
+	@Test
+	public void teststripFunctionBracket(){
+		assertEquals("java_lang_Object", WorkerForArrows.stripFunction("java[][][/[lang[][[[/]Object"));
+	}
+	@Test
+	public void teststripFunctionMixed(){
+		assertEquals("java_lang_Object", WorkerForArrows.stripFunction("java.lang/[Object]"));
+	}
+	@Test
+	public void teststripFunctionUnderscore(){
+		assertEquals("java_lang_Object", WorkerForArrows.stripFunction("java_lang_Object"));
+	}
+	
+	
 }
