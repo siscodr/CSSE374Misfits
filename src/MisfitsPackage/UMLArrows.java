@@ -152,7 +152,7 @@ public class UMLArrows {
 	 */
 	public void addField(String type) {
 		String cleanType = WorkerForArrows.stripFunction(type);
-		if(cleanType == this.className){
+		if(cleanType.equals(this.className)){
 			this.isSingle = true;
 		}
 		if (checkExistingArrow(cleanType))
@@ -216,8 +216,14 @@ public class UMLArrows {
 	 * @return No return value
 	 */
 	public void printClass() {
+		String pattern = "";
+		String color ="";
+		if(isSingle){
+			pattern = "\\n\\<\\<Singleton\\>\\>";
+			color = "color=\"purple\"";
+		}
 		System.out.print("   " + className
-				+ " [\n     shape=\"record\"     label = \"{" + className + "|"
+				+ " [\n     shape=\"record\"  " + color + "    label = \"{" + className + pattern + "|"
 				+ fieldBuffer.toString() + "|" + methodBuffer.toString()
 				+ "\n}\"\n];\n");
 		printArrows();
