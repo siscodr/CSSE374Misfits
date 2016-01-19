@@ -3,6 +3,7 @@ package MisfitsPackage;
 import java.util.ArrayList;
 import java.util.List;
 
+import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.Type;
 
 /**
@@ -152,9 +153,6 @@ public class UMLArrows {
 	 */
 	public void addField(String type) {
 		String cleanType = WorkerForArrows.stripFunction(type);
-		if(cleanType.equals(this.className)){
-			this.isSingle = true;
-		}
 		if (checkExistingArrow(cleanType))
 			fields.add(cleanType);
 	}
@@ -168,8 +166,12 @@ public class UMLArrows {
 	 * 
 	 * @return No return value.
 	 */
-	public void addFieldDesc(String desc) {
+	public void addFieldDesc(String desc, int access) {
 		String currentType = Type.getType(desc).getClassName();
+		String cleanType = WorkerForArrows.stripFunction(currentType);
+		if(cleanType.equals(this.className) && access == (Opcodes.ACC_PRIVATE | Opcodes.ACC_STATIC)){
+			this.isSingle = true;
+		}
 		addField(currentType);
 	}
 
