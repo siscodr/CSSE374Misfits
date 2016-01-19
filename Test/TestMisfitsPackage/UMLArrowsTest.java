@@ -500,38 +500,38 @@ public class UMLArrowsTest {
 		arrows.addFieldDesc(desc, access);
 		assertEquals(fieldsarray, fields.get(arrows));
 	}
-//	TODO: test should pass
-//	@Test
-//	public void testaddFieldDescSingletonTrue() throws NoSuchFieldException,
-//			SecurityException, IllegalArgumentException, IllegalAccessException {
-//		UMLArrows arrows = UMLArrows.getInstance();
-//		Field whitelist = WorkerForArrows.class.getDeclaredField("whitelist");
-//		whitelist.setAccessible(true);
-//		ArrayList<String> whitelistv1 = new ArrayList<String>(
-//				Arrays.asList("TestMisfitsPackage_UMLArrowsTest"));
-//		whitelist.set(arrows, whitelistv1);
-//		Field fields = UMLArrows.class.getDeclaredField("fields");
-//		fields.setAccessible(true);
-//		Field singleBool = UMLArrows.class.getDeclaredField("isSingle");
-//		singleBool.setAccessible(true);
-//		ArrayList<String> fieldsarray = new ArrayList<String>();
-//		fields.set(arrows, new ArrayList<String>());
-//		Field className = UMLArrows.class.getDeclaredField("className");
-//		className.setAccessible(true);
-//		// We must avoid having the stripper from touching this string
-//		String toAdd = "TestMisfitsPackage_UMLArrowsTest";
-//		String desc = "LTestMisfitsPackage/UMLArrowsTest;";
-//		className.set(arrows, toAdd);
-//		fieldsarray.add(toAdd);
-//		int access = Opcodes.ACC_PRIVATE | Opcodes.ACC_STATIC; 
-//		// An Opcode of
-//																// private and
-//																// static should
-//																// make isSingle
-//																// true
-//		arrows.addFieldDesc(desc, access);
-//		assertEquals(true, singleBool.get(arrows));
-//	}
+
+	@Test
+	public void testaddFieldDescSingletonTrue() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
+		UMLArrows arrows = UMLArrows.getInstance();
+		Field whitelist = WorkerForArrows.class.getDeclaredField("whitelist");
+		whitelist.setAccessible(true);
+		ArrayList<String> whitelistv1 = new ArrayList<String>(
+				Arrays.asList("TestMisfitsPackage_UMLArrowsTest"));
+		whitelist.set(arrows, whitelistv1);
+		Field fields = UMLArrows.class.getDeclaredField("fields");
+		fields.setAccessible(true);
+		Field singleBool = UMLArrows.class.getDeclaredField("isSingle");
+		singleBool.setAccessible(true);
+		ArrayList<String> fieldsarray = new ArrayList<String>();
+		fields.set(arrows, new ArrayList<String>());
+		Field className = UMLArrows.class.getDeclaredField("className");
+		className.setAccessible(true);
+		// We must avoid having the stripper from touching this string
+		String toAdd = "TestMisfitsPackage_UMLArrowsTest";
+		String desc = "LTestMisfitsPackage/UMLArrowsTest;";
+		className.set(arrows, toAdd);
+		fieldsarray.add(toAdd);
+		int access = Opcodes.ACC_PRIVATE | Opcodes.ACC_STATIC; 
+		// An Opcode of
+																// private and
+																// static should
+																// make isSingle
+																// true
+		arrows.addFieldDesc(desc, access);
+		assertEquals(true, singleBool.get(arrows));
+	}
 
 	@Test
 	public void testaddFieldDescSingletonPublicOnly()
@@ -588,7 +588,7 @@ public class UMLArrowsTest {
 		int access = Opcodes.ACC_PRIVATE; // An Opcode of only private should leave
 										// isSingle as false
 		arrows.addFieldDesc(desc, access);
-		assertEquals(true, singleBool.get(arrows));
+		assertEquals(false, singleBool.get(arrows));
 	}
 
 	@Test
