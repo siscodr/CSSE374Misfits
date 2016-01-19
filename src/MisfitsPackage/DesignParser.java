@@ -32,7 +32,7 @@ public class DesignParser {
 
 			makeReader(className);
 
-			UMLArrows.getInstance().printClass(className);
+			UMLArrows.getInstance().printClass();
 		}
 		endDiagram();
 	}
@@ -65,6 +65,7 @@ public class DesignParser {
 	 *             Exception where string doesn't link to a class
 	 */
 	private static void makeReader(String className) throws IOException {
+		UMLArrows.getInstance().setClass(className);
 		ClassReader reader = new ClassReader(className);
 
 		ClassVisitor InterfaceVisitor = new InterfaceDeclarationVisitor(

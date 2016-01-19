@@ -13,12 +13,14 @@ import jdk.internal.org.objectweb.asm.Type;
  */
 public class UMLArrows {
 	private static UMLArrows ourArrows = new UMLArrows();
+	private Boolean isSingle = false;
 	private ArrayList<String> fields;
 	private ArrayList<String> uses;
 	private String supers;
 	private ArrayList<String> interfaces;
 	private StringBuffer fieldBuffer = new StringBuffer();
 	private StringBuffer methodBuffer = new StringBuffer();
+	private String className;
 
 	/**
 	 * Constructs a UMLArrows
@@ -84,6 +86,7 @@ public class UMLArrows {
 		supers = "";
 		fieldBuffer = new StringBuffer();
 		methodBuffer = new StringBuffer();
+		isSingle = false;
 	}
 
 	/**
@@ -209,13 +212,12 @@ public class UMLArrows {
 	 *            A String representation of name of the current class
 	 * @return No return value
 	 */
-	public void printClass(String name) {
-		String newName = WorkerForArrows.stripFunction(name);
-		System.out.print("   " + newName
-				+ " [\n     shape=\"record\"     label = \"{" + newName + "|"
+	public void printClass() {
+		System.out.print("   " + className
+				+ " [\n     shape=\"record\"     label = \"{" + className + "|"
 				+ fieldBuffer.toString() + "|" + methodBuffer.toString()
 				+ "\n}\"\n];\n");
-		printArrows(newName);
+		printArrows();
 		UMLArrows.getInstance().resetUMLArrows();
 	}
 
@@ -289,11 +291,11 @@ public class UMLArrows {
 	 *            class
 	 * @return No return value
 	 */
-	private void printArrows(String classString) {
-		printUses(classString);
-		printFields(classString);
-		printInterfaces(classString);
-		printSupers(classString);
+	private void printArrows() {
+		printUses();
+		printFields();
+		printInterfaces();
+		printSupers();
 	}
 
 	/**
@@ -304,7 +306,7 @@ public class UMLArrows {
 	 *            class
 	 * @return No return type.
 	 */
-	private void printUses(String className) {
+	private void printUses() {
 		for (String types : this.uses) {
 			if (types.contains("_")) {
 				System.out.println(className + " -> " + types
@@ -321,7 +323,7 @@ public class UMLArrows {
 	 *            class
 	 * @return No return type.
 	 */
-	private void printFields(String className) {
+	private void printFields() {
 		for (String field : this.fields) {
 			if (field.contains("_")) {
 				System.out.println(className + " -> " + field
@@ -338,7 +340,7 @@ public class UMLArrows {
 	 *            class
 	 * @return No return type.
 	 */
-	private void printInterfaces(String className) {
+	private void printInterfaces() {
 		for (String interf : this.interfaces) {
 			if (interf.contains("_")) {
 				System.out.println(className + " -> " + interf
@@ -355,10 +357,14 @@ public class UMLArrows {
 	 *            class
 	 * @return No return type.
 	 */
-	private void printSupers(String className) {
+	private void printSupers() {
 		if (supers.contains("_")) {
 			System.out.println(className + " -> " + supers
 					+ " [arrowhead=\"onormal\"];");
 		}
+	}
+
+	public void setClass(String className) {
+		this.className = WorkerForArrows.stripFunction(className);
 	}
 }
