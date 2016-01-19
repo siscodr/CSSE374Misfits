@@ -5,19 +5,21 @@
     <id>UMLClass</id>
     <coordinates>
       <x>108</x>
-      <y>288</y>
+      <y>270</y>
       <w>246</w>
-      <h>330</h>
+      <h>348</h>
     </coordinates>
     <panel_attributes>MisfitsPackage::UMLArrows
 --
 -ourArrows = new UMLArrows(): UMLArrows
+-isString: boolean
 -fields: ArrayList&lt;String&gt;
 -uses: ArrayList&lt;String&gt;
 -supers: String
 -interfaces: ArrayList&lt;String&gt;
 -fieldBuffer = new StringBuffer(): StringBuffer
 -methodBuffer = new StringBuffer(): StringBuffer
+-className: String
 --
 +getInstance(): UMLArrows
 +getFields(): ArrayList&lt;String&gt;
@@ -42,6 +44,7 @@
 -printFields(String className): void
 -printInterfaces(String className): void
 -printSupers(String className): void
++setClass(String className): void
 
 </panel_attributes>
     <additional_attributes/>
@@ -372,7 +375,7 @@
       <h>294</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>10.0;380.0;90.0;30.0;810.0;10.0;1230.0;470.0</additional_attributes>
+    <additional_attributes>10.0;350.0;90.0;30.0;810.0;10.0;1230.0;470.0</additional_attributes>
   </element>
   <element>
     <type>com.baselet.element.old.element.Relation</type>
