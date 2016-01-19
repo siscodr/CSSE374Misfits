@@ -36,7 +36,8 @@ public class UMLArrowsTest {
 
 	@Test
 	public void testgetInstance() {
-		assertEquals("UMLArrows", (UMLArrows.getInstance().getClass().getSimpleName()));
+		assertEquals("UMLArrows",
+				(UMLArrows.getInstance().getClass().getSimpleName()));
 	}
 
 	@Test
@@ -47,7 +48,8 @@ public class UMLArrowsTest {
 	}
 
 	@Test
-	public void testgetFields() throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+	public void testgetFields() throws NoSuchFieldException,
+			IllegalArgumentException, IllegalAccessException {
 		UMLArrows arrows = UMLArrows.getInstance();
 		Field fields = UMLArrows.class.getDeclaredField("fields");
 		fields.setAccessible(true);
@@ -61,11 +63,13 @@ public class UMLArrowsTest {
 	}
 
 	@Test
-	public void testgetFieldsValues() throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+	public void testgetFieldsValues() throws NoSuchFieldException,
+			IllegalArgumentException, IllegalAccessException {
 		UMLArrows arrows = UMLArrows.getInstance();
 		Field fields = UMLArrows.class.getDeclaredField("fields");
 		fields.setAccessible(true);
-		ArrayList<String> fieldsv1 = new ArrayList<String>(Arrays.asList("String", "cóol", "Understood"));
+		ArrayList<String> fieldsv1 = new ArrayList<String>(Arrays.asList(
+				"String", "cóol", "Understood"));
 		fields.set(arrows, fieldsv1);
 		// Checking for same instance using ==
 		assertEquals(fieldsv1, arrows.getFields());
@@ -75,7 +79,8 @@ public class UMLArrowsTest {
 	}
 
 	@Test
-	public void testgetUses() throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+	public void testgetUses() throws NoSuchFieldException,
+			IllegalArgumentException, IllegalAccessException {
 		UMLArrows arrows = UMLArrows.getInstance();
 		Field uses = UMLArrows.class.getDeclaredField("uses");
 		uses.setAccessible(true);
@@ -89,11 +94,13 @@ public class UMLArrowsTest {
 	}
 
 	@Test
-	public void testgetUsesValues() throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+	public void testgetUsesValues() throws NoSuchFieldException,
+			IllegalArgumentException, IllegalAccessException {
 		UMLArrows arrows = UMLArrows.getInstance();
 		Field uses = UMLArrows.class.getDeclaredField("uses");
 		uses.setAccessible(true);
-		ArrayList<String> usesv1 = new ArrayList<String>(Arrays.asList("String", "cóol", "Understood"));
+		ArrayList<String> usesv1 = new ArrayList<String>(Arrays.asList(
+				"String", "cóol", "Understood"));
 		uses.set(arrows, usesv1);
 		// Checking for same instance using ==
 		assertEquals(usesv1, arrows.getUses());
@@ -103,7 +110,8 @@ public class UMLArrowsTest {
 	}
 
 	@Test
-	public void testgetInterfaces() throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+	public void testgetInterfaces() throws NoSuchFieldException,
+			IllegalArgumentException, IllegalAccessException {
 		UMLArrows arrows = UMLArrows.getInstance();
 		Field interfaces = UMLArrows.class.getDeclaredField("interfaces");
 		interfaces.setAccessible(true);
@@ -117,12 +125,13 @@ public class UMLArrowsTest {
 	}
 
 	@Test
-	public void testgetInterfacesValues()
-			throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+	public void testgetInterfacesValues() throws NoSuchFieldException,
+			IllegalArgumentException, IllegalAccessException {
 		UMLArrows arrows = UMLArrows.getInstance();
 		Field interfaces = UMLArrows.class.getDeclaredField("interfaces");
 		interfaces.setAccessible(true);
-		ArrayList<String> interfacesv1 = new ArrayList<String>(Arrays.asList("String", "cóol", "Understood"));
+		ArrayList<String> interfacesv1 = new ArrayList<String>(Arrays.asList(
+				"String", "cóol", "Understood"));
 		interfaces.set(arrows, interfacesv1);
 		// Checking for same instance using ==
 		assertEquals(interfacesv1, arrows.getInterfaces());
@@ -132,7 +141,8 @@ public class UMLArrowsTest {
 	}
 
 	@Test
-	public void testgetSupers() throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+	public void testgetSupers() throws NoSuchFieldException,
+			IllegalArgumentException, IllegalAccessException {
 		UMLArrows arrows = UMLArrows.getInstance();
 		Field supers = UMLArrows.class.getDeclaredField("supers");
 		supers.setAccessible(true);
@@ -143,7 +153,8 @@ public class UMLArrowsTest {
 	}
 
 	@Test
-	public void testgetSupersValues() throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+	public void testgetSupersValues() throws NoSuchFieldException,
+			IllegalArgumentException, IllegalAccessException {
 		UMLArrows arrows = UMLArrows.getInstance();
 		Field supers = UMLArrows.class.getDeclaredField("supers");
 		supers.setAccessible(true);
@@ -157,8 +168,8 @@ public class UMLArrowsTest {
 	}
 
 	@Test
-	public void testresetUMLArrows()
-			throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+	public void testresetUMLArrows() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
 		UMLArrows arrows = UMLArrows.getInstance();
 		arrows.resetUMLArrows();
 		// Field whitelist =
@@ -180,8 +191,8 @@ public class UMLArrowsTest {
 	}
 
 	@Test
-	public void testresetUMLArrowsValues()
-			throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+	public void testresetUMLArrowsValues() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
 		UMLArrows arrows = UMLArrows.getInstance();
 		// Get the fields
 
@@ -202,9 +213,18 @@ public class UMLArrowsTest {
 		// whitelist.set(arrows,new ArrayList<String>(Arrays.asList(
 		// "String", "cóol", "Understood")));
 		supers.set(arrows, "This is a cool String");
-		interfaces.set(arrows, new ArrayList<String>(Arrays.asList("Looks interesting", "cóol", "Understood")));
-		uses.set(arrows, new ArrayList<String>(Arrays.asList("String", "cóol", "Testing123")));
-		fields.set(arrows, new ArrayList<String>(Arrays.asList("Helllllo", "cóol", "Mic Check?")));
+		interfaces.set(
+				arrows,
+				new ArrayList<String>(Arrays.asList("Looks interesting",
+						"cóol", "Understood")));
+		uses.set(
+				arrows,
+				new ArrayList<String>(Arrays.asList("String", "cóol",
+						"Testing123")));
+		fields.set(
+				arrows,
+				new ArrayList<String>(Arrays.asList("Helllllo", "cóol",
+						"Mic Check?")));
 		// Reset
 		arrows.resetUMLArrows();
 		// Test
@@ -216,8 +236,8 @@ public class UMLArrowsTest {
 	}
 
 	@Test
-	public void testaddToFieldBufferSpace()
-			throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException {
+	public void testaddToFieldBufferSpace() throws IllegalArgumentException,
+			IllegalAccessException, NoSuchFieldException, SecurityException {
 		String toAdd = " ";
 		UMLArrows arrows = UMLArrows.getInstance();
 		Field fieldBuffer = UMLArrows.class.getDeclaredField("fieldBuffer");
@@ -229,8 +249,8 @@ public class UMLArrowsTest {
 	}
 
 	@Test
-	public void testaddToFieldBufferString()
-			throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException {
+	public void testaddToFieldBufferString() throws IllegalArgumentException,
+			IllegalAccessException, NoSuchFieldException, SecurityException {
 		String toAdd = "I am a string";
 		UMLArrows arrows = UMLArrows.getInstance();
 		Field fieldBuffer = UMLArrows.class.getDeclaredField("fieldBuffer");
@@ -242,8 +262,8 @@ public class UMLArrowsTest {
 	}
 
 	@Test
-	public void testaddToFieldBufferSymbols()
-			throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException {
+	public void testaddToFieldBufferSymbols() throws IllegalArgumentException,
+			IllegalAccessException, NoSuchFieldException, SecurityException {
 		String toAdd = "(#)^%@#%^@#$)@#$*@#&$)@!_)*";
 		UMLArrows arrows = UMLArrows.getInstance();
 		Field fieldBuffer = UMLArrows.class.getDeclaredField("fieldBuffer");
@@ -255,8 +275,8 @@ public class UMLArrowsTest {
 	}
 
 	@Test
-	public void testaddToFieldBufferNothing()
-			throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException {
+	public void testaddToFieldBufferNothing() throws IllegalArgumentException,
+			IllegalAccessException, NoSuchFieldException, SecurityException {
 		String toAdd = "";
 		UMLArrows arrows = UMLArrows.getInstance();
 		Field fieldBuffer = UMLArrows.class.getDeclaredField("fieldBuffer");
@@ -268,8 +288,8 @@ public class UMLArrowsTest {
 	}
 
 	@Test
-	public void testaddToMethodBufferSpace()
-			throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException {
+	public void testaddToMethodBufferSpace() throws IllegalArgumentException,
+			IllegalAccessException, NoSuchFieldException, SecurityException {
 		String toAdd = " ";
 		UMLArrows arrows = UMLArrows.getInstance();
 		Field methodBuffer = UMLArrows.class.getDeclaredField("methodBuffer");
@@ -281,8 +301,8 @@ public class UMLArrowsTest {
 	}
 
 	@Test
-	public void testaddToMethodBufferString()
-			throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException {
+	public void testaddToMethodBufferString() throws IllegalArgumentException,
+			IllegalAccessException, NoSuchFieldException, SecurityException {
 		String toAdd = "I am a string";
 		UMLArrows arrows = UMLArrows.getInstance();
 		Field methodBuffer = UMLArrows.class.getDeclaredField("methodBuffer");
@@ -294,8 +314,8 @@ public class UMLArrowsTest {
 	}
 
 	@Test
-	public void testaddToMethodBufferSymbols()
-			throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException {
+	public void testaddToMethodBufferSymbols() throws IllegalArgumentException,
+			IllegalAccessException, NoSuchFieldException, SecurityException {
 		String toAdd = "(#)^%@#%^@#$)@#$*@#&$)@!_)*";
 		UMLArrows arrows = UMLArrows.getInstance();
 		Field methodBuffer = UMLArrows.class.getDeclaredField("methodBuffer");
@@ -307,8 +327,8 @@ public class UMLArrowsTest {
 	}
 
 	@Test
-	public void testaddToMethodBufferNothing()
-			throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException {
+	public void testaddToMethodBufferNothing() throws IllegalArgumentException,
+			IllegalAccessException, NoSuchFieldException, SecurityException {
 		String toAdd = "";
 		UMLArrows arrows = UMLArrows.getInstance();
 		Field methodBuffer = UMLArrows.class.getDeclaredField("methodBuffer");
@@ -321,8 +341,8 @@ public class UMLArrowsTest {
 
 	@SuppressWarnings("unchecked")
 	@Test
-	public void testaddUseEmptyString()
-			throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+	public void testaddUseEmptyString() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
 		UMLArrows arrows = UMLArrows.getInstance();
 		Field whitelist = WorkerForArrows.class.getDeclaredField("whitelist");
 		whitelist.setAccessible(true);
@@ -339,12 +359,13 @@ public class UMLArrowsTest {
 
 	@SuppressWarnings("unchecked")
 	@Test
-	public void testaddUseNumerics()
-			throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+	public void testaddUseNumerics() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
 		UMLArrows arrows = UMLArrows.getInstance();
 		Field whitelist = WorkerForArrows.class.getDeclaredField("whitelist");
 		whitelist.setAccessible(true);
-		ArrayList<String> whitelistv1 = new ArrayList<String>(Arrays.asList("12093174120"));
+		ArrayList<String> whitelistv1 = new ArrayList<String>(
+				Arrays.asList("12093174120"));
 		whitelist.set(arrows, whitelistv1);
 		Field uses = UMLArrows.class.getDeclaredField("uses");
 		uses.setAccessible(true);
@@ -357,12 +378,13 @@ public class UMLArrowsTest {
 
 	@SuppressWarnings("unchecked")
 	@Test
-	public void testaddUseString()
-			throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+	public void testaddUseString() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
 		UMLArrows arrows = UMLArrows.getInstance();
 		Field whitelist = WorkerForArrows.class.getDeclaredField("whitelist");
 		whitelist.setAccessible(true);
-		ArrayList<String> whitelistv1 = new ArrayList<String>(Arrays.asList("HeyHeyHeyThisisaCoolTest"));
+		ArrayList<String> whitelistv1 = new ArrayList<String>(
+				Arrays.asList("HeyHeyHeyThisisaCoolTest"));
 		whitelist.set(arrows, whitelistv1);
 		Field uses = UMLArrows.class.getDeclaredField("uses");
 		uses.setAccessible(true);
@@ -375,29 +397,32 @@ public class UMLArrowsTest {
 	}
 
 	@Test
-	public void testaddUses()
-			throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+	public void testaddUses() throws NoSuchFieldException, SecurityException,
+			IllegalArgumentException, IllegalAccessException {
 		UMLArrows arrows = UMLArrows.getInstance();
 		Field whitelist = WorkerForArrows.class.getDeclaredField("whitelist");
 		whitelist.setAccessible(true);
-		ArrayList<String> whitelistv1 = new ArrayList<String>(Arrays.asList("int", "double", "byte"));
+		ArrayList<String> whitelistv1 = new ArrayList<String>(Arrays.asList(
+				"int", "double", "byte"));
 		whitelist.set(arrows, whitelistv1);
 		Field uses = UMLArrows.class.getDeclaredField("uses");
 		uses.setAccessible(true);
 		uses.set(arrows, new ArrayList<String>());
-		ArrayList<String> usesarray = new ArrayList<String>(Arrays.asList("int", "double", "byte"));
+		ArrayList<String> usesarray = new ArrayList<String>(Arrays.asList(
+				"int", "double", "byte"));
 		String desc = "(IDB)Ljava/lang/Object";
 		arrows.addUses(desc);
 		assertEquals(usesarray, uses.get(arrows));
 	}
 
 	@Test
-	public void testaddFieldObject()
-			throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+	public void testaddFieldObject() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
 		UMLArrows arrows = UMLArrows.getInstance();
 		Field whitelist = WorkerForArrows.class.getDeclaredField("whitelist");
 		whitelist.setAccessible(true);
-		ArrayList<String> whitelistv1 = new ArrayList<String>(Arrays.asList("java_lang_Object"));
+		ArrayList<String> whitelistv1 = new ArrayList<String>(
+				Arrays.asList("java_lang_Object"));
 		whitelist.set(arrows, whitelistv1);
 		Field fields = UMLArrows.class.getDeclaredField("fields");
 		fields.setAccessible(true);
@@ -412,12 +437,13 @@ public class UMLArrowsTest {
 	}
 
 	@Test
-	public void testaddFieldUMLArrows()
-			throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+	public void testaddFieldUMLArrows() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
 		UMLArrows arrows = UMLArrows.getInstance();
 		Field whitelist = WorkerForArrows.class.getDeclaredField("whitelist");
 		whitelist.setAccessible(true);
-		ArrayList<String> whitelistv1 = new ArrayList<String>(Arrays.asList("TestMisfitsPackage_UMLArrowsTest"));
+		ArrayList<String> whitelistv1 = new ArrayList<String>(
+				Arrays.asList("TestMisfitsPackage_UMLArrowsTest"));
 		whitelist.set(arrows, whitelistv1);
 		Field fields = UMLArrows.class.getDeclaredField("fields");
 		fields.setAccessible(true);
@@ -432,12 +458,13 @@ public class UMLArrowsTest {
 	}
 
 	@Test
-	public void testaddFieldDescObject()
-			throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+	public void testaddFieldDescObject() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
 		UMLArrows arrows = UMLArrows.getInstance();
 		Field whitelist = WorkerForArrows.class.getDeclaredField("whitelist");
 		whitelist.setAccessible(true);
-		ArrayList<String> whitelistv1 = new ArrayList<String>(Arrays.asList("java_lang_Object"));
+		ArrayList<String> whitelistv1 = new ArrayList<String>(
+				Arrays.asList("java_lang_Object"));
 		whitelist.set(arrows, whitelistv1);
 		Field fields = UMLArrows.class.getDeclaredField("fields");
 		fields.setAccessible(true);
@@ -446,18 +473,20 @@ public class UMLArrowsTest {
 		// We must avoid having the stripper from touching this string
 		String toAdd = "java_lang_Object";
 		String desc = "Ljava/lang/Object;";
+		int access = Opcodes.ACC_PUBLIC;
 		fieldsarray.add(toAdd);
-		arrows.addFieldDesc(desc);
+		arrows.addFieldDesc(desc, access);
 		assertEquals(fieldsarray, fields.get(arrows));
 	}
 
 	@Test
-	public void testaddFieldDescUMLArrowsTest()
-			throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+	public void testaddFieldDescUMLArrowsTest() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
 		UMLArrows arrows = UMLArrows.getInstance();
 		Field whitelist = WorkerForArrows.class.getDeclaredField("whitelist");
 		whitelist.setAccessible(true);
-		ArrayList<String> whitelistv1 = new ArrayList<String>(Arrays.asList("TestMisfitsPackage_UMLArrowsTest"));
+		ArrayList<String> whitelistv1 = new ArrayList<String>(
+				Arrays.asList("TestMisfitsPackage_UMLArrowsTest"));
 		whitelist.set(arrows, whitelistv1);
 		Field fields = UMLArrows.class.getDeclaredField("fields");
 		fields.setAccessible(true);
@@ -467,17 +496,138 @@ public class UMLArrowsTest {
 		String toAdd = "TestMisfitsPackage_UMLArrowsTest";
 		String desc = "LTestMisfitsPackage/UMLArrowsTest;";
 		fieldsarray.add(toAdd);
-		arrows.addFieldDesc(desc);
+		int access = Opcodes.ACC_PUBLIC;
+		arrows.addFieldDesc(desc, access);
 		assertEquals(fieldsarray, fields.get(arrows));
 	}
+//	TODO: test should pass
+//	@Test
+//	public void testaddFieldDescSingletonTrue() throws NoSuchFieldException,
+//			SecurityException, IllegalArgumentException, IllegalAccessException {
+//		UMLArrows arrows = UMLArrows.getInstance();
+//		Field whitelist = WorkerForArrows.class.getDeclaredField("whitelist");
+//		whitelist.setAccessible(true);
+//		ArrayList<String> whitelistv1 = new ArrayList<String>(
+//				Arrays.asList("TestMisfitsPackage_UMLArrowsTest"));
+//		whitelist.set(arrows, whitelistv1);
+//		Field fields = UMLArrows.class.getDeclaredField("fields");
+//		fields.setAccessible(true);
+//		Field singleBool = UMLArrows.class.getDeclaredField("isSingle");
+//		singleBool.setAccessible(true);
+//		ArrayList<String> fieldsarray = new ArrayList<String>();
+//		fields.set(arrows, new ArrayList<String>());
+//		Field className = UMLArrows.class.getDeclaredField("className");
+//		className.setAccessible(true);
+//		// We must avoid having the stripper from touching this string
+//		String toAdd = "TestMisfitsPackage_UMLArrowsTest";
+//		String desc = "LTestMisfitsPackage/UMLArrowsTest;";
+//		className.set(arrows, toAdd);
+//		fieldsarray.add(toAdd);
+//		int access = Opcodes.ACC_PRIVATE | Opcodes.ACC_STATIC; 
+//		// An Opcode of
+//																// private and
+//																// static should
+//																// make isSingle
+//																// true
+//		arrows.addFieldDesc(desc, access);
+//		assertEquals(true, singleBool.get(arrows));
+//	}
 
 	@Test
-	public void testsetSuperString()
-			throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+	public void testaddFieldDescSingletonPublicOnly()
+			throws NoSuchFieldException, SecurityException,
+			IllegalArgumentException, IllegalAccessException {
 		UMLArrows arrows = UMLArrows.getInstance();
 		Field whitelist = WorkerForArrows.class.getDeclaredField("whitelist");
 		whitelist.setAccessible(true);
-		ArrayList<String> whitelistv1 = new ArrayList<String>(Arrays.asList("HeyHeyHeyThisisaCoolTest"));
+		ArrayList<String> whitelistv1 = new ArrayList<String>(
+				Arrays.asList("TestMisfitsPackage_UMLArrowsTest"));
+		whitelist.set(arrows, whitelistv1);
+		Field fields = UMLArrows.class.getDeclaredField("fields");
+		fields.setAccessible(true);
+		Field singleBool = UMLArrows.class.getDeclaredField("isSingle");
+		singleBool.setAccessible(true);
+		ArrayList<String> fieldsarray = new ArrayList<String>();
+		fields.set(arrows, new ArrayList<String>());
+		Field className = UMLArrows.class.getDeclaredField("className");
+		className.setAccessible(true);
+		// We must avoid having the stripper from touching this string
+		String toAdd = "TestMisfitsPackage_UMLArrowsTest";
+		String desc = "LTestMisfitsPackage/UMLArrowsTest;";
+		className.set(arrows, toAdd);
+		fieldsarray.add(toAdd);
+		int access = Opcodes.ACC_PUBLIC; // An Opcode of public should leave
+										// isSingle as false
+		arrows.addFieldDesc(desc, access);
+		assertEquals(false, singleBool.get(arrows));
+	}
+
+	@Test
+	public void testaddFieldDescSingletonPrivateOnly()
+			throws NoSuchFieldException, SecurityException,
+			IllegalArgumentException, IllegalAccessException {
+		UMLArrows arrows = UMLArrows.getInstance();
+		Field whitelist = WorkerForArrows.class.getDeclaredField("whitelist");
+		whitelist.setAccessible(true);
+		ArrayList<String> whitelistv1 = new ArrayList<String>(
+				Arrays.asList("TestMisfitsPackage_UMLArrowsTest"));
+		whitelist.set(arrows, whitelistv1);
+		Field fields = UMLArrows.class.getDeclaredField("fields");
+		fields.setAccessible(true);
+		Field singleBool = UMLArrows.class.getDeclaredField("isSingle");
+		singleBool.setAccessible(true);
+		ArrayList<String> fieldsarray = new ArrayList<String>();
+		fields.set(arrows, new ArrayList<String>());
+		Field className = UMLArrows.class.getDeclaredField("className");
+		className.setAccessible(true);
+		// We must avoid having the stripper from touching this string
+		String toAdd = "TestMisfitsPackage_UMLArrowsTest";
+		String desc = "LTestMisfitsPackage/UMLArrowsTest;";
+		className.set(arrows, toAdd);
+		fieldsarray.add(toAdd);
+		int access = Opcodes.ACC_PRIVATE; // An Opcode of only private should leave
+										// isSingle as false
+		arrows.addFieldDesc(desc, access);
+		assertEquals(true, singleBool.get(arrows));
+	}
+
+	@Test
+	public void testaddFieldDescSingletonStaticOnly()
+			throws NoSuchFieldException, SecurityException,
+			IllegalArgumentException, IllegalAccessException {
+		UMLArrows arrows = UMLArrows.getInstance();
+		Field whitelist = WorkerForArrows.class.getDeclaredField("whitelist");
+		whitelist.setAccessible(true);
+		ArrayList<String> whitelistv1 = new ArrayList<String>(
+				Arrays.asList("TestMisfitsPackage_UMLArrowsTest"));
+		whitelist.set(arrows, whitelistv1);
+		Field fields = UMLArrows.class.getDeclaredField("fields");
+		fields.setAccessible(true);
+		Field singleBool = UMLArrows.class.getDeclaredField("isSingle");
+		singleBool.setAccessible(true);
+		ArrayList<String> fieldsarray = new ArrayList<String>();
+		fields.set(arrows, new ArrayList<String>());
+		Field className = UMLArrows.class.getDeclaredField("className");
+		className.setAccessible(true);
+		// We must avoid having the stripper from touching this string
+		String toAdd = "TestMisfitsPackage_UMLArrowsTest";
+		String desc = "LTestMisfitsPackage/UMLArrowsTest;";
+		className.set(arrows, toAdd);
+		fieldsarray.add(toAdd);
+		int access = Opcodes.ACC_STATIC; // An Opcode of only static should leave
+										// isSingle as false
+		arrows.addFieldDesc(desc, access);
+		assertEquals(false, singleBool.get(arrows));
+	}
+
+	@Test
+	public void testsetSuperString() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
+		UMLArrows arrows = UMLArrows.getInstance();
+		Field whitelist = WorkerForArrows.class.getDeclaredField("whitelist");
+		whitelist.setAccessible(true);
+		ArrayList<String> whitelistv1 = new ArrayList<String>(
+				Arrays.asList("HeyHeyHeyThisisaCoolTest"));
 		whitelist.set(arrows, whitelistv1);
 		Field supers = UMLArrows.class.getDeclaredField("supers");
 		supers.setAccessible(true);
@@ -488,12 +638,13 @@ public class UMLArrowsTest {
 	}
 
 	@Test
-	public void testsetSuperNumerics()
-			throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+	public void testsetSuperNumerics() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
 		UMLArrows arrows = UMLArrows.getInstance();
 		Field whitelist = WorkerForArrows.class.getDeclaredField("whitelist");
 		whitelist.setAccessible(true);
-		ArrayList<String> whitelistv1 = new ArrayList<String>(Arrays.asList("56789987655678"));
+		ArrayList<String> whitelistv1 = new ArrayList<String>(
+				Arrays.asList("56789987655678"));
 		whitelist.set(arrows, whitelistv1);
 		Field supers = UMLArrows.class.getDeclaredField("supers");
 		supers.setAccessible(true);
@@ -504,12 +655,13 @@ public class UMLArrowsTest {
 	}
 
 	@Test
-	public void testsetSuperSpecial()
-			throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+	public void testsetSuperSpecial() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
 		UMLArrows arrows = UMLArrows.getInstance();
 		Field whitelist = WorkerForArrows.class.getDeclaredField("whitelist");
 		whitelist.setAccessible(true);
-		ArrayList<String> whitelistv1 = new ArrayList<String>(Arrays.asList("#$%^&*(<>?:\"{}';'"));
+		ArrayList<String> whitelistv1 = new ArrayList<String>(
+				Arrays.asList("#$%^&*(<>?:\"{}';'"));
 		whitelist.set(arrows, whitelistv1);
 		Field supers = UMLArrows.class.getDeclaredField("supers");
 		supers.setAccessible(true);
@@ -521,8 +673,8 @@ public class UMLArrowsTest {
 
 	@SuppressWarnings("unchecked")
 	@Test
-	public void testaddInterfaceEmptyString()
-			throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+	public void testaddInterfaceEmptyString() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
 		UMLArrows arrows = UMLArrows.getInstance();
 		Field whitelist = WorkerForArrows.class.getDeclaredField("whitelist");
 		whitelist.setAccessible(true);
@@ -530,7 +682,8 @@ public class UMLArrowsTest {
 		whitelist.set(arrows, whitelistv1);
 		Field interfaces = UMLArrows.class.getDeclaredField("interfaces");
 		interfaces.setAccessible(true);
-		ArrayList<String> interfacesarray = (ArrayList<String>) interfaces.get(arrows);
+		ArrayList<String> interfacesarray = (ArrayList<String>) interfaces
+				.get(arrows);
 		String toAdd = "";
 		interfacesarray.add(toAdd);
 		arrows.addInterface(toAdd);
@@ -539,16 +692,18 @@ public class UMLArrowsTest {
 
 	@SuppressWarnings("unchecked")
 	@Test
-	public void testaddInterfaceString()
-			throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+	public void testaddInterfaceString() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
 		UMLArrows arrows = UMLArrows.getInstance();
 		Field whitelist = WorkerForArrows.class.getDeclaredField("whitelist");
 		whitelist.setAccessible(true);
-		ArrayList<String> whitelistv1 = new ArrayList<String>(Arrays.asList("MegaInterface"));
+		ArrayList<String> whitelistv1 = new ArrayList<String>(
+				Arrays.asList("MegaInterface"));
 		whitelist.set(arrows, whitelistv1);
 		Field interfaces = UMLArrows.class.getDeclaredField("interfaces");
 		interfaces.setAccessible(true);
-		ArrayList<String> interfacesarray = (ArrayList<String>) interfaces.get(arrows);
+		ArrayList<String> interfacesarray = (ArrayList<String>) interfaces
+				.get(arrows);
 		String toAdd = "MegaInterface";
 		interfacesarray.add(toAdd);
 		arrows.addInterface(toAdd);
@@ -557,16 +712,18 @@ public class UMLArrowsTest {
 
 	@SuppressWarnings("unchecked")
 	@Test
-	public void testaddInterfaceNumerics()
-			throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+	public void testaddInterfaceNumerics() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
 		UMLArrows arrows = UMLArrows.getInstance();
 		Field whitelist = WorkerForArrows.class.getDeclaredField("whitelist");
 		whitelist.setAccessible(true);
-		ArrayList<String> whitelistv1 = new ArrayList<String>(Arrays.asList("0937240432"));
+		ArrayList<String> whitelistv1 = new ArrayList<String>(
+				Arrays.asList("0937240432"));
 		whitelist.set(arrows, whitelistv1);
 		Field interfaces = UMLArrows.class.getDeclaredField("interfaces");
 		interfaces.setAccessible(true);
-		ArrayList<String> interfacesarray = (ArrayList<String>) interfaces.get(arrows);
+		ArrayList<String> interfacesarray = (ArrayList<String>) interfaces
+				.get(arrows);
 		String toAdd = "0937240432";
 		interfacesarray.add(toAdd);
 		arrows.addInterface(toAdd);
@@ -574,8 +731,8 @@ public class UMLArrowsTest {
 	}
 
 	@Test
-	public void testprintClassNoBuffers()
-			throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+	public void testprintClassNoBuffers() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
 		UMLArrows arrows = UMLArrows.getInstance();
 		Field supers = UMLArrows.class.getDeclaredField("supers");
 		supers.setAccessible(true);
@@ -599,12 +756,14 @@ public class UMLArrowsTest {
 		fieldbuffer.set(arrows, new StringBuffer());
 		methodbuffer.set(arrows, new StringBuffer());
 		arrows.printClass();
-		assertEquals("   test [\n     shape=\"record\"     label = \"{test||\n}\"\n];\n", outContent.toString());
+		assertEquals(
+				"   test [\n     shape=\"record\"      label = \"{test||\n}\"\n];\n",
+				outContent.toString());
 	}
 
 	@Test
-	public void testprintClass()
-			throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+	public void testprintClass() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
 		UMLArrows arrows = UMLArrows.getInstance();
 		Field supers = UMLArrows.class.getDeclaredField("supers");
 		supers.setAccessible(true);
@@ -633,38 +792,44 @@ public class UMLArrowsTest {
 		methodbuffer.set(arrows, mTemp);
 		arrows.printClass();
 		assertEquals(
-				"   test [\n     shape=\"record\"     label = \"{test|I was thinking about this buffer and it was a good idea.|This is a powerful MethodBuffer.\n}\"\n];\n",
+				"   test [\n     shape=\"record\"      label = \"{test|I was thinking about this buffer and it was a good idea.|This is a powerful MethodBuffer.\n}\"\n];\n",
 				outContent.toString());
 	}
 
 	@Test
-	public void testaddFieldToBuffer()
-			throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+	public void testaddFieldToBuffer() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
 		UMLArrows arrows = UMLArrows.getInstance();
 		Field whitelist = WorkerForArrows.class.getDeclaredField("whitelist");
 		whitelist.setAccessible(true);
-		ArrayList<String> whitelistv1 = new ArrayList<String>(Arrays.asList("java_lang_Object"));
+		ArrayList<String> whitelistv1 = new ArrayList<String>(
+				Arrays.asList("java_lang_Object"));
 		whitelist.set(arrows, whitelistv1);
 		Field fieldbuffer = UMLArrows.class.getDeclaredField("fieldBuffer");
 		fieldbuffer.setAccessible(true);
 		fieldbuffer.set(arrows, new StringBuffer());
-		arrows.addFieldToBuffer(Opcodes.ACC_PUBLIC, "test", "Ljava/lang/Object;");
-		assertEquals("+ test : java_lang_Object\\l", fieldbuffer.get(arrows).toString());
+		arrows.addFieldToBuffer(Opcodes.ACC_PUBLIC, "test",
+				"Ljava/lang/Object;");
+		assertEquals("+ test : java_lang_Object\\l", fieldbuffer.get(arrows)
+				.toString());
 	}
 
 	@Test
-	public void testaddMethodToBuffer()
-			throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+	public void testaddMethodToBuffer() throws NoSuchFieldException,
+			SecurityException, IllegalArgumentException, IllegalAccessException {
 		UMLArrows arrows = UMLArrows.getInstance();
 		Field whitelist = WorkerForArrows.class.getDeclaredField("whitelist");
 		whitelist.setAccessible(true);
-		ArrayList<String> whitelistv1 = new ArrayList<String>(Arrays.asList("java_lang_Object"));
+		ArrayList<String> whitelistv1 = new ArrayList<String>(
+				Arrays.asList("java_lang_Object"));
 		whitelist.set(arrows, whitelistv1);
 		Field methodbuffer = UMLArrows.class.getDeclaredField("methodBuffer");
 		methodbuffer.setAccessible(true);
 		methodbuffer.set(arrows, new StringBuffer());
-		arrows.addMethodToBuffer(Opcodes.ACC_PUBLIC, "test", "()Ljava/lang/Object;");
-		assertEquals("+test([]) : java_lang_Object\\l ", methodbuffer.get(arrows).toString());
+		arrows.addMethodToBuffer(Opcodes.ACC_PUBLIC, "test",
+				"()Ljava/lang/Object;");
+		assertEquals("+test([]) : java_lang_Object\\l ",
+				methodbuffer.get(arrows).toString());
 	}
 
 }
