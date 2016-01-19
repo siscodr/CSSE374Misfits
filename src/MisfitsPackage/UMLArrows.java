@@ -152,6 +152,9 @@ public class UMLArrows {
 	 */
 	public void addField(String type) {
 		String cleanType = WorkerForArrows.stripFunction(type);
+		if(cleanType == this.className){
+			this.isSingle = true;
+		}
 		if (checkExistingArrow(cleanType))
 			fields.add(cleanType);
 	}
