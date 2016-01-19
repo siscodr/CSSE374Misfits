@@ -589,13 +589,16 @@ public class UMLArrowsTest {
 		fieldbuffer.setAccessible(true);
 		Field methodbuffer = UMLArrows.class.getDeclaredField("methodBuffer");
 		methodbuffer.setAccessible(true);
+		Field className = UMLArrows.class.getDeclaredField("className");
+		className.setAccessible(true);
+		className.set(arrows, "test");
 		supers.set(arrows, "");
 		interfaces.set(arrows, new ArrayList<String>());
 		uses.set(arrows, new ArrayList<String>());
 		fields.set(arrows, new ArrayList<String>());
 		fieldbuffer.set(arrows, new StringBuffer());
 		methodbuffer.set(arrows, new StringBuffer());
-		arrows.printClass("test");
+		arrows.printClass();
 		assertEquals("   test [\n     shape=\"record\"     label = \"{test||\n}\"\n];\n", outContent.toString());
 	}
 
@@ -615,6 +618,9 @@ public class UMLArrowsTest {
 		fieldbuffer.setAccessible(true);
 		Field methodbuffer = UMLArrows.class.getDeclaredField("methodBuffer");
 		methodbuffer.setAccessible(true);
+		Field className = UMLArrows.class.getDeclaredField("className");
+		className.setAccessible(true);
+		className.set(arrows, "test");
 		supers.set(arrows, "");
 		interfaces.set(arrows, new ArrayList<String>());
 		uses.set(arrows, new ArrayList<String>());
@@ -625,7 +631,7 @@ public class UMLArrowsTest {
 		mTemp.append("This is a powerful MethodBuffer.");
 		fieldbuffer.set(arrows, fTemp);
 		methodbuffer.set(arrows, mTemp);
-		arrows.printClass("test");
+		arrows.printClass();
 		assertEquals(
 				"   test [\n     shape=\"record\"     label = \"{test|I was thinking about this buffer and it was a good idea.|This is a powerful MethodBuffer.\n}\"\n];\n",
 				outContent.toString());
