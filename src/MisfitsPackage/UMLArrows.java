@@ -220,6 +220,7 @@ public class UMLArrows {
 	public void printClass() {
 		String pattern = "";
 		String color ="";
+		//Will use hashmap here in future
 		if(isSingle){
 			pattern = "\\n\\<\\<Singleton\\>\\>";
 			color = "color=\"purple\"";
