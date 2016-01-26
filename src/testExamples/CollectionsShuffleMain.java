@@ -1,4 +1,4 @@
-package ShuffleMain;
+package testExamples;
 
 import java.io.IOException;
 import java.util.ArrayList;
