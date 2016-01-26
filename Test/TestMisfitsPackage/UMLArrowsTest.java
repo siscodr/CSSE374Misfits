@@ -13,6 +13,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import MisfitsPackage.PatternDetector;
+import MisfitsPackage.SingletonDetector;
 import MisfitsPackage.UMLArrows;
 import MisfitsPackage.WorkerForArrows;
 import jdk.internal.org.objectweb.asm.Opcodes;
@@ -512,8 +514,14 @@ public class UMLArrowsTest {
 		whitelist.set(arrows, whitelistv1);
 		Field fields = UMLArrows.class.getDeclaredField("fields");
 		fields.setAccessible(true);
-		Field singleBool = UMLArrows.class.getDeclaredField("isSingle");
-		singleBool.setAccessible(true);
+		
+		SingletonDetector detect = new SingletonDetector("red", "purple");
+		Field detector = UMLArrows.class.getDeclaredField("detectors");
+		detector.setAccessible(true);
+		ArrayList<PatternDetector> pattern =new ArrayList<PatternDetector>();
+		pattern.add(detect);
+		detector.set(arrows, pattern);
+		
 		ArrayList<String> fieldsarray = new ArrayList<String>();
 		fields.set(arrows, new ArrayList<String>());
 		Field className = UMLArrows.class.getDeclaredField("className");
@@ -524,13 +532,9 @@ public class UMLArrowsTest {
 		className.set(arrows, toAdd);
 		fieldsarray.add(toAdd);
 		int access = Opcodes.ACC_PRIVATE | Opcodes.ACC_STATIC; 
-		// An Opcode of
-																// private and
-																// static should
-																// make isSingle
-																// true
+		// An Opcode of private and static should make isSingle true
 		arrows.addFieldDesc(desc, access);
-		assertEquals(true, singleBool.get(arrows));
+		assertEquals(true, detect.isDetected());
 	}
 
 	@Test
@@ -545,8 +549,14 @@ public class UMLArrowsTest {
 		whitelist.set(arrows, whitelistv1);
 		Field fields = UMLArrows.class.getDeclaredField("fields");
 		fields.setAccessible(true);
-		Field singleBool = UMLArrows.class.getDeclaredField("isSingle");
-		singleBool.setAccessible(true);
+		
+		SingletonDetector detect = new SingletonDetector("red", "purple");
+		Field detector = UMLArrows.class.getDeclaredField("detectors");
+		detector.setAccessible(true);
+		ArrayList<PatternDetector> pattern =new ArrayList<PatternDetector>();
+		pattern.add(detect);
+		detector.set(arrows, pattern);
+		
 		ArrayList<String> fieldsarray = new ArrayList<String>();
 		fields.set(arrows, new ArrayList<String>());
 		Field className = UMLArrows.class.getDeclaredField("className");
@@ -559,7 +569,7 @@ public class UMLArrowsTest {
 		int access = Opcodes.ACC_PUBLIC; // An Opcode of public should leave
 										// isSingle as false
 		arrows.addFieldDesc(desc, access);
-		assertEquals(false, singleBool.get(arrows));
+		assertEquals(false, detect.isDetected());
 	}
 
 	@Test
@@ -574,8 +584,14 @@ public class UMLArrowsTest {
 		whitelist.set(arrows, whitelistv1);
 		Field fields = UMLArrows.class.getDeclaredField("fields");
 		fields.setAccessible(true);
-		Field singleBool = UMLArrows.class.getDeclaredField("isSingle");
-		singleBool.setAccessible(true);
+		
+		SingletonDetector detect = new SingletonDetector("red", "purple");
+		Field detector = UMLArrows.class.getDeclaredField("detectors");
+		detector.setAccessible(true);
+		ArrayList<PatternDetector> pattern =new ArrayList<PatternDetector>();
+		pattern.add(detect);
+		detector.set(arrows, pattern);
+		
 		ArrayList<String> fieldsarray = new ArrayList<String>();
 		fields.set(arrows, new ArrayList<String>());
 		Field className = UMLArrows.class.getDeclaredField("className");
@@ -588,7 +604,7 @@ public class UMLArrowsTest {
 		int access = Opcodes.ACC_PRIVATE; // An Opcode of only private should leave
 										// isSingle as false
 		arrows.addFieldDesc(desc, access);
-		assertEquals(false, singleBool.get(arrows));
+		assertEquals(false, detect.isDetected());
 	}
 
 	@Test
@@ -603,8 +619,14 @@ public class UMLArrowsTest {
 		whitelist.set(arrows, whitelistv1);
 		Field fields = UMLArrows.class.getDeclaredField("fields");
 		fields.setAccessible(true);
-		Field singleBool = UMLArrows.class.getDeclaredField("isSingle");
-		singleBool.setAccessible(true);
+
+		SingletonDetector detect = new SingletonDetector("red", "purple");
+		Field detector = UMLArrows.class.getDeclaredField("detectors");
+		detector.setAccessible(true);
+		ArrayList<PatternDetector> pattern =new ArrayList<PatternDetector>();
+		pattern.add(detect);
+		detector.set(arrows, pattern);
+		
 		ArrayList<String> fieldsarray = new ArrayList<String>();
 		fields.set(arrows, new ArrayList<String>());
 		Field className = UMLArrows.class.getDeclaredField("className");
@@ -617,7 +639,7 @@ public class UMLArrowsTest {
 		int access = Opcodes.ACC_STATIC; // An Opcode of only static should leave
 										// isSingle as false
 		arrows.addFieldDesc(desc, access);
-		assertEquals(false, singleBool.get(arrows));
+		assertEquals(false, detect.isDetected());
 	}
 
 	@Test
