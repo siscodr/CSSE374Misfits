@@ -253,7 +253,6 @@ public class UMLArrows {
 		System.out.print("   " + className + " [\n     shape=\"record\"  " + color + fillColor + "    label = \"{" + className
 				+ pattern + "|" + fieldBuffer.toString() + "|" + methodBuffer.toString() + "\n}\"\n];\n");
 		printArrows();
-		UMLArrows.getInstance().resetUMLArrows();
 	}
 
 	/**

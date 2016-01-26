@@ -29,7 +29,9 @@ public class DesignParser {
 		WorkerForArrows.addWhitelist(classes);
 
 		for (String className : classes) {
-
+			
+			UMLArrows.getInstance().resetUMLArrows();
+			
 			makeReader(className);
 
 			UMLArrows.getInstance().printClass();
