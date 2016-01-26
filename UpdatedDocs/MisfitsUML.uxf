@@ -22,11 +22,13 @@
 -className: String
 --
 +getInstance(): UMLArrows
++addDetector(PatternDector): void
 +getFields(): ArrayList&lt;String&gt;
 +getUses(): ArrayList&lt;String&gt;
 +getInterfaces(): ArrayList&lt;String&gt;
 +getSupers(): String
 +resetUMLArrows(): void
++resetDetectors(): void
 +addToFieldBuffer(String toAppend): void
 +addToMethodBuffer(String toAppend): void
 +addUse(String currentType): void
