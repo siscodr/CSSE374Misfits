@@ -12,6 +12,7 @@ public class UMLCreatorMain {
 	 *             Exception where string doesn't link to a class
 	 */
 	public static void main(String[] args) throws IOException {
+		UMLArrows.getInstance().addDetector(new SingletonDetector("orange", "purple"));
 		DesignParser.makeUML(args); // Runs the program
 	}
 }
