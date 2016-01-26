@@ -1,5 +1,6 @@
-package MisfitsPackage;
+package Visitors;
 
+import UMLClasses.UMLArrows;
 import jdk.internal.org.objectweb.asm.ClassVisitor;
 import jdk.internal.org.objectweb.asm.FieldVisitor;
 import jdk.internal.org.objectweb.asm.Opcodes;
@@ -57,10 +58,8 @@ public class ClassFieldVisitor extends ClassVisitor {
 	 *            if the field does not have an initial value
 	 */
 	@Override
-	public FieldVisitor visitField(int access, String name, String desc,
-			String signature, Object value) {
-		FieldVisitor toDecorate = super.visitField(access, name, desc,
-				signature, value);
+	public FieldVisitor visitField(int access, String name, String desc, String signature, Object value) {
+		FieldVisitor toDecorate = super.visitField(access, name, desc, signature, value);
 		if (signature != null) {
 			SignatureReader reader = new SignatureReader(signature);
 			SignatureVisitor visitor = new mySignatureVisitor(Opcodes.ASM5);

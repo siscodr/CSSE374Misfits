@@ -13,8 +13,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import MisfitsPackage.Instruction;
-import MisfitsPackage.SDArrows;
+import SDClasses.Instruction;
+import SDClasses.SDArrows;
 
 public class TestSDArrows {
 

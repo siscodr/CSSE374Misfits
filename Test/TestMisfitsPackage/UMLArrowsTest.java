@@ -13,10 +13,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import MisfitsPackage.PatternDetector;
-import MisfitsPackage.SingletonDetector;
-import MisfitsPackage.UMLArrows;
 import MisfitsPackage.WorkerForArrows;
+import UMLClasses.PatternDetector;
+import UMLClasses.SingletonDetector;
+import UMLClasses.UMLArrows;
 import jdk.internal.org.objectweb.asm.Opcodes;
 
 public class UMLArrowsTest {

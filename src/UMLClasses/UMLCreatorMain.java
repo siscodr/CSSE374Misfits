@@ -1,10 +1,13 @@
-package MisfitsPackage;
+package UMLClasses;
 
 import java.io.IOException;
 
+import MisfitsPackage.DesignParser;
+
 public class UMLCreatorMain {
 	/**
-	 * Main just calls makeUML from DesignParser (Split for better design and testing)
+	 * Main just calls makeUML from DesignParser (Split for better design and
+	 * testing)
 	 * 
 	 * @param args
 	 *            Class names for the classes to be turned into an UML

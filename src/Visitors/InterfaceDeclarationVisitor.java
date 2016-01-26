@@ -1,28 +1,29 @@
-package MisfitsPackage;
+package Visitors;
 
+import UMLClasses.UMLArrows;
 import jdk.internal.org.objectweb.asm.ClassVisitor;
 
 /**
- * SuperDeclarationVisitor decorates ClassVisitor so the extends Arrows can be
- * drawn
+ * InterfaceDeclarationVisitor Decorates ClassVisitor so the interface Arrows
+ * can be drawn
  * 
  * @author TheMisfits
  */
-public class SuperDeclarationVisitor extends ClassVisitor {
+public class InterfaceDeclarationVisitor extends ClassVisitor {
 
 	/**
-	 * Constructs a new SuperDeclarationVisitor
+	 * Constructs a new InterfaceDeclarationVisitor
 	 * 
 	 * @param api
 	 *            the ASM API version implemented by this visitor. Must be one
 	 *            of Opcodes.ASM4.
 	 */
-	public SuperDeclarationVisitor(int api) {
+	public InterfaceDeclarationVisitor(int api) {
 		super(api);
 	}
 
 	/**
-	 * Constructs a new SuperDeclarationVisitor that decorates the old
+	 * Constructs a new InterfaceDeclarationVisitor that decorates the old
 	 * ClassVisitor.
 	 * 
 	 * @param api
@@ -31,14 +32,13 @@ public class SuperDeclarationVisitor extends ClassVisitor {
 	 * @param toDecorate
 	 *            A ClassVisitor for this class to Decorate
 	 */
-	public SuperDeclarationVisitor(int api, ClassVisitor toDecorate) {
+	public InterfaceDeclarationVisitor(int api, ClassVisitor toDecorate) {
 		super(api, toDecorate);
 	}
 
 	/**
 	 * This method decorates the ClassVisitor's visit function to add
-	 * functionality to pass Super classes (Class Extensions) to UMLArrow in
-	 * order to create a UML
+	 * functionality to pass interfaces to UMLArrow in order to create a UML
 	 *
 	 * @param version
 	 *            the class version
@@ -57,11 +57,15 @@ public class SuperDeclarationVisitor extends ClassVisitor {
 	 * @param interfaces
 	 *            An array of classes that the class inherits methods from
 	 */
-	public void visit(int version, int access, String name, String signature,
-			String superName, String[] interfaces) {
+	public void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
 
-		// Store super arrows (class extensions) into UMLArrows
-		UMLArrows.getInstance().setSuper(superName);
+		UMLArrows arrows = UMLArrows.getInstance(); // Get the Singleton
+													// Instance of UMLArrows
+
+		for (int i = 0; i < interfaces.length; i++) {
+			arrows.addInterface(interfaces[i]); // Store interface arrows into
+												// UMLArrows
+		}
 
 		// Does the decoratee's visit function
 		super.visit(version, access, name, signature, superName, interfaces);

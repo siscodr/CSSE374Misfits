@@ -1,5 +1,6 @@
-package MisfitsPackage;
+package Visitors;
 
+import UMLClasses.UMLArrows;
 import jdk.internal.org.objectweb.asm.ClassVisitor;
 import jdk.internal.org.objectweb.asm.MethodVisitor;
 
@@ -50,11 +51,9 @@ public class ClassMethodVisitor extends ClassVisitor {
 	 * @param exceptions
 	 *            the internal names of the method's exception classes.
 	 */
-	public MethodVisitor visitMethod(int access, String name, String desc,
-			String signature, String[] exceptions) {
+	public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
 
-		MethodVisitor methodVisitor = super.visitMethod(access, name, desc,
-				signature, exceptions);
+		MethodVisitor methodVisitor = super.visitMethod(access, name, desc, signature, exceptions);
 		// Add use arrows
 		UMLArrows.getInstance().addUses(desc);
 		return methodVisitor;

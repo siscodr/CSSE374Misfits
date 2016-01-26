@@ -2,6 +2,14 @@ package MisfitsPackage;
 
 import java.io.IOException;
 
+import SDClasses.SDArrows;
+import UMLClasses.UMLArrows;
+import Visitors.ClassFieldDeclarationVisitor;
+import Visitors.ClassFieldVisitor;
+import Visitors.ClassMethodVisitor;
+import Visitors.InterfaceDeclarationVisitor;
+import Visitors.MethodDeclarationVisitor;
+import Visitors.SuperDeclarationVisitor;
 import jdk.internal.org.objectweb.asm.ClassReader;
 import jdk.internal.org.objectweb.asm.ClassVisitor;
 import jdk.internal.org.objectweb.asm.Opcodes;
@@ -29,9 +37,9 @@ public class DesignParser {
 		WorkerForArrows.addWhitelist(classes);
 
 		for (String className : classes) {
-			
+
 			UMLArrows.getInstance().resetUMLArrows();
-			
+
 			makeReader(className);
 
 			UMLArrows.getInstance().printClass();
@@ -70,23 +78,27 @@ public class DesignParser {
 		UMLArrows.getInstance().setClass(className);
 		ClassReader reader = new ClassReader(className);
 
-		ClassVisitor InterfaceVisitor = new InterfaceDeclarationVisitor(
-				Opcodes.ASM5); // Interface Arrows
+		ClassVisitor InterfaceVisitor = new InterfaceDeclarationVisitor(Opcodes.ASM5); // Interface
+																						// Arrows
 
-		ClassVisitor SuperVisitor = new SuperDeclarationVisitor(Opcodes.ASM5,
-				InterfaceVisitor); // Extends Arrows
+		ClassVisitor SuperVisitor = new SuperDeclarationVisitor(Opcodes.ASM5, InterfaceVisitor); // Extends
+																									// Arrows
 
-		ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5,
-				SuperVisitor); // Fields for Classes
+		ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, SuperVisitor); // Fields
+																						// for
+																						// Classes
 
-		ClassVisitor fieldUsesVisitor = new ClassFieldDeclarationVisitor(
-				Opcodes.ASM5, fieldVisitor); // Field's Association arrows
+		ClassVisitor fieldUsesVisitor = new ClassFieldDeclarationVisitor(Opcodes.ASM5, fieldVisitor); // Field's
+																										// Association
+																										// arrows
 
-		ClassVisitor methodUsesVisitor = new ClassMethodVisitor(Opcodes.ASM5,
-				fieldUsesVisitor); // Method's Uses arrows
+		ClassVisitor methodUsesVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldUsesVisitor); // Method's
+																									// Uses
+																									// arrows
 
-		ClassVisitor methodVisitor = new MethodDeclarationVisitor(Opcodes.ASM5,
-				methodUsesVisitor); // Method for Classes
+		ClassVisitor methodVisitor = new MethodDeclarationVisitor(Opcodes.ASM5, methodUsesVisitor); // Method
+																									// for
+																									// Classes
 
 		reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 	}

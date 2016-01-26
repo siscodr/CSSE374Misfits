@@ -1,5 +1,6 @@
-package MisfitsPackage;
+package Visitors;
 
+import UMLClasses.UMLArrows;
 import jdk.internal.org.objectweb.asm.ClassVisitor;
 import jdk.internal.org.objectweb.asm.FieldVisitor;
 
@@ -54,10 +55,8 @@ public class ClassFieldDeclarationVisitor extends ClassVisitor {
 	 *            the field's initial value. This parameter, which may be null
 	 *            if the field does not have an initial value
 	 */
-	public FieldVisitor visitField(int access, String name, String desc,
-			String signature, Object value) {
-		FieldVisitor toDecorate = super.visitField(access, name, desc,
-				signature, value);
+	public FieldVisitor visitField(int access, String name, String desc, String signature, Object value) {
+		FieldVisitor toDecorate = super.visitField(access, name, desc, signature, value);
 		// Adds a field in the UML for given class
 		UMLArrows.getInstance().addFieldToBuffer(access, name, desc);
 		return toDecorate;

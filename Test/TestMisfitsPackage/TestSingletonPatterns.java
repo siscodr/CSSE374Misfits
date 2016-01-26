@@ -13,9 +13,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import MisfitsPackage.DesignParser;
-import MisfitsPackage.PatternDetector;
-import MisfitsPackage.SingletonDetector;
-import MisfitsPackage.UMLArrows;
+import UMLClasses.PatternDetector;
+import UMLClasses.SingletonDetector;
+import UMLClasses.UMLArrows;
 
 
 public class TestSingletonPatterns {

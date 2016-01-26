@@ -1,4 +1,4 @@
-package MisfitsPackage;
+package SDClasses;
 
 public interface Instruction {
 	public void printInstruction();

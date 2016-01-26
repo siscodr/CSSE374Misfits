@@ -1,4 +1,6 @@
-package MisfitsPackage;
+package SDClasses;
+
+import MisfitsPackage.WorkerForArrows;
 
 public class TypeInstruction implements Instruction {
 

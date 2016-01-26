@@ -1,5 +1,6 @@
-package MisfitsPackage;
+package Visitors;
 
+import UMLClasses.UMLArrows;
 import jdk.internal.org.objectweb.asm.ClassVisitor;
 import jdk.internal.org.objectweb.asm.MethodVisitor;
 import jdk.internal.org.objectweb.asm.Opcodes;
@@ -55,16 +56,13 @@ public class MethodDeclarationVisitor extends ClassVisitor {
 	 * @param exceptions
 	 *            the internal names of the method's exception classes.
 	 */
-	public MethodVisitor visitMethod(int access, String name, String desc,
-			String signature, String[] exceptions) {
+	public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
 
-		MethodVisitor toDecorate = super.visitMethod(access, name, desc,
-				signature, exceptions);
+		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
 
 		// Decorates the current MethodVisitor
 		MethodVisitor toReturn = new MyMethodVisitor(Opcodes.ASM5, toDecorate, name);
-	
-		
+
 		// Sends required variables to UMLArrows to add the method to the class
 		UMLArrows.getInstance().addMethodToBuffer(access, name, desc);
 

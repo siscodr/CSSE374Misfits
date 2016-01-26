@@ -1,8 +1,9 @@
-package MisfitsPackage;
+package UMLClasses;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import MisfitsPackage.WorkerForArrows;
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.Type;
 
@@ -93,9 +94,9 @@ public class UMLArrows {
 		methodBuffer = new StringBuffer();
 		resetDetectors();
 	}
-	
-	public void resetDetectors(){
-		for(PatternDetector detector: detectors){
+
+	public void resetDetectors() {
+		for (PatternDetector detector : detectors) {
 			detector.setDetected(false);
 		}
 	}
@@ -180,8 +181,8 @@ public class UMLArrows {
 		String currentType = Type.getType(desc).getClassName();
 		String cleanType = WorkerForArrows.stripFunction(currentType);
 		if (cleanType.equals(this.className) && access == (Opcodes.ACC_PRIVATE | Opcodes.ACC_STATIC)) {
-			for(PatternDetector detector: detectors){
-				if(detector.getPattern() == "Singleton"){
+			for (PatternDetector detector : detectors) {
+				if (detector.getPattern() == "Singleton") {
 					detector.setDetected(true);
 				}
 			}
@@ -240,15 +241,15 @@ public class UMLArrows {
 		 * if(isSingle){ pattern = "\\n\\<\\<Singleton\\>\\>"; color =
 		 * "color=\"purple\""; }
 		 */
-		for(PatternDetector detector: detectors){
-			if(detector.isDetected()){
+		for (PatternDetector detector : detectors) {
+			if (detector.isDetected()) {
 				pattern = "\\n\\<\\<" + detector.getPattern() + "\\>\\>";
 				color = "color=\"" + detector.getColor() + "\"";
 				fillColor = ", fillcolor=\"" + detector.getFillColor() + "\" style=\"filled\"";
 			}
 		}
-		System.out.print("   " + className + " [\n     shape=\"record\"  " + color + fillColor + "    label = \"{" + className
-				+ pattern + "|" + fieldBuffer.toString() + "|" + methodBuffer.toString() + "\n}\"\n];\n");
+		System.out.print("   " + className + " [\n     shape=\"record\"  " + color + fillColor + "    label = \"{"
+				+ className + pattern + "|" + fieldBuffer.toString() + "|" + methodBuffer.toString() + "\n}\"\n];\n");
 		printArrows();
 	}
 
