@@ -16,7 +16,6 @@ import MisfitsPackage.DesignParser;
 import MisfitsPackage.PatternDetector;
 import MisfitsPackage.SingletonDetector;
 import MisfitsPackage.UMLArrows;
-import MisfitsPackage.UMLCreatorMain;
 
 
 public class TestSingletonPatterns {
