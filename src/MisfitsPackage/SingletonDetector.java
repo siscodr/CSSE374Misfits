@@ -12,23 +12,23 @@ public class SingletonDetector implements PatternDetector {
 		this.isDetected = false;
 		this.pattern = "Singleton";
 	}
-	@Override
+	
 	public String getPattern() {
 		return pattern;
 	}
-	@Override
+
 	public String getColor() {
 		return color;
 	}
-	@Override
+
 	public String getFillColor() {
 		return fillColor;
 	}
-	@Override
+
 	public boolean isDetected() {
 		return isDetected;
 	}
-	@Override
+
 	public void setDetected(boolean detected) {
 		isDetected = detected;
 		
