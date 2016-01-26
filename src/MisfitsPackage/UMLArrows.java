@@ -1,7 +1,10 @@
 package MisfitsPackage;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.Type;
@@ -14,7 +17,7 @@ import jdk.internal.org.objectweb.asm.Type;
  */
 public class UMLArrows {
 	private static UMLArrows ourArrows = new UMLArrows();
-	private Boolean isSingle = false;
+	private ArrayList<PatternDetector> detectors = new ArrayList<PatternDetector>();
 	private ArrayList<String> fields;
 	private ArrayList<String> uses;
 	private String supers;
@@ -37,6 +40,10 @@ public class UMLArrows {
 	 */
 	public static UMLArrows getInstance() {
 		return ourArrows;
+	}
+
+	public void addDetector(PatternDetector patternDetector) {
+		detectors.add(patternDetector);
 	}
 
 	/**
@@ -87,7 +94,13 @@ public class UMLArrows {
 		supers = "";
 		fieldBuffer = new StringBuffer();
 		methodBuffer = new StringBuffer();
-		isSingle = false;
+		resetDetectors();
+	}
+	
+	public void resetDetectors(){
+		for(PatternDetector detector: detectors){
+			detector.setDetected(false);
+		}
 	}
 
 	/**
@@ -169,8 +182,12 @@ public class UMLArrows {
 	public void addFieldDesc(String desc, int access) {
 		String currentType = Type.getType(desc).getClassName();
 		String cleanType = WorkerForArrows.stripFunction(currentType);
-		if(cleanType.equals(this.className) && access == (Opcodes.ACC_PRIVATE | Opcodes.ACC_STATIC)){
-			this.isSingle = true;
+		if (cleanType.equals(this.className) && access == (Opcodes.ACC_PRIVATE | Opcodes.ACC_STATIC)) {
+			for(PatternDetector detector: detectors){
+				if(detector.getPattern() == "Singleton"){
+					detector.setDetected(true);
+				}
+			}
 		}
 		addField(currentType);
 	}
@@ -219,16 +236,22 @@ public class UMLArrows {
 	 */
 	public void printClass() {
 		String pattern = "";
-		String color ="";
-		//Will use hashmap here in future
-		if(isSingle){
-			pattern = "\\n\\<\\<Singleton\\>\\>";
-			color = "color=\"purple\"";
+		String color = "";
+		String fillColor = "";
+		// Will use hashmap here in future
+		/*
+		 * if(isSingle){ pattern = "\\n\\<\\<Singleton\\>\\>"; color =
+		 * "color=\"purple\""; }
+		 */
+		for(PatternDetector detector: detectors){
+			if(detector.isDetected()){
+				pattern = "\\n\\<\\<" + detector.getPattern() + "\\>\\>";
+				color = "color=\"" + detector.getColor() + "\"";
+				fillColor = ", fillcolor=\"" + detector.getFillColor() + "\" style=\"filled\"";
+			}
 		}
-		System.out.print("   " + className
-				+ " [\n     shape=\"record\"  " + color + "    label = \"{" + className + pattern + "|"
-				+ fieldBuffer.toString() + "|" + methodBuffer.toString()
-				+ "\n}\"\n];\n");
+		System.out.print("   " + className + " [\n     shape=\"record\"  " + color + fillColor + "    label = \"{" + className
+				+ pattern + "|" + fieldBuffer.toString() + "|" + methodBuffer.toString() + "\n}\"\n];\n");
 		printArrows();
 		UMLArrows.getInstance().resetUMLArrows();
 	}
@@ -273,8 +296,7 @@ public class UMLArrows {
 			List<String> stypes = WorkerForArrows.getTypesFromDesc(desc);
 			String symbol = WorkerForArrows.makeSymbol(access);
 			String returnType = WorkerForArrows.stripFunction(rType);
-			String temp = symbol + name + "(" + stypes.toString() + ") : "
-					+ returnType + "\\l ";
+			String temp = symbol + name + "(" + stypes.toString() + ") : " + returnType + "\\l ";
 
 			this.addToMethodBuffer(temp);
 		}
@@ -289,10 +311,8 @@ public class UMLArrows {
 	 * @return boolean If the arrow should be added to the diagram
 	 */
 	private boolean checkExistingArrow(String cleanType) {
-		return !uses.contains(cleanType) && !fields.contains(cleanType)
-				&& !supers.contains(cleanType)
-				&& !interfaces.contains(cleanType)
-				&& WorkerForArrows.unwantedTypes(cleanType);
+		return !uses.contains(cleanType) && !fields.contains(cleanType) && !supers.contains(cleanType)
+				&& !interfaces.contains(cleanType) && WorkerForArrows.unwantedTypes(cleanType);
 	}
 
 	/**
@@ -321,8 +341,7 @@ public class UMLArrows {
 	private void printUses() {
 		for (String types : this.uses) {
 			if (types.contains("_")) {
-				System.out.println(className + " -> " + types
-						+ " [arrowhead=\"vee\", style=\"dashed\"];");
+				System.out.println(className + " -> " + types + " [arrowhead=\"vee\", style=\"dashed\"];");
 			}
 		}
 	}
@@ -338,8 +357,7 @@ public class UMLArrows {
 	private void printFields() {
 		for (String field : this.fields) {
 			if (field.contains("_")) {
-				System.out.println(className + " -> " + field
-						+ " [arrowhead=\"vee\"];");
+				System.out.println(className + " -> " + field + " [arrowhead=\"vee\"];");
 			}
 		}
 	}
@@ -355,8 +373,7 @@ public class UMLArrows {
 	private void printInterfaces() {
 		for (String interf : this.interfaces) {
 			if (interf.contains("_")) {
-				System.out.println(className + " -> " + interf
-						+ " [arrowhead=\"onormal\", style=\"dashed\"];");
+				System.out.println(className + " -> " + interf + " [arrowhead=\"onormal\", style=\"dashed\"];");
 			}
 		}
 	}
@@ -371,8 +388,7 @@ public class UMLArrows {
 	 */
 	private void printSupers() {
 		if (supers.contains("_")) {
-			System.out.println(className + " -> " + supers
-					+ " [arrowhead=\"onormal\"];");
+			System.out.println(className + " -> " + supers + " [arrowhead=\"onormal\"];");
 		}
 	}
 
