@@ -1,20 +1,18 @@
 package UMLClasses;
 
-import jdk.internal.org.objectweb.asm.Opcodes;
-
-public class SingletonDetector implements PatternDetector {
+public class AdapterDetector implements PatternDetector {
 	private String color;
 	private String pattern;
 	private String fillColor;
 	private boolean isDetected;
-
-	public SingletonDetector(String color, String fillColor) {
+	
+	public AdapterDetector(String color, String fillColor){
 		this.color = color;
 		this.fillColor = fillColor;
 		this.isDetected = false;
-		this.pattern = "Singleton";
+		this.pattern = "Adapter";
 	}
-
+	
 	public String getPattern() {
 		return pattern;
 	}
@@ -35,11 +33,10 @@ public class SingletonDetector implements PatternDetector {
 		isDetected = detected;
 
 	}
-	
-	public void detect(String className, String cleanedDesc, int access) {
-		if (cleanedDesc.equals(className) && access == (Opcodes.ACC_PRIVATE | Opcodes.ACC_STATIC)) {
-				setDetected(true);
-		}
+
+	public void detect(String className, String desc, int access) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
