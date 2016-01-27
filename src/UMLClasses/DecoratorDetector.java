@@ -1,18 +1,20 @@
 package UMLClasses;
 
+import ClassStorage.ClassContainer;
+
 public class DecoratorDetector implements PatternDetector {
 	private String color;
 	private String pattern;
 	private String fillColor;
 	private boolean isDetected;
-	
-	public DecoratorDetector(String color, String fillColor){
+
+	public DecoratorDetector(String color, String fillColor) {
 		this.color = color;
 		this.fillColor = fillColor;
 		this.isDetected = false;
 		this.pattern = "Decorator";
 	}
-	
+
 	public String getPattern() {
 		return pattern;
 	}
@@ -34,12 +36,11 @@ public class DecoratorDetector implements PatternDetector {
 
 	}
 
-	public void detect(String className, String methodName, String desc, String interfaceName) {
+	public void detect(ClassContainer currentClass) {
 		// TODO Auto-generated method stub
-		if(className.equals(methodName)&&desc.contains(interfaceName)){
-			setDetected(true);
-		}
+		// if(className.equals(methodName) && desc.contains(interfaceName)){
+		// setDetected(true);
+		// }
 	}
-
 
 }

@@ -1,5 +1,7 @@
 package UMLClasses;
 
+import ClassStorage.ClassContainer;
+
 public interface PatternDetector {
 
 	public String getPattern();
@@ -8,7 +10,7 @@ public interface PatternDetector {
 
 	public String getFillColor();
 	
-	//public void detect(String className, String desc, int access);
+	public void detect(ClassContainer currentClass);
 
 	public boolean isDetected();
 	

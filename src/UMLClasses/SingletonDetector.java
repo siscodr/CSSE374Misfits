@@ -1,5 +1,6 @@
 package UMLClasses;
 
+import ClassStorage.ClassContainer;
 import jdk.internal.org.objectweb.asm.Opcodes;
 
 public class SingletonDetector implements PatternDetector {
@@ -35,10 +36,13 @@ public class SingletonDetector implements PatternDetector {
 		isDetected = detected;
 
 	}
-	
-	public void detect(String className, String cleanedDesc, int access) {
-		if (cleanedDesc.equals(className) && access == (Opcodes.ACC_PRIVATE | Opcodes.ACC_STATIC)) {
+
+	public void detect(ClassContainer currentClass) {
+		String className = currentClass.getClassName();
+		for (FieldStorage field : currentClass.getFields()) {
+			if (field.getType().equals(className) && field.getAccess() == (Opcodes.ACC_PRIVATE | Opcodes.ACC_STATIC)) {
 				setDetected(true);
+			}
 		}
 	}
 

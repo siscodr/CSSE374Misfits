@@ -1,5 +1,7 @@
 package UMLClasses;
 
+import ClassStorage.ClassContainer;
+
 public class AdapterDetector implements PatternDetector {
 	private String color;
 	private String pattern;
@@ -34,7 +36,7 @@ public class AdapterDetector implements PatternDetector {
 
 	}
 
-	public void detect(String className, String desc, int access) {
+	public void detect(ClassContainer currentClass) {
 		// TODO Auto-generated method stub
 		
 	}
