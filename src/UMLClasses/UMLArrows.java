@@ -192,6 +192,7 @@ public class UMLArrows {
 		 * "color=\"purple\""; }
 		 */
 		for (PatternDetector detector : detectors) {
+			detector.detect(currentClass);
 			if (detector.isDetected()) {
 				pattern = "\\n\\<\\<" + detector.getPattern() + "\\>\\>";
 				color = "color=\"" + detector.getColor() + "\"";
