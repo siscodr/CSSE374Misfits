@@ -8,10 +8,10 @@ import jdk.internal.org.objectweb.asm.Type;
 
 public class MethodInstruction implements Instruction {
 
-	String name;
-	String owner;
-	ArrayList<String> params = new ArrayList<String>();
-	String returns = "";
+	private String name;
+	private String owner;
+	private ArrayList<String> params = new ArrayList<String>();
+	private String returns = "";
 
 	public MethodInstruction(String owner, String name, String desc) {
 		this.owner = owner;

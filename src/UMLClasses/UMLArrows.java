@@ -3,8 +3,8 @@ package UMLClasses;
 import java.util.ArrayList;
 import java.util.List;
 
+import ClassStorage.ClassContainer;
 import MisfitsPackage.WorkerForArrows;
-import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.Type;
 
 /**
@@ -16,19 +16,15 @@ import jdk.internal.org.objectweb.asm.Type;
 public class UMLArrows {
 	private static UMLArrows ourArrows = new UMLArrows();
 	private ArrayList<PatternDetector> detectors = new ArrayList<PatternDetector>();
-	private ArrayList<String> fields;
-	private ArrayList<String> uses;
-	private String supers;
-	private ArrayList<String> interfaces;
 	private StringBuffer fieldBuffer = new StringBuffer();
 	private StringBuffer methodBuffer = new StringBuffer();
-	private String className;
-
+	private ClassContainer currentClass;
+	
 	/**
 	 * Constructs a UMLArrows
 	 */
 	private UMLArrows() {
-		resetUMLArrows();
+		resetUMLArrows("");
 	}
 
 	/**
@@ -44,83 +40,23 @@ public class UMLArrows {
 		detectors.add(patternDetector);
 	}
 
-	/**
-	 * Getter for the fields associated with the current class
-	 * 
-	 * @return ArrayList<String>
-	 */
-	public ArrayList<String> getFields() {
-		return this.fields;
-	}
-
-	/**
-	 * Getter for the classes that are 'used' by the current class.
-	 * 
-	 * @return ArrayList<String>
-	 */
-	public ArrayList<String> getUses() {
-		return this.uses;
-	}
-
-	/**
-	 * Getter for the interfaces that the current class implements.
-	 * 
-	 * @return ArrayList<String>
-	 */
-	public ArrayList<String> getInterfaces() {
-		return interfaces;
-	}
-
-	/**
-	 * Getter for the class that the current class extends.
-	 * 
-	 * @return String
-	 */
-	public String getSupers() {
-		return supers;
-	}
-
-	/**
-	 * Resets the ArrayLists used to make arrows.
-	 * 
-	 * @return No return value.
-	 */
-	public void resetUMLArrows() {
-		fields = new ArrayList<String>();
-		uses = new ArrayList<String>();
-		interfaces = new ArrayList<String>();
-		supers = "";
-		fieldBuffer = new StringBuffer();
-		methodBuffer = new StringBuffer();
-		resetDetectors();
-	}
-
 	public void resetDetectors() {
 		for (PatternDetector detector : detectors) {
 			detector.setDetected(false);
 		}
 	}
-
+	
+	
 	/**
-	 * Append the given string to the end of the FieldBuffer
+	 * Resets the ArrayLists used to make arrows.
 	 * 
-	 * @param toAppend
-	 *            A String to append to the current FieldBuffer
 	 * @return No return value.
 	 */
-	public void addToFieldBuffer(String toAppend) {
-		this.fieldBuffer.append(toAppend);
-	}
-
-	/**
-	 * Append the given string to the end of the MethodBuffer
-	 * 
-	 * @param toAppend
-	 *            A String to append to the current MethodBuffer
-	 * @return No return value.
-	 */
-	public void addToMethodBuffer(String toAppend) {
-		this.methodBuffer.append(toAppend);
+	public void resetUMLArrows(String className) {
+		currentClass = new ClassContainer(WorkerForArrows.stripFunction(className));
+		fieldBuffer = new StringBuffer();
+		methodBuffer = new StringBuffer();
+		resetDetectors();
 	}
 
 	/**
@@ -133,8 +69,8 @@ public class UMLArrows {
 	 */
 	public void addUse(String currentType) {
 		String cleanType = WorkerForArrows.stripFunction(currentType);
-		if (checkExistingArrow(cleanType))
-			uses.add(cleanType);
+		if (currentClass.checkExistingArrow(cleanType))
+			currentClass.addUse(cleanType);
 	}
 
 	/**
@@ -162,10 +98,10 @@ public class UMLArrows {
 	 * 
 	 * @return No return value.
 	 */
-	public void addField(String type) {
+	public void addField(String type, int access) {
 		String cleanType = WorkerForArrows.stripFunction(type);
-		if (checkExistingArrow(cleanType))
-			fields.add(cleanType);
+		if (currentClass.checkExistingArrow(cleanType))
+			currentClass.addField(new FieldStorage(access, cleanType));
 	}
 
 	/**
@@ -179,15 +115,7 @@ public class UMLArrows {
 	 */
 	public void addFieldDesc(String desc, int access) {
 		String currentType = Type.getType(desc).getClassName();
-		String cleanType = WorkerForArrows.stripFunction(currentType);
-		if (cleanType.equals(this.className) && access == (Opcodes.ACC_PRIVATE | Opcodes.ACC_STATIC)) {
-			for (PatternDetector detector : detectors) {
-				if (detector.getPattern() == "Singleton") {
-					detector.setDetected(true);
-				}
-			}
-		}
-		addField(currentType);
+		addField(currentType, access);
 	}
 
 	/**
@@ -201,8 +129,8 @@ public class UMLArrows {
 	public void setSuper(String currentType) {
 		if (currentType != null) {
 			String cleanType = WorkerForArrows.stripFunction(currentType);
-			if (checkExistingArrow(cleanType))
-				supers = (cleanType);
+			if (currentClass.checkExistingArrow(cleanType))
+				currentClass.setSuper(cleanType);
 		}
 	}
 
@@ -217,8 +145,30 @@ public class UMLArrows {
 	 */
 	public void addInterface(String currentType) {
 		String cleanType = WorkerForArrows.stripFunction(currentType);
-		if (checkExistingArrow(cleanType))
-			interfaces.add(cleanType);
+		if (currentClass.checkExistingArrow(cleanType))
+			currentClass.addInterface(cleanType);
+	}
+	
+	/**
+	 * Append the given string to the end of the FieldBuffer
+	 * 
+	 * @param toAppend
+	 *            A String to append to the current FieldBuffer
+	 * @return No return value.
+	 */
+	public void addToFieldBuffer(String toAppend) {
+		this.fieldBuffer.append(toAppend);
+	}
+
+	/**
+	 * Append the given string to the end of the MethodBuffer
+	 * 
+	 * @param toAppend
+	 *            A String to append to the current MethodBuffer
+	 * @return No return value.
+	 */
+	public void addToMethodBuffer(String toAppend) {
+		this.methodBuffer.append(toAppend);
 	}
 
 	/**
@@ -248,8 +198,8 @@ public class UMLArrows {
 				fillColor = ", fillcolor=\"" + detector.getFillColor() + "\" style=\"filled\"";
 			}
 		}
-		System.out.print("   " + className + " [\n     shape=\"record\"  " + color + fillColor + "    label = \"{"
-				+ className + pattern + "|" + fieldBuffer.toString() + "|" + methodBuffer.toString() + "\n}\"\n];\n");
+		System.out.print("   " + currentClass.getClassName() + " [\n     shape=\"record\"  " + color + fillColor + "    label = \"{"
+				+ currentClass.getClassName() + pattern + "|" + fieldBuffer.toString() + "|" + methodBuffer.toString() + "\n}\"\n];\n");
 		printArrows();
 	}
 
@@ -300,19 +250,6 @@ public class UMLArrows {
 	}
 
 	/**
-	 * Checks the given string to see if it should be added to the diagram.
-	 * 
-	 * @param cleanType
-	 *            A String that has been Stripped prior to being passed to be
-	 *            checked.
-	 * @return boolean If the arrow should be added to the diagram
-	 */
-	private boolean checkExistingArrow(String cleanType) {
-		return !uses.contains(cleanType) && !fields.contains(cleanType) && !supers.contains(cleanType)
-				&& !interfaces.contains(cleanType) && WorkerForArrows.unwantedTypes(cleanType);
-	}
-
-	/**
 	 * Prints all the arrows to the console.
 	 * 
 	 * @param classString
@@ -336,9 +273,9 @@ public class UMLArrows {
 	 * @return No return type.
 	 */
 	private void printUses() {
-		for (String types : this.uses) {
+		for (String types : currentClass.getUses()) {
 			if (types.contains("_")) {
-				System.out.println(className + " -> " + types + " [arrowhead=\"vee\", style=\"dashed\"];");
+				System.out.println(currentClass.getClassName() + " -> " + types + " [arrowhead=\"vee\", style=\"dashed\"];");
 			}
 		}
 	}
@@ -352,9 +289,9 @@ public class UMLArrows {
 	 * @return No return type.
 	 */
 	private void printFields() {
-		for (String field : this.fields) {
-			if (field.contains("_")) {
-				System.out.println(className + " -> " + field + " [arrowhead=\"vee\"];");
+		for (FieldStorage field : currentClass.getFields()) {
+			if (field.getType().contains("_")) {
+				System.out.println(currentClass.getClassName() + " -> " + field.getType() + " [arrowhead=\"vee\"];");
 			}
 		}
 	}
@@ -368,9 +305,9 @@ public class UMLArrows {
 	 * @return No return type.
 	 */
 	private void printInterfaces() {
-		for (String interf : this.interfaces) {
+		for (String interf : currentClass.getInterfaces()) {
 			if (interf.contains("_")) {
-				System.out.println(className + " -> " + interf + " [arrowhead=\"onormal\", style=\"dashed\"];");
+				System.out.println(currentClass.getClassName() + " -> " + interf + " [arrowhead=\"onormal\", style=\"dashed\"];");
 			}
 		}
 	}
@@ -384,12 +321,8 @@ public class UMLArrows {
 	 * @return No return type.
 	 */
 	private void printSupers() {
-		if (supers.contains("_")) {
-			System.out.println(className + " -> " + supers + " [arrowhead=\"onormal\"];");
+		if (currentClass.getSupers().contains("_")) {
+			System.out.println(currentClass.getClassName() + " -> " + currentClass.getSupers() + " [arrowhead=\"onormal\"];");
 		}
-	}
-
-	public void setClass(String className) {
-		this.className = WorkerForArrows.stripFunction(className);
 	}
 }

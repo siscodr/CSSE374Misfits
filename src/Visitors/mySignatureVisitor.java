@@ -4,13 +4,15 @@ import UMLClasses.UMLArrows;
 import jdk.internal.org.objectweb.asm.signature.SignatureVisitor;
 
 public class mySignatureVisitor extends SignatureVisitor {
-
-	public mySignatureVisitor(int api) {
+	private int access;
+	
+	public mySignatureVisitor(int api, int access) {
 		super(api);
+		this.access = access;
 	}
 
 	public void visitClassType(String name) {
-		UMLArrows.getInstance().addField(name);
+		UMLArrows.getInstance().addField(name, this.access);
 		super.visitClassType(name);
 	}
 }

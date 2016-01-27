@@ -62,7 +62,7 @@ public class ClassFieldVisitor extends ClassVisitor {
 		FieldVisitor toDecorate = super.visitField(access, name, desc, signature, value);
 		if (signature != null) {
 			SignatureReader reader = new SignatureReader(signature);
-			SignatureVisitor visitor = new mySignatureVisitor(Opcodes.ASM5);
+			SignatureVisitor visitor = new mySignatureVisitor(Opcodes.ASM5, access);
 			// Adds field to UML to allow for association arrows to be drawn
 			reader.accept(visitor);
 		}
