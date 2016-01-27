@@ -34,9 +34,11 @@ public class DecoratorDetector implements PatternDetector {
 
 	}
 
-	public void detect(String className, String desc, int access) {
+	public void detect(String className, String methodName, String desc, String interfaceName) {
 		// TODO Auto-generated method stub
-		
+		if(className.equals(methodName)&&desc.contains(interfaceName)){
+			setDetected(true);
+		}
 	}
 
 

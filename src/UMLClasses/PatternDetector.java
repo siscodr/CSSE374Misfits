@@ -8,7 +8,7 @@ public interface PatternDetector {
 
 	public String getFillColor();
 	
-	public void detect(String className, String desc, int access);
+	//public void detect(String className, String desc, int access);
 
 	public boolean isDetected();
 	
