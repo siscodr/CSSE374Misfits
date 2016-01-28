@@ -4,10 +4,12 @@ import java.util.ArrayList;
 
 import MisfitsPackage.WorkerForArrows;
 import UMLClasses.FieldStorage;
+import UMLClasses.MethodStorage;
 
 public class ClassContainer {
 	private String className;
 	private ArrayList<FieldStorage> fields;
+	private ArrayList<MethodStorage> methods;
 	private ArrayList<String> uses;
 	private String supers;
 	private ArrayList<String> interfaces;
@@ -15,15 +17,17 @@ public class ClassContainer {
 	public ClassContainer(String className) {
 		this.className = className;
 		this.fields = new ArrayList<FieldStorage>();
+		this.methods = new ArrayList<MethodStorage>();
 		this.uses = new ArrayList<String>();
 		this.supers = "";
 		this.interfaces = new ArrayList<String>();
 	}
 
-	public ClassContainer(String className, ArrayList<FieldStorage> fields, ArrayList<String> uses, String supers,
+	public ClassContainer(String className, ArrayList<FieldStorage> fields, ArrayList<MethodStorage> methods, ArrayList<String> uses, String supers,
 			ArrayList<String> interfaces) {
 		this.className = className;
 		this.fields = fields;
+		this.methods = methods;
 		this.uses = uses;
 		this.supers = supers;
 		this.interfaces = interfaces;
@@ -37,6 +41,10 @@ public class ClassContainer {
 		return fields;
 	}
 
+	public ArrayList<MethodStorage> getMethods() {
+		return methods;
+	}
+	
 	public ArrayList<String> getUses() {
 		return uses;
 	}
@@ -59,6 +67,10 @@ public class ClassContainer {
 
 	public void addField(FieldStorage field){
 		fields.add(field);
+	}
+	
+	public void addMethod(MethodStorage method){
+		methods.add(method);
 	}
 	
 	public void addInterface(String interfaceName){

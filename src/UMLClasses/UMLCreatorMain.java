@@ -16,6 +16,7 @@ public class UMLCreatorMain {
 	 */
 	public static void main(String[] args) throws IOException {
 		UMLArrows.getInstance().addDetector(new SingletonDetector("orange", "purple"));
+		UMLArrows.getInstance().addDetector(new DecoratorDetector("green", "blue"));
 		DesignParser.makeUML(args); // Runs the program
 	}
 }

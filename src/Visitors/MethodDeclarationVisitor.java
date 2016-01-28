@@ -65,6 +65,7 @@ public class MethodDeclarationVisitor extends ClassVisitor {
 
 		// Sends required variables to UMLArrows to add the method to the class
 		UMLArrows.getInstance().addMethodToBuffer(access, name, desc);
+		UMLArrows.getInstance().addMethodDesc(name, desc, access);
 
 		return toReturn;
 	}

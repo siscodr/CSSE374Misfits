@@ -90,7 +90,7 @@ public class UMLArrows {
 	}
 
 	/**
-	 * Adds the given class to the List of classes associated with current
+	 * Adds the given fields to the List of fields associated with current
 	 * class.
 	 * 
 	 * @param type
@@ -105,7 +105,7 @@ public class UMLArrows {
 	}
 
 	/**
-	 * Adds the given class to the List of classes associated with current
+	 * Adds the given field to the List of fields associated with current
 	 * class.
 	 * 
 	 * @param desc
@@ -116,6 +116,19 @@ public class UMLArrows {
 	public void addFieldDesc(String desc, int access) {
 		String currentType = Type.getType(desc).getClassName();
 		addField(currentType, access);
+	}
+	
+	/**
+	 * Adds the given method to the List of classes associated with current
+	 * class.
+	 * 
+	 * @param desc
+	 *            The method's Descriptor.
+	 * 
+	 * @return No return value.
+	 */
+	public void addMethodDesc(String name, String desc, int access) {
+		currentClass.addMethod(new MethodStorage(name, desc, access));
 	}
 
 	/**
@@ -225,6 +238,7 @@ public class UMLArrows {
 		}
 	}
 
+	
 	/**
 	 * Takes the given parameters to add to the method buffer in GraphViz
 	 * format.

@@ -1,6 +1,7 @@
 package UMLClasses;
 
 import ClassStorage.ClassContainer;
+import MisfitsPackage.WorkerForArrows;
 
 public class DecoratorDetector implements PatternDetector {
 	private String color;
@@ -33,13 +34,26 @@ public class DecoratorDetector implements PatternDetector {
 
 	public void setDetected(boolean detected) {
 		isDetected = detected;
-
 	}
 
 	public void detect(ClassContainer currentClass) {
-		// TODO Auto-generated method stub
-		// if(className.equals(methodName) && desc.contains(interfaceName)){
-		// setDetected(true);
+		String extension = currentClass.getSupers();
+		//System.out.println("This is our Extension: " + extension);
+		if (!extension.equals("")) {
+			for (MethodStorage method : currentClass.getMethods()) {
+				if (method.getName().equals("<init>")) {
+					for (String param : WorkerForArrows.getTypesFromDesc(method.getDesc())) {
+						//System.out.println(param);
+						if (WorkerForArrows.stripFunction(param).equals(extension)) {
+							setDetected(true);
+						}
+					}
+				}
+			}
+		}
+		// if(currentClass.getClassName().equals(methodName) &&
+		// desc.contains(interfaceName)){
+
 		// }
 	}
 
