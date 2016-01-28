@@ -1,4 +1,4 @@
-package UMLClasses;
+package ClassStorage;
 
 public class MethodStorage {
 	private String name;

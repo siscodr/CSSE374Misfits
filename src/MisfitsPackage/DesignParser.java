@@ -32,7 +32,6 @@ public class DesignParser {
 	 *             Exception where string doesn't link to a class
 	 */
 	public static void makeUML(String[] classes) throws IOException {
-		startDiagram("misfit_diagram");
 		// Creates whiteList for the classes to draw on UML
 		WorkerForArrows.addWhitelist(classes);
 
@@ -41,10 +40,9 @@ public class DesignParser {
 			UMLArrows.getInstance().resetUMLArrows(className);
 
 			makeReader(className);
-
-			UMLArrows.getInstance().printClass();
 		}
-		endDiagram();
+
+		UMLArrows.getInstance().printClasses("misfit_diagram");
 	}
 
 	/**
@@ -102,21 +100,5 @@ public class DesignParser {
 		reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 	}
 
-	/**
-	 * Makes the initial diagram starting code with given name (Should only be
-	 * ran once per diagram).
-	 * 
-	 * @param nameOfDiagram
-	 *            The name in which the diagram is to be titled.
-	 */
-	public static void startDiagram(String nameOfDiagram) {
-		System.out.print("digraph " + nameOfDiagram + "{\nrankdir=BT\n");
-	}
 
-	/**
-	 * Makes the end diagram code (Should only be ran once per diagram).
-	 */
-	public static void endDiagram() {
-		System.out.print("}\n");
-	}
 }

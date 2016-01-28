@@ -1,6 +1,7 @@
 package UMLClasses;
 
 import ClassStorage.ClassContainer;
+import ClassStorage.FieldStorage;
 import jdk.internal.org.objectweb.asm.Opcodes;
 
 public class SingletonDetector implements PatternDetector {

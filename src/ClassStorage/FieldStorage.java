@@ -1,4 +1,4 @@
-package UMLClasses;
+package ClassStorage;
 
 public class FieldStorage {
 	private int access;

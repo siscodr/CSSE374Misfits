@@ -1,6 +1,7 @@
 package UMLClasses;
 
 import ClassStorage.ClassContainer;
+import ClassStorage.MethodStorage;
 import MisfitsPackage.WorkerForArrows;
 
 public class DecoratorDetector implements PatternDetector {

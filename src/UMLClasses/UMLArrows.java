@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ClassStorage.ClassContainer;
+import ClassStorage.FieldStorage;
 import MisfitsPackage.WorkerForArrows;
 import jdk.internal.org.objectweb.asm.Type;
 
@@ -16,15 +17,13 @@ import jdk.internal.org.objectweb.asm.Type;
 public class UMLArrows {
 	private static UMLArrows ourArrows = new UMLArrows();
 	private ArrayList<PatternDetector> detectors = new ArrayList<PatternDetector>();
-	private StringBuffer fieldBuffer = new StringBuffer();
-	private StringBuffer methodBuffer = new StringBuffer();
 	private ClassContainer currentClass;
-	
+	private ArrayList<ClassContainer> classes = new ArrayList<ClassContainer>();
+
 	/**
 	 * Constructs a UMLArrows
 	 */
 	private UMLArrows() {
-		resetUMLArrows("");
 	}
 
 	/**
@@ -45,18 +44,17 @@ public class UMLArrows {
 			detector.setDetected(false);
 		}
 	}
-	
-	
+
 	/**
 	 * Resets the ArrayLists used to make arrows.
 	 * 
 	 * @return No return value.
 	 */
 	public void resetUMLArrows(String className) {
+		if (currentClass != null) {
+			classes.add(currentClass);
+		}
 		currentClass = new ClassContainer(WorkerForArrows.stripFunction(className));
-		fieldBuffer = new StringBuffer();
-		methodBuffer = new StringBuffer();
-		resetDetectors();
 	}
 
 	/**
@@ -68,9 +66,7 @@ public class UMLArrows {
 	 * @return No return value.
 	 */
 	public void addUse(String currentType) {
-		String cleanType = WorkerForArrows.stripFunction(currentType);
-		if (currentClass.checkExistingArrow(cleanType))
-			currentClass.addUse(cleanType);
+		currentClass.addUse(currentType);
 	}
 
 	/**
@@ -83,10 +79,7 @@ public class UMLArrows {
 	 * @return No return value.
 	 */
 	public void addUses(String desc) {
-		List<String> stypes = WorkerForArrows.getTypesFromDesc(desc);
-		for (String types : stypes) {
-			addUse(types);
-		}
+		currentClass.addUse(desc);
 	}
 
 	/**
@@ -99,14 +92,11 @@ public class UMLArrows {
 	 * @return No return value.
 	 */
 	public void addField(String type, int access) {
-		String cleanType = WorkerForArrows.stripFunction(type);
-		if (currentClass.checkExistingArrow(cleanType))
-			currentClass.addField(new FieldStorage(access, cleanType));
+		currentClass.addField(type, access);
 	}
 
 	/**
-	 * Adds the given field to the List of fields associated with current
-	 * class.
+	 * Adds the given field to the List of fields associated with current class.
 	 * 
 	 * @param desc
 	 *            The field's Descriptor.
@@ -114,10 +104,9 @@ public class UMLArrows {
 	 * @return No return value.
 	 */
 	public void addFieldDesc(String desc, int access) {
-		String currentType = Type.getType(desc).getClassName();
-		addField(currentType, access);
+		currentClass.addFieldDesc(desc, access);
 	}
-	
+
 	/**
 	 * Adds the given method to the List of classes associated with current
 	 * class.
@@ -128,7 +117,7 @@ public class UMLArrows {
 	 * @return No return value.
 	 */
 	public void addMethodDesc(String name, String desc, int access) {
-		currentClass.addMethod(new MethodStorage(name, desc, access));
+		currentClass.addMethodDesc(name, desc, access);
 	}
 
 	/**
@@ -140,11 +129,7 @@ public class UMLArrows {
 	 * @return No return value.
 	 */
 	public void setSuper(String currentType) {
-		if (currentType != null) {
-			String cleanType = WorkerForArrows.stripFunction(currentType);
-			if (currentClass.checkExistingArrow(cleanType))
-				currentClass.setSuper(cleanType);
-		}
+		currentClass.setSuper(currentType);
 	}
 
 	/**
@@ -157,31 +142,7 @@ public class UMLArrows {
 	 * @return No return value.
 	 */
 	public void addInterface(String currentType) {
-		String cleanType = WorkerForArrows.stripFunction(currentType);
-		if (currentClass.checkExistingArrow(cleanType))
-			currentClass.addInterface(cleanType);
-	}
-	
-	/**
-	 * Append the given string to the end of the FieldBuffer
-	 * 
-	 * @param toAppend
-	 *            A String to append to the current FieldBuffer
-	 * @return No return value.
-	 */
-	public void addToFieldBuffer(String toAppend) {
-		this.fieldBuffer.append(toAppend);
-	}
-
-	/**
-	 * Append the given string to the end of the MethodBuffer
-	 * 
-	 * @param toAppend
-	 *            A String to append to the current MethodBuffer
-	 * @return No return value.
-	 */
-	public void addToMethodBuffer(String toAppend) {
-		this.methodBuffer.append(toAppend);
+		currentClass.addInterface(currentType);
 	}
 
 	/**
@@ -195,28 +156,56 @@ public class UMLArrows {
 	 *            A String representation of name of the current class
 	 * @return No return value
 	 */
-	public void printClass() {
-		String pattern = "";
-		String color = "";
-		String fillColor = "";
+	public void printClasses(String nameOfDiagram) {
+		String pattern;
+		String color;
+		String fillColor;
 		// Will use hashmap here in future
 		/*
 		 * if(isSingle){ pattern = "\\n\\<\\<Singleton\\>\\>"; color =
 		 * "color=\"purple\""; }
 		 */
-		for (PatternDetector detector : detectors) {
-			detector.detect(currentClass);
-			if (detector.isDetected()) {
-				pattern = "\\n\\<\\<" + detector.getPattern() + "\\>\\>";
-				color = "color=\"" + detector.getColor() + "\"";
-				fillColor = ", fillcolor=\"" + detector.getFillColor() + "\" style=\"filled\"";
+		startDiagram(nameOfDiagram);
+		for (ClassContainer tempClass : classes) {
+			pattern = "";
+			color = "";
+			fillColor = "";
+			for (PatternDetector detector : detectors) {
+				resetDetectors();
+				detector.detect(tempClass);
+				if (detector.isDetected()) {
+					pattern = "\\n\\<\\<" + detector.getPattern() + "\\>\\>";
+					color = "color=\"" + detector.getColor() + "\"";
+					fillColor = ", fillcolor=\"" + detector.getFillColor() + "\" style=\"filled\"";
+				}
 			}
+			System.out.print("   " + tempClass.getClassName() + " [\n     shape=\"record\"  " + color + fillColor
+					+ "    label = \"{" + tempClass.getClassName() + pattern + "|"
+					+ tempClass.getfieldBuffer().toString() + "|" + tempClass.getMethodBuffer().toString()
+					+ "\n}\"\n];\n");
+			printArrows(tempClass);
 		}
-		System.out.print("   " + currentClass.getClassName() + " [\n     shape=\"record\"  " + color + fillColor + "    label = \"{"
-				+ currentClass.getClassName() + pattern + "|" + fieldBuffer.toString() + "|" + methodBuffer.toString() + "\n}\"\n];\n");
-		printArrows();
+		endDiagram();
 	}
 
+	/**
+	 * Makes the initial diagram starting code with given name (Should only be
+	 * ran once per diagram).
+	 * 
+	 * @param nameOfDiagram
+	 *            The name in which the diagram is to be titled.
+	 */
+	public static void startDiagram(String nameOfDiagram) {
+		System.out.print("digraph " + nameOfDiagram + "{\nrankdir=BT\n");
+	}
+
+	/**
+	 * Makes the end diagram code (Should only be ran once per diagram).
+	 */
+	public static void endDiagram() {
+		System.out.print("}\n");
+	}
+	
 	/**
 	 * Takes the given parameters to add to the field buffer in GraphViz format.
 	 * 
@@ -234,11 +223,10 @@ public class UMLArrows {
 			String symbol = WorkerForArrows.makeSymbol(access);
 			String type2 = WorkerForArrows.stripFunction(type);
 			String temp = symbol + " " + name + " : " + type2 + "\\l";
-			this.addToFieldBuffer(temp);
+			currentClass.addToFieldBuffer(temp);
 		}
 	}
 
-	
 	/**
 	 * Takes the given parameters to add to the method buffer in GraphViz
 	 * format.
@@ -260,7 +248,7 @@ public class UMLArrows {
 			String returnType = WorkerForArrows.stripFunction(rType);
 			String temp = symbol + name + "(" + stypes.toString() + ") : " + returnType + "\\l ";
 
-			this.addToMethodBuffer(temp);
+			currentClass.addToMethodBuffer(temp);
 		}
 	}
 
@@ -272,11 +260,11 @@ public class UMLArrows {
 	 *            class
 	 * @return No return value
 	 */
-	private void printArrows() {
-		printUses();
-		printFields();
-		printInterfaces();
-		printSupers();
+	private void printArrows(ClassContainer tempClass) {
+		printUses(tempClass);
+		printFields(tempClass);
+		printInterfaces(tempClass);
+		printSupers(tempClass);
 	}
 
 	/**
@@ -287,10 +275,11 @@ public class UMLArrows {
 	 *            class
 	 * @return No return type.
 	 */
-	private void printUses() {
-		for (String types : currentClass.getUses()) {
+	private void printUses(ClassContainer tempClass) {
+		for (String types : tempClass.getUses()) {
 			if (types.contains("_")) {
-				System.out.println(currentClass.getClassName() + " -> " + types + " [arrowhead=\"vee\", style=\"dashed\"];");
+				System.out.println(
+						tempClass.getClassName() + " -> " + types + " [arrowhead=\"vee\", style=\"dashed\"];");
 			}
 		}
 	}
@@ -303,10 +292,10 @@ public class UMLArrows {
 	 *            class
 	 * @return No return type.
 	 */
-	private void printFields() {
-		for (FieldStorage field : currentClass.getFields()) {
+	private void printFields(ClassContainer tempClass) {
+		for (FieldStorage field : tempClass.getFields()) {
 			if (field.getType().contains("_")) {
-				System.out.println(currentClass.getClassName() + " -> " + field.getType() + " [arrowhead=\"vee\"];");
+				System.out.println(tempClass.getClassName() + " -> " + field.getType() + " [arrowhead=\"vee\"];");
 			}
 		}
 	}
@@ -319,10 +308,11 @@ public class UMLArrows {
 	 *            class
 	 * @return No return type.
 	 */
-	private void printInterfaces() {
-		for (String interf : currentClass.getInterfaces()) {
+	private void printInterfaces(ClassContainer tempClass) {
+		for (String interf : tempClass.getInterfaces()) {
 			if (interf.contains("_")) {
-				System.out.println(currentClass.getClassName() + " -> " + interf + " [arrowhead=\"onormal\", style=\"dashed\"];");
+				System.out.println(
+						tempClass.getClassName() + " -> " + interf + " [arrowhead=\"onormal\", style=\"dashed\"];");
 			}
 		}
 	}
@@ -335,9 +325,10 @@ public class UMLArrows {
 	 *            class
 	 * @return No return type.
 	 */
-	private void printSupers() {
-		if (currentClass.getSupers().contains("_")) {
-			System.out.println(currentClass.getClassName() + " -> " + currentClass.getSupers() + " [arrowhead=\"onormal\"];");
+	private void printSupers(ClassContainer tempClass) {
+		if (tempClass.getSupers().contains("_")) {
+			System.out.println(
+					tempClass.getClassName() + " -> " + tempClass.getSupers() + " [arrowhead=\"onormal\"];");
 		}
 	}
 }
