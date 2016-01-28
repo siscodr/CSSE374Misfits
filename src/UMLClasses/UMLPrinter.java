@@ -42,7 +42,7 @@ public class UMLPrinter {
 				}
 			}
 			System.out.print("   " + tempClass.getClassName() + " [\n     shape=\"record\"  " + color + fillColor
-					+ "    label = \"{" + tempClass.getClassName() + pattern + "|"
+					+ "    label = \"{" + tempClass.getClassName() + pattern + tempClass.getLabel() + "|"
 					+ tempClass.getfieldBuffer().toString() + "|" + tempClass.getMethodBuffer().toString()
 					+ "\n}\"\n];\n");
 			printArrows(tempClass);

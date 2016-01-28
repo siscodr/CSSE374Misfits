@@ -7,7 +7,6 @@ public class ArrowStorage {
 	public ArrowStorage(String targetType) {
 		super();
 		this.targetType = targetType;
-		this.label = "";
 	}
 
 	public String getTargetType() {
@@ -15,9 +14,13 @@ public class ArrowStorage {
 	}
 
 	public String getLabel() {
-		if(label != ""){
-			return "label = \" " + label +"\"";
+		if(this.label != null){
+			return "label = \" " + this.label +"\",";
 		}
-		return label;
+		return "";
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
 	}
 }

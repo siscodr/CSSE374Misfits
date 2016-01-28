@@ -49,6 +49,12 @@ public class DecoratorDetector implements PatternDetector {
 					for (String param : WorkerForArrows.getTypesFromDesc(method.getDesc())) {
 						//System.out.println(param);
 						if (WorkerForArrows.stripFunction(param).equals(extension)) {
+							currentClass.getSupers().setLabel("<<Decorates>>");
+							for(ClassContainer tempclass :UMLArrows.getInstance().getClasses()){
+								if(tempclass.getClassName().equals(extension)){
+									tempclass.setLabel("Component");
+								}
+							}
 							setDetected(true);
 						}
 					}

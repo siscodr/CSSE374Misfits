@@ -34,14 +34,14 @@ public class DesignParser {
 	public static void makeUML(String[] classes) throws IOException {
 		// Creates whiteList for the classes to draw on UML
 		WorkerForArrows.addWhitelist(classes);
-
+		
 		for (String className : classes) {
-
+			
 			UMLArrows.getInstance().resetUMLArrows(className);
 
 			makeReader(className);
 		}
-
+		UMLArrows.getInstance().resetUMLArrows("");
 		UMLArrows.getInstance().printClasses("misfit_diagram");
 	}
 

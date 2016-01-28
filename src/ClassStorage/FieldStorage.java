@@ -9,7 +9,6 @@ public class FieldStorage {
 		super();
 		this.access = access;
 		this.type = type;
-		this.label = "";
 	}
 
 	public int getAccess() {
@@ -19,13 +18,16 @@ public class FieldStorage {
 	public String getType() {
 		return type;
 	}
-	
+
 	public String getLabel() {
-		if(label != ""){
-			return "label = \" " + label +"\"";
+		if (this.label != null) {
+			return "label = \" " + label + "\"";
 		}
-		return label;
+		return "";
 	}
 
+	public void setLabel(String label) {
+		this.label = label;
+	}
 
 }

@@ -8,6 +8,7 @@ import jdk.internal.org.objectweb.asm.Type;
 
 public class ClassContainer {
 	private String className;
+	private String label;
 	private ArrayList<FieldStorage> fields;
 	private ArrayList<MethodStorage> methods;
 	private ArrayList<ArrowStorage> uses;
@@ -27,6 +28,18 @@ public class ClassContainer {
 		this.methodBuffer = new StringBuffer();
 	}
 
+
+	public String getLabel() {
+		if(this.label != null){
+			return "\\n\\<\\<" + this.label + "\\>\\>";
+		}
+		return "";
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
+	
 	public String getClassName() {
 		return className;
 	}
@@ -141,7 +154,7 @@ public class ClassContainer {
 	public void setSuper(String currentType) {
 		if (currentType != null) {
 			String cleanType = WorkerForArrows.stripFunction(currentType);
-			if (checkExistingArrow(currentType)) {
+			if (WorkerForArrows.unwantedTypes(cleanType)) {
 				this.supers = new ArrowStorage(cleanType);
 			}
 		}
