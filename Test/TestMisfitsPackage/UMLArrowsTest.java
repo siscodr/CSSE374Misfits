@@ -48,126 +48,134 @@ public class UMLArrowsTest {
 		// == used to test if it is the same Instance.
 		assertTrue(arrows == UMLArrows.getInstance());
 	}
+	
+	// UMLArrows.getFields() refactored to ClassContainer.getFields()
+//	@Test
+//	public void testgetFields() throws NoSuchFieldException,
+//			IllegalArgumentException, IllegalAccessException {
+//		UMLArrows arrows = UMLArrows.getInstance();
+//		Field fields = UMLArrows.class.getDeclaredField("fields");
+//		fields.setAccessible(true);
+//		ArrayList<String> fieldsv1 = new ArrayList<String>();
+//		fields.set(arrows, fieldsv1);
+//		// Checking for same instance using ==
+//		assertTrue(arrows.getFields() == fieldsv1);
+//		ArrayList<String> fieldsv2 = new ArrayList<String>();
+//		// Checking for different instance using !=
+//		assertTrue(arrows.getFields() != fieldsv2);
+//	}
 
-	@Test
-	public void testgetFields() throws NoSuchFieldException,
-			IllegalArgumentException, IllegalAccessException {
-		UMLArrows arrows = UMLArrows.getInstance();
-		Field fields = UMLArrows.class.getDeclaredField("fields");
-		fields.setAccessible(true);
-		ArrayList<String> fieldsv1 = new ArrayList<String>();
-		fields.set(arrows, fieldsv1);
-		// Checking for same instance using ==
-		assertTrue(arrows.getFields() == fieldsv1);
-		ArrayList<String> fieldsv2 = new ArrayList<String>();
-		// Checking for different instance using !=
-		assertTrue(arrows.getFields() != fieldsv2);
-	}
+	// UMLArrows.getFields() refactored to ClassContainer.getFields()
+//	@Test
+//	public void testgetFieldsValues() throws NoSuchFieldException,
+//			IllegalArgumentException, IllegalAccessException {
+//		UMLArrows arrows = UMLArrows.getInstance();
+//		Field fields = UMLArrows.class.getDeclaredField("fields");
+//		fields.setAccessible(true);
+//		ArrayList<String> fieldsv1 = new ArrayList<String>(Arrays.asList(
+//				"String", "cóol", "Understood"));
+//		fields.set(arrows, fieldsv1);
+//		// Checking for same instance using ==
+//		assertEquals(fieldsv1, arrows.getFields());
+//		ArrayList<String> fieldsv2 = new ArrayList<String>();
+//		// Checking for different instance using !=
+//		assertTrue(!arrows.getFields().equals(fieldsv2));
+//	}
 
-	@Test
-	public void testgetFieldsValues() throws NoSuchFieldException,
-			IllegalArgumentException, IllegalAccessException {
-		UMLArrows arrows = UMLArrows.getInstance();
-		Field fields = UMLArrows.class.getDeclaredField("fields");
-		fields.setAccessible(true);
-		ArrayList<String> fieldsv1 = new ArrayList<String>(Arrays.asList(
-				"String", "cóol", "Understood"));
-		fields.set(arrows, fieldsv1);
-		// Checking for same instance using ==
-		assertEquals(fieldsv1, arrows.getFields());
-		ArrayList<String> fieldsv2 = new ArrayList<String>();
-		// Checking for different instance using !=
-		assertTrue(!arrows.getFields().equals(fieldsv2));
-	}
+	// UMLArrows.getUses() refactored to ClassContainer.getUses()
+//	@Test
+//	public void testgetUses() throws NoSuchFieldException,
+//			IllegalArgumentException, IllegalAccessException {
+//		UMLArrows arrows = UMLArrows.getInstance();
+//		Field uses = UMLArrows.class.getDeclaredField("uses");
+//		uses.setAccessible(true);
+//		ArrayList<String> usesv1 = new ArrayList<String>();
+//		uses.set(arrows, usesv1);
+//		// Checking for same instance using ==
+//		assertTrue(arrows.getUses() == usesv1);
+//		ArrayList<String> usesv2 = new ArrayList<String>();
+//		// Checking for different instance using !=
+//		assertTrue(arrows.getUses() != usesv2);
+//	}
 
-	@Test
-	public void testgetUses() throws NoSuchFieldException,
-			IllegalArgumentException, IllegalAccessException {
-		UMLArrows arrows = UMLArrows.getInstance();
-		Field uses = UMLArrows.class.getDeclaredField("uses");
-		uses.setAccessible(true);
-		ArrayList<String> usesv1 = new ArrayList<String>();
-		uses.set(arrows, usesv1);
-		// Checking for same instance using ==
-		assertTrue(arrows.getUses() == usesv1);
-		ArrayList<String> usesv2 = new ArrayList<String>();
-		// Checking for different instance using !=
-		assertTrue(arrows.getUses() != usesv2);
-	}
+	// UMLArrows.getUses() refactored to ClassContainer.getUses()
+//	@Test
+//	public void testgetUsesValues() throws NoSuchFieldException,
+//			IllegalArgumentException, IllegalAccessException {
+//		UMLArrows arrows = UMLArrows.getInstance();
+//		Field uses = UMLArrows.class.getDeclaredField("uses");
+//		uses.setAccessible(true);
+//		ArrayList<String> usesv1 = new ArrayList<String>(Arrays.asList(
+//				"String", "cóol", "Understood"));
+//		uses.set(arrows, usesv1);
+//		// Checking for same instance using ==
+//		assertEquals(usesv1, arrows.getUses());
+//		ArrayList<String> usesv2 = new ArrayList<String>();
+//		// Checking for different instance using !=
+//		assertTrue(!arrows.getUses().equals(usesv2));
+//	}
 
-	@Test
-	public void testgetUsesValues() throws NoSuchFieldException,
-			IllegalArgumentException, IllegalAccessException {
-		UMLArrows arrows = UMLArrows.getInstance();
-		Field uses = UMLArrows.class.getDeclaredField("uses");
-		uses.setAccessible(true);
-		ArrayList<String> usesv1 = new ArrayList<String>(Arrays.asList(
-				"String", "cóol", "Understood"));
-		uses.set(arrows, usesv1);
-		// Checking for same instance using ==
-		assertEquals(usesv1, arrows.getUses());
-		ArrayList<String> usesv2 = new ArrayList<String>();
-		// Checking for different instance using !=
-		assertTrue(!arrows.getUses().equals(usesv2));
-	}
+	// UMLArrows.getInterfaces() refactored to ClassContainer.getInterfaces()
+//	@Test
+//	public void testgetInterfaces() throws NoSuchFieldException,
+//			IllegalArgumentException, IllegalAccessException {
+//		UMLArrows arrows = UMLArrows.getInstance();
+//		Field interfaces = UMLArrows.class.getDeclaredField("interfaces");
+//		interfaces.setAccessible(true);
+//		ArrayList<String> interfacesv1 = new ArrayList<String>();
+//		interfaces.set(arrows, interfacesv1);
+//		// Checking for same instance using ==
+//		assertTrue(arrows.getInterfaces() == interfacesv1);
+//		ArrayList<String> interfacesv2 = new ArrayList<String>();
+//		// Checking for different instance using !=
+//		assertTrue(arrows.getInterfaces() != interfacesv2);
+//	}
 
-	@Test
-	public void testgetInterfaces() throws NoSuchFieldException,
-			IllegalArgumentException, IllegalAccessException {
-		UMLArrows arrows = UMLArrows.getInstance();
-		Field interfaces = UMLArrows.class.getDeclaredField("interfaces");
-		interfaces.setAccessible(true);
-		ArrayList<String> interfacesv1 = new ArrayList<String>();
-		interfaces.set(arrows, interfacesv1);
-		// Checking for same instance using ==
-		assertTrue(arrows.getInterfaces() == interfacesv1);
-		ArrayList<String> interfacesv2 = new ArrayList<String>();
-		// Checking for different instance using !=
-		assertTrue(arrows.getInterfaces() != interfacesv2);
-	}
+	// UMLArrows.getInterfaces() refactored to ClassContainer.getInterfaces()
+//	@Test
+//	public void testgetInterfacesValues() throws NoSuchFieldException,
+//			IllegalArgumentException, IllegalAccessException {
+//		UMLArrows arrows = UMLArrows.getInstance();
+//		Field interfaces = UMLArrows.class.getDeclaredField("interfaces");
+//		interfaces.setAccessible(true);
+//		ArrayList<String> interfacesv1 = new ArrayList<String>(Arrays.asList(
+//				"String", "cóol", "Understood"));
+//		interfaces.set(arrows, interfacesv1);
+//		// Checking for same instance using ==
+//		assertEquals(interfacesv1, arrows.getInterfaces());
+//		ArrayList<String> interfacesv2 = new ArrayList<String>();
+//		// Checking for different instance using !=
+//		assertTrue(!arrows.getInterfaces().equals(interfacesv2));
+//	}
 
-	@Test
-	public void testgetInterfacesValues() throws NoSuchFieldException,
-			IllegalArgumentException, IllegalAccessException {
-		UMLArrows arrows = UMLArrows.getInstance();
-		Field interfaces = UMLArrows.class.getDeclaredField("interfaces");
-		interfaces.setAccessible(true);
-		ArrayList<String> interfacesv1 = new ArrayList<String>(Arrays.asList(
-				"String", "cóol", "Understood"));
-		interfaces.set(arrows, interfacesv1);
-		// Checking for same instance using ==
-		assertEquals(interfacesv1, arrows.getInterfaces());
-		ArrayList<String> interfacesv2 = new ArrayList<String>();
-		// Checking for different instance using !=
-		assertTrue(!arrows.getInterfaces().equals(interfacesv2));
-	}
+	// UMLArrows.getSupers() refactored to ClassContainer.getSupers()
+//	@Test
+//	public void testgetSupers() throws NoSuchFieldException,
+//			IllegalArgumentException, IllegalAccessException {
+//		UMLArrows arrows = UMLArrows.getInstance();
+//		Field supers = UMLArrows.class.getDeclaredField("supers");
+//		supers.setAccessible(true);
+//		String supersv1 = "";
+//		supers.set(arrows, supersv1);
+//		// Checking for same instance using ==
+//		assertTrue(arrows.getSupers() == supersv1);
+//	}
 
-	@Test
-	public void testgetSupers() throws NoSuchFieldException,
-			IllegalArgumentException, IllegalAccessException {
-		UMLArrows arrows = UMLArrows.getInstance();
-		Field supers = UMLArrows.class.getDeclaredField("supers");
-		supers.setAccessible(true);
-		String supersv1 = "";
-		supers.set(arrows, supersv1);
-		// Checking for same instance using ==
-		assertTrue(arrows.getSupers() == supersv1);
-	}
-
-	@Test
-	public void testgetSupersValues() throws NoSuchFieldException,
-			IllegalArgumentException, IllegalAccessException {
-		UMLArrows arrows = UMLArrows.getInstance();
-		Field supers = UMLArrows.class.getDeclaredField("supers");
-		supers.setAccessible(true);
-		String supersv1 = "Understood";
-		supers.set(arrows, supersv1);
-		// Checking for same instance using ==
-		assertEquals(supersv1, arrows.getSupers());
-		String supersv2 = "Hello_World";
-		// Checking for different instance using !=
-		assertTrue(!arrows.getSupers().equals(supersv2));
-	}
+	// UMLArrows.getSupers() refactored to ClassContainer.getSupers()
+//	@Test
+//	public void testgetSupersValues() throws NoSuchFieldException,
+//			IllegalArgumentException, IllegalAccessException {
+//		UMLArrows arrows = UMLArrows.getInstance();
+//		Field supers = UMLArrows.class.getDeclaredField("supers");
+//		supers.setAccessible(true);
+//		String supersv1 = "Understood";
+//		supers.set(arrows, supersv1);
+//		// Checking for same instance using ==
+//		assertEquals(supersv1, arrows.getSupers());
+//		String supersv2 = "Hello_World";
+//		// Checking for different instance using !=
+//		assertTrue(!arrows.getSupers().equals(supersv2));
+//	}
 
 	@Test
 	public void testresetUMLArrows() throws NoSuchFieldException,
@@ -417,47 +425,49 @@ public class UMLArrowsTest {
 		assertEquals(usesarray, uses.get(arrows));
 	}
 
-	@Test
-	public void testaddFieldObject() throws NoSuchFieldException,
-			SecurityException, IllegalArgumentException, IllegalAccessException {
-		UMLArrows arrows = UMLArrows.getInstance();
-		Field whitelist = WorkerForArrows.class.getDeclaredField("whitelist");
-		whitelist.setAccessible(true);
-		ArrayList<String> whitelistv1 = new ArrayList<String>(
-				Arrays.asList("java_lang_Object"));
-		whitelist.set(arrows, whitelistv1);
-		Field fields = UMLArrows.class.getDeclaredField("fields");
-		fields.setAccessible(true);
-		ArrayList<String> fieldsarray = new ArrayList<String>();
-		fields.set(arrows, new ArrayList<String>());
-		// We must avoid having the stripper from touching this string
-		String toAdd = "java_lang_Object";
-		String type = "java/lang/Object";
-		fieldsarray.add(toAdd);
-		arrows.addField(type);
-		assertEquals(fieldsarray, fields.get(arrows));
-	}
-
-	@Test
-	public void testaddFieldUMLArrows() throws NoSuchFieldException,
-			SecurityException, IllegalArgumentException, IllegalAccessException {
-		UMLArrows arrows = UMLArrows.getInstance();
-		Field whitelist = WorkerForArrows.class.getDeclaredField("whitelist");
-		whitelist.setAccessible(true);
-		ArrayList<String> whitelistv1 = new ArrayList<String>(
-				Arrays.asList("TestMisfitsPackage_UMLArrowsTest"));
-		whitelist.set(arrows, whitelistv1);
-		Field fields = UMLArrows.class.getDeclaredField("fields");
-		fields.setAccessible(true);
-		ArrayList<String> fieldsarray = new ArrayList<String>();
-		fields.set(arrows, new ArrayList<String>());
-		// We must avoid having the stripper from touching this string
-		String toAdd = "TestMisfitsPackage_UMLArrowsTest";
-		String type = "TestMisfitsPackage/UMLArrowsTest";
-		fieldsarray.add(toAdd);
-		arrows.addField(type);
-		assertEquals(fieldsarray, fields.get(arrows));
-	}
+	// UMLArrows.addField() refactored to ClassContainer.addField()
+//	@Test
+//	public void testaddFieldObject() throws NoSuchFieldException,
+//			SecurityException, IllegalArgumentException, IllegalAccessException {
+//		UMLArrows arrows = UMLArrows.getInstance();
+//		Field whitelist = WorkerForArrows.class.getDeclaredField("whitelist");
+//		whitelist.setAccessible(true);
+//		ArrayList<String> whitelistv1 = new ArrayList<String>(
+//				Arrays.asList("java_lang_Object"));
+//		whitelist.set(arrows, whitelistv1);
+//		Field fields = UMLArrows.class.getDeclaredField("fields");
+//		fields.setAccessible(true);
+//		ArrayList<String> fieldsarray = new ArrayList<String>();
+//		fields.set(arrows, new ArrayList<String>());
+//		// We must avoid having the stripper from touching this string
+//		String toAdd = "java_lang_Object";
+//		String type = "java/lang/Object";
+//		fieldsarray.add(toAdd);
+//		arrows.addField(type);
+//		assertEquals(fieldsarray, fields.get(arrows));
+//	}
+	
+	// UMLArrows.addField() refactored to ClassContainer.addField()
+//	@Test
+//	public void testaddFieldUMLArrows() throws NoSuchFieldException,
+//			SecurityException, IllegalArgumentException, IllegalAccessException {
+//		UMLArrows arrows = UMLArrows.getInstance();
+//		Field whitelist = WorkerForArrows.class.getDeclaredField("whitelist");
+//		whitelist.setAccessible(true);
+//		ArrayList<String> whitelistv1 = new ArrayList<String>(
+//				Arrays.asList("TestMisfitsPackage_UMLArrowsTest"));
+//		whitelist.set(arrows, whitelistv1);
+//		Field fields = UMLArrows.class.getDeclaredField("fields");
+//		fields.setAccessible(true);
+//		ArrayList<String> fieldsarray = new ArrayList<String>();
+//		fields.set(arrows, new ArrayList<String>());
+//		// We must avoid having the stripper from touching this string
+//		String toAdd = "TestMisfitsPackage_UMLArrowsTest";
+//		String type = "TestMisfitsPackage/UMLArrowsTest";
+//		fieldsarray.add(toAdd);
+//		arrows.addField(type);
+//		assertEquals(fieldsarray, fields.get(arrows));
+//	}
 
 	@Test
 	public void testaddFieldDescObject() throws NoSuchFieldException,
