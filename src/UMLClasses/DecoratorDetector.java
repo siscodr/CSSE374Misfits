@@ -38,7 +38,10 @@ public class DecoratorDetector implements PatternDetector {
 	}
 
 	public void detect(ClassContainer currentClass) {
-		String extension = currentClass.getSupers();
+		if(currentClass.getSupers() == null){
+			return;
+		}
+		String extension = currentClass.getSupers().getTargetType();
 		//System.out.println("This is our Extension: " + extension);
 		if (!extension.equals("")) {
 			for (MethodStorage method : currentClass.getMethods()) {

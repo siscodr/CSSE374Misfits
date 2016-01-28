@@ -131,6 +131,10 @@ public class UMLArrows {
 	public void setSuper(String currentType) {
 		currentClass.setSuper(currentType);
 	}
+	
+	public ArrayList<ClassContainer> getClasses(){
+		return classes;
+	}
 
 	/**
 	 * Adds the given class to the List of classes that interfaces of this class
@@ -145,66 +149,9 @@ public class UMLArrows {
 		currentClass.addInterface(currentType);
 	}
 
-	/**
-	 * Print all the Buffers and Arrows to the Console. Then resets fields to
-	 * setup for the next class.
-	 * 
-	 * TODO:Add functionality to allow to export this as a file (Out of project
-	 * scope).
-	 * 
-	 * @param name
-	 *            A String representation of name of the current class
-	 * @return No return value
-	 */
-	public void printClasses(String nameOfDiagram) {
-		String pattern;
-		String color;
-		String fillColor;
-		// Will use hashmap here in future
-		/*
-		 * if(isSingle){ pattern = "\\n\\<\\<Singleton\\>\\>"; color =
-		 * "color=\"purple\""; }
-		 */
-		startDiagram(nameOfDiagram);
-		for (ClassContainer tempClass : classes) {
-			pattern = "";
-			color = "";
-			fillColor = "";
-			for (PatternDetector detector : detectors) {
-				resetDetectors();
-				detector.detect(tempClass);
-				if (detector.isDetected()) {
-					pattern = "\\n\\<\\<" + detector.getPattern() + "\\>\\>";
-					color = "color=\"" + detector.getColor() + "\"";
-					fillColor = ", fillcolor=\"" + detector.getFillColor() + "\" style=\"filled\"";
-				}
-			}
-			System.out.print("   " + tempClass.getClassName() + " [\n     shape=\"record\"  " + color + fillColor
-					+ "    label = \"{" + tempClass.getClassName() + pattern + "|"
-					+ tempClass.getfieldBuffer().toString() + "|" + tempClass.getMethodBuffer().toString()
-					+ "\n}\"\n];\n");
-			printArrows(tempClass);
-		}
-		endDiagram();
-	}
+	
 
-	/**
-	 * Makes the initial diagram starting code with given name (Should only be
-	 * ran once per diagram).
-	 * 
-	 * @param nameOfDiagram
-	 *            The name in which the diagram is to be titled.
-	 */
-	public static void startDiagram(String nameOfDiagram) {
-		System.out.print("digraph " + nameOfDiagram + "{\nrankdir=BT\n");
-	}
 
-	/**
-	 * Makes the end diagram code (Should only be ran once per diagram).
-	 */
-	public static void endDiagram() {
-		System.out.print("}\n");
-	}
 	
 	/**
 	 * Takes the given parameters to add to the field buffer in GraphViz format.
@@ -252,83 +199,11 @@ public class UMLArrows {
 		}
 	}
 
-	/**
-	 * Prints all the arrows to the console.
-	 * 
-	 * @param classString
-	 *            A String representation that has been Stripped of the current
-	 *            class
-	 * @return No return value
-	 */
-	private void printArrows(ClassContainer tempClass) {
-		printUses(tempClass);
-		printFields(tempClass);
-		printInterfaces(tempClass);
-		printSupers(tempClass);
+	public ArrayList<PatternDetector> getDetectors() {
+		return detectors;
+	}
+	public void printClasses(String nameOfDiagram) {
+		UMLPrinter.printClasses(nameOfDiagram, this.classes);
 	}
 
-	/**
-	 * Prints all 'Use' arrows with this class.
-	 * 
-	 * @param className
-	 *            A String representation that has been Stripped of the current
-	 *            class
-	 * @return No return type.
-	 */
-	private void printUses(ClassContainer tempClass) {
-		for (String types : tempClass.getUses()) {
-			if (types.contains("_")) {
-				System.out.println(
-						tempClass.getClassName() + " -> " + types + " [arrowhead=\"vee\", style=\"dashed\"];");
-			}
-		}
-	}
-
-	/**
-	 * Prints all 'Association' arrows with this class.
-	 * 
-	 * @param className
-	 *            A String representation that has been Stripped of the current
-	 *            class
-	 * @return No return type.
-	 */
-	private void printFields(ClassContainer tempClass) {
-		for (FieldStorage field : tempClass.getFields()) {
-			if (field.getType().contains("_")) {
-				System.out.println(tempClass.getClassName() + " -> " + field.getType() + " [arrowhead=\"vee\"];");
-			}
-		}
-	}
-
-	/**
-	 * Prints all 'Interface' arrows with this class.
-	 * 
-	 * @param className
-	 *            A String representation that has been Stripped of the current
-	 *            class
-	 * @return No return type.
-	 */
-	private void printInterfaces(ClassContainer tempClass) {
-		for (String interf : tempClass.getInterfaces()) {
-			if (interf.contains("_")) {
-				System.out.println(
-						tempClass.getClassName() + " -> " + interf + " [arrowhead=\"onormal\", style=\"dashed\"];");
-			}
-		}
-	}
-
-	/**
-	 * Prints all 'Extension' arrows with this class.
-	 * 
-	 * @param className
-	 *            A String representation that has been Stripped of the current
-	 *            class
-	 * @return No return type.
-	 */
-	private void printSupers(ClassContainer tempClass) {
-		if (tempClass.getSupers().contains("_")) {
-			System.out.println(
-					tempClass.getClassName() + " -> " + tempClass.getSupers() + " [arrowhead=\"onormal\"];");
-		}
-	}
 }

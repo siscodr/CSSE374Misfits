@@ -10,9 +10,9 @@ public class ClassContainer {
 	private String className;
 	private ArrayList<FieldStorage> fields;
 	private ArrayList<MethodStorage> methods;
-	private ArrayList<String> uses;
-	private String supers;
-	private ArrayList<String> interfaces;
+	private ArrayList<ArrowStorage> uses;
+	private ArrowStorage supers;
+	private ArrayList<ArrowStorage> interfaces;
 	private StringBuffer fieldBuffer;
 	private StringBuffer methodBuffer;
 
@@ -20,9 +20,9 @@ public class ClassContainer {
 		this.className = className;
 		this.fields = new ArrayList<FieldStorage>();
 		this.methods = new ArrayList<MethodStorage>();
-		this.uses = new ArrayList<String>();
-		this.supers = "";
-		this.interfaces = new ArrayList<String>();
+		this.uses = new ArrayList<ArrowStorage>();
+		this.supers = null;
+		this.interfaces = new ArrayList<ArrowStorage>();
 		this.fieldBuffer = new StringBuffer();
 		this.methodBuffer = new StringBuffer();
 	}
@@ -39,15 +39,15 @@ public class ClassContainer {
 		return methods;
 	}
 
-	public ArrayList<String> getUses() {
+	public ArrayList<ArrowStorage> getUses() {
 		return uses;
 	}
 
-	public String getSupers() {
+	public ArrowStorage getSupers() {
 		return supers;
 	}
 
-	public ArrayList<String> getInterfaces() {
+	public ArrayList<ArrowStorage> getInterfaces() {
 		return interfaces;
 	}
 
@@ -70,7 +70,7 @@ public class ClassContainer {
 	public void addUse(String currentType) {
 		String cleanType = WorkerForArrows.stripFunction(currentType);
 		if (checkExistingArrow(cleanType))
-			this.uses.add(cleanType);
+			this.uses.add(new ArrowStorage(cleanType));
 	}
 
 	/**
@@ -141,15 +141,16 @@ public class ClassContainer {
 	public void setSuper(String currentType) {
 		if (currentType != null) {
 			String cleanType = WorkerForArrows.stripFunction(currentType);
-			if (checkExistingArrow(cleanType))
-				this.supers = (cleanType);
+			if (checkExistingArrow(currentType)) {
+				this.supers = new ArrowStorage(cleanType);
+			}
 		}
 	}
 
 	public void addInterface(String interfaceName) {
 		String cleanType = WorkerForArrows.stripFunction(interfaceName);
 		if (checkExistingArrow(cleanType))
-			interfaces.add(cleanType);
+			interfaces.add(new ArrowStorage(cleanType));
 	}
 
 	/**
@@ -183,8 +184,46 @@ public class ClassContainer {
 	 * @return boolean If the arrow should be added to the diagram
 	 */
 	public boolean checkExistingArrow(String cleanType) {
-		return !uses.contains(cleanType) && checkfields(cleanType) && !supers.contains(cleanType)
-				&& !interfaces.contains(cleanType) && WorkerForArrows.unwantedTypes(cleanType);
+		boolean flag;
+		flag = WorkerForArrows.unwantedTypes(cleanType);
+		if (flag) {
+			flag = checkfields(cleanType);
+		}
+		if (flag) {
+			flag = checkUses(cleanType);
+		}
+		if (flag) {
+			flag = checkInterfaces(cleanType);
+		}
+		if (supers != null) {
+			if (cleanType.equals(supers.getTargetType())) {
+				flag = false;
+			}
+		}
+
+		// !uses.contains(cleanType) && checkfields(cleanType) &&
+		// !supers.getTargetType().equals(cleanType)
+		// && !interfaces.contains(cleanType) &&
+		// WorkerForArrows.unwantedTypes(cleanType);
+		return flag;
+	}
+
+	private boolean checkInterfaces(String cleanType) {
+		for (ArrowStorage tempInterface : interfaces) {
+			if (cleanType.equals(tempInterface.getTargetType())) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private boolean checkUses(String cleanType) {
+		for (ArrowStorage use : uses) {
+			if (cleanType.equals(use.getTargetType())) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	private boolean checkfields(String cleanType) {
