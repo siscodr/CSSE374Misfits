@@ -19,6 +19,14 @@ public class ClassContainer {
 	private boolean isInterface;
 	private ArrayList<MethodFieldsStorage> methodsField;
 
+	public ArrayList<MethodFieldsStorage> getMethodsField() {
+		return methodsField;
+	}
+
+	public void setMethodsField(ArrayList<MethodFieldsStorage> methodsField) {
+		this.methodsField = methodsField;
+	}
+
 	public ClassContainer(String className) {
 		this.className = className;
 		this.fields = new ArrayList<FieldStorage>();
