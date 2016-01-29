@@ -12,7 +12,7 @@ public class AdapterDetector implements PatternDetector {
 	private String pattern;
 	private String fillColor;
 	private boolean isDetected;
-	private FieldStorage adapteeField;
+	private ArrayList<FieldStorage> adapteeField;
 	
 	
 	public AdapterDetector(String color, String fillColor) {
@@ -20,6 +20,7 @@ public class AdapterDetector implements PatternDetector {
 		this.fillColor = fillColor;
 		this.isDetected = false;
 		this.pattern = "Adapter";
+		adapteeField = new ArrayList<FieldStorage>();
 	}
 
 	public String getPattern() {
@@ -46,16 +47,22 @@ public class AdapterDetector implements PatternDetector {
 	public void detect(ClassContainer currentClass) {
 		if (checkFields(currentClass)&&checkTarget(currentClass)) {
 			setDetected(true);
+			for(FieldStorage field: this.adapteeField){
+				labelAdaptees(field);
+			}
 		}
+		
 	}
 
 	private boolean checkTarget(ClassContainer currentClass) {
 		boolean isAdapter = false;
 		for(ArrowStorage inter : currentClass.getInterfaces()){
 			isAdapter = true;
+			labelTargets(inter);
 		}
 		if(currentClass.getSupers()!=null){
 			isAdapter=true;
+			labelTargets(currentClass.getSupers());
 		}
 		return isAdapter;
 	}
@@ -68,6 +75,15 @@ public class AdapterDetector implements PatternDetector {
 		}
 	}
 
+	private void labelAdaptees(FieldStorage field){
+		field.setLabel("<<Adapts>>");
+		for(ClassContainer currentClass : UMLArrows.getInstance().getClasses()){
+			if(currentClass.getClassName().equals(field.getType())){
+				currentClass.setLabel("Adaptee");
+			}
+		}
+	}
+	
 	private boolean checkFields(ClassContainer currentClass) {
 		ArrayList<MethodFieldsStorage> methods = currentClass.getMethodsField();
 		boolean fieldInMethods = false;
@@ -89,7 +105,7 @@ public class AdapterDetector implements PatternDetector {
 				}
 				if (adaptee) {
 					fieldInMethods = true;
-					adapteeField = field;
+					adapteeField.add(field);
 					//System.out.println("I am the adaptee: " + field.getType());
 				}
 			}
