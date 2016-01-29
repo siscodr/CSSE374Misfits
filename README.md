@@ -14,6 +14,9 @@ For the most part, our design for UMLs stayed the same.  We mostly just added ne
 Milestone 4:
 Because our code was so well designed, our design did not change in this milestone.
 
+Milestone 5:
+We refactored most of our code a lot.  Detection is implemented inside of detectors and adding class information happens in ClassContainer instead of UMLArrows.  UMLArrows still directs toward the current container.  All printing now occurs at the end of the program and happens from the UMLPrinter class.  
+
 Who did what 
 Milestone 1:
 Morgan Cook: Wrote code to print the class name in the UML, implemented the ‘use’ and ‘extends’ arrows, wrote code to draw the line between fields and methods, did constant quality assurance and drew the UML diagram 
@@ -34,6 +37,14 @@ Milestone 4:
 Morgan Cook: Added color to singleton class boxes, wrote singleton detection, wrote <<Singleton>> on classes that are singleton, updated the UML and documentation
 Donald Sisco: Made modifications to the code to allow for singleton detection
 Jonathan Soulsby: wrote all tests
+
+Milestone 5:
+Morgan Cook: Made detector classes and moved Singleton detector code into its detector class, created ClassContainer and extracted necessary information to this class, added label arrows and component label, updated all documentation
+
+Donald Sisco: refactored / repackaged the code, passed ClassContainers to detectors, implemented code for Decorator Detectors, made ArrowStorage and UMLPrinter, stopped classes from pointing at themselves, added implementation of interface detection, helped write the adapter detection logic
+
+Jonathan Soulsby: Fixed Singleton & UMLArrows tests, added detect methods to the detector classes, wrote adapter detection logic, wrote all tests
+
 
 Instructions for UML:
 1)	Download the code into Eclipse

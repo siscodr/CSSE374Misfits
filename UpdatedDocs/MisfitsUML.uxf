@@ -4,58 +4,42 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>108</x>
-      <y>270</y>
+      <x>96</x>
+      <y>582</y>
       <w>246</w>
-      <h>348</h>
+      <h>240</h>
     </coordinates>
-    <panel_attributes>MisfitsPackage::UMLArrows
+    <panel_attributes>UMLClasses::UMLArrows
 --
--ourArrows = new UMLArrows(): UMLArrows
+-ourArrows: UMLArrows
 -detectors: ArrayList&lt;PatternDetectors&gt;
--fields: ArrayList&lt;String&gt;
--uses: ArrayList&lt;String&gt;
--supers: String
--interfaces: ArrayList&lt;String&gt;
--fieldBuffer = new StringBuffer(): StringBuffer
--methodBuffer = new StringBuffer(): StringBuffer
--className: String
+-currentClass: ClassContainer
+-classes: ArrayList&lt;ClassContainer&gt;
 --
 +getInstance(): UMLArrows
 +addDetector(PatternDector): void
-+getFields(): ArrayList&lt;String&gt;
-+getUses(): ArrayList&lt;String&gt;
-+getInterfaces(): ArrayList&lt;String&gt;
-+getSupers(): String
-+resetUMLArrows(): void
 +resetDetectors(): void
-+addToFieldBuffer(String toAppend): void
-+addToMethodBuffer(String toAppend): void
++resetUMLArrows(String className): void
 +addUse(String currentType): void
 +addUses(String desc): void
 +addField(String desc): void
 +addFieldDesc(String): void
++addMethodDesc(String name, String desc, int access): void
 +setSuper(String currentType): void
 +addInterface(String currentType): void
-+printClass(String name): void
 +addFieldToBuffer(int access, String name, String desc): void
 +addMethodToBuffer(int access, String name, String desc): void
--checkExistingArrow(String cleanType): boolean
--printArrows(String classString): void
--printUses(String className): void
--printFields(String className): void
--printInterfaces(String className): void
--printSupers(String className): void
-+setClass(String className): void
-
-</panel_attributes>
++getDetectors(): ArrayList&lt;PatternDetector&gt;
++printClasses(String nameOfDiagram): void
++setIsInterface(boolean isInterface): void
++addMethodFields(MethodFieldsStorage methodFieldsStorage): void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1026</x>
-      <y>342</y>
+      <x>1014</x>
+      <y>570</y>
       <w>174</w>
       <h>84</h>
     </coordinates>
@@ -65,40 +49,42 @@
 +makeUML(String[] classes): void
 +makeSD(String[] classes): void
 -makeReader(String className): void
-+startDiagram(String nameOfDiagram): void
-+endDiagram(): void
---
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>198</x>
-      <y>804</y>
+      <x>156</x>
+      <y>1062</y>
       <w>336</w>
-      <h>72</h>
+      <h>120</h>
     </coordinates>
-    <panel_attributes>MisfitsPackage::MyMethodVisitor
+    <panel_attributes>Visitors::MyMethodVisitorSD
 --
+-instructions: ArrayList&lt;Instruction&gt;
+-name: String
 --
-+MyMethodVisitor(int api): ctor
-+MyMethodVisitor(int api, MethodVisitor toDecorate): ctor
++MyMethodVisitorSD(int api): ctor
++MyMethodVisitorSd(int api, MethodVisitor toDecorate): ctor
 +visitTypeInsn(int opCode, String val): void
 +visitMethodInsn(int opcode, String owner, String name, String desc, boolean bool): void
---
++visitVarInsn(int opcode, int var): void
++VisitAnnotation(String desc, boolean visible): AnnotationVisitor
++visitCode(): void
++visitEnd(): void
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>468</x>
-      <y>336</y>
+      <x>456</x>
+      <y>564</y>
       <w>348</w>
       <h>66</h>
     </coordinates>
-    <panel_attributes>MisfitsPackage::ClassFieldDeclarationVisitor
+    <panel_attributes>Visitors::ClassFieldDeclarationVisitor
 --
 --
 +ClassFieldDeclarationVisitor(int api): ctor
@@ -110,12 +96,12 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>468</x>
-      <y>408</y>
+      <x>456</x>
+      <y>636</y>
       <w>348</w>
       <h>66</h>
     </coordinates>
-    <panel_attributes>MisfitsPackage::ClassFieldVisitor
+    <panel_attributes>Visitors::ClassFieldVisitor
 --
 --
 +ClassFieldVisitor(int api): ctor
@@ -127,12 +113,12 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>462</x>
-      <y>564</y>
+      <x>450</x>
+      <y>792</y>
       <w>390</w>
       <h>66</h>
     </coordinates>
-    <panel_attributes>MisfitsPackage::ClassMethodVisitor
+    <panel_attributes>Visitors::ClassMethodVisitor
 --
 --
 +ClassMethodVisitor(int api): ctor
@@ -144,12 +130,12 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>468</x>
-      <y>162</y>
+      <x>456</x>
+      <y>390</y>
       <w>390</w>
       <h>66</h>
     </coordinates>
-    <panel_attributes>MisfitsPackage::InterfaceDeclarationVisitor
+    <panel_attributes>Visitors::InterfaceDeclarationVisitor
 --
 --
 +InterfaceDeclarationVisitor(int api): ctor
@@ -162,12 +148,12 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>462</x>
-      <y>642</y>
+      <x>450</x>
+      <y>870</y>
       <w>390</w>
       <h>66</h>
     </coordinates>
-    <panel_attributes>MisfitsPackage::MethodDeclarationVisitor
+    <panel_attributes>Visitors::MethodDeclarationVisitor
 --
 --
 +MethodDeclarationVisitor(int api): ctor
@@ -178,12 +164,12 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>468</x>
-      <y>246</y>
+      <x>456</x>
+      <y>474</y>
       <w>390</w>
       <h>66</h>
     </coordinates>
-    <panel_attributes>MisfitsPackage::SuperDeclarationVisitor
+    <panel_attributes>Visitors::SuperDeclarationVisitor
 --
 --
 +SuperDeclarationVisitor(int api): ctor
@@ -194,24 +180,22 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1356</x>
-      <y>390</y>
+      <x>1344</x>
+      <y>618</y>
       <w>138</w>
       <h>42</h>
     </coordinates>
-    <panel_attributes>MisfitsPackage::UMLCreatorMain
+    <panel_attributes>UMLClasses::UMLCreatorMain
 --
 --
-+main(String[] args): void
---
-</panel_attributes>
++main(String[] args): void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>852</x>
-      <y>198</y>
+      <x>840</x>
+      <y>426</y>
       <w>186</w>
       <h>156</h>
     </coordinates>
@@ -221,8 +205,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>852</x>
-      <y>276</y>
+      <x>840</x>
+      <y>504</y>
       <w>186</w>
       <h>90</h>
     </coordinates>
@@ -232,8 +216,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>810</x>
-      <y>348</y>
+      <x>798</x>
+      <y>576</y>
       <w>228</w>
       <h>36</h>
     </coordinates>
@@ -243,8 +227,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>810</x>
-      <y>384</y>
+      <x>798</x>
+      <y>612</y>
       <w>228</w>
       <h>60</h>
     </coordinates>
@@ -254,8 +238,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>846</x>
-      <y>408</y>
+      <x>834</x>
+      <y>636</y>
       <w>192</w>
       <h>186</h>
     </coordinates>
@@ -265,8 +249,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>846</x>
-      <y>420</y>
+      <x>834</x>
+      <y>648</y>
       <w>210</w>
       <h>246</h>
     </coordinates>
@@ -276,30 +260,30 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>390</x>
-      <y>702</y>
-      <w>114</w>
-      <h>114</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>10.0;170.0;170.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
       <x>348</x>
-      <y>180</y>
-      <w>132</w>
+      <y>930</y>
+      <w>144</w>
       <h>144</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>10.0;220.0;200.0;10.0</additional_attributes>
+    <additional_attributes>10.0;220.0;220.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>348</x>
-      <y>270</y>
+      <x>336</x>
+      <y>408</y>
+      <w>132</w>
+      <h>186</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;290.0;200.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>336</x>
+      <y>498</y>
       <w>132</w>
       <h>96</h>
     </coordinates>
@@ -309,30 +293,30 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>348</x>
-      <y>354</y>
-      <w>132</w>
-      <h>48</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>10.0;60.0;200.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>348</x>
-      <y>432</y>
-      <w>132</w>
-      <h>48</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>10.0;60.0;200.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>348</x>
+      <x>336</x>
       <y>582</y>
+      <w>132</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;60.0;200.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>336</x>
+      <y>660</y>
+      <w>132</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;60.0;200.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>336</x>
+      <y>810</y>
       <w>126</w>
       <h>18</h>
     </coordinates>
@@ -342,41 +326,41 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>348</x>
-      <y>600</y>
+      <x>336</x>
+      <y>816</y>
       <w>132</w>
-      <h>54</h>
+      <h>66</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;200.0;70.0</additional_attributes>
+    <additional_attributes>10.0;10.0;200.0;90.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>222</x>
-      <y>612</y>
-      <w>18</w>
-      <h>204</h>
+      <x>180</x>
+      <y>816</y>
+      <w>48</w>
+      <h>258</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;320.0</additional_attributes>
+    <additional_attributes>60.0;10.0;10.0;410.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>312</x>
-      <y>60</y>
+      <x>300</x>
+      <y>288</y>
       <w>750</w>
-      <h>294</h>
+      <h>306</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>10.0;350.0;90.0;30.0;810.0;10.0;1230.0;470.0</additional_attributes>
+    <additional_attributes>10.0;490.0;90.0;30.0;810.0;10.0;1230.0;470.0</additional_attributes>
   </element>
   <element>
     <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
-      <x>48</x>
-      <y>396</y>
+      <x>36</x>
+      <y>624</y>
       <w>72</w>
       <h>132</h>
     </coordinates>
@@ -386,8 +370,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1194</x>
-      <y>378</y>
+      <x>1182</x>
+      <y>606</y>
       <w>174</w>
       <h>48</h>
     </coordinates>
@@ -397,24 +381,22 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1356</x>
-      <y>450</y>
+      <x>1344</x>
+      <y>678</y>
       <w>138</w>
       <h>42</h>
     </coordinates>
-    <panel_attributes>MisfitsPackage::SDCreatorMain
+    <panel_attributes>SDClasses::SDCreatorMain
 --
 --
-+main(String[] args): void
---
-</panel_attributes>
++main(String[] args): void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1194</x>
-      <y>396</y>
+      <x>1182</x>
+      <y>624</y>
       <w>174</w>
       <h>90</h>
     </coordinates>
@@ -424,12 +406,12 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>468</x>
-      <y>492</y>
+      <x>456</x>
+      <y>720</y>
       <w>348</w>
       <h>48</h>
     </coordinates>
-    <panel_attributes>MisfitsPackage::mySignatureVisitor
+    <panel_attributes>Visitors::mySignatureVisitor
 --
 --
 +visitClassType(String): void
@@ -439,8 +421,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>768</x>
-      <y>468</y>
+      <x>756</x>
+      <y>696</y>
       <w>24</w>
       <h>36</h>
     </coordinates>
@@ -450,8 +432,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>348</x>
-      <y>528</y>
+      <x>336</x>
+      <y>756</y>
       <w>132</w>
       <h>24</h>
     </coordinates>
@@ -461,12 +443,12 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>150</x>
-      <y>912</y>
+      <x>138</x>
+      <y>1200</y>
       <w>336</w>
       <h>102</h>
     </coordinates>
-    <panel_attributes>MisfitsPackage::MethodInstruction
+    <panel_attributes>SDClasses::MethodInstruction
 --
 name: String
 owner: String
@@ -483,23 +465,23 @@ returns: String
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>324</x>
-      <y>870</y>
-      <w>18</w>
-      <h>54</h>
+      <x>282</x>
+      <y>1176</y>
+      <w>48</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+    <additional_attributes>60.0;40.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>582</x>
-      <y>810</y>
+      <x>570</x>
+      <y>1038</y>
       <w>336</w>
       <h>102</h>
     </coordinates>
-    <panel_attributes>MisfitsPackage::TypeInstruction
+    <panel_attributes>SDClasses::TypeInstruction
 --
 opCode: Int
 Type: String
@@ -513,12 +495,12 @@ Type: String
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1194</x>
-      <y>582</y>
+      <x>1182</x>
+      <y>810</y>
       <w>246</w>
       <h>168</h>
     </coordinates>
-    <panel_attributes>MisfitsPackage::SDArrows
+    <panel_attributes>SDClasses::SDArrows
 --
 -ourArrows: SDArrows
 -instructionSets: HashMap
@@ -540,17 +522,17 @@ Type: String
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1128</x>
-      <y>930</y>
+      <x>1116</x>
+      <y>1158</y>
       <w>150</w>
       <h>72</h>
     </coordinates>
-    <panel_attributes>MisfitsPackage::Instruction
+    <panel_attributes>SDClasses::Instruction
 &lt;&lt;Interface&gt;&gt;
 --
 --
 +printInstruction(): void
-+execute(): void
++execute(String caller, int depth): void
 --
 </panel_attributes>
     <additional_attributes/>
@@ -558,14 +540,14 @@ Type: String
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>360</x>
-      <y>1110</y>
+      <x>348</x>
+      <y>1338</y>
       <w>174</w>
       <h>102</h>
     </coordinates>
     <panel_attributes>MisfitsPackage::WorkerForArrows
 --
--WhiteList: ArrayList
+-whiteList: ArrayList
 --
 +getWhiteList(): ArrayList
 +addWhiteList(String): void
@@ -580,52 +562,52 @@ Type: String
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>528</x>
-      <y>822</y>
-      <w>66</w>
-      <h>18</h>
+      <x>486</x>
+      <y>1050</y>
+      <w>96</w>
+      <h>96</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>90.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>140.0;10.0;10.0;140.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>528</x>
-      <y>846</y>
-      <w>612</w>
-      <h>114</h>
+      <x>486</x>
+      <y>1152</y>
+      <w>642</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>1000.0;170.0;70.0;170.0;10.0;10.0</additional_attributes>
+    <additional_attributes>1050.0;40.0;120.0;40.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>480</x>
-      <y>744</y>
+      <x>468</x>
+      <y>972</y>
       <w>876</w>
       <h>354</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>1430.0;10.0;1440.0;570.0;90.0;560.0;10.0;420.0</additional_attributes>
+    <additional_attributes>1430.0;10.0;1440.0;570.0;90.0;560.0;10.0;520.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>528</x>
-      <y>636</y>
-      <w>678</w>
-      <h>186</h>
+      <x>486</x>
+      <y>864</y>
+      <w>708</w>
+      <h>264</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>1110.0;10.0;540.0;210.0;10.0;290.0</additional_attributes>
+    <additional_attributes>1160.0;10.0;590.0;210.0;10.0;420.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1146</x>
-      <y>420</y>
+      <x>1134</x>
+      <y>648</y>
       <w>78</w>
       <h>174</h>
     </coordinates>
@@ -635,8 +617,8 @@ Type: String
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1242</x>
-      <y>744</y>
+      <x>1230</x>
+      <y>972</y>
       <w>18</w>
       <h>198</h>
     </coordinates>
@@ -646,8 +628,8 @@ Type: String
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>528</x>
-      <y>744</y>
+      <x>516</x>
+      <y>972</y>
       <w>876</w>
       <h>432</h>
     </coordinates>
@@ -657,30 +639,30 @@ Type: String
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>372</x>
-      <y>1008</y>
+      <x>360</x>
+      <y>1296</y>
       <w>18</w>
-      <h>114</h>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>10.0;170.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>120</x>
-      <y>612</y>
+      <x>108</x>
+      <y>816</y>
       <w>252</w>
-      <h>576</h>
+      <h>600</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>400.0;940.0;10.0;790.0;20.0;10.0</additional_attributes>
+    <additional_attributes>400.0;980.0;10.0;830.0;20.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>12</x>
-      <y>0</y>
+      <x>0</x>
+      <y>228</y>
       <w>1092</w>
       <h>1212</h>
     </coordinates>
@@ -690,8 +672,8 @@ Type: String
   <element>
     <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
-      <x>1422</x>
-      <y>594</y>
+      <x>1410</x>
+      <y>822</y>
       <w>84</w>
       <h>132</h>
     </coordinates>
@@ -701,8 +683,8 @@ Type: String
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>912</x>
-      <y>852</y>
+      <x>900</x>
+      <y>1080</y>
       <w>228</w>
       <h>96</h>
     </coordinates>
@@ -712,8 +694,8 @@ Type: String
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>912</x>
-      <y>720</y>
+      <x>900</x>
+      <y>948</y>
       <w>294</w>
       <h>126</h>
     </coordinates>
@@ -723,19 +705,19 @@ Type: String
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>480</x>
-      <y>966</y>
+      <x>468</x>
+      <y>1194</y>
       <w>660</w>
-      <h>18</h>
+      <h>78</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>1080.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>1080.0;10.0;10.0;110.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>120</x>
-      <y>150</y>
+      <x>108</x>
+      <y>378</y>
       <w>126</w>
       <h>84</h>
     </coordinates>
@@ -754,19 +736,19 @@ Type: String
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>168</x>
-      <y>228</y>
+      <x>156</x>
+      <y>456</y>
       <w>18</w>
-      <h>54</h>
+      <h>138</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;210.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>42</x>
-      <y>18</y>
+      <x>30</x>
+      <y>246</y>
       <w>120</w>
       <h>108</h>
     </coordinates>
@@ -788,12 +770,275 @@ Type: String
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>126</x>
-      <y>120</y>
+      <x>114</x>
+      <y>348</y>
       <w>18</w>
       <h>42</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>876</x>
+      <y>192</y>
+      <w>114</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>ClassStorage::ArrowStorage
+--
+-targetType: String
+-label: String
+--
++getTargetType(): String
++getLabel(): String
++setLabel(String label): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1212</x>
+      <y>78</y>
+      <w>276</w>
+      <h>402</h>
+    </coordinates>
+    <panel_attributes>ClassStorage::ClassContainer
+--
+-className: String
+-label: String
+-fields: ArrayList&lt;FieldStorage&gt;
+-methods: ArrayList&lt;MethodStorage&gt;
+-uses: ArrayList&lt;ArrowStorage&gt;
+-supers: ArrowStorage
+-interfaces: ArrayList&lt;ArrowStorage&gt;
+-fieldBuffer: StringBuffer
+-methodBuffer: StringBuffer
+-isInterface: boolean
+-methodsField: ArrayList&lt;MethodFieldsStorage&gt;
+--
++getMethodsField(): ArrayList&lt;MethodFieldsStorage&gt;
++setMethodsField(ArrayList&lt;MethodFieldsStorage&gt; methodsField
++getLabel(): String
++setLabel(String label): void
++getClassName(): String
++getFields(): ArrayList&lt;FieldStorage&gt;
++getMethods(): ArrayList&lt;MethodStorage&gt;
++getUses(): ArrayList&lt;ArrowStorage&gt;
++getSupers(): ArrowStorage
++getInterfaces(): ArrayList&lt;ArrowStorage&gt;
++getMethodBuffer(): StringBuffer
++getfieldBuffer(): StringBuffer
++setIsInterface(boolean isInterface0: void
++addUse(String currentType): void
++addUses(String desc): void
++addField(String type, int access): void
++addFieldDesc(String desc, int access): void
++addMethodDesc(String name, String desc, int access): void
++setSuper(String currentType): void
++addInterface(String interfaceName): void
++addToFieldBuffer(String toAppend): void
++addToMethodBuffer(String toAppend): void
+_checkExistingArrow(String cleanType): boolean
+-checkInterfaces(String cleanType): boolean
+-checkUses(String cleanType): boolean
+-checkfields(String cleanType): boolean
++getIsInterface(): boolean
++addMethodFields(MethodFieldsStorage methodFieldsStorage): void  </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>834</x>
+      <y>72</y>
+      <w>126</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>ClassStorage::FieldStorage
+--
+-access: int
+-type: String
+-label: String
+--
++getAccess(): int
++getType(): String
++getLabel(): String
++setLabel(String label): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>990</x>
+      <y>72</y>
+      <w>162</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>ClassStorage::MethodFieldsStorage
+--
+-name: String
+-fields: ArrayList&lt;String&gt;
+--
++getName(): String
++setName(String name): void
++getFields(): ArrayList&lt;String&gt;
++setFields(ArrayList&lt;String&gt; fields): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1026</x>
+      <y>186</y>
+      <w>150</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>ClassStorage::MethodStorage
+--
+-name: String
+-desc: String
+-access: int
+--
++getName(): String
++getDesc(): String
++getAccess(): int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>276</x>
+      <y>0</y>
+      <w>180</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>UMLClasses: DecoratorDetector
+--
+-color: String
+-pattern: String
+-fillColor: String
+-isDetected: boolean
+--
++getPattern(): String
++getColor(): String
++getFillColor(): String
++isDetected(): boolean
++setDetected(boolean detected): void
++detect(ClassContainer: currentClass): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>48</x>
+      <y>0</y>
+      <w>216</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>UMLClasses: AdapterDetector
+--
+-color: String
+-pattern: String
+-fillColor: String
+-isDetected: boolean
+-adapteeField: ArrayList&lt;FieldStorage&gt;
+--
++getPattern(): String
++getColor(): String
++getFillColor(): String
++isDetected(): boolean
++setDetected(boolean detected): void
++detect(ClassContainer: currentClass): void
+-checkTarget(ClassContainer: currentClass): boolean
+-labelTargets(ArrowStorage arrows): void
+-labelAdaptees(FieldStorage field): void
+-checkFields(ClassContainer currentClass): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>468</x>
+      <y>0</y>
+      <w>180</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>UMLClasses: PatternDetector
+&lt;&lt;Interface&gt;&gt;
+--
+--
++getPattern(): String
++getColor(): String
++getFillColor(): String
++isDetected(): boolean
++setDetected(boolean detected): void
++detect(ClassContainer: currentClass): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>648</x>
+      <y>0</y>
+      <w>180</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>UMLClasses: SingletonDetector
+--
+-color: String
+-pattern: String
+-fillColor: String
+-isDetected: boolean
+--
++getPattern(): String
++getColor(): String
++getFillColor(): String
++isDetected(): boolean
++setDetected(boolean detected): void
++detect(ClassContainer: currentClass): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1500</x>
+      <y>78</y>
+      <w>312</w>
+      <h>102</h>
+    </coordinates>
+    <panel_attributes>UMLClasses::UMLPrinter
+--
+--
++printClasses(String nameOfDiagram, ArrayList&lt;ClassContainer&gt; classes): void
+-startDiagram(String nameOfDiagram): void
+-endDiagram(): void
+-printArrows(ClassContainer tempClass): void
+-printUses(ClassContainer tempClass): void
+-printFields(ClassContainer tempClass): void
+-printInterfaces(ClassContainer tempClass): void
+-printSupers(ClassContainer tempClass): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>120</x>
+      <y>924</y>
+      <w>336</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>Visitors::MyMethodVisitorUML
+--
+-types: ArrayList&lt;String&gt;
+-name: String
+--
++MyMethodVisitorUML(int api): ctor
++MyMethodVisitorUML(int api, MethodVisitor toDecorate): ctor
++visitFieldInsn(int opcode, String owner, String name, String desc): void
++visitEnd(): void
+</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>
