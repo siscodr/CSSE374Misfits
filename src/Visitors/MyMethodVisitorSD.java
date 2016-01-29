@@ -17,7 +17,7 @@ import jdk.internal.org.objectweb.asm.Type;
  * 
  * @author TheMisfits
  */
-public class MyMethodVisitor extends MethodVisitor {
+public class MyMethodVisitorSD extends MethodVisitor {
 
 	private ArrayList<Instruction> instructions;
 	private String name;
@@ -29,7 +29,7 @@ public class MyMethodVisitor extends MethodVisitor {
 	 *            the ASM API version implemented by this visitor. Must be one
 	 *            of Opcodes.ASM4.
 	 */
-	public MyMethodVisitor(int api, String name) {
+	public MyMethodVisitorSD(int api, String name) {
 		super(api);
 		this.instructions = new ArrayList<Instruction>();
 		this.name = name;
@@ -44,14 +44,14 @@ public class MyMethodVisitor extends MethodVisitor {
 	 * @param toDecorate
 	 *            A MethodVisitor for this class to Decorate
 	 */
-	public MyMethodVisitor(int api, MethodVisitor toDecorate, String name) {
+	public MyMethodVisitorSD(int api, MethodVisitor toDecorate, String name) {
 		super(api, toDecorate);
 		this.instructions = new ArrayList<Instruction>();
 		this.name = name;
 	}
 
 	/**
-	 * Decorates the visitTypeInsn method to get an use arrow for when a class
+	 * Decorates the visitInsn method to get an use arrow for when a class
 	 * is constructed
 	 * 
 	 * @param opcode

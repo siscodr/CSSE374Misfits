@@ -7,14 +7,14 @@ public class AdapterDetector implements PatternDetector {
 	private String pattern;
 	private String fillColor;
 	private boolean isDetected;
-	
-	public AdapterDetector(String color, String fillColor){
+
+	public AdapterDetector(String color, String fillColor) {
 		this.color = color;
 		this.fillColor = fillColor;
 		this.isDetected = false;
 		this.pattern = "Adapter";
 	}
-	
+
 	public String getPattern() {
 		return pattern;
 	}
@@ -37,8 +37,7 @@ public class AdapterDetector implements PatternDetector {
 	}
 
 	public void detect(ClassContainer currentClass) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 }

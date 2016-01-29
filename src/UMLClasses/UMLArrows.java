@@ -5,6 +5,7 @@ import java.util.List;
 
 import ClassStorage.ClassContainer;
 import ClassStorage.FieldStorage;
+import ClassStorage.MethodFieldsStorage;
 import MisfitsPackage.WorkerForArrows;
 import jdk.internal.org.objectweb.asm.Type;
 
@@ -208,6 +209,10 @@ public class UMLArrows {
 
 	public void setIsInterface(boolean isInterface) {
 		currentClass.setIsInterface(isInterface);	
+	}
+
+	public void addMethodFields(MethodFieldsStorage methodFieldsStorage) {
+		currentClass.addMethodFields(methodFieldsStorage);
 	}
 
 }

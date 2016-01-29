@@ -17,6 +17,7 @@ public class ClassContainer {
 	private StringBuffer fieldBuffer;
 	private StringBuffer methodBuffer;
 	private boolean isInterface;
+	private ArrayList<MethodFieldsStorage> methodsField;
 
 	public ClassContainer(String className) {
 		this.className = className;
@@ -28,11 +29,11 @@ public class ClassContainer {
 		this.fieldBuffer = new StringBuffer();
 		this.methodBuffer = new StringBuffer();
 		this.isInterface = false;
+		this.methodsField = new ArrayList<MethodFieldsStorage>();
 	}
 
-
 	public String getLabel() {
-		if(this.label != null){
+		if (this.label != null) {
 			return "\\n\\<\\<" + this.label + "\\>\\>";
 		}
 		return "";
@@ -41,7 +42,7 @@ public class ClassContainer {
 	public void setLabel(String label) {
 		this.label = label;
 	}
-	
+
 	public String getClassName() {
 		return className;
 	}
@@ -73,8 +74,8 @@ public class ClassContainer {
 	public StringBuffer getfieldBuffer() {
 		return fieldBuffer;
 	}
-	
-	public void setIsInterface(boolean isInterface){
+
+	public void setIsInterface(boolean isInterface) {
 		this.isInterface = isInterface;
 	}
 
@@ -254,9 +255,12 @@ public class ClassContainer {
 		return true;
 	}
 
-
 	public boolean getIsInterface() {
 		return this.isInterface;
+	}
+
+	public void addMethodFields(MethodFieldsStorage methodFieldsStorage) {
+		this.methodsField.add(methodFieldsStorage);
 	}
 
 }
