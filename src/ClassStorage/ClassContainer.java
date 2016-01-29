@@ -16,6 +16,7 @@ public class ClassContainer {
 	private ArrayList<ArrowStorage> interfaces;
 	private StringBuffer fieldBuffer;
 	private StringBuffer methodBuffer;
+	private boolean isInterface;
 
 	public ClassContainer(String className) {
 		this.className = className;
@@ -26,6 +27,7 @@ public class ClassContainer {
 		this.interfaces = new ArrayList<ArrowStorage>();
 		this.fieldBuffer = new StringBuffer();
 		this.methodBuffer = new StringBuffer();
+		this.isInterface = false;
 	}
 
 
@@ -70,6 +72,10 @@ public class ClassContainer {
 
 	public StringBuffer getfieldBuffer() {
 		return fieldBuffer;
+	}
+	
+	public void setIsInterface(boolean isInterface){
+		this.isInterface = isInterface;
 	}
 
 	/**
@@ -246,6 +252,11 @@ public class ClassContainer {
 			}
 		}
 		return true;
+	}
+
+
+	public boolean getIsInterface() {
+		return this.isInterface;
 	}
 
 }

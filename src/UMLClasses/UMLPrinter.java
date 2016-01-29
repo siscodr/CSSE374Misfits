@@ -22,6 +22,7 @@ public class UMLPrinter {
 		String pattern;
 		String color;
 		String fillColor;
+		String preLabel;
 		// Will use hashmap here in future
 		/*
 		 * if(isSingle){ pattern = "\\n\\<\\<Singleton\\>\\>"; color =
@@ -32,17 +33,21 @@ public class UMLPrinter {
 			pattern = "";
 			color = "";
 			fillColor = "";
+			preLabel = "";
+			if(tempClass.getIsInterface()){
+				preLabel = "\\<\\<Interface\\>\\> \\n";
+			}
 			UMLArrows.getInstance().resetDetectors();
 			for (PatternDetector detector : UMLArrows.getInstance().getDetectors()) {
 				detector.detect(tempClass);
 				if (detector.isDetected()) {
-					pattern = "\\n\\<\\<" + detector.getPattern() + "\\>\\>";
+					pattern = "\\n \\<\\<" + detector.getPattern() + "\\>\\>";
 					color = "color=\"" + detector.getColor() + "\"";
 					fillColor = ", fillcolor=\"" + detector.getFillColor() + "\" style=\"filled\"";
 				}
 			}
 			System.out.print("   " + tempClass.getClassName() + " [\n     shape=\"record\"  " + color + fillColor
-					+ "    label = \"{" + tempClass.getClassName() + pattern + tempClass.getLabel() + "|"
+					+ "    label = \"{" + preLabel + tempClass.getClassName() + pattern + tempClass.getLabel() + "|"
 					+ tempClass.getfieldBuffer().toString() + "|" + tempClass.getMethodBuffer().toString()
 					+ "\n}\"\n];\n");
 			printArrows(tempClass);

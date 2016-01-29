@@ -206,4 +206,8 @@ public class UMLArrows {
 		UMLPrinter.printClasses(nameOfDiagram, this.classes);
 	}
 
+	public void setIsInterface(boolean isInterface) {
+		currentClass.setIsInterface(isInterface);	
+	}
+
 }

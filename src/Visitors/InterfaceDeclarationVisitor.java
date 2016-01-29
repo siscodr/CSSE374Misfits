@@ -2,6 +2,7 @@ package Visitors;
 
 import UMLClasses.UMLArrows;
 import jdk.internal.org.objectweb.asm.ClassVisitor;
+import jdk.internal.org.objectweb.asm.Opcodes;
 
 /**
  * InterfaceDeclarationVisitor Decorates ClassVisitor so the interface Arrows
@@ -61,6 +62,9 @@ public class InterfaceDeclarationVisitor extends ClassVisitor {
 
 		UMLArrows arrows = UMLArrows.getInstance(); // Get the Singleton
 													// Instance of UMLArrows
+		if((Opcodes.ACC_INTERFACE & access) != 0) {
+			arrows.setIsInterface(true);
+		}
 
 		for (int i = 0; i < interfaces.length; i++) {
 			arrows.addInterface(interfaces[i]); // Store interface arrows into
