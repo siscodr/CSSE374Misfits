@@ -61,7 +61,9 @@ public class MethodDeclarationVisitor extends ClassVisitor {
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
 
 		// Decorates the current MethodVisitor
-		MethodVisitor toReturn = new MyMethodVisitorSD(Opcodes.ASM5, toDecorate, name);
+		MethodVisitor aReturn = new MyMethodVisitorSD(Opcodes.ASM5, toDecorate, name);
+		
+		MethodVisitor toReturn = new MyMethodVisitorUML(Opcodes.ASM5, aReturn, name);
 
 		// Sends required variables to UMLArrows to add the method to the class
 		UMLArrows.getInstance().addMethodToBuffer(access, name, desc);

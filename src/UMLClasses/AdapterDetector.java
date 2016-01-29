@@ -51,21 +51,26 @@ public class AdapterDetector implements PatternDetector {
 		ArrayList<MethodFieldsStorage> methods = currentClass.getMethodsField();
 		boolean fieldInMethods = false;
 		for (FieldStorage field : currentClass.getFields()) {
-			boolean adaptee = true;
-			for (MethodFieldsStorage method : methods) {
-				boolean fieldInMethod = false;
-				for (String type : method.getFields()) {
-					if (field.equals(type)) {
-						fieldInMethod = true;
+			if (!field.getType().equals(currentClass.getClassName())) {
+				boolean adaptee = true;
+				for (MethodFieldsStorage method : methods) {
+					boolean fieldInMethod = false;
+					for (String type : method.getFields()) {
+						//System.out.println(field.getType() + " : is in the method: " + type);
+						if (field.getType().equals(type)) {
+							fieldInMethod = true;
+							//System.out.println(field.getType() + " : PASSED : " + method.getName());
+						}
+					}
+					if (!fieldInMethod) {
+						adaptee = false;
 					}
 				}
-				if (!fieldInMethod) {
-					adaptee = false;
+				if (adaptee) {
+					fieldInMethods = true;
+					adapteeField = field;
+					//System.out.println("I am the adaptee: " + field.getType());
 				}
-			}
-			if (adaptee) {
-				fieldInMethods = true;
-				adapteeField=field;
 			}
 		}
 		return fieldInMethods;

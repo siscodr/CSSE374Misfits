@@ -2,6 +2,8 @@ package Visitors;
 
 import java.util.ArrayList;
 
+import com.sun.xml.internal.ws.org.objectweb.asm.Type;
+
 import ClassStorage.MethodFieldsStorage;
 import MisfitsPackage.WorkerForArrows;
 import SDClasses.Instruction;
@@ -43,7 +45,7 @@ public class MyMethodVisitorUML extends MethodVisitor {
 
 	public void visitFieldInsn(int opCode, String owner, String name, String desc) {
 		super.visitFieldInsn(opCode, owner, name, desc);
-		String cleanType = WorkerForArrows.stripFunction(owner);
+		String cleanType = WorkerForArrows.stripFunction(Type.getType(desc).getClassName());
 		if(!types.contains(cleanType)){
 			types.add(cleanType);
 		}
