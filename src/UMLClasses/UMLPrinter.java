@@ -93,7 +93,7 @@ public class UMLPrinter {
 	 */
 	private static void printUses(ClassContainer tempClass) {
 		for (ArrowStorage types : tempClass.getUses()) {
-			if (types.getTargetType().contains("_")) {
+			if (types.getTargetType().contains("_") && !types.getTargetType().equals(tempClass.getClassName())) {
 				System.out.println(
 						tempClass.getClassName() + " -> " + types.getTargetType() + " [ " + types.getLabel() + "arrowhead=\"vee\", style=\"dashed\"];");
 			}
@@ -110,7 +110,7 @@ public class UMLPrinter {
 	 */
 	private static void printFields(ClassContainer tempClass) {
 		for (FieldStorage field : tempClass.getFields()) {
-			if (field.getType().contains("_")) {
+			if (field.getType().contains("_") && !field.getType().equals(tempClass.getClassName())) {
 				System.out.println(tempClass.getClassName() + " -> " + field.getType() + " [" + field.getLabel() +"arrowhead=\"vee\"];");
 			}
 		}
@@ -126,7 +126,7 @@ public class UMLPrinter {
 	 */
 	private static void printInterfaces(ClassContainer tempClass) {
 		for (ArrowStorage interf : tempClass.getInterfaces()) {
-			if (interf.getTargetType().contains("_")) {
+			if (interf.getTargetType().contains("_") && !interf.getTargetType().equals(tempClass.getClassName())) {
 				System.out.println(
 						tempClass.getClassName() + " -> " + interf.getTargetType() + " [ " + interf.getLabel() + "arrowhead=\"onormal\", style=\"dashed\"];");
 			}
@@ -146,7 +146,7 @@ public class UMLPrinter {
 		if(extension == null){
 			return;
 		}
-		if (extension.getTargetType().contains("_")) {
+		if (extension.getTargetType().contains("_") && !extension.getTargetType().equals(tempClass.getClassName())) {
 			System.out.println(
 					tempClass.getClassName() + " -> " + tempClass.getSupers().getTargetType() + " [" + extension.getLabel() + "arrowhead=\"onormal\"];");
 		}
