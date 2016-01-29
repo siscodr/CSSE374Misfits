@@ -2,6 +2,7 @@ package UMLClasses;
 
 import java.util.ArrayList;
 
+import ClassStorage.ArrowStorage;
 import ClassStorage.ClassContainer;
 import ClassStorage.FieldStorage;
 import ClassStorage.MethodFieldsStorage;
@@ -12,7 +13,8 @@ public class AdapterDetector implements PatternDetector {
 	private String fillColor;
 	private boolean isDetected;
 	private FieldStorage adapteeField;
-
+	
+	
 	public AdapterDetector(String color, String fillColor) {
 		this.color = color;
 		this.fillColor = fillColor;
@@ -42,8 +44,27 @@ public class AdapterDetector implements PatternDetector {
 	}
 
 	public void detect(ClassContainer currentClass) {
-		if (checkFields(currentClass)) {
+		if (checkFields(currentClass)&&checkTarget(currentClass)) {
 			setDetected(true);
+		}
+	}
+
+	private boolean checkTarget(ClassContainer currentClass) {
+		boolean isAdapter = false;
+		for(ArrowStorage inter : currentClass.getInterfaces()){
+			isAdapter = true;
+		}
+		if(currentClass.getSupers()!=null){
+			isAdapter=true;
+		}
+		return isAdapter;
+	}
+	
+	private void labelTargets(ArrowStorage arrows){
+		for(ClassContainer currentClass : UMLArrows.getInstance().getClasses()){
+			if(currentClass.getClassName().equals(arrows.getTargetType())){
+				currentClass.setLabel("Target");
+			}
 		}
 	}
 
