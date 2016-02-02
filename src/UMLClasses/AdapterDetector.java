@@ -41,17 +41,17 @@ public class AdapterDetector implements PatternDetector {
 
 	public void setDetected(boolean detected) {
 		isDetected = detected;
-
 	}
 
 	public void detect(ClassContainer currentClass) {
-		if (checkFields(currentClass)&&checkTarget(currentClass)) {
-			setDetected(true);
-			for(FieldStorage field: this.adapteeField){
-				labelAdaptees(field);
+		if(currentClass.getLabel().contains("Decorates")){
+			if (checkFields(currentClass)&&checkTarget(currentClass)) {
+				setDetected(true);
+				for(FieldStorage field: this.adapteeField){
+					labelAdaptees(field);
+				}
 			}
 		}
-		
 	}
 
 	private boolean checkTarget(ClassContainer currentClass) {
