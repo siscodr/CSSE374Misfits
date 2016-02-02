@@ -1,5 +1,7 @@
 package UMLClasses;
 
+import java.util.ArrayList;
+
 import ClassStorage.ClassContainer;
 import ClassStorage.MethodStorage;
 import MisfitsPackage.WorkerForArrows;
@@ -42,20 +44,36 @@ public class DecoratorDetector implements PatternDetector {
 			return;
 		}
 		String extension = currentClass.getSupers().getTargetType();
-		//System.out.println("This is our Extension: " + extension);
-		if (!extension.equals("")) {
-			for (MethodStorage method : currentClass.getMethods()) {
-				if (method.getName().equals("<init>")) {
-					for (String param : WorkerForArrows.getTypesFromDesc(method.getDesc())) {
-						//System.out.println(param);
-						if (WorkerForArrows.stripFunction(param).equals(extension)) {
-							currentClass.getSupers().setLabel("<<Decorates>>");
-							for(ClassContainer tempclass :UMLArrows.getInstance().getClasses()){
-								if(tempclass.getClassName().equals(extension)){
-									tempclass.setLabel("Component");
+		while(extension!=null){
+			//System.out.println("This is our Extension: " + extension);
+			if (!extension.equals("")) {
+				for (MethodStorage method : currentClass.getMethods()) {
+					if (method.getName().equals("<init>")) {
+						for (String param : WorkerForArrows.getTypesFromDesc(method.getDesc())) {
+							//System.out.println(param);
+							if (WorkerForArrows.stripFunction(param).equals(extension)) {
+								currentClass.getSupers().setLabel("<<Decorates>>");
+								for(ClassContainer tempclass :UMLArrows.getInstance().getClasses()){
+									if(tempclass.getClassName().equals(extension)){
+										tempclass.setLabel("Component");
+									}
 								}
+								setDetected(true);
+								
 							}
-							setDetected(true);
+						}
+					}
+				}
+				if(isDetected){
+					break;
+				}
+				ArrayList<ClassContainer> possibleClasses = UMLArrows.getInstance().getClasses();
+				for(ClassContainer cls : possibleClasses){
+					if(cls.getClassName().equals(extension)){
+						if(cls.getSupers()!=null){
+							extension=cls.getSupers().getTargetType();
+						}else{
+							extension=null;
 						}
 					}
 				}
