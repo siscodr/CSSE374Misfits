@@ -3,6 +3,7 @@ package UMLClasses;
 import java.util.ArrayList;
 
 import ClassStorage.ClassContainer;
+import ClassStorage.FieldStorage;
 import ClassStorage.MethodStorage;
 import MisfitsPackage.WorkerForArrows;
 
@@ -40,40 +41,45 @@ public class DecoratorDetector implements PatternDetector {
 	}
 
 	public void detect(ClassContainer currentClass) {
-		if(currentClass.getSupers() == null){
+		if (currentClass.getSupers() == null) {
 			return;
 		}
 		String extension = currentClass.getSupers().getTargetType();
-		while(extension!=null){
-			//System.out.println("This is our Extension: " + extension);
+		while (extension != null) {
+			// System.out.println("This is our Extension: " + extension);
 			if (!extension.equals("")) {
 				for (MethodStorage method : currentClass.getMethods()) {
 					if (method.getName().equals("<init>")) {
 						for (String param : WorkerForArrows.getTypesFromDesc(method.getDesc())) {
-							//System.out.println(param);
+							// System.out.println(param);
 							if (WorkerForArrows.stripFunction(param).equals(extension)) {
-								currentClass.getSupers().setLabel("<<Decorates>>");
-								for(ClassContainer tempclass :UMLArrows.getInstance().getClasses()){
-									if(tempclass.getClassName().equals(extension)){
+								ArrayList<FieldStorage> fields = currentClass.getFields();
+								for (FieldStorage field : fields) {
+									if (field.getType().equals(extension)) {
+										field.setLabel("<<Decorates>>");
+									}
+								}
+								for (ClassContainer tempclass : UMLArrows.getInstance().getClasses()) {
+									if (tempclass.getClassName().equals(extension)) {
 										tempclass.setLabel("Component");
 									}
 								}
 								setDetected(true);
-								
+
 							}
 						}
 					}
 				}
-				if(isDetected){
+				if (isDetected) {
 					break;
 				}
 				ArrayList<ClassContainer> possibleClasses = UMLArrows.getInstance().getClasses();
-				for(ClassContainer cls : possibleClasses){
-					if(cls.getClassName().equals(extension)){
-						if(cls.getSupers()!=null){
-							extension=cls.getSupers().getTargetType();
-						}else{
-							extension=null;
+				for (ClassContainer cls : possibleClasses) {
+					if (cls.getClassName().equals(extension)) {
+						if (cls.getSupers() != null) {
+							extension = cls.getSupers().getTargetType();
+						} else {
+							extension = null;
 						}
 					}
 				}
