@@ -132,8 +132,8 @@ public class UMLArrows {
 	public void setSuper(String currentType) {
 		currentClass.setSuper(currentType);
 	}
-	
-	public ArrayList<ClassContainer> getClasses(){
+
+	public ArrayList<ClassContainer> getClasses() {
 		return classes;
 	}
 
@@ -150,10 +150,6 @@ public class UMLArrows {
 		currentClass.addInterface(currentType);
 	}
 
-	
-
-
-	
 	/**
 	 * Takes the given parameters to add to the field buffer in GraphViz format.
 	 * 
@@ -203,12 +199,29 @@ public class UMLArrows {
 	public ArrayList<PatternDetector> getDetectors() {
 		return detectors;
 	}
+
 	public void printClasses(String nameOfDiagram) {
 		UMLPrinter.printClasses(nameOfDiagram, this.classes);
 	}
 
+	public void detect() {
+		for (ClassContainer cls : this.classes) {
+			UMLArrows.getInstance().resetDetectors();
+			if (detectors.size() != 0) {
+				for (PatternDetector detector : detectors) {
+					detector.detect(cls);
+					if (detector.isDetected()) {
+						cls.setColor(detector.getColor());
+						cls.setFillColor(detector.getFillColor());
+					}
+				}
+			}
+		}
+
+	}
+
 	public void setIsInterface(boolean isInterface) {
-		currentClass.setIsInterface(isInterface);	
+		currentClass.setIsInterface(isInterface);
 	}
 
 	public void addMethodFields(MethodFieldsStorage methodFieldsStorage) {

@@ -38,9 +38,11 @@ public class DesignParser {
 		for (String className : classes) {
 			
 			UMLArrows.getInstance().resetUMLArrows(className);
-
 			makeReader(className);
 		}
+		//DONE MAKING CLASSES
+		UMLArrows.getInstance().detect();
+		
 		UMLArrows.getInstance().resetUMLArrows("");
 		UMLArrows.getInstance().printClasses("misfit_diagram");
 	}

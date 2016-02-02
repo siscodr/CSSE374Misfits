@@ -34,18 +34,12 @@ public class UMLPrinter {
 			color = "";
 			fillColor = "";
 			preLabel = "";
-			if(tempClass.getIsInterface()){
+			if (tempClass.getIsInterface()) {
 				preLabel = "\\<\\<Interface\\>\\> \\n";
 			}
-			UMLArrows.getInstance().resetDetectors();
-			for (PatternDetector detector : UMLArrows.getInstance().getDetectors()) {
-				detector.detect(tempClass);
-				if (detector.isDetected()) {
-					pattern = "\\n \\<\\<" + detector.getPattern() + "\\>\\>";
-					color = "color=\"" + detector.getColor() + "\"";
-					fillColor = ", fillcolor=\"" + detector.getFillColor() + "\" style=\"filled\"";
-				}
-			}
+				pattern = "\\n \\<\\<" + tempClass.getLabel() + "\\>\\>";
+				color = "color=\"" + tempClass.getColor() + "\"";
+				fillColor = ", fillcolor=\"" + tempClass.getFillColor() + "\" style=\"filled\"";
 			System.out.print("   " + tempClass.getClassName() + " [\n     shape=\"record\"  " + color + fillColor
 					+ "    label = \"{" + preLabel + tempClass.getClassName() + pattern + tempClass.getLabel() + "|"
 					+ tempClass.getfieldBuffer().toString() + "|" + tempClass.getMethodBuffer().toString()
@@ -54,7 +48,7 @@ public class UMLPrinter {
 		}
 		endDiagram();
 	}
-	
+
 	/**
 	 * Makes the initial diagram starting code with given name (Should only be
 	 * ran once per diagram).
@@ -72,7 +66,7 @@ public class UMLPrinter {
 	private static void endDiagram() {
 		System.out.print("}\n");
 	}
-	
+
 	/**
 	 * Prints all the arrows to the console.
 	 * 
@@ -99,8 +93,8 @@ public class UMLPrinter {
 	private static void printUses(ClassContainer tempClass) {
 		for (ArrowStorage types : tempClass.getUses()) {
 			if (types.getTargetType().contains("_") && !types.getTargetType().equals(tempClass.getClassName())) {
-				System.out.println(
-						tempClass.getClassName() + " -> " + types.getTargetType() + " [ " + types.getLabel() + "arrowhead=\"vee\", style=\"dashed\"];");
+				System.out.println(tempClass.getClassName() + " -> " + types.getTargetType() + " [ " + types.getLabel()
+						+ "arrowhead=\"vee\", style=\"dashed\"];");
 			}
 		}
 	}
@@ -116,7 +110,8 @@ public class UMLPrinter {
 	private static void printFields(ClassContainer tempClass) {
 		for (FieldStorage field : tempClass.getFields()) {
 			if (field.getType().contains("_") && !field.getType().equals(tempClass.getClassName())) {
-				System.out.println(tempClass.getClassName() + " -> " + field.getType() + " [" + field.getLabel() +"arrowhead=\"vee\"];");
+				System.out.println(tempClass.getClassName() + " -> " + field.getType() + " [" + field.getLabel()
+						+ "arrowhead=\"vee\"];");
 			}
 		}
 	}
@@ -132,8 +127,8 @@ public class UMLPrinter {
 	private static void printInterfaces(ClassContainer tempClass) {
 		for (ArrowStorage interf : tempClass.getInterfaces()) {
 			if (interf.getTargetType().contains("_") && !interf.getTargetType().equals(tempClass.getClassName())) {
-				System.out.println(
-						tempClass.getClassName() + " -> " + interf.getTargetType() + " [ " + interf.getLabel() + "arrowhead=\"onormal\", style=\"dashed\"];");
+				System.out.println(tempClass.getClassName() + " -> " + interf.getTargetType() + " [ "
+						+ interf.getLabel() + "arrowhead=\"onormal\", style=\"dashed\"];");
 			}
 		}
 	}
@@ -148,12 +143,12 @@ public class UMLPrinter {
 	 */
 	private static void printSupers(ClassContainer tempClass) {
 		ArrowStorage extension = tempClass.getSupers();
-		if(extension == null){
+		if (extension == null) {
 			return;
 		}
 		if (extension.getTargetType().contains("_") && !extension.getTargetType().equals(tempClass.getClassName())) {
-			System.out.println(
-					tempClass.getClassName() + " -> " + tempClass.getSupers().getTargetType() + " [" + extension.getLabel() + "arrowhead=\"onormal\"];");
+			System.out.println(tempClass.getClassName() + " -> " + tempClass.getSupers().getTargetType() + " ["
+					+ extension.getLabel() + "arrowhead=\"onormal\"];");
 		}
 	}
 }

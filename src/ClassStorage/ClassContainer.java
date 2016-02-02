@@ -18,6 +18,8 @@ public class ClassContainer {
 	private StringBuffer methodBuffer;
 	private boolean isInterface;
 	private ArrayList<MethodFieldsStorage> methodsField;
+	private String color;
+	private String fillColor;
 
 	public ClassContainer(String className) {
 		this.className = className;
@@ -30,6 +32,25 @@ public class ClassContainer {
 		this.methodBuffer = new StringBuffer();
 		this.isInterface = false;
 		this.methodsField = new ArrayList<MethodFieldsStorage>();
+		label = "";
+		color = "";
+		fillColor = "";
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public String getFillColor() {
+		return fillColor;
+	}
+
+	public void setFillColor(String fillColor) {
+		this.fillColor = fillColor;
 	}
 
 	public ArrayList<MethodFieldsStorage> getMethodsField() {

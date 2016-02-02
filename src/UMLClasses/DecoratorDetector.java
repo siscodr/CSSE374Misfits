@@ -51,7 +51,6 @@ public class DecoratorDetector implements PatternDetector {
 				for (MethodStorage method : currentClass.getMethods()) {
 					if (method.getName().equals("<init>")) {
 						for (String param : WorkerForArrows.getTypesFromDesc(method.getDesc())) {
-							// System.out.println(param);
 							if (WorkerForArrows.stripFunction(param).equals(extension)) {
 								ArrayList<FieldStorage> fields = currentClass.getFields();
 								for (FieldStorage field : fields) {
