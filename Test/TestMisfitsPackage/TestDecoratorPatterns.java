@@ -36,7 +36,7 @@ public class TestDecoratorPatterns {
 	}
 	
 	@Test
-	public void testMouseAdapterForDecorator() throws IOException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException{
+	public void testCheckClassAdapterForDecorator() throws IOException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException{
 		UMLArrows arrows = UMLArrows.getInstance();
 		DecoratorDetector detect = new DecoratorDetector("blue", "green");
 		Field detector = UMLArrows.class.getDeclaredField("detectors");
@@ -44,16 +44,16 @@ public class TestDecoratorPatterns {
 		ArrayList<PatternDetector> pattern =new ArrayList<PatternDetector>();
 		pattern.add(detect);
 		detector.set(arrows, pattern);
-		
-		String[] testString = new String[1];
-		testString[0]="java.awt.event.MouseAdapter";
+		String[] testString = new String[2];
+		testString[0]="jdk.internal.org.objectweb.asm.ClassVisitor";
+		testString[1]="jdk.internal.org.objectweb.asm.util.CheckClassAdapter";
 		DesignParser.makeUML(testString);
 		
-		assertEquals(false, detect.isDetected());
+		assertEquals(true, detect.isDetected());
 	}
 	
 	@Test
-	public void testForDecorator() throws IOException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException{
+	public void testInputStreamForDecorator() throws IOException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException{
 		UMLArrows arrows = UMLArrows.getInstance();
 		DecoratorDetector detect = new DecoratorDetector("blue", "green");
 		Field detector = UMLArrows.class.getDeclaredField("detectors");
@@ -62,8 +62,10 @@ public class TestDecoratorPatterns {
 		pattern.add(detect);
 		detector.set(arrows, pattern);
 		
-		String[] testString = new String[1];
-		testString[0]="java.awt.event.MouseAdapter";
+		String[] testString = new String[3];
+		testString[0]="java.io.InputStreamReader";
+		testString[1]="sun.nio.cs.StreamDecoder";
+		testString[2]="java.io.InputStream";
 		DesignParser.makeUML(testString);
 		
 		
