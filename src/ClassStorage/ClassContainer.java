@@ -38,6 +38,9 @@ public class ClassContainer {
 	}
 
 	public String getColor() {
+		if (color != "") {
+			return "color=\"" + color + "\" ";
+		}
 		return color;
 	}
 
@@ -46,6 +49,9 @@ public class ClassContainer {
 	}
 
 	public String getFillColor() {
+		if (fillColor != "") {
+			return ", fillcolor=\"" + fillColor + "\" style=\"filled\"";
+		}
 		return fillColor;
 	}
 
@@ -60,9 +66,9 @@ public class ClassContainer {
 	public void setMethodsField(ArrayList<MethodFieldsStorage> methodsField) {
 		this.methodsField = methodsField;
 	}
-	
+
 	public String getLabel() {
-		if (this.label != null) {
+		if (this.label != "") {
 			return "\\n\\<\\<" + this.label + "\\>\\>";
 		}
 		return "";

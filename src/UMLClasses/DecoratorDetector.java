@@ -52,24 +52,18 @@ public class DecoratorDetector implements PatternDetector {
 					if (method.getName().equals("<init>")) {
 						for (String param : WorkerForArrows.getTypesFromDesc(method.getDesc())) {
 							if (WorkerForArrows.stripFunction(param).equals(extension)) {
-								ArrayList<FieldStorage> fields = currentClass.getFields();
-								for (FieldStorage field : fields) {
-									if (field.getType().equals(extension)) {
-										field.setLabel("<<Decorates>>");
-									}
-								}
 								for (ClassContainer tempclass : UMLArrows.getInstance().getClasses()) {
 									if (tempclass.getClassName().equals(extension)) {
 										tempclass.setLabel("Component");
 									}
 								}
 								setDetected(true);
-
 							}
 						}
 					}
 				}
 				if (isDetected) {
+					currentClass.getSupers().setLabel("<<Decorates>>");
 					break;
 				}
 				ArrayList<ClassContainer> possibleClasses = UMLArrows.getInstance().getClasses();

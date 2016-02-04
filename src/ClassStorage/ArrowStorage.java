@@ -2,7 +2,7 @@ package ClassStorage;
 
 public class ArrowStorage {
 	private String targetType;
-	private String label;
+	private String label = "";
 
 	public ArrowStorage(String targetType) {
 		super();
@@ -14,7 +14,7 @@ public class ArrowStorage {
 	}
 
 	public String getLabel() {
-		if(this.label != null){
+		if(this.label != ""){
 			return "label = \" " + this.label +"\",";
 		}
 		return "";

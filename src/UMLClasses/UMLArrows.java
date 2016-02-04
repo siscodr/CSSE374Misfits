@@ -211,6 +211,7 @@ public class UMLArrows {
 				for (PatternDetector detector : detectors) {
 					detector.detect(cls);
 					if (detector.isDetected()) {
+						cls.setLabel(detector.getPattern());
 						cls.setColor(detector.getColor());
 						cls.setFillColor(detector.getFillColor());
 					}

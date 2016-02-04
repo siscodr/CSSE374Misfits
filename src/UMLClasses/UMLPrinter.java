@@ -37,11 +37,11 @@ public class UMLPrinter {
 			if (tempClass.getIsInterface()) {
 				preLabel = "\\<\\<Interface\\>\\> \\n";
 			}
-				pattern = "\\n \\<\\<" + tempClass.getLabel() + "\\>\\>";
-				color = "color=\"" + tempClass.getColor() + "\"";
-				fillColor = ", fillcolor=\"" + tempClass.getFillColor() + "\" style=\"filled\"";
+				pattern = tempClass.getLabel();
+				color = tempClass.getColor();
+				fillColor = tempClass.getFillColor();
 			System.out.print("   " + tempClass.getClassName() + " [\n     shape=\"record\"  " + color + fillColor
-					+ "    label = \"{" + preLabel + tempClass.getClassName() + pattern + tempClass.getLabel() + "|"
+					+ "    label = \"{" + preLabel + tempClass.getClassName() + pattern + "|"
 					+ tempClass.getfieldBuffer().toString() + "|" + tempClass.getMethodBuffer().toString()
 					+ "\n}\"\n];\n");
 			printArrows(tempClass);

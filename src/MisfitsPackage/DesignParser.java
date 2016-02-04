@@ -40,10 +40,9 @@ public class DesignParser {
 			UMLArrows.getInstance().resetUMLArrows(className);
 			makeReader(className);
 		}
+		UMLArrows.getInstance().resetUMLArrows("");
 		//DONE MAKING CLASSES
 		UMLArrows.getInstance().detect();
-		
-		UMLArrows.getInstance().resetUMLArrows("");
 		UMLArrows.getInstance().printClasses("misfit_diagram");
 	}
 
