@@ -1,7 +1,6 @@
 package TestMisfitsPackage;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -13,6 +12,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import ClassStorage.ClassContainer;
 import MisfitsPackage.WorkerForArrows;
 import UMLClasses.PatternDetector;
 import UMLClasses.SingletonDetector;
@@ -180,24 +180,18 @@ public class UMLArrowsTest {
 	@Test
 	public void testresetUMLArrows() throws NoSuchFieldException,
 			SecurityException, IllegalArgumentException, IllegalAccessException {
+		int classesSize;
 		UMLArrows arrows = UMLArrows.getInstance();
-		arrows.resetUMLArrows();
-		// Field whitelist =
-		// WorkerForArrows.class.getDeclaredField("whitelist");
-		// whitelist.setAccessible(true);
-		Field supers = UMLArrows.class.getDeclaredField("supers");
-		supers.setAccessible(true);
-		Field interfaces = UMLArrows.class.getDeclaredField("interfaces");
-		interfaces.setAccessible(true);
-		Field uses = UMLArrows.class.getDeclaredField("uses");
-		uses.setAccessible(true);
-		Field fields = UMLArrows.class.getDeclaredField("fields");
-		fields.setAccessible(true);
-		// assertEquals(new ArrayList<String>(), whitelist.get(arrows));
-		assertEquals("", supers.get(arrows));
-		assertEquals(new ArrayList<String>(), interfaces.get(arrows));
-		assertEquals(new ArrayList<String>(), uses.get(arrows));
-		assertEquals(new ArrayList<String>(), fields.get(arrows));
+		Field currentClass = UMLArrows.class.getDeclaredField("currentClass");
+		currentClass.setAccessible(true);
+		classesSize = arrows.getClasses().size();
+		arrows.setCurrentClass("DecoratorDetector");
+		assertEquals(0, classesSize);
+		ClassContainer curClass = (ClassContainer) currentClass.get(arrows);
+		arrows.setCurrentClass("DecoratorDetector");
+		classesSize = arrows.getClasses().size();
+		assertEquals(1, classesSize);
+		assertEquals(curClass, arrows.getClasses().get(0));
 	}
 
 	@Test
