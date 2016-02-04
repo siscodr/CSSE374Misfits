@@ -44,7 +44,7 @@ public class AdapterDetector implements PatternDetector {
 	}
 
 	public void detect(ClassContainer currentClass) {
-		if(currentClass.getLabel().contains("Decorates")){
+		if(!currentClass.getLabel().contains("Decorator")){
 			if (checkFields(currentClass)&&checkTarget(currentClass)) {
 				setDetected(true);
 				for(FieldStorage field: this.adapteeField){
