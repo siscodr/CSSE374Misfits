@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ClassStorage.ClassContainer;
-import ClassStorage.FieldStorage;
 import ClassStorage.MethodFieldsStorage;
 import MisfitsPackage.WorkerForArrows;
 import jdk.internal.org.objectweb.asm.Type;
