@@ -39,7 +39,6 @@ public class CompositeDetector implements PatternDetector {
 		isDetected = detected;
 	}
 
-	@Override
 	public void detect(ClassContainer currentClass) {
 		findComponent(currentClass);
 		if (!this.isDetected) {
