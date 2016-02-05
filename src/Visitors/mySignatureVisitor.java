@@ -13,6 +13,7 @@ public class mySignatureVisitor extends SignatureVisitor {
 
 	public void visitClassType(String name) {
 		UMLArrows.getInstance().addField(name, this.access);
+		UMLArrows.getInstance().addCollectionDataType(name);
 		super.visitClassType(name);
 	}
 }

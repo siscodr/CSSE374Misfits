@@ -229,4 +229,8 @@ public class UMLArrows {
 		currentClass.addMethodFields(methodFieldsStorage);
 	}
 
+	public void addCollectionDataType(String name) {
+		currentClass.addCollectionDataType(WorkerForArrows.stripFunction(name));
+	}
+
 }

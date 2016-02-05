@@ -20,6 +20,7 @@ public class ClassContainer {
 	private ArrayList<MethodFieldsStorage> methodsField;
 	private String color;
 	private String fillColor;
+	private ArrayList<String> collectionDataTypes;
 
 	public ClassContainer(String className) {
 		this.className = className;
@@ -32,9 +33,20 @@ public class ClassContainer {
 		this.methodBuffer = new StringBuffer();
 		this.isInterface = false;
 		this.methodsField = new ArrayList<MethodFieldsStorage>();
+		this.collectionDataTypes = new ArrayList<String>();
 		label = "";
 		color = "";
 		fillColor = "";
+	}
+
+	public ArrayList<String> getCollectionDataTypes() {
+		return collectionDataTypes;
+	}
+
+	public void addCollectionDataType(String dataType) {
+		if (WorkerForArrows.unwantedTypes(dataType)) {
+			collectionDataTypes.add(dataType);
+		}
 	}
 
 	public String getColor() {
