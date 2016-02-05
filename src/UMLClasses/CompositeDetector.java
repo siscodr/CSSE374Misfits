@@ -41,6 +41,7 @@ public class CompositeDetector implements PatternDetector {
 
 	public void detect(ClassContainer currentClass) {
 		findComponent(currentClass);
+		
 		if (!this.isDetected) {
 			return;
 		}
@@ -75,7 +76,7 @@ public class CompositeDetector implements PatternDetector {
 				while (parents.size() != 0 && !isLeaf) {
 					for (ArrowStorage parent : parents) {
 						if (parent.getTargetType().equals(this.component)) {
-							leaves.add(parent.getTargetType());
+							leaves.add(cls.getClassName());
 							isLeaf = true;
 						}
 					}
