@@ -45,6 +45,12 @@ Donald Sisco: refactored / repackaged the code, passed ClassContainers to detect
 
 Jonathan Soulsby: Fixed Singleton & UMLArrows tests, added detect methods to the detector classes, wrote adapter detection logic, wrote all tests
 
+Milestone 6:
+Morgan Cook: Updated Decorator Detector and Adapter Detector, fixed decorates label to label correct arrow, created and wrote foundation for CompositeDetector, wrote code to find component and composites, updated the UML and README
+
+Donald Sisco: refactored the printing and detecting code, wrote code to find leaves, labeled the classes with their correct labels
+
+Jonathan Soulsby: Updated Decorator Detector and Adapter Detector, updated tests for Milestone 5, wrote tests for Milestone 6
 
 Instructions for UML:
 1)	Download the code into Eclipse
