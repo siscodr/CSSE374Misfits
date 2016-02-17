@@ -43,4 +43,22 @@ public class GUIMain {
 		frame.validate();
 	}
 
+	public static void runConfigPanel() {
+		frame.getContentPane().remove(panel);
+		ConfigPanel panelConfig = new ConfigPanel();
+		panel = panelConfig.getPanel();
+		frame.getContentPane().add(panel);
+		frame.invalidate();
+		frame.validate();
+	}
+	
+	public static void runDisplayPanel() {
+		frame.getContentPane().remove(panel);
+		DisplayPanel paneldisplay = new DisplayPanel();
+		//panel = paneldisplay.getPanel();
+		frame.getContentPane().add(panel);
+		frame.invalidate();
+		frame.validate();
+	}
+
 }

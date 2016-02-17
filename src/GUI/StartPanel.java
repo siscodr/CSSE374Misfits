@@ -48,7 +48,7 @@ public class StartPanel {
 		configButton.setBounds(200, 300, 200, 50);
 		configButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Launch configurements page
+				GUIMain.runConfigPanel();
 			}
 		});
 		panel.add(configButton);
