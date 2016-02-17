@@ -13,14 +13,13 @@ public class AdapterDetector implements PatternDetector {
 	private String fillColor;
 	private boolean isDetected;
 	private ArrayList<FieldStorage> adapteeField;
-	
-	
+
 	public AdapterDetector(String color, String fillColor) {
 		this.color = color;
 		this.fillColor = fillColor;
 		this.isDetected = false;
 		this.pattern = "Adapter";
-		adapteeField = new ArrayList<FieldStorage>();
+		this.adapteeField = new ArrayList<FieldStorage>();
 	}
 
 	public String getPattern() {
@@ -39,15 +38,20 @@ public class AdapterDetector implements PatternDetector {
 		return isDetected;
 	}
 
-	public void setDetected(boolean detected) {
-		isDetected = detected;
+	public void reset() {
+		setDetected(false);
+		this.adapteeField = new ArrayList<FieldStorage>();
+	}
+
+	private void setDetected(boolean detected) {
+		this.isDetected = detected;
 	}
 
 	public void detect(ClassContainer currentClass) {
-		if(!currentClass.getLabel().contains("Decorator")){
-			if (checkFields(currentClass)&&checkTarget(currentClass)) {
+		if (!currentClass.getLabel().contains("Decorator")) {
+			if (checkFields(currentClass) && checkTarget(currentClass)) {
 				setDetected(true);
-				for(FieldStorage field: this.adapteeField){
+				for (FieldStorage field : this.adapteeField) {
 					labelAdaptees(field);
 				}
 			}
@@ -56,34 +60,34 @@ public class AdapterDetector implements PatternDetector {
 
 	private boolean checkTarget(ClassContainer currentClass) {
 		boolean isAdapter = false;
-		for(ArrowStorage inter : currentClass.getInterfaces()){
+		for (ArrowStorage inter : currentClass.getInterfaces()) {
 			isAdapter = true;
 			labelTargets(inter);
 		}
-		if(currentClass.getSupers()!=null){
-			isAdapter=true;
+		if (currentClass.getSupers() != null) {
+			isAdapter = true;
 			labelTargets(currentClass.getSupers());
 		}
 		return isAdapter;
 	}
-	
-	private void labelTargets(ArrowStorage arrows){
-		for(ClassContainer currentClass : UMLArrows.getInstance().getClasses()){
-			if(currentClass.getClassName().equals(arrows.getTargetType())){
+
+	private void labelTargets(ArrowStorage arrows) {
+		for (ClassContainer currentClass : UMLArrows.getInstance().getClasses()) {
+			if (currentClass.getClassName().equals(arrows.getTargetType())) {
 				currentClass.setLabel("Target");
 			}
 		}
 	}
 
-	private void labelAdaptees(FieldStorage field){
+	private void labelAdaptees(FieldStorage field) {
 		field.setLabel("<<Adapts>>");
-		for(ClassContainer currentClass : UMLArrows.getInstance().getClasses()){
-			if(currentClass.getClassName().equals(field.getType())){
+		for (ClassContainer currentClass : UMLArrows.getInstance().getClasses()) {
+			if (currentClass.getClassName().equals(field.getType())) {
 				currentClass.setLabel("Adaptee");
 			}
 		}
 	}
-	
+
 	private boolean checkFields(ClassContainer currentClass) {
 		ArrayList<MethodFieldsStorage> methods = currentClass.getMethodsField();
 		boolean fieldInMethods = false;
@@ -93,10 +97,12 @@ public class AdapterDetector implements PatternDetector {
 				for (MethodFieldsStorage method : methods) {
 					boolean fieldInMethod = false;
 					for (String type : method.getFields()) {
-						//System.out.println(field.getType() + " : is in the method: " + type);
+						// System.out.println(field.getType() +
+						// " : is in the method: " + type);
 						if (field.getType().equals(type)) {
 							fieldInMethod = true;
-							//System.out.println(field.getType() + " : PASSED : " + method.getName());
+							// System.out.println(field.getType() +
+							// " : PASSED : " + method.getName());
 						}
 					}
 					if (!fieldInMethod) {
@@ -106,7 +112,8 @@ public class AdapterDetector implements PatternDetector {
 				if (adaptee) {
 					fieldInMethods = true;
 					adapteeField.add(field);
-					//System.out.println("I am the adaptee: " + field.getType());
+					// System.out.println("I am the adaptee: " +
+					// field.getType());
 				}
 			}
 		}

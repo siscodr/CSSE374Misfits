@@ -41,7 +41,7 @@ public class UMLArrows {
 
 	public void resetDetectors() {
 		for (PatternDetector detector : detectors) {
-			detector.setDetected(false);
+			detector.reset();
 		}
 	}
 

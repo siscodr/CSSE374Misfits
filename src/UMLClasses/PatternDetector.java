@@ -14,7 +14,6 @@ public interface PatternDetector {
 
 	public boolean isDetected();
 	
-	//TODO: set to private method once detect is fully implemented.
-	public void setDetected(boolean detected);
+	public void reset();
 
 }

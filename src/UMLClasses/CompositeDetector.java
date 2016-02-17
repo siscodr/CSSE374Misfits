@@ -20,23 +20,27 @@ public class CompositeDetector implements PatternDetector {
 	}
 
 	public String getPattern() {
-		return pattern;
+		return this.pattern;
 	}
 
 	public String getColor() {
-		return color;
+		return this.color;
 	}
 
 	public String getFillColor() {
-		return fillColor;
+		return this.fillColor;
 	}
 
 	public boolean isDetected() {
-		return isDetected;
+		return this.isDetected;
 	}
 
-	public void setDetected(boolean detected) {
-		isDetected = detected;
+	public void reset() {
+		setDetected(false);
+	}
+	
+	private void setDetected(boolean detected) {
+		this.isDetected = detected;
 	}
 
 	public void detect(ClassContainer currentClass) {
@@ -149,5 +153,4 @@ public class CompositeDetector implements PatternDetector {
 		}
 		return toReturn;
 	}
-
 }
