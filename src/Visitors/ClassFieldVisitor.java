@@ -66,7 +66,7 @@ public class ClassFieldVisitor extends ClassVisitor {
 			// Adds field to UML to allow for association arrows to be drawn
 			reader.accept(visitor);
 		}
-		UMLArrows.getInstance().addFieldDesc(desc, access);
+		UMLArrows.getInstance().addFieldDesc(desc, access, name);
 		return toDecorate;
 	}
 

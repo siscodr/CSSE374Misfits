@@ -103,8 +103,8 @@ public class UMLArrows {
 	 * 
 	 * @return No return value.
 	 */
-	public void addFieldDesc(String desc, int access) {
-		currentClass.addFieldDesc(desc, access);
+	public void addFieldDesc(String desc, int access, String name) {
+		currentClass.addFieldDesc(desc, access, name);
 	}
 
 	/**

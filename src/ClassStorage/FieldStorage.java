@@ -2,6 +2,7 @@ package ClassStorage;
 
 public class FieldStorage {
 	private int access;
+	private String name;
 	private String type;
 	private String label;
 
@@ -9,12 +10,24 @@ public class FieldStorage {
 		super();
 		this.access = access;
 		this.type = type;
+		this.name = null;
 	}
 
+	public FieldStorage(int access, String type, String name) {
+		super();
+		this.access = access;
+		this.type = type;
+		this.name = name;
+	}
+	
 	public int getAccess() {
 		return access;
 	}
 
+	public String getName(){
+		return this.name;
+	}
+	
 	public String getType() {
 		return type;
 	}

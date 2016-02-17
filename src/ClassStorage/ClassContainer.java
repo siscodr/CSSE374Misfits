@@ -179,9 +179,11 @@ public class ClassContainer {
 	 * 
 	 * @return No return value.
 	 */
-	public void addFieldDesc(String desc, int access) {
+	public void addFieldDesc(String desc, int access, String name) {
 		String currentType = Type.getType(desc).getClassName();
-		addField(currentType, access);
+		String cleanType = WorkerForArrows.stripFunction(currentType);
+		if (checkExistingArrow(cleanType))
+			fields.add(new FieldStorage(access, cleanType, name));
 	}
 
 	/**
