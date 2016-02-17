@@ -14,7 +14,7 @@ import javax.swing.SwingUtilities;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-public class LaunchScreen {
+public class StartPanel {
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -27,23 +27,12 @@ public class LaunchScreen {
 		JFrame f = new JFrame("Launching GUI!");
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel panel = new JPanel();
-		//f.addKeyListener(new KeyListener());
 		f.add(panel);
 		f.setSize(1000, 800);
 		addWelcomeLabel(panel);
 		addConfigButton(panel);
 		addLaunchButton(panel);
 		f.setVisible(true);
-	}
-
-	private static void addProgressBar(JPanel panel) {
-		System.out.println("morgan");
-		JProgressBar progBar = new JProgressBar();
-		panel.setLayout(null);
-		progBar.setBounds(200, 450, 500, 100);
-		System.out.println(progBar);
-		panel.add(progBar);
-		
 	}
 
 	private static void addWelcomeLabel(JPanel panel) {
@@ -63,11 +52,6 @@ public class LaunchScreen {
 		launchButton.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("morgan");
-				JProgressBar progBar = new JProgressBar();
-				progBar.setBounds(200, 450, 500, 100);
-				System.out.println(progBar);
-				panel.add(progBar);
 			}
 		});
 		panel.add(launchButton);
