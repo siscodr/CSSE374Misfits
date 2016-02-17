@@ -8,8 +8,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.SwingUtilities;
 
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class LaunchScreen {
@@ -32,6 +34,15 @@ public class LaunchScreen {
 		addConfigButton(panel);
 		addLaunchButton(panel);
 		f.setVisible(true);
+	}
+
+	private static void addProgressBar(JPanel panel) {
+		System.out.println("morgan");
+		JProgressBar progBar = new JProgressBar();
+		panel.setLayout(null);
+		progBar.setBounds(200, 450, 500, 100);
+		System.out.println(progBar);
+		panel.add(progBar);
 		
 	}
 
@@ -48,10 +59,15 @@ public class LaunchScreen {
 		panel.setLayout(null);
 		launchButton.setText("Launch");
 		launchButton.setBounds(500, 300, 200, 50);
+
 		launchButton.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//LAUNCH
+				System.out.println("morgan");
+				JProgressBar progBar = new JProgressBar();
+				progBar.setBounds(200, 450, 500, 100);
+				System.out.println(progBar);
+				panel.add(progBar);
 			}
 		});
 		panel.add(launchButton);
