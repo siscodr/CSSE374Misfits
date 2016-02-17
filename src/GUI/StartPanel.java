@@ -2,37 +2,20 @@ package GUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.SwingUtilities;
-
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 
 public class StartPanel {
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				createAndShowGUI();
-			}
-		});
-	}
-	
-	private static void createAndShowGUI() {
-		JFrame f = new JFrame("Launching GUI!");
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		JPanel panel = new JPanel();
-		f.add(panel);
-		f.setSize(1000, 800);
+
+	private JPanel panel;
+
+	public StartPanel() {
+		panel = new JPanel();
 		addWelcomeLabel(panel);
 		addConfigButton(panel);
 		addLaunchButton(panel);
-		f.setVisible(true);
 	}
 
 	private static void addWelcomeLabel(JPanel panel) {
@@ -49,13 +32,13 @@ public class StartPanel {
 		launchButton.setText("Launch");
 		launchButton.setBounds(500, 300, 200, 50);
 
-		launchButton.addActionListener(new ActionListener(){
-			@Override
+		launchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				GUIMain.runLoadPanel();
 			}
 		});
 		panel.add(launchButton);
-		
+
 	}
 
 	private static void addConfigButton(JPanel panel) {
@@ -63,14 +46,20 @@ public class StartPanel {
 		panel.setLayout(null);
 		configButton.setText("Set configurments");
 		configButton.setBounds(200, 300, 200, 50);
-		configButton.addActionListener(new ActionListener(){
-			@Override
+		configButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//Launch configurements page
+				// Launch configurements page
 			}
 		});
 		panel.add(configButton);
-		
+
 	}
-	
+
+	public JPanel getPanel() {
+		return panel;
+	}
+
+	public void setPanel(JPanel panel) {
+		this.panel = panel;
+	}
 }
