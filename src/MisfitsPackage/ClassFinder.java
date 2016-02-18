@@ -17,13 +17,25 @@ public class ClassFinder {
 			if (f.isDirectory()) {
 				classes.addAll(recursiveStep(f.getAbsolutePath()));
 			} else {
-				classes.add(f.getParentFile().getName() + "." + f.getName());
+				if (f.getParentFile() == null) {
+					classes.add(f.getName());
+				} else {
+					classes.add(f.getParentFile().getName() + "." + f.getName());
+				}
 			}
 		}
-		
+		ArrayList<String> temp = new ArrayList<String>();
+		for (int i = 0; i < classes.size(); i++) {
+			temp.add(classes.get(i));
+		}
+		for (String clazz : temp) {
+			if(clazz.contains("$")){
+				classes.remove(clazz);
+			}
+		}
 		String[] toReturn = new String[classes.size()];
-		for(int i = 0; i <classes.size();i++){
-			toReturn[i] = classes.get(i);
+		for (int i = 0; i < classes.size(); i++) {
+			toReturn[i] = classes.get(i).split(".class")[0];
 		}
 		return toReturn;
 	}
@@ -39,7 +51,11 @@ public class ClassFinder {
 			if (f.isDirectory()) {
 				classes.addAll(recursiveStep(f.getAbsolutePath()));
 			} else {
-				classes.add(f.getParentFile().getName() + "."+  f.getName());
+				if (f.getParentFile() == null) {
+					classes.add(f.getName());
+				} else {
+					classes.add(f.getParentFile().getName() + "." + f.getName());
+				}
 			}
 		}
 		return classes;
