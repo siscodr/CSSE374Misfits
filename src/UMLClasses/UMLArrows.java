@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ClassStorage.ClassContainer;
+import ClassStorage.MethodCallStorage;
 import ClassStorage.MethodFieldsStorage;
 import MisfitsPackage.WorkerForArrows;
 import jdk.internal.org.objectweb.asm.Type;
@@ -116,8 +117,8 @@ public class UMLArrows {
 	 * 
 	 * @return No return value.
 	 */
-	public void addMethodDesc(String name, String desc, int access) {
-		currentClass.addMethodDesc(name, desc, access);
+	public void addMethodDesc(String name, String desc, int access, ArrayList<MethodCallStorage> methodCalls) {
+		currentClass.addMethodDesc(name, desc, access, methodCalls);
 	}
 
 	/**

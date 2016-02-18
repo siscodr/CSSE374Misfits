@@ -195,8 +195,8 @@ public class ClassContainer {
 	 * 
 	 * @return No return value.
 	 */
-	public void addMethodDesc(String name, String desc, int access) {
-		this.methods.add(new MethodStorage(name, desc, access));
+	public void addMethodDesc(String name, String desc, int access, ArrayList<MethodCallStorage> methodCalls) {
+		this.methods.add(new MethodStorage(name, desc, access, methodCalls));
 	}
 
 	/**
