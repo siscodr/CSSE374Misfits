@@ -5,10 +5,16 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -93,8 +99,7 @@ public class DisplayPanel {
 		JMenuItem instructionItem = new JMenuItem("Instruction");
 		instructionItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//TODO
-				System.out.println("I'm Giving Instructions!");
+				performInstructions();
 			}
 		});
 		helpMenu.add(instructionItem);
@@ -102,8 +107,7 @@ public class DisplayPanel {
 		JMenuItem aboutItem = new JMenuItem("About");
 		aboutItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//TODO
-				System.out.println("I'm The About!");
+				performAbout();
 			}
 		});
 		helpMenu.add(aboutItem);
@@ -111,6 +115,50 @@ public class DisplayPanel {
 		menuBar.add(fileMenu);
 		menuBar.add(helpMenu);
 		return menuBar;
+	}
+	
+	public void performAbout() {
+		JFrame frame = new JFrame("About");
+		frame.setSize(700, 500);
+		frame.setVisible(true);
+		java.nio.file.Path file = Paths.get("C:\\Users\\cookmn\\Documents\\GitHub\\CSSE374Misfits\\docs\\About");
+		JLabel label = new JLabel("About label");
+		String toPrint = "<html>";
+		Charset charset = Charset.forName("US-ASCII");
+		try (BufferedReader reader = Files.newBufferedReader(file, charset)) {
+		    String line = null;
+		    while ((line = reader.readLine()) != null) {
+		    	toPrint += line + "<br>";
+		    }
+		} catch (IOException x) {
+		    System.err.format("IOException: %s%n", x);
+		}
+		toPrint += "</html>";
+		label.setText(toPrint);
+		frame.add(label);
+		frame.pack();
+	}
+	
+	public void performInstructions() {
+		JFrame frame = new JFrame("Instructions");
+		frame.setSize(700, 500);
+		frame.setVisible(true);
+		java.nio.file.Path file = Paths.get("C:\\Users\\cookmn\\Documents\\GitHub\\CSSE374Misfits\\docs\\Instructions");
+		JLabel label = new JLabel("Instructions label");
+		String toPrint = "<html>";
+		Charset charset = Charset.forName("US-ASCII");
+		try (BufferedReader reader = Files.newBufferedReader(file, charset)) {
+		    String line = null;
+		    while ((line = reader.readLine()) != null) {
+		    	toPrint += line + "<br>";
+		    }
+		} catch (IOException x) {
+		    System.err.format("IOException: %s%n", x);
+		}
+		toPrint += "</html>";
+		label.setText(toPrint);
+		frame.add(label);
+		frame.pack();
 	}
 
 	private JSplitPane addLeftRightPane() {

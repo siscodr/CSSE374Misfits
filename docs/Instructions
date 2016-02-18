@@ -1,0 +1,25 @@
+
+Thank you for your interest in PatternDetector.  Here are the instructions on how to use this program.
+----------------------------------------------------------------------------------------------------------------------------------------
+
+1) From the start panel, adjust your configurations appropriately.  The configurations are as follows:
+---Input-Folder: this is the folder that contains the classes in which you want to detector to find patterns.
+---Input-Classes: this is any additional classes in which you want to detect patterns.
+---Output-Directory: this is where you want the final image to be exported.
+---Dot-Path: this is the path to your GraphViz.
+---Phases: These are the patterns that you want to detect in the order that you want to detect them.
+---Additional: Any thresholds needed by the pattern detectors.
+		
+2) Click the launch button to launch the program.
+
+3) Once the display panel appears, adjust which patterns and classes you want to appear in the image by using 
+---the checkboxes along the side and click File -> Update.
+   
+4) To export the graph, click File -> Export.
+
+5) To reset the configurations, click File -> Reset.
+
+6) To learn more about the program, click Help -> About.
+
+7) If you have any additional questions, comments or concerns, feel free to contact our support team at TeamMisfits@PatternDetector.com
+
