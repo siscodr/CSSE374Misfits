@@ -19,6 +19,9 @@ import javax.swing.tree.TreePath;
 
 public class DisplayPanel {
 
+	//TODO Setter for this
+	public String imgLocation;
+	
 	private JPanel panel;
 	private BufferedImage img;
 
@@ -77,6 +80,15 @@ public class DisplayPanel {
 			}
 		});
 		fileMenu.add(exportItem);
+		
+		JMenuItem updateItem = new JMenuItem("Update");
+		updateItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//TODO
+				System.out.println("I'm Updating The Image!");
+			}
+		});
+		fileMenu.add(updateItem);
 		
 		JMenuItem instructionItem = new JMenuItem("Instruction");
 		instructionItem.addActionListener(new ActionListener() {
@@ -148,6 +160,8 @@ public class DisplayPanel {
 		// Object[] objects = new Object[3];
 
 		final JCheckBoxTree tree = new JCheckBoxTree();
+		//tree.setModel(new DefaultTreeModel(new DefaultMutableTreeNode()));
+		//tree.removeSelectionRow(0);
 		tree.addCheckChangeEventListener(new JCheckBoxTree.CheckChangeEventListener() {
 			public void checkStateChanged(JCheckBoxTree.CheckChangeEvent event) {
 				System.out.println("event");
