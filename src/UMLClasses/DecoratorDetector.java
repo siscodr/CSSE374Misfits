@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import ClassStorage.ClassContainer;
 import ClassStorage.MethodStorage;
+import ClassStorage.PatternStorage;
 import MisfitsPackage.WorkerForArrows;
 
 public class DecoratorDetector implements PatternDetector {
@@ -47,6 +48,7 @@ public class DecoratorDetector implements PatternDetector {
 		if (currentClass.getSupers() == null) {
 			return;
 		}
+		ArrayList<String> classes = new ArrayList<String>();
 		String extension = currentClass.getSupers().getTargetType();
 		while (extension != null) {
 			// System.out.println("This is our Extension: " + extension);
@@ -58,6 +60,7 @@ public class DecoratorDetector implements PatternDetector {
 								for (ClassContainer tempclass : UMLArrows.getInstance().getClasses()) {
 									if (tempclass.getClassName().equals(extension)) {
 										tempclass.setLabel("Component");
+										classes.add(tempclass.getClassName());
 									}
 								}
 								setDetected(true);
@@ -85,5 +88,9 @@ public class DecoratorDetector implements PatternDetector {
 		// desc.contains(interfaceName)){
 
 		// }
+		if(isDetected()){
+			classes.add(currentClass.getClassName());
+			UMLArrows.getInstance().addPattern(new PatternStorage(this.pattern, currentClass.getClassName(), classes));
+		}
 	}
 }

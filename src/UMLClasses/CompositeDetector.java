@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import ClassStorage.ArrowStorage;
 import ClassStorage.ClassContainer;
+import ClassStorage.PatternStorage;
 
 public class CompositeDetector implements PatternDetector {
 	private String color;
@@ -11,6 +12,7 @@ public class CompositeDetector implements PatternDetector {
 	private String fillColor;
 	private boolean isDetected;
 	private String component;
+	private ArrayList<String> classes = new ArrayList<String>();
 
 	public CompositeDetector(String color, String fillColor) {
 		this.color = color;
@@ -37,6 +39,7 @@ public class CompositeDetector implements PatternDetector {
 
 	public void reset() {
 		setDetected(false);
+		classes = new ArrayList<String>();
 	}
 	
 	private void setDetected(boolean detected) {
@@ -51,6 +54,11 @@ public class CompositeDetector implements PatternDetector {
 		}
 		labelComponent();
 		findLeaves(currentClass.getClassName());
+		
+		if(isDetected()){
+			classes.add(currentClass.getClassName());
+			UMLArrows.getInstance().addPattern(new PatternStorage(this.pattern, currentClass.getClassName(), this.classes));
+		}
 	}
 
 	private void labelComponent() {
@@ -82,6 +90,7 @@ public class CompositeDetector implements PatternDetector {
 						if (parent.getTargetType().equals(this.component)) {
 							leaves.add(cls.getClassName());
 							isLeaf = true;
+							
 						}
 					}
 					if (!isLeaf) {
@@ -98,6 +107,7 @@ public class CompositeDetector implements PatternDetector {
 			for (ClassContainer currentClass : UMLArrows.getInstance().getClasses()) {
 				if (currentClass.getClassName().equals(leaf)) {
 					currentClass.setLabel("Leaf");
+					classes.add(leaf);
 				}
 			}
 		}
@@ -124,6 +134,7 @@ public class CompositeDetector implements PatternDetector {
 					if (parent.getTargetType().equals(type)) {
 						this.setDetected(true);
 						this.component = type;
+						this.classes.add(component);
 					}
 				}
 			}

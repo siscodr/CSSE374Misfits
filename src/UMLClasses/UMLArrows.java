@@ -6,6 +6,7 @@ import java.util.List;
 import ClassStorage.ClassContainer;
 import ClassStorage.MethodCallStorage;
 import ClassStorage.MethodFieldsStorage;
+import ClassStorage.PatternStorage;
 import MisfitsPackage.WorkerForArrows;
 import jdk.internal.org.objectweb.asm.Type;
 
@@ -20,6 +21,7 @@ public class UMLArrows {
 	private ArrayList<PatternDetector> detectors = new ArrayList<PatternDetector>();
 	private ClassContainer currentClass;
 	private ArrayList<ClassContainer> classes = new ArrayList<ClassContainer>();
+	private ArrayList<PatternStorage> patterns = new ArrayList<PatternStorage>();
 
 	/**
 	 * Constructs a UMLArrows
@@ -233,4 +235,10 @@ public class UMLArrows {
 		currentClass.addCollectionDataType(WorkerForArrows.stripFunction(name));
 	}
 
+	public void addPattern(PatternStorage patternStorage) {
+		this.patterns.add(patternStorage);
+	}
+	public ArrayList<PatternStorage> getPatterns(){
+		return this.patterns;
+	}
 }

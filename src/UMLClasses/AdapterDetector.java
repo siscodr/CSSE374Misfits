@@ -6,6 +6,7 @@ import ClassStorage.ArrowStorage;
 import ClassStorage.ClassContainer;
 import ClassStorage.FieldStorage;
 import ClassStorage.MethodFieldsStorage;
+import ClassStorage.PatternStorage;
 
 public class AdapterDetector implements PatternDetector {
 	private String color;
@@ -13,6 +14,7 @@ public class AdapterDetector implements PatternDetector {
 	private String fillColor;
 	private boolean isDetected;
 	private ArrayList<FieldStorage> adapteeField;
+	private ArrayList<String> classes;
 
 	public AdapterDetector(String color, String fillColor) {
 		this.color = color;
@@ -20,6 +22,7 @@ public class AdapterDetector implements PatternDetector {
 		this.isDetected = false;
 		this.pattern = "Adapter";
 		this.adapteeField = new ArrayList<FieldStorage>();
+		classes = new ArrayList<String>();
 	}
 
 	public String getPattern() {
@@ -41,6 +44,7 @@ public class AdapterDetector implements PatternDetector {
 	public void reset() {
 		setDetected(false);
 		this.adapteeField = new ArrayList<FieldStorage>();
+		this.classes = new ArrayList<String>();
 	}
 
 	private void setDetected(boolean detected) {
@@ -55,6 +59,10 @@ public class AdapterDetector implements PatternDetector {
 					labelAdaptees(field);
 				}
 			}
+		}
+		if(isDetected()){
+			classes.add(currentClass.getClassName());
+			UMLArrows.getInstance().addPattern(new PatternStorage(this.pattern, currentClass.getClassName(), this.classes));
 		}
 	}
 
@@ -75,6 +83,7 @@ public class AdapterDetector implements PatternDetector {
 		for (ClassContainer currentClass : UMLArrows.getInstance().getClasses()) {
 			if (currentClass.getClassName().equals(arrows.getTargetType())) {
 				currentClass.setLabel("Target");
+				this.classes.add(currentClass.getClassName());
 			}
 		}
 	}
@@ -84,6 +93,7 @@ public class AdapterDetector implements PatternDetector {
 		for (ClassContainer currentClass : UMLArrows.getInstance().getClasses()) {
 			if (currentClass.getClassName().equals(field.getType())) {
 				currentClass.setLabel("Adaptee");
+				this.classes.add(currentClass.getClassName());
 			}
 		}
 	}

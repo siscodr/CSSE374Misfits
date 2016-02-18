@@ -1,8 +1,11 @@
 package UMLClasses;
 
+import java.util.ArrayList;
+
+import jdk.internal.org.objectweb.asm.Opcodes;
 import ClassStorage.ClassContainer;
 import ClassStorage.FieldStorage;
-import jdk.internal.org.objectweb.asm.Opcodes;
+import ClassStorage.PatternStorage;
 
 public class SingletonDetector implements PatternDetector {
 	private String color;
@@ -44,11 +47,17 @@ public class SingletonDetector implements PatternDetector {
 
 	public void detect(ClassContainer currentClass) {
 		String className = currentClass.getClassName();
+		String headClass = null;
+		ArrayList<String> classes = new ArrayList<String>();
 		for (FieldStorage field : currentClass.getFields()) {
 			if (field.getType().equals(className) && field.getAccess() == (Opcodes.ACC_PRIVATE | Opcodes.ACC_STATIC)) {
+				headClass = className;
+				classes.add(headClass);
 				setDetected(true);
 			}
 		}
+		if(isDetected()){
+			UMLArrows.getInstance().addPattern(new PatternStorage(this.pattern, headClass, classes));
+		}
 	}
-
 }
