@@ -48,8 +48,17 @@ public class ConfigPanel {
 				setConfigText(file2, panel);
 			}
 		});
-		panel.add(update);
 		setConfigText(file, panel);
+		panel.add(update);
+		JButton done = new JButton("button");
+		done.setText("Done");
+		done.setBounds(720, 640, 200, 50);
+		done.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GUIMain.runStartPanel();
+			}
+		});
+		panel.add(done);
 	}
 	
 	public static void setConfigText(java.nio.file.Path file, JPanel panel){
