@@ -1,0 +1,282 @@
+digraph misfit_diagram{
+rankdir=BT
+   ClassStorage_ArrowStorage [
+     shape="record"      label = "{ClassStorage_ArrowStorage|- targetType : java_lang_String\l- label : java_lang_String\l|+getTargetType([]) : java_lang_String\l +getLabel([]) : java_lang_String\l +setLabel([java.lang.String]) : void\l 
+}"
+];
+   ClassStorage_ClassContainer [
+     shape="record"      label = "{ClassStorage_ClassContainer|- className : java_lang_String\l- label : java_lang_String\l- fields : java_util_ArrayList\l- methods : java_util_ArrayList\l- uses : java_util_ArrayList\l- supers : ClassStorage_ArrowStorage\l- interfaces : java_util_ArrayList\l- fieldBuffer : java_lang_StringBuffer\l- methodBuffer : java_lang_StringBuffer\l- isInterface : boolean\l- methodsField : java_util_ArrayList\l- color : java_lang_String\l- fillColor : java_lang_String\l- collectionDataTypes : java_util_ArrayList\l|+getCollectionDataTypes([]) : java_util_ArrayList\l +addCollectionDataType([java.lang.String]) : void\l +getColor([]) : java_lang_String\l +setColor([java.lang.String]) : void\l +getFillColor([]) : java_lang_String\l +setFillColor([java.lang.String]) : void\l +getMethodsField([]) : java_util_ArrayList\l +setMethodsField([java.util.ArrayList]) : void\l +getLabel([]) : java_lang_String\l +setLabel([java.lang.String]) : void\l +getClassName([]) : java_lang_String\l +getFields([]) : java_util_ArrayList\l +getMethods([]) : java_util_ArrayList\l +getUses([]) : java_util_ArrayList\l +getSupers([]) : ClassStorage_ArrowStorage\l +getInterfaces([]) : java_util_ArrayList\l +getMethodBuffer([]) : java_lang_StringBuffer\l +getfieldBuffer([]) : java_lang_StringBuffer\l +setIsInterface([boolean]) : void\l +addUse([java.lang.String]) : void\l +addUses([java.lang.String]) : void\l +addField([java.lang.String, int]) : void\l +addFieldDesc([java.lang.String, int, java.lang.String]) : void\l +addMethodDesc([java.lang.String, java.lang.String, int, java.util.ArrayList]) : void\l +setSuper([java.lang.String]) : void\l +addInterface([java.lang.String]) : void\l +addToFieldBuffer([java.lang.String]) : void\l +addToMethodBuffer([java.lang.String]) : void\l +checkExistingArrow([java.lang.String]) : boolean\l -checkInterfaces([java.lang.String]) : boolean\l -checkUses([java.lang.String]) : boolean\l -checkfields([java.lang.String]) : boolean\l +getIsInterface([]) : boolean\l +addMethodFields([ClassStorage.MethodFieldsStorage]) : void\l 
+}"
+];
+ClassStorage_ClassContainer -> MisfitsPackage_WorkerForArrows [ arrowhead="vee", style="dashed"];
+ClassStorage_ClassContainer -> ClassStorage_FieldStorage [arrowhead="vee"];
+ClassStorage_ClassContainer -> ClassStorage_MethodStorage [arrowhead="vee"];
+ClassStorage_ClassContainer -> ClassStorage_ArrowStorage [arrowhead="vee"];
+ClassStorage_ClassContainer -> ClassStorage_MethodFieldsStorage [arrowhead="vee"];
+   ClassStorage_FieldStorage [
+     shape="record"      label = "{ClassStorage_FieldStorage|- access : int\l- name : java_lang_String\l- type : java_lang_String\l- label : java_lang_String\l|+getAccess([]) : int\l +getName([]) : java_lang_String\l +getType([]) : java_lang_String\l +getLabel([]) : java_lang_String\l +setLabel([java.lang.String]) : void\l 
+}"
+];
+   ClassStorage_MethodFieldsStorage [
+     shape="record"      label = "{ClassStorage_MethodFieldsStorage|- name : java_lang_String\l- fields : java_util_ArrayList\l|+getName([]) : java_lang_String\l +setName([java.lang.String]) : void\l +getFields([]) : java_util_ArrayList\l +setFields([java.util.ArrayList]) : void\l 
+}"
+];
+   ClassStorage_MethodStorage [
+     shape="record"      label = "{ClassStorage_MethodStorage|- name : java_lang_String\l- desc : java_lang_String\l- access : int\l- methodCalls : java_util_ArrayList\l|+getName([]) : java_lang_String\l +getDesc([]) : java_lang_String\l +getAccess([]) : int\l +getMethodCalls([]) : java_util_ArrayList\l 
+}"
+];
+   GUI_ConfigPanel [
+     shape="record"      label = "{GUI_ConfigPanel|- panel : javax_swing_JPanel\l+ configs : javax_swing_JLabel\l count : int\l timeSettingConfig : int\l|-addText([javax.swing.JPanel]) : void\l -doParsing([java.lang.String]) : void\l +setConfigText([java.nio.file.Path, javax.swing.JPanel]) : java_lang_String\l +getPanel([]) : javax_swing_JPanel\l +setPanel([javax.swing.JPanel]) : void\l 
+}"
+];
+   GUI_DisplayPanel [
+     shape="record"      label = "{GUI_DisplayPanel|+ imgLocation : java_lang_String\l- panel : javax_swing_JPanel\l- img : java_awt_image_BufferedImage\l|+getPanel([]) : javax_swing_JPanel\l +setPanel([javax.swing.JPanel]) : void\l -addTopBottomPane([]) : void\l -addMenuBar([]) : javax_swing_JMenuBar\l -addLeftRightPane([]) : javax_swing_JSplitPane\l -addLeftPanel([]) : javax_swing_JScrollPane\l -addRightPane([]) : javax_swing_JScrollPane\l -checkBoxTree([]) : GUI_JCheckBoxTree\l access$0([GUI.DisplayPanel]) : java_awt_image_BufferedImage\l 
+}"
+];
+   GUI_GUIMain [
+     shape="record"      label = "{GUI_GUIMain|- frame : javax_swing_JFrame\l- panel : javax_swing_JPanel\l|+main([java.lang.String[]]) : void\l -createFrame([]) : void\l +runStartPanel([]) : void\l +runLoadPanel([]) : void\l +runConfigPanel([]) : void\l +runDisplayPanel([]) : void\l 
+}"
+];
+GUI_GUIMain -> GUI_StartPanel [ arrowhead="vee", style="dashed"];
+GUI_GUIMain -> GUI_LoadPanel [ arrowhead="vee", style="dashed"];
+GUI_GUIMain -> GUI_ConfigPanel [ arrowhead="vee", style="dashed"];
+GUI_GUIMain -> GUI_DisplayPanel [ arrowhead="vee", style="dashed"];
+   GUI_LoadPanel [
+     shape="record"      label = "{GUI_LoadPanel|- panel : javax_swing_JPanel\l|-addProgressBar([javax.swing.JPanel]) : void\l -addLoadingLabel([javax.swing.JPanel]) : void\l +getPanel([]) : javax_swing_JPanel\l +setPanel([javax.swing.JPanel]) : void\l 
+}"
+];
+   GUI_StartPanel [
+     shape="record"      label = "{GUI_StartPanel|- panel : javax_swing_JPanel\l|-addWelcomeLabel([javax.swing.JPanel]) : void\l -addLaunchButton([javax.swing.JPanel]) : void\l -addConfigButton([javax.swing.JPanel]) : void\l +getPanel([]) : javax_swing_JPanel\l +setPanel([javax.swing.JPanel]) : void\l 
+}"
+];
+   MisfitsPackage_ClassFinder [
+     shape="record"      label = "{MisfitsPackage_ClassFinder||+getClasses([java.lang.String]) : java_lang_String\l -recursiveStep([java.lang.String]) : java_util_ArrayList\l 
+}"
+];
+   MisfitsPackage_DesignParser [
+     shape="record"      label = "{MisfitsPackage_DesignParser||+makeUML([java.lang.String[]]) : void\l +makeSD([java.lang.String[]]) : void\l -makeReader([java.lang.String]) : void\l 
+}"
+];
+MisfitsPackage_DesignParser -> MisfitsPackage_WorkerForArrows [ arrowhead="vee", style="dashed"];
+MisfitsPackage_DesignParser -> UMLClasses_UMLArrows [ arrowhead="vee", style="dashed"];
+MisfitsPackage_DesignParser -> SDClasses_SDArrows [ arrowhead="vee", style="dashed"];
+MisfitsPackage_DesignParser -> Visitors_InterfaceDeclarationVisitor [ arrowhead="vee", style="dashed"];
+MisfitsPackage_DesignParser -> Visitors_SuperDeclarationVisitor [ arrowhead="vee", style="dashed"];
+MisfitsPackage_DesignParser -> Visitors_ClassFieldVisitor [ arrowhead="vee", style="dashed"];
+MisfitsPackage_DesignParser -> Visitors_ClassFieldDeclarationVisitor [ arrowhead="vee", style="dashed"];
+MisfitsPackage_DesignParser -> Visitors_ClassMethodVisitor [ arrowhead="vee", style="dashed"];
+MisfitsPackage_DesignParser -> Visitors_MethodDeclarationVisitor [ arrowhead="vee", style="dashed"];
+   MisfitsPackage_WorkerForArrows [
+     shape="record"      label = "{MisfitsPackage_WorkerForArrows|- whitelist : java_util_ArrayList\l|+getWhitelist([]) : java_util_ArrayList\l +addWhitelist([java.lang.String[]]) : void\l +unwantedTypes([java.lang.String]) : boolean\l +getTypesFromDesc([java.lang.String]) : java_util_List\l +makeSymbol([int]) : java_lang_String\l +stripFunction([java.lang.String]) : java_lang_String\l 
+}"
+];
+   SDClasses_Instruction [
+     shape="record"      label = "{\<\<Interface\>\> \nSDClasses_Instruction||+printInstruction([]) : void\l +execute([java.lang.String, int]) : void\l 
+}"
+];
+   SDClasses_MethodInstruction [
+     shape="record"      label = "{SDClasses_MethodInstruction|- name : java_lang_String\l- owner : java_lang_String\l- params : java_util_ArrayList\l- returns : java_lang_String\l|+printInstruction([]) : void\l +execute([java.lang.String, int]) : void\l +toString([]) : java_lang_String\l -getParamString([]) : java_lang_String\l 
+}"
+];
+SDClasses_MethodInstruction -> MisfitsPackage_WorkerForArrows [ arrowhead="vee", style="dashed"];
+SDClasses_MethodInstruction -> SDClasses_SDArrows [ arrowhead="vee", style="dashed"];
+SDClasses_MethodInstruction -> SDClasses_Instruction [ arrowhead="onormal", style="dashed"];
+   SDClasses_SDArrows [
+     shape="record"  color="orange" , fillcolor="purple" style="filled"    label = "{SDClasses_SDArrows\n\<\<Singleton\>\>|- DEPTHLIMIT : int\l- ourArrows : SDClasses_SDArrows\l- instructionSets : java_util_HashMap\l- currentClass : java_lang_String\l- classes : java_util_ArrayList\l|+getInstance([]) : SDClasses_SDArrows\l +setCurrentClass([java.lang.String]) : void\l +printClass([java.lang.String]) : void\l +addItemsToHashMap([java.lang.String, java.util.ArrayList]) : void\l +getHashMap([]) : java_util_HashMap\l +getCurrentClass([]) : java_lang_String\l +executeFromMain([java.lang.String]) : void\l +execute([java.lang.String, java.lang.String, int]) : void\l +checkClasses([java.lang.String]) : void\l -addClass([java.lang.String]) : void\l 
+}"
+];
+SDClasses_SDArrows -> MisfitsPackage_WorkerForArrows [ arrowhead="vee", style="dashed"];
+SDClasses_SDArrows -> SDClasses_Instruction [arrowhead="vee"];
+   SDClasses_SDCreatorMain [
+     shape="record"      label = "{SDClasses_SDCreatorMain||+main([java.lang.String[]]) : void\l 
+}"
+];
+SDClasses_SDCreatorMain -> MisfitsPackage_DesignParser [ arrowhead="vee", style="dashed"];
+   SDClasses_TypeInstruction [
+     shape="record"      label = "{SDClasses_TypeInstruction| opCode : int\l type : java_lang_String\l|+printInstruction([]) : void\l +execute([java.lang.String, int]) : void\l +toString([]) : java_lang_String\l 
+}"
+];
+SDClasses_TypeInstruction -> MisfitsPackage_WorkerForArrows [ arrowhead="vee", style="dashed"];
+SDClasses_TypeInstruction -> SDClasses_Instruction [ arrowhead="onormal", style="dashed"];
+   testExamples_ChocolateBoiler [
+     shape="record"  color="orange" , fillcolor="purple" style="filled"    label = "{testExamples_ChocolateBoiler\n\<\<Singleton\>\>|- empty : boolean\l- boiled : boolean\l- uniqueInstance : testExamples_ChocolateBoiler\l|+getInstance([]) : testExamples_ChocolateBoiler\l +fill([]) : void\l +drain([]) : void\l +boil([]) : void\l +isEmpty([]) : boolean\l +isBoiled([]) : boolean\l 
+}"
+];
+   testExamples_CollectionsShuffleMain [
+     shape="record"      label = "{testExamples_CollectionsShuffleMain||+main([java.lang.String[]]) : void\l 
+}"
+];
+   TestMisfitsPackage_ClassFinderTest [
+     shape="record"      label = "{TestMisfitsPackage_ClassFinderTest||+test([]) : void\l 
+}"
+];
+TestMisfitsPackage_ClassFinderTest -> MisfitsPackage_ClassFinder [ arrowhead="vee", style="dashed"];
+   TestMisfitsPackage_TestAdapterPatterns [
+     shape="record"      label = "{TestMisfitsPackage_TestAdapterPatterns|- outContent : java_io_ByteArrayOutputStream\l- errContent : java_io_ByteArrayOutputStream\l|+setUpStreams([]) : void\l +cleanUpStreams([]) : void\l +testInputStreamReaderForAdapter([]) : void\l +testOutputStreamReaderForAdapter([]) : void\l +testCheckClassAdapterForAdapter([]) : void\l 
+}"
+];
+TestMisfitsPackage_TestAdapterPatterns -> UMLClasses_UMLArrows [ arrowhead="vee", style="dashed"];
+TestMisfitsPackage_TestAdapterPatterns -> UMLClasses_AdapterDetector [ arrowhead="vee", style="dashed"];
+TestMisfitsPackage_TestAdapterPatterns -> MisfitsPackage_DesignParser [ arrowhead="vee", style="dashed"];
+   TestMisfitsPackage_TestCompositePatterns [
+     shape="record"      label = "{TestMisfitsPackage_TestCompositePatterns||+testContainerForComposite([]) : void\l +testJComponentForCompositeLeaf([]) : void\l +testInputStreamReaderForComposite([]) : void\l 
+}"
+];
+TestMisfitsPackage_TestCompositePatterns -> UMLClasses_UMLArrows [ arrowhead="vee", style="dashed"];
+TestMisfitsPackage_TestCompositePatterns -> UMLClasses_CompositeDetector [ arrowhead="vee", style="dashed"];
+TestMisfitsPackage_TestCompositePatterns -> MisfitsPackage_DesignParser [ arrowhead="vee", style="dashed"];
+TestMisfitsPackage_TestCompositePatterns -> ClassStorage_ClassContainer [ arrowhead="vee", style="dashed"];
+   TestMisfitsPackage_TestDecoratorPatterns [
+     shape="record"      label = "{TestMisfitsPackage_TestDecoratorPatterns|- outContent : java_io_ByteArrayOutputStream\l- errContent : java_io_ByteArrayOutputStream\l|+setUpStreams([]) : void\l +cleanUpStreams([]) : void\l +testCheckClassAdapterForDecorator([]) : void\l +testInputStreamForDecorator([]) : void\l 
+}"
+];
+TestMisfitsPackage_TestDecoratorPatterns -> UMLClasses_UMLArrows [ arrowhead="vee", style="dashed"];
+TestMisfitsPackage_TestDecoratorPatterns -> UMLClasses_DecoratorDetector [ arrowhead="vee", style="dashed"];
+TestMisfitsPackage_TestDecoratorPatterns -> MisfitsPackage_DesignParser [ arrowhead="vee", style="dashed"];
+   TestMisfitsPackage_TestSDArrows [
+     shape="record"      label = "{TestMisfitsPackage_TestSDArrows|- outContent : java_io_ByteArrayOutputStream\l- errContent : java_io_ByteArrayOutputStream\l|+setUpStreams([]) : void\l +cleanUpStreams([]) : void\l +testgetInstance([]) : void\l +testgetSameInstance([]) : void\l +testprintClassEmpty([]) : void\l +testprintClassString([]) : void\l +testprintClassNumeric([]) : void\l +testprintClassLong([]) : void\l +testaddItemsToHashMap([]) : void\l 
+}"
+];
+TestMisfitsPackage_TestSDArrows -> SDClasses_SDArrows [ arrowhead="vee", style="dashed"];
+   TestMisfitsPackage_TestSingletonPatterns [
+     shape="record"      label = "{TestMisfitsPackage_TestSingletonPatterns|- outContent : java_io_ByteArrayOutputStream\l- errContent : java_io_ByteArrayOutputStream\l|+setUpStreams([]) : void\l +cleanUpStreams([]) : void\l +testRuntimeForSingleton([]) : void\l +testDesktopForSingleton([]) : void\l +testCalendarForSingleton([]) : void\l +testFilterInputStreamForSingleton([]) : void\l 
+}"
+];
+TestMisfitsPackage_TestSingletonPatterns -> UMLClasses_UMLArrows [ arrowhead="vee", style="dashed"];
+TestMisfitsPackage_TestSingletonPatterns -> UMLClasses_SingletonDetector [ arrowhead="vee", style="dashed"];
+TestMisfitsPackage_TestSingletonPatterns -> MisfitsPackage_DesignParser [ arrowhead="vee", style="dashed"];
+   TestMisfitsPackage_TestWorkerForArrows [
+     shape="record"      label = "{TestMisfitsPackage_TestWorkerForArrows||+testgetWhiteList([]) : void\l +testgetWhitelistValues([]) : void\l +testaddWhiteListEmpty([]) : void\l +testaddWhiteListStrings([]) : void\l +testunwantedTypesInWhitelist([]) : void\l +testunwantedTypesSubstringInWhiteList([]) : void\l +testunwantedTypesNull([]) : void\l +testunwantedTypesEmptyString([]) : void\l +testgetTypesFromDescPrimatives([]) : void\l +testgetTypesFromDescClasses([]) : void\l +testgetTypesFromDescCandP([]) : void\l +testmakeSymbolPublic([]) : void\l +testmakeSymbolPrivate([]) : void\l +testmakeSymbolProtected([]) : void\l +testmakeSymbolNone([]) : void\l +teststripFunctionSlash([]) : void\l +teststripFunctionDor([]) : void\l +teststripFunctionBracket([]) : void\l +teststripFunctionMixed([]) : void\l +teststripFunctionUnderscore([]) : void\l 
+}"
+];
+TestMisfitsPackage_TestWorkerForArrows -> MisfitsPackage_WorkerForArrows [ arrowhead="vee", style="dashed"];
+   TestMisfitsPackage_UMLArrowsTest [
+     shape="record"      label = "{TestMisfitsPackage_UMLArrowsTest|- outContent : java_io_ByteArrayOutputStream\l- errContent : java_io_ByteArrayOutputStream\l|+setUpStreams([]) : void\l +cleanUpStreams([]) : void\l +testgetInstance([]) : void\l +testgetSameInstance([]) : void\l +testresetUMLArrows([]) : void\l +testresetUMLArrowsValues([]) : void\l +testaddToFieldBufferSpace([]) : void\l +testaddToFieldBufferString([]) : void\l +testaddToFieldBufferSymbols([]) : void\l +testaddToFieldBufferNothing([]) : void\l +testaddToMethodBufferSpace([]) : void\l +testaddToMethodBufferString([]) : void\l +testaddToMethodBufferSymbols([]) : void\l +testaddToMethodBufferNothing([]) : void\l +testaddUseEmptyString([]) : void\l +testaddUseNumerics([]) : void\l +testaddUseString([]) : void\l +testaddUses([]) : void\l +testaddFieldDescObject([]) : void\l +testaddFieldDescUMLArrowsTest([]) : void\l +testaddFieldDescSingletonTrue([]) : void\l +testaddFieldDescSingletonPublicOnly([]) : void\l +testaddFieldDescSingletonPrivateOnly([]) : void\l +testaddFieldDescSingletonStaticOnly([]) : void\l +testsetSuperString([]) : void\l +testsetSuperNumerics([]) : void\l +testsetSuperSpecial([]) : void\l +testaddInterfaceEmptyString([]) : void\l +testaddInterfaceString([]) : void\l +testaddInterfaceNumerics([]) : void\l +testprintClassNoBuffers([]) : void\l +testprintClass([]) : void\l +testaddFieldToBuffer([]) : void\l +testaddMethodToBuffer([]) : void\l 
+}"
+];
+TestMisfitsPackage_UMLArrowsTest -> UMLClasses_UMLArrows [ arrowhead="vee", style="dashed"];
+   TestMisfitsPackage_UMLPrinterTest [
+     shape="record"      label = "{TestMisfitsPackage_UMLPrinterTest|- outContent : java_io_ByteArrayOutputStream\l- errContent : java_io_ByteArrayOutputStream\l|+setUpStreams([]) : void\l +cleanUpStreams([]) : void\l +testStartDiagramNoSpaces([]) : void\l +testStartDiagramSpaces([]) : void\l +testStartDiagramSpecialCharacters([]) : void\l +testStartDiagramNoName([]) : void\l +testStartDiagramLargeName([]) : void\l +testEndDiagram([]) : void\l +testEndDiagramSpace([]) : void\l 
+}"
+];
+TestMisfitsPackage_UMLPrinterTest -> UMLClasses_UMLPrinter [ arrowhead="vee", style="dashed"];
+   UMLClasses_AdapterDetector [
+     shape="record"      label = "{UMLClasses_AdapterDetector|- color : java_lang_String\l- pattern : java_lang_String\l- fillColor : java_lang_String\l- isDetected : boolean\l- adapteeField : java_util_ArrayList\l- classes : java_util_ArrayList\l|+getPattern([]) : java_lang_String\l +getColor([]) : java_lang_String\l +getFillColor([]) : java_lang_String\l +isDetected([]) : boolean\l +reset([]) : void\l -setDetected([boolean]) : void\l +detect([ClassStorage.ClassContainer]) : void\l -checkTarget([ClassStorage.ClassContainer]) : boolean\l -labelTargets([ClassStorage.ArrowStorage]) : void\l -labelAdaptees([ClassStorage.FieldStorage]) : void\l -checkFields([ClassStorage.ClassContainer]) : boolean\l 
+}"
+];
+UMLClasses_AdapterDetector -> ClassStorage_ClassContainer [ arrowhead="vee", style="dashed"];
+UMLClasses_AdapterDetector -> UMLClasses_UMLArrows [ arrowhead="vee", style="dashed"];
+UMLClasses_AdapterDetector -> ClassStorage_ArrowStorage [ arrowhead="vee", style="dashed"];
+UMLClasses_AdapterDetector -> ClassStorage_MethodFieldsStorage [ arrowhead="vee", style="dashed"];
+UMLClasses_AdapterDetector -> ClassStorage_FieldStorage [arrowhead="vee"];
+UMLClasses_AdapterDetector -> UMLClasses_PatternDetector [ arrowhead="onormal", style="dashed"];
+   UMLClasses_CompositeDetector [
+     shape="record"      label = "{UMLClasses_CompositeDetector|- color : java_lang_String\l- pattern : java_lang_String\l- fillColor : java_lang_String\l- isDetected : boolean\l- component : java_lang_String\l- classes : java_util_ArrayList\l|+getPattern([]) : java_lang_String\l +getColor([]) : java_lang_String\l +getFillColor([]) : java_lang_String\l +isDetected([]) : boolean\l +reset([]) : void\l -setDetected([boolean]) : void\l +detect([ClassStorage.ClassContainer]) : void\l -labelComponent([]) : void\l -findLeaves([java.lang.String]) : void\l -labelLeaves([java.util.ArrayList]) : void\l -findComponent([ClassStorage.ClassContainer]) : void\l -getNextGeneration([java.util.ArrayList]) : java_util_ArrayList\l 
+}"
+];
+UMLClasses_CompositeDetector -> ClassStorage_ClassContainer [ arrowhead="vee", style="dashed"];
+UMLClasses_CompositeDetector -> UMLClasses_UMLArrows [ arrowhead="vee", style="dashed"];
+UMLClasses_CompositeDetector -> ClassStorage_ArrowStorage [ arrowhead="vee", style="dashed"];
+UMLClasses_CompositeDetector -> UMLClasses_PatternDetector [ arrowhead="onormal", style="dashed"];
+   UMLClasses_DecoratorDetector [
+     shape="record"      label = "{UMLClasses_DecoratorDetector|- color : java_lang_String\l- pattern : java_lang_String\l- fillColor : java_lang_String\l- isDetected : boolean\l|+getPattern([]) : java_lang_String\l +getColor([]) : java_lang_String\l +getFillColor([]) : java_lang_String\l +isDetected([]) : boolean\l +reset([]) : void\l -setDetected([boolean]) : void\l +detect([ClassStorage.ClassContainer]) : void\l 
+}"
+];
+UMLClasses_DecoratorDetector -> ClassStorage_ArrowStorage [ arrowhead="vee", style="dashed"];
+UMLClasses_DecoratorDetector -> ClassStorage_ClassContainer [ arrowhead="vee", style="dashed"];
+UMLClasses_DecoratorDetector -> ClassStorage_MethodStorage [ arrowhead="vee", style="dashed"];
+UMLClasses_DecoratorDetector -> MisfitsPackage_WorkerForArrows [ arrowhead="vee", style="dashed"];
+UMLClasses_DecoratorDetector -> UMLClasses_UMLArrows [ arrowhead="vee", style="dashed"];
+UMLClasses_DecoratorDetector -> UMLClasses_PatternDetector [ arrowhead="onormal", style="dashed"];
+   UMLClasses_PatternDetector [
+     shape="record"      label = "{\<\<Interface\>\> \nUMLClasses_PatternDetector||+getPattern([]) : java_lang_String\l +getColor([]) : java_lang_String\l +getFillColor([]) : java_lang_String\l +detect([ClassStorage.ClassContainer]) : void\l +isDetected([]) : boolean\l +reset([]) : void\l 
+}"
+];
+   UMLClasses_SingletonDetector [
+     shape="record"      label = "{UMLClasses_SingletonDetector|- color : java_lang_String\l- pattern : java_lang_String\l- fillColor : java_lang_String\l- isDetected : boolean\l|+getPattern([]) : java_lang_String\l +getColor([]) : java_lang_String\l +getFillColor([]) : java_lang_String\l +isDetected([]) : boolean\l +reset([]) : void\l -setDetected([boolean]) : void\l +detect([ClassStorage.ClassContainer]) : void\l 
+}"
+];
+UMLClasses_SingletonDetector -> ClassStorage_ClassContainer [ arrowhead="vee", style="dashed"];
+UMLClasses_SingletonDetector -> ClassStorage_FieldStorage [ arrowhead="vee", style="dashed"];
+UMLClasses_SingletonDetector -> UMLClasses_UMLArrows [ arrowhead="vee", style="dashed"];
+UMLClasses_SingletonDetector -> UMLClasses_PatternDetector [ arrowhead="onormal", style="dashed"];
+   UMLClasses_UMLArrows [
+     shape="record"  color="orange" , fillcolor="purple" style="filled"    label = "{UMLClasses_UMLArrows\n\<\<Singleton\>\>|- ourArrows : UMLClasses_UMLArrows\l- detectors : java_util_ArrayList\l- currentClass : ClassStorage_ClassContainer\l- classes : java_util_ArrayList\l- patterns : java_util_ArrayList\l|+getInstance([]) : UMLClasses_UMLArrows\l +addDetector([UMLClasses.PatternDetector]) : void\l +resetDetectors([]) : void\l +resetUMLArrows([java.lang.String]) : void\l +addUse([java.lang.String]) : void\l +addUses([java.lang.String]) : void\l +addField([java.lang.String, int]) : void\l +addFieldDesc([java.lang.String, int, java.lang.String]) : void\l +addMethodDesc([java.lang.String, java.lang.String, int, java.util.ArrayList]) : void\l +setSuper([java.lang.String]) : void\l +getClasses([]) : java_util_ArrayList\l +addInterface([java.lang.String]) : void\l +addFieldToBuffer([int, java.lang.String, java.lang.String]) : void\l +addMethodToBuffer([int, java.lang.String, java.lang.String]) : void\l +getDetectors([]) : java_util_ArrayList\l +printClasses([java.lang.String]) : void\l +detect([]) : void\l +setIsInterface([boolean]) : void\l +addMethodFields([ClassStorage.MethodFieldsStorage]) : void\l +addCollectionDataType([java.lang.String]) : void\l +addPattern([ClassStorage.PatternStorage]) : void\l +getPatterns([]) : java_util_ArrayList\l 
+}"
+];
+UMLClasses_UMLArrows -> MisfitsPackage_WorkerForArrows [ arrowhead="vee", style="dashed"];
+UMLClasses_UMLArrows -> UMLClasses_UMLPrinter [ arrowhead="vee", style="dashed"];
+UMLClasses_UMLArrows -> UMLClasses_PatternDetector [arrowhead="vee"];
+UMLClasses_UMLArrows -> ClassStorage_ClassContainer [arrowhead="vee"];
+   UMLClasses_UMLCreatorMain [
+     shape="record"      label = "{UMLClasses_UMLCreatorMain||+main([java.lang.String[]]) : void\l 
+}"
+];
+UMLClasses_UMLCreatorMain -> UMLClasses_UMLArrows [ arrowhead="vee", style="dashed"];
+UMLClasses_UMLCreatorMain -> UMLClasses_SingletonDetector [ arrowhead="vee", style="dashed"];
+UMLClasses_UMLCreatorMain -> UMLClasses_DecoratorDetector [ arrowhead="vee", style="dashed"];
+UMLClasses_UMLCreatorMain -> UMLClasses_CompositeDetector [ arrowhead="vee", style="dashed"];
+UMLClasses_UMLCreatorMain -> UMLClasses_AdapterDetector [ arrowhead="vee", style="dashed"];
+UMLClasses_UMLCreatorMain -> MisfitsPackage_DesignParser [ arrowhead="vee", style="dashed"];
+   UMLClasses_UMLPrinter [
+     shape="record"      label = "{UMLClasses_UMLPrinter||+printClasses([java.lang.String, java.util.ArrayList]) : void\l -startDiagram([java.lang.String]) : void\l -endDiagram([]) : void\l -printArrows([ClassStorage.ClassContainer]) : void\l -printUses([ClassStorage.ClassContainer]) : void\l -printFields([ClassStorage.ClassContainer]) : void\l -printInterfaces([ClassStorage.ClassContainer]) : void\l -printSupers([ClassStorage.ClassContainer]) : void\l 
+}"
+];
+UMLClasses_UMLPrinter -> ClassStorage_ClassContainer [ arrowhead="vee", style="dashed"];
+UMLClasses_UMLPrinter -> ClassStorage_ArrowStorage [ arrowhead="vee", style="dashed"];
+UMLClasses_UMLPrinter -> ClassStorage_FieldStorage [ arrowhead="vee", style="dashed"];
+   Visitors_ClassFieldDeclarationVisitor [
+     shape="record"      label = "{Visitors_ClassFieldDeclarationVisitor||+visitField([int, java.lang.String, java.lang.String, java.lang.String, java.lang.Object]) : jdk_internal_org_objectweb_asm_FieldVisitor\l 
+}"
+];
+Visitors_ClassFieldDeclarationVisitor -> UMLClasses_UMLArrows [ arrowhead="vee", style="dashed"];
+   Visitors_ClassFieldVisitor [
+     shape="record"      label = "{Visitors_ClassFieldVisitor||+visitField([int, java.lang.String, java.lang.String, java.lang.String, java.lang.Object]) : jdk_internal_org_objectweb_asm_FieldVisitor\l 
+}"
+];
+Visitors_ClassFieldVisitor -> Visitors_mySignatureVisitor [ arrowhead="vee", style="dashed"];
+Visitors_ClassFieldVisitor -> UMLClasses_UMLArrows [ arrowhead="vee", style="dashed"];
+   Visitors_ClassMethodVisitor [
+     shape="record"      label = "{Visitors_ClassMethodVisitor||+visitMethod([int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]]) : jdk_internal_org_objectweb_asm_MethodVisitor\l 
+}"
+];
+Visitors_ClassMethodVisitor -> UMLClasses_UMLArrows [ arrowhead="vee", style="dashed"];
+   Visitors_InterfaceDeclarationVisitor [
+     shape="record"      label = "{Visitors_InterfaceDeclarationVisitor||+visit([int, int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]]) : void\l 
+}"
+];
+Visitors_InterfaceDeclarationVisitor -> UMLClasses_UMLArrows [ arrowhead="vee", style="dashed"];
+   Visitors_MethodDeclarationVisitor [
+     shape="record"      label = "{Visitors_MethodDeclarationVisitor||+visitMethod([int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]]) : jdk_internal_org_objectweb_asm_MethodVisitor\l 
+}"
+];
+Visitors_MethodDeclarationVisitor -> Visitors_MyMethodVisitorSD [ arrowhead="vee", style="dashed"];
+Visitors_MethodDeclarationVisitor -> Visitors_MyMethodVisitorUML [ arrowhead="vee", style="dashed"];
+Visitors_MethodDeclarationVisitor -> UMLClasses_UMLArrows [ arrowhead="vee", style="dashed"];
+   Visitors_MyMethodVisitorSD [
+     shape="record"      label = "{Visitors_MyMethodVisitorSD|- instructions : java_util_ArrayList\l- name : java_lang_String\l|+visitMethodInsn([int, java.lang.String, java.lang.String, java.lang.String, boolean]) : void\l +visitTypeInsn([int, java.lang.String]) : void\l +visitVarInsn([int, int]) : void\l +VisitAnnotation([java.lang.String, boolean]) : jdk_internal_org_objectweb_asm_AnnotationVisitor\l +visitCode([]) : void\l +visitEnd([]) : void\l 
+}"
+];
+Visitors_MyMethodVisitorSD -> UMLClasses_UMLArrows [ arrowhead="vee", style="dashed"];
+Visitors_MyMethodVisitorSD -> SDClasses_MethodInstruction [ arrowhead="vee", style="dashed"];
+Visitors_MyMethodVisitorSD -> SDClasses_TypeInstruction [ arrowhead="vee", style="dashed"];
+Visitors_MyMethodVisitorSD -> SDClasses_SDArrows [ arrowhead="vee", style="dashed"];
+Visitors_MyMethodVisitorSD -> SDClasses_Instruction [arrowhead="vee"];
+   Visitors_MyMethodVisitorUML [
+     shape="record"      label = "{Visitors_MyMethodVisitorUML|- types : java_util_ArrayList\l- name : java_lang_String\l|+visitFieldInsn([int, java.lang.String, java.lang.String, java.lang.String]) : void\l +visitEnd([]) : void\l 
+}"
+];
+Visitors_MyMethodVisitorUML -> MisfitsPackage_WorkerForArrows [ arrowhead="vee", style="dashed"];
+Visitors_MyMethodVisitorUML -> UMLClasses_UMLArrows [ arrowhead="vee", style="dashed"];
+Visitors_MyMethodVisitorUML -> ClassStorage_MethodFieldsStorage [ arrowhead="vee", style="dashed"];
+   Visitors_mySignatureVisitor [
+     shape="record"      label = "{Visitors_mySignatureVisitor|- access : int\l|+visitClassType([java.lang.String]) : void\l 
+}"
+];
+Visitors_mySignatureVisitor -> UMLClasses_UMLArrows [ arrowhead="vee", style="dashed"];
+   Visitors_SuperDeclarationVisitor [
+     shape="record"      label = "{Visitors_SuperDeclarationVisitor||+visit([int, int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]]) : void\l 
+}"
+];
+Visitors_SuperDeclarationVisitor -> UMLClasses_UMLArrows [ arrowhead="vee", style="dashed"];
+}
