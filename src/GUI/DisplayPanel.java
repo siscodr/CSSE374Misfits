@@ -13,6 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageOutputStream;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -81,8 +82,12 @@ public class DisplayPanel {
 		JMenuItem exportItem = new JMenuItem("Export");
 		exportItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//TODO
-				System.out.println("I'm Exporting!");
+				try {
+					ImageIO.write(img, "jpg", new File(Configurations.getInstance().outputDirectory + ".jpg"));
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		fileMenu.add(exportItem);

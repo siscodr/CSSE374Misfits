@@ -23,7 +23,7 @@ public class Configurations {
 
 	public static Configurations getInstance() {
 		if(ourConfigs == null){
-			ourConfigs = new Configurations("c:\\User1\\Documents\\Lab2-1\\bin", "java.io.Reader,java.io.BufferedReader,java.lang.Runtime,org.asm.ClassVisitor", "c:\\User1\\Documents\\Lab2-1\\input-output", "C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe", "Loader, Decorator-Detector, Singleton-Detector", myArray);
+			ourConfigs = new Configurations("c:\\User1\\Documents\\Lab2-1\\bin", "java.io.Reader,java.io.BufferedReader,java.lang.Runtime,org.asm.ClassVisitor", "C:\\Users\\cookmn\\Documents\\GitHub\\CSSE374Misfits\\docs\\Image", "C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe", "Loader, Decorator-Detector, Singleton-Detector", myArray);
 		}
 		return ourConfigs;
 	}
