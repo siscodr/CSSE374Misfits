@@ -16,7 +16,8 @@ import javax.swing.JTextArea;
 public class ConfigPanel {
 	private JPanel panel;
 	public static JLabel configs = new JLabel("configs");
-
+	static int count = 0;
+	static int timeSettingConfig = 0;
 
 
 	public ConfigPanel() {
@@ -45,7 +46,7 @@ public class ConfigPanel {
 		update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				java.nio.file.Path file2 = Paths.get(textArea.getText());
-				setConfigText(file2, panel);
+				String toPrint = setConfigText(file2, panel);
 			}
 		});
 		setConfigText(file, panel);
@@ -61,7 +62,34 @@ public class ConfigPanel {
 		panel.add(done);
 	}
 	
-	public static void setConfigText(java.nio.file.Path file, JPanel panel){
+
+	private static void doParsing(String toPrint) {
+		String[] strings = new String[2];
+		if(count == 0){
+			strings = toPrint.split(": ");
+			Configurations.getInstance().setInputFolder(strings[1]);
+		} else if(count == 1) {
+			strings = toPrint.split(": ");
+			Configurations.getInstance().setInputClasses(strings[1]);
+		} else if(count == 2) {
+			strings = toPrint.split(": ");
+			Configurations.getInstance().setOutputDirectory(strings[1]);
+		} else if(count == 3) {
+			strings = toPrint.split(": ");
+			Configurations.getInstance().setDotPath(strings[1]);
+		} else if(count == 4) {
+			strings = toPrint.split(": ");
+			Configurations.getInstance().setPhases(strings[1]);
+		} else{
+			strings = toPrint.split(": ");
+			Configurations.getInstance().patternDelegations.add(strings[1]);
+			System.out.println(Configurations.getInstance().patternDelegations);
+		}
+		count++;
+	}
+	
+	public static String setConfigText(java.nio.file.Path file, JPanel panel){
+		int tempCount = 0;
 		configs.setText("");
 		String toPrint = "<html>";
 		Charset charset = Charset.forName("US-ASCII");
@@ -69,6 +97,10 @@ public class ConfigPanel {
 		    String line = null;
 		    while ((line = reader.readLine()) != null) {
 		    	toPrint += line + "<br>";
+		    	if(timeSettingConfig != 0 && tempCount %2 == 0){
+		    		doParsing(line);
+		    	}
+		    	tempCount++;
 		    }
 		} catch (IOException x) {
 		    System.err.format("IOException: %s%n", x);
@@ -77,6 +109,8 @@ public class ConfigPanel {
 		configs.setText(toPrint);
 		configs.setBounds(50, 200, 900, 500);
 		panel.add(configs);
+		timeSettingConfig++;
+		return toPrint;
 	}
 
 	public JPanel getPanel() {

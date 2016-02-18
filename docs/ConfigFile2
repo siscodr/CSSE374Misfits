@@ -1,17 +1,15 @@
-Input-Folder: c:\\User1\\Documents\\Lab2-1\\bin
+Input-Folder: Morgan's folder
 
-Input-Classes: java.io.Reader,java.io.BufferedReader,java.lang.Runtime,org.asm.ClassVisitor
+Input-Classes: Morgan's classes
 
-Output-Directory: c:\\User1\\Documents\\Lab2-1\\input-output
+Output-Directory: Morgan's directory
 
-Dot-Path: C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe
+Dot-Path: Morgan's path
 
-Phases: Loader, Decorator-Detector, Singleton-Detector
+Phases: Morgan's phases
 
 Adapter-MethodDelegation: 2
 
 Decorator-MethodDelegation: 1
 
 Singleton-RequireGetInstance: true
-
-This is the new config file!!!
