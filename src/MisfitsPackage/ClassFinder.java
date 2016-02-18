@@ -10,7 +10,6 @@ public class ClassFinder {
 		File root = new File(path);
 		File[] list = root.listFiles();
 		ArrayList<String> classes = new ArrayList<String>();
-
 		if (list == null)
 			return null;
 
@@ -18,17 +17,21 @@ public class ClassFinder {
 			if (f.isDirectory()) {
 				classes.addAll(recursiveStep(f.getAbsolutePath()));
 			} else {
-				classes.add(f.getPath());
+				classes.add(f.getParentFile().getName() + "." + f.getName());
 			}
 		}
-		return (String[]) classes.toArray();
+		
+		String[] toReturn = new String[classes.size()];
+		for(int i = 0; i <classes.size();i++){
+			toReturn[i] = classes.get(i);
+		}
+		return toReturn;
 	}
 
 	private static ArrayList<String> recursiveStep(String path) {
 		File root = new File(path);
 		File[] list = root.listFiles();
 		ArrayList<String> classes = new ArrayList<String>();
-
 		if (list == null)
 			return classes;
 
@@ -36,7 +39,7 @@ public class ClassFinder {
 			if (f.isDirectory()) {
 				classes.addAll(recursiveStep(f.getAbsolutePath()));
 			} else {
-				classes.add(f.getPath());
+				classes.add(f.getParentFile().getName() + "."+  f.getName());
 			}
 		}
 		return classes;
