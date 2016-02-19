@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.imageio.stream.ImageOutputStream;
@@ -22,7 +23,12 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
+
+import ClassStorage.PatternStorage;
+import UMLClasses.UMLArrows;
 
 public class DisplayPanel {
 
@@ -31,7 +37,8 @@ public class DisplayPanel {
 	
 	private JPanel panel;
 	private BufferedImage img;
-
+	private String selectedClasses;
+	
 	public JPanel getPanel() {
 		return panel;
 	}
@@ -85,7 +92,6 @@ public class DisplayPanel {
 				try {
 					ImageIO.write(img, "jpg", new File(Configurations.getInstance().outputDirectory + ".jpg"));
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -95,7 +101,9 @@ public class DisplayPanel {
 		JMenuItem updateItem = new JMenuItem("Update");
 		updateItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//TODO
+				//TODO remove comments when integrated
+				//UMLRenderer rend = new UMLRenderer();
+				//rend.runGraphViz(selectedClasses);
 				System.out.println("I'm Updating The Image!");
 			}
 		});
@@ -210,20 +218,58 @@ public class DisplayPanel {
 	}
 
 	private JCheckBoxTree checkBoxTree() {
-		// Object[] objects = new Object[3];
-
+//		Object[] objects = new Object[4];
+//		objects[0]="Decorator";
+//		objects[1]="Adapter";
+//		objects[2]="Singleton";
+//		objects[3]="Other";
+		//Test
+		UMLArrows.getInstance().addPattern(new PatternStorage("Decorator","DecoratorClass.java",new ArrayList<String>()));
+		UMLArrows.getInstance().addPattern(new PatternStorage("Singleton","SingletonClass.java",new ArrayList<String>()));
+		//UMLArrows.getInstance().addPattern(new PatternStorage("Decorator","DecoratorClass.java",new ArrayList<String>()));
+		
+		 ArrayList<PatternStorage> patterns = UMLArrows.getInstance().getPatterns();
 		final JCheckBoxTree tree = new JCheckBoxTree();
-		//tree.setModel(new DefaultTreeModel(new DefaultMutableTreeNode()));
+		DefaultMutableTreeNode rootNode= new DefaultMutableTreeNode("All");
+		for(PatternStorage pattern : patterns){
+			//if(rootNode.getChildCount()==0){
+				DefaultMutableTreeNode newPatternNode = new DefaultMutableTreeNode(pattern.getPattern());
+				newPatternNode.add(new DefaultMutableTreeNode(pattern.getHeadClass()));
+				rootNode.add(newPatternNode);
+			//}else{
+			//for(int i = 0; i<rootNode.getChildCount();i++){
+				//if(rootNode.getChildAt(i).toString().equals(pattern.getPattern())){
+				//	((DefaultMutableTreeNode)rootNode.getChildAt(i)).add(new DefaultMutableTreeNode(pattern.getHeadClass()));
+				//}else{
+//					DefaultMutableTreeNode newPatternNode = new DefaultMutableTreeNode(pattern.getPattern());
+//					newPatternNode.add(new DefaultMutableTreeNode(pattern.getHeadClass()));
+//					rootNode.add(newPatternNode);
+				//}
+			//}
+			//}
+		}
+		DefaultTreeModel model = new DefaultTreeModel(rootNode);
+		
+		
+		tree.setModel(model);
+		
+		
+		
 		//tree.removeSelectionRow(0);
 		tree.addCheckChangeEventListener(new JCheckBoxTree.CheckChangeEventListener() {
 			public void checkStateChanged(JCheckBoxTree.CheckChangeEvent event) {
-				System.out.println("event");
 				TreePath[] paths = tree.getCheckedPaths();
+				String classString = "";
 				for (TreePath tp : paths) {
-					for (Object pathPart : tp.getPath()) {
-						System.out.print(pathPart + ",");
+					if(tp.getPath().length==3){
+						//for (Object pathPart : tp.getPath()) {
+						classString= classString + " " +tp.getPath()[2];
+							//classString= classString + " " +pathPart;
+						//}
 					}
-					System.out.println();
+					//TODO: format classString better
+					System.out.println(classString);
+					selectedClasses = classString;
 				}
 			}
 		});
