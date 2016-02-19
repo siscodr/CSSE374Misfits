@@ -1,6 +1,6 @@
-Input-Folder: c:\\User1\\Documents\\Lab2-1\\bin
+Input-Folder: C:\EclipseWorkspaces\CSSE374\Lab5-1\bin
 
-Input-Classes: java.io.Reader,java.io.BufferedReader,java.lang.Runtime,org.asm.ClassVisitor
+Input-Classes: java.io.Reader java.io.BufferedReader java.lang.Runtime org.asm.ClassVisitor
 
 Output-Directory: C:\\Users\\cookmn\\Documents\\GitHub\\CSSE374Misfits\\docs\\Export
 

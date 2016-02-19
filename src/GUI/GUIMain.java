@@ -12,8 +12,8 @@ public class GUIMain {
 
 	public static void main(String[] args) {
 		createFrame();
-		//runStartPanel();
-		runDisplayPanel();
+		runStartPanel();
+		//runDisplayPanel();
 	}
 
 	private static void createFrame() {
@@ -54,7 +54,7 @@ public class GUIMain {
 	}
 	
 	public static void runDisplayPanel() {
-		//frame.getContentPane().remove(panel);
+		frame.getContentPane().remove(panel);
 		DisplayPanel paneldisplay = new DisplayPanel();
 		panel = paneldisplay.getPanel();
 		frame.getContentPane().add(panel);

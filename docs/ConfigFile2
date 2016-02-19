@@ -1,12 +1,12 @@
-Input-Folder: Morgan's folder
+Input-Folder: C:\Users\cookmn\Documents\GitHub\CSSE374Misfits\bin
 
-Input-Classes: Morgan's classes
+Input-Classes: java.io.Reader java.io.BufferedReader java.lang.Runtime org.asm.ClassVisitor
 
-Output-Directory: Morgan's directory
+Output-Directory: C:\\Users\\cookmn\\Documents\\GitHub\\CSSE374Misfits\\docs\\Export
 
-Dot-Path: Morgan's path
+Dot-Path: C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe
 
-Phases: Morgan's phases
+Phases: Loader, Decorator-Detector, Singleton-Detector
 
 Adapter-MethodDelegation: 2
 

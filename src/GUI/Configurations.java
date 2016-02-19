@@ -1,6 +1,9 @@
 package GUI;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
+import MisfitsPackage.ClassFinder;
 
 public class Configurations {
 	private static ArrayList<String> myArray = new ArrayList<String>();
@@ -11,6 +14,7 @@ public class Configurations {
 	public String dotPath;
 	public String phases;
 	public ArrayList<String> patternDelegations;
+	public String[] classes;
 
 	private Configurations(String iFolder, String iClasses, String oDirectory, String dPath, String pha, ArrayList<String> arrayList) {
 		inputFolder = iFolder;
@@ -26,6 +30,15 @@ public class Configurations {
 			ourConfigs = new Configurations("c:\\User1\\Documents\\Lab2-1\\bin", "java.io.Reader,java.io.BufferedReader,java.lang.Runtime,org.asm.ClassVisitor", "C:\\Users\\cookmn\\Documents\\GitHub\\CSSE374Misfits\\docs\\Image", "C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe", "Loader, Decorator-Detector, Singleton-Detector", myArray);
 		}
 		return ourConfigs;
+	}
+	
+	public void setClasses() {
+		classes = ClassFinder.getClasses(inputFolder);
+		ArrayList<String> classesToAdd = new ArrayList<String>();
+		classesToAdd.addAll(Arrays.asList(inputClasses.split(" ")));
+		if(classes != null) {
+			classesToAdd.addAll(Arrays.asList(classes));
+		}
 	}
 
 	public String getInputFolder() {

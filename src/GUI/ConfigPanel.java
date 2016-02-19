@@ -56,6 +56,7 @@ public class ConfigPanel {
 		done.setBounds(720, 640, 200, 50);
 		done.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Configurations.getInstance().setClasses();
 				GUIMain.runStartPanel();
 			}
 		});
