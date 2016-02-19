@@ -40,7 +40,8 @@ public class DisplayPanel {
 	
 	private JPanel panel;
 	private BufferedImage img;
-	private String selectedClasses;
+	private JScrollPane rightPane;
+	private ArrayList<String> selectedClasses = new ArrayList<String>();
 	
 	public JPanel getPanel() {
 		return panel;
@@ -128,7 +129,13 @@ public class DisplayPanel {
 		updateItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//TODO remove comments when integrated
-				
+				if(selectedClasses.isEmpty()){
+					System.out.println("Select Something");
+				}else{
+					renderImage(selectedClasses);
+					updateRightPane();
+					panel.repaint();
+				}
 				System.out.println("I'm Updating The Image!");
 			}
 		});
@@ -226,23 +233,24 @@ public class DisplayPanel {
 
 	private JScrollPane addRightPane() {
 		// JViewport port = new JViewport();
-		JScrollPane rightPane = null;
-		try {
-			//img = ImageIO.read(new File("UpdatedDocs/Milestone6/MisfitsUMLM6.jpg"));
-			//img = ImageIO.read(new File("docs/MisfitsUML.jpg"));
-			//TODO
-			img = ImageIO.read(new File(displayImg));
-			JPanel pic = new Pic();
-			pic.setPreferredSize(new Dimension(img.getWidth(), img.getHeight()));
-			rightPane = new JScrollPane(pic);
-
-		} catch (IOException e) {
-		}
+		rightPane = null;
+		//TODO
+			updateRightPane();
 
 		return rightPane;
-
 	}
 
+	private void updateRightPane(){
+		try {
+			img = ImageIO.read(new File(displayImg));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		JPanel pic = new Pic();
+		pic.setPreferredSize(new Dimension(img.getWidth(), img.getHeight()));
+		rightPane = new JScrollPane(pic);
+	}
+	
 	private JCheckBoxTree checkBoxTree() {
 //		Object[] objects = new Object[4];
 //		objects[0]="Decorator";
@@ -285,18 +293,18 @@ public class DisplayPanel {
 		tree.addCheckChangeEventListener(new JCheckBoxTree.CheckChangeEventListener() {
 			public void checkStateChanged(JCheckBoxTree.CheckChangeEvent event) {
 				TreePath[] paths = tree.getCheckedPaths();
-				String classString = "";
+				ArrayList<String> classString = new ArrayList<String>();
 				for (TreePath tp : paths) {
 					if(tp.getPath().length==3){
 						//for (Object pathPart : tp.getPath()) {
-						classString= classString + " " +tp.getPath()[2];
+						classString.add(tp.getPath()[2].toString());
 							//classString= classString + " " +pathPart;
 						//}
 					}
 					//TODO: format classString better
-					System.out.println(classString);
 					selectedClasses = classString;
 				}
+				System.out.println(classString);
 			}
 		});
 		return tree;
