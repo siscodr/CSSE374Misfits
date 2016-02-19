@@ -108,6 +108,7 @@ public class DisplayPanel {
 		JMenuItem resetItem = new JMenuItem("Reset");
 		resetItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				UMLArrows.getInstance().clearUMLArrows();
 				GUIMain.runStartPanel();
 			}
 		});
@@ -136,11 +137,9 @@ public class DisplayPanel {
 					updateRightPane();
 					panel.repaint();
 				}
-				System.out.println("I'm Updating The Image!");
 			}
 
 			private ArrayList<String> getOtherClasses() {
-				// TODO Auto-generated method stub
 				ArrayList<String> cls = new ArrayList<String>();
 				cls=selectedClasses;
 				for(PatternStorage pattern : UMLArrows.getInstance().getPatterns()){
@@ -291,7 +290,6 @@ public class DisplayPanel {
 					}
 					selectedClasses = classString;
 				}
-				System.out.println(classString);
 			}
 		});
 		return tree;

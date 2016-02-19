@@ -6,17 +6,28 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 
 public class StartPanel {
 
 	private JPanel panel;
+	private static JProgressBar progBar;
 
 	public StartPanel() {
 		panel = new JPanel();
+		progBar = new JProgressBar();
 		addWelcomeLabel(panel);
 		addConfigButton(panel);
 		addLaunchButton(panel);
+		addProgressBar(panel);
 		Configurations.getInstance().loadConfig(Configurations.getInstance().configFile);
+	}
+
+	private void addProgressBar(JPanel panel) {
+//		panel.setLayout(null);
+//		progBar.setBounds(225, 450, 450, 50);
+//		panel.add(progBar);
+//		
 	}
 
 	private static void addWelcomeLabel(JPanel panel) {
@@ -35,6 +46,10 @@ public class StartPanel {
 
 		launchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+//				for (int i = 0; i < 100; i++) {
+//					progBar.setValue(i);
+//					progBar.update(progBar.getGraphics());
+//				}
 				GUIMain.runLoadPanel();
 			}
 		});
@@ -45,7 +60,7 @@ public class StartPanel {
 	private static void addConfigButton(JPanel panel) {
 		JButton configButton = new JButton("config");
 		panel.setLayout(null);
-		configButton.setText("Set configurments");
+		configButton.setText("Set configurements");
 		configButton.setBounds(200, 300, 200, 50);
 		configButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

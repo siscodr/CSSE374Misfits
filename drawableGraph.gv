@@ -9,4 +9,65 @@ rankdir=BT
 }"
 ];
 java_io_BufferedReader -> java_io_Reader [ label = " <<Decorates>>",arrowhead="onormal"];
+   java_lang_Runtime [
+     shape="record"  color="orange" , fillcolor="purple" style="filled"    label = "{java_lang_Runtime\n\<\<Singleton\>\>|- currentRuntime : java_lang_Runtime\l|+getRuntime([]) : java_lang_Runtime\l +exit([int]) : void\l +addShutdownHook([java.lang.Thread]) : void\l +removeShutdownHook([java.lang.Thread]) : boolean\l +halt([int]) : void\l +runFinalizersOnExit([boolean]) : void\l +exec([java.lang.String]) : java_lang_Process\l +exec([java.lang.String, java.lang.String[]]) : java_lang_Process\l +exec([java.lang.String, java.lang.String[], java.io.File]) : java_lang_Process\l +exec([java.lang.String[]]) : java_lang_Process\l +exec([java.lang.String[], java.lang.String[]]) : java_lang_Process\l +exec([java.lang.String[], java.lang.String[], java.io.File]) : java_lang_Process\l +availableProcessors([]) : int\l +freeMemory([]) : long\l +totalMemory([]) : long\l +maxMemory([]) : long\l +gc([]) : void\l -runFinalization0([]) : void\l +runFinalization([]) : void\l +traceInstructions([boolean]) : void\l +traceMethodCalls([boolean]) : void\l +load([java.lang.String]) : void\l load0([java.lang.Class, java.lang.String]) : void\l +loadLibrary([java.lang.String]) : void\l loadLibrary0([java.lang.Class, java.lang.String]) : void\l +getLocalizedInputStream([java.io.InputStream]) : java_io_InputStream\l +getLocalizedOutputStream([java.io.OutputStream]) : java_io_OutputStream\l 
+}"
+];
+   jdk_internal_org_objectweb_asm_ClassVisitor [
+     shape="record"      label = "{jdk_internal_org_objectweb_asm_ClassVisitor\n\<\<Component\>\>|# api : int\l# cv : jdk_internal_org_objectweb_asm_ClassVisitor\l|+visit([int, int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]]) : void\l +visitSource([java.lang.String, java.lang.String]) : void\l +visitOuterClass([java.lang.String, java.lang.String, java.lang.String]) : void\l +visitAnnotation([java.lang.String, boolean]) : jdk_internal_org_objectweb_asm_AnnotationVisitor\l +visitTypeAnnotation([int, jdk.internal.org.objectweb.asm.TypePath, java.lang.String, boolean]) : jdk_internal_org_objectweb_asm_AnnotationVisitor\l +visitAttribute([jdk.internal.org.objectweb.asm.Attribute]) : void\l +visitInnerClass([java.lang.String, java.lang.String, java.lang.String, int]) : void\l +visitField([int, java.lang.String, java.lang.String, java.lang.String, java.lang.Object]) : jdk_internal_org_objectweb_asm_FieldVisitor\l +visitMethod([int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]]) : jdk_internal_org_objectweb_asm_MethodVisitor\l +visitEnd([]) : void\l 
+}"
+];
+   GUI_Configurations [
+     shape="record"  color="orange" , fillcolor="purple" style="filled"    label = "{GUI_Configurations\n\<\<Singleton\>\>|- ourConfigs : GUI_Configurations\l+ inputFolder : java_lang_String\l+ inputClasses : java_lang_String\l+ outputDirectory : java_lang_String\l+ dotPath : java_lang_String\l+ phases : java_lang_String\l+ configFile : java_lang_String\l+ patternDelegations : java_util_ArrayList\l+ classString : java_util_ArrayList\l+ patternString : java_util_ArrayList\l+ thresholds : java_util_HashMap\l count : int\l|+getInstance([]) : GUI_Configurations\l +setClasses([]) : void\l +parsePatterns([]) : void\l +getInputFolder([]) : java_lang_String\l +setInputFolder([java.lang.String]) : void\l +getInputClasses([]) : java_lang_String\l +setInputClasses([java.lang.String]) : void\l +getOutputDirectory([]) : java_lang_String\l +setOutputDirectory([java.lang.String]) : void\l +getConfigFile([]) : java_lang_String\l +setConfigFile([java.lang.String]) : void\l +getDotPath([]) : java_lang_String\l +setDotPath([java.lang.String]) : void\l +getPhases([]) : java_lang_String\l +setPhases([java.lang.String]) : void\l +getPatternDelegations([]) : java_util_ArrayList\l +setPatternDelegations([java.util.ArrayList]) : void\l +setThreshold([]) : void\l +getThreshold([java.lang.String]) : java_lang_Object\l -doParsing([java.lang.String]) : void\l +loadConfig([java.lang.String]) : void\l 
+}"
+];
+GUI_Configurations -> java_io_BufferedReader [  arrowhead="vee", style="dashed"];
+   SDClasses_SDArrows [
+     shape="record"  color="orange" , fillcolor="purple" style="filled"    label = "{SDClasses_SDArrows\n\<\<Singleton\>\>|- DEPTHLIMIT : int\l- ourArrows : SDClasses_SDArrows\l- instructionSets : java_util_HashMap\l- currentClass : java_lang_String\l- classes : java_util_ArrayList\l|+getInstance([]) : SDClasses_SDArrows\l +setCurrentClass([java.lang.String]) : void\l +printClass([java.lang.String]) : void\l +addItemsToHashMap([java.lang.String, java.util.ArrayList]) : void\l +getHashMap([]) : java_util_HashMap\l +getCurrentClass([]) : java_lang_String\l +executeFromMain([java.lang.String]) : void\l +execute([java.lang.String, java.lang.String, int]) : void\l +checkClasses([java.lang.String]) : void\l -addClass([java.lang.String]) : void\l 
+}"
+];
+   testExamples_ChocolateBoiler [
+     shape="record"  color="orange" , fillcolor="purple" style="filled"    label = "{testExamples_ChocolateBoiler\n\<\<Singleton\>\>|- empty : boolean\l- boiled : boolean\l- uniqueInstance : testExamples_ChocolateBoiler\l|+getInstance([]) : testExamples_ChocolateBoiler\l +fill([]) : void\l +drain([]) : void\l +boil([]) : void\l +isEmpty([]) : boolean\l +isBoiled([]) : boolean\l 
+}"
+];
+   UMLClasses_UMLArrows [
+     shape="record"  color="orange" , fillcolor="purple" style="filled"    label = "{UMLClasses_UMLArrows\n\<\<Singleton\>\>|- ourArrows : UMLClasses_UMLArrows\l- detectors : java_util_ArrayList\l- currentClass : ClassStorage_ClassContainer\l- classes : java_util_ArrayList\l- patterns : java_util_ArrayList\l|+getInstance([]) : UMLClasses_UMLArrows\l +addDetector([UMLClasses.PatternDetector]) : void\l +resetDetectors([]) : void\l +resetUMLArrows([java.lang.String]) : void\l +clearUMLArrows([]) : void\l +addUse([java.lang.String]) : void\l +addUses([java.lang.String]) : void\l +addField([java.lang.String, int]) : void\l +addFieldDesc([java.lang.String, int, java.lang.String]) : void\l +addMethodDesc([java.lang.String, java.lang.String, int, java.util.ArrayList]) : void\l +setSuper([java.lang.String]) : void\l +getClasses([]) : java_util_ArrayList\l +addInterface([java.lang.String]) : void\l +addFieldToBuffer([int, java.lang.String, java.lang.String]) : void\l +addMethodToBuffer([int, java.lang.String, java.lang.String]) : void\l +getDetectors([]) : java_util_ArrayList\l +printClasses([java.lang.String]) : void\l +detect([]) : void\l +setIsInterface([boolean]) : void\l +addMethodFields([ClassStorage.MethodFieldsStorage]) : void\l +addCollectionDataType([java.lang.String]) : void\l +addPattern([ClassStorage.PatternStorage]) : void\l +getPatterns([]) : java_util_ArrayList\l 
+}"
+];
+   Visitors_ClassFieldDeclarationVisitor [
+     shape="record"  color="green" , fillcolor="blue" style="filled"    label = "{Visitors_ClassFieldDeclarationVisitor\n\<\<Decorator\>\>||+visitField([int, java.lang.String, java.lang.String, java.lang.String, java.lang.Object]) : jdk_internal_org_objectweb_asm_FieldVisitor\l 
+}"
+];
+Visitors_ClassFieldDeclarationVisitor -> UMLClasses_UMLArrows [  arrowhead="vee", style="dashed"];
+Visitors_ClassFieldDeclarationVisitor -> jdk_internal_org_objectweb_asm_ClassVisitor [ label = " <<Decorates>>",arrowhead="onormal"];
+   Visitors_ClassFieldVisitor [
+     shape="record"  color="green" , fillcolor="blue" style="filled"    label = "{Visitors_ClassFieldVisitor\n\<\<Decorator\>\>||+visitField([int, java.lang.String, java.lang.String, java.lang.String, java.lang.Object]) : jdk_internal_org_objectweb_asm_FieldVisitor\l 
+}"
+];
+Visitors_ClassFieldVisitor -> UMLClasses_UMLArrows [  arrowhead="vee", style="dashed"];
+Visitors_ClassFieldVisitor -> jdk_internal_org_objectweb_asm_ClassVisitor [ label = " <<Decorates>>",arrowhead="onormal"];
+   Visitors_ClassMethodVisitor [
+     shape="record"  color="green" , fillcolor="blue" style="filled"    label = "{Visitors_ClassMethodVisitor\n\<\<Decorator\>\>||+visitMethod([int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]]) : jdk_internal_org_objectweb_asm_MethodVisitor\l 
+}"
+];
+Visitors_ClassMethodVisitor -> UMLClasses_UMLArrows [  arrowhead="vee", style="dashed"];
+Visitors_ClassMethodVisitor -> jdk_internal_org_objectweb_asm_ClassVisitor [ label = " <<Decorates>>",arrowhead="onormal"];
+   Visitors_InterfaceDeclarationVisitor [
+     shape="record"  color="green" , fillcolor="blue" style="filled"    label = "{Visitors_InterfaceDeclarationVisitor\n\<\<Decorator\>\>||+visit([int, int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]]) : void\l 
+}"
+];
+Visitors_InterfaceDeclarationVisitor -> UMLClasses_UMLArrows [  arrowhead="vee", style="dashed"];
+Visitors_InterfaceDeclarationVisitor -> jdk_internal_org_objectweb_asm_ClassVisitor [ label = " <<Decorates>>",arrowhead="onormal"];
+   Visitors_MethodDeclarationVisitor [
+     shape="record"  color="green" , fillcolor="blue" style="filled"    label = "{Visitors_MethodDeclarationVisitor\n\<\<Decorator\>\>||+visitMethod([int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]]) : jdk_internal_org_objectweb_asm_MethodVisitor\l 
+}"
+];
+Visitors_MethodDeclarationVisitor -> UMLClasses_UMLArrows [  arrowhead="vee", style="dashed"];
+Visitors_MethodDeclarationVisitor -> jdk_internal_org_objectweb_asm_ClassVisitor [ label = " <<Decorates>>",arrowhead="onormal"];
+   Visitors_SuperDeclarationVisitor [
+     shape="record"  color="green" , fillcolor="blue" style="filled"    label = "{Visitors_SuperDeclarationVisitor\n\<\<Decorator\>\>||+visit([int, int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]]) : void\l 
+}"
+];
+Visitors_SuperDeclarationVisitor -> UMLClasses_UMLArrows [  arrowhead="vee", style="dashed"];
+Visitors_SuperDeclarationVisitor -> jdk_internal_org_objectweb_asm_ClassVisitor [ label = " <<Decorates>>",arrowhead="onormal"];
 }

@@ -37,6 +37,7 @@ public class GUIMain {
 		LoadPanel panelLoader = new LoadPanel();
 		panel = panelLoader.getPanel();
 		frame.getContentPane().add(panel);
+		panelLoader.runDesignLoader();
 		frame.invalidate();
 		frame.validate();
 	}

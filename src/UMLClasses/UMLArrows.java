@@ -60,6 +60,13 @@ public class UMLArrows {
 		currentClass = new ClassContainer(WorkerForArrows.stripFunction(className));
 	}
 
+	public void clearUMLArrows(){
+		detectors = new ArrayList<PatternDetector>();
+		currentClass = null;
+		classes = new ArrayList<ClassContainer>();
+		patterns = new ArrayList<PatternStorage>();
+	}
+	
 	/**
 	 * Adds the given class to the list of classes that the current class uses.
 	 * 

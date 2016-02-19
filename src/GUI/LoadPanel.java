@@ -9,16 +9,16 @@ import javax.swing.JProgressBar;
 public class LoadPanel {
 
 	private JPanel panel;
+	static JProgressBar progBar;
 
 	public LoadPanel() {
 		panel = new JPanel();
 		addLoadingLabel(panel);
 		addProgressBar(panel);
-		runDesignLoader();
-		GUIMain.runDisplayPanel();
+
 	}
 
-	private void runDesignLoader() {
+	public void runDesignLoader() {
 		DesignLoader loader = new DesignLoader();
 		try {
 			loader.runDesign(this);
@@ -33,10 +33,22 @@ public class LoadPanel {
 		} catch (InvocationTargetException e) {
 			e.printStackTrace();
 		}
+		GUIMain.runDisplayPanel();
 	}
 
+	public void setProgressBarMax(int max){
+		progBar.setMaximum(max);
+		progBar.update(progBar.getGraphics());
+	}
+	
+	public void iterateProgBar(){
+		progBar.setValue(progBar.getValue()+1);	
+		progBar.update(progBar.getGraphics());
+		panel.repaint();
+	}
+	
 	private static void addProgressBar(JPanel panel) {
-		JProgressBar progBar = new JProgressBar();
+		progBar = new JProgressBar();
 		panel.setLayout(null);
 		progBar.setBounds(250, 450, 500, 100);
 		panel.add(progBar);

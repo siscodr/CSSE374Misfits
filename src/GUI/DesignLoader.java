@@ -16,9 +16,11 @@ public class DesignLoader {
 		
 		loadPatterns();
 		
-		
 		ArrayList<String> classes = Configurations.getInstance().classString;
 		String[] toWhitelist = new String[classes.size()];
+		
+		panel.setProgressBarMax(classes.size());
+		
 		for (int i = 0; i < classes.size(); i++) {
 			toWhitelist[i] = classes.get(i);
 		}
@@ -31,6 +33,7 @@ public class DesignLoader {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			panel.iterateProgBar();
 		}
 		UMLArrows.getInstance().resetUMLArrows("");
 		//DONE MAKING CLASSES
