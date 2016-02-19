@@ -2,6 +2,10 @@ package UMLClasses;
 
 import java.io.IOException;
 
+import Detectors.AdapterDetector;
+import Detectors.CompositeDetector;
+import Detectors.DecoratorDetector;
+import Detectors.SingletonDetector;
 import MisfitsPackage.ClassFinder;
 import MisfitsPackage.DesignParser;
 

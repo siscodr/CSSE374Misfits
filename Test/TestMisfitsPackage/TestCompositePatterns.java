@@ -13,10 +13,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ClassStorage.ClassContainer;
+import Detectors.AdapterDetector;
+import Detectors.CompositeDetector;
+import Detectors.PatternDetector;
 import MisfitsPackage.DesignParser;
-import UMLClasses.AdapterDetector;
-import UMLClasses.CompositeDetector;
-import UMLClasses.PatternDetector;
 import UMLClasses.UMLArrows;
 
 public class TestCompositePatterns {

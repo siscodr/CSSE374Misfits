@@ -1,7 +1,8 @@
-package UMLClasses;
+package Detectors;
 
 import java.util.ArrayList;
 
+import UMLClasses.UMLArrows;
 import jdk.internal.org.objectweb.asm.Opcodes;
 import ClassStorage.ClassContainer;
 import ClassStorage.FieldStorage;

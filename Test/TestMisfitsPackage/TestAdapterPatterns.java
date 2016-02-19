@@ -12,11 +12,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import Detectors.AdapterDetector;
+import Detectors.DecoratorDetector;
+import Detectors.PatternDetector;
+import Detectors.SingletonDetector;
 import MisfitsPackage.DesignParser;
-import UMLClasses.AdapterDetector;
-import UMLClasses.DecoratorDetector;
-import UMLClasses.PatternDetector;
-import UMLClasses.SingletonDetector;
 import UMLClasses.UMLArrows;
 
 public class TestAdapterPatterns {

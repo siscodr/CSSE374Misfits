@@ -12,9 +12,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import Detectors.PatternDetector;
+import Detectors.SingletonDetector;
 import MisfitsPackage.DesignParser;
-import UMLClasses.PatternDetector;
-import UMLClasses.SingletonDetector;
 import UMLClasses.UMLArrows;
 
 

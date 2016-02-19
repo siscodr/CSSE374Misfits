@@ -1,4 +1,4 @@
-package UMLClasses;
+package Detectors;
 
 import java.util.ArrayList;
 
@@ -6,6 +6,7 @@ import ClassStorage.ClassContainer;
 import ClassStorage.MethodStorage;
 import ClassStorage.PatternStorage;
 import MisfitsPackage.WorkerForArrows;
+import UMLClasses.UMLArrows;
 
 public class DecoratorDetector implements PatternDetector {
 	private String color;

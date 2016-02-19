@@ -1,7 +1,8 @@
-package UMLClasses;
+package Detectors;
 
 import java.util.ArrayList;
 
+import UMLClasses.UMLArrows;
 import ClassStorage.ArrowStorage;
 import ClassStorage.ClassContainer;
 import ClassStorage.PatternStorage;

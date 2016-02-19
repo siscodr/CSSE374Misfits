@@ -7,6 +7,7 @@ import ClassStorage.ClassContainer;
 import ClassStorage.MethodCallStorage;
 import ClassStorage.MethodFieldsStorage;
 import ClassStorage.PatternStorage;
+import Detectors.PatternDetector;
 import MisfitsPackage.WorkerForArrows;
 import jdk.internal.org.objectweb.asm.Type;
 

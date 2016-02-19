@@ -5,9 +5,9 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
+import Detectors.PatternDetector;
 import MisfitsPackage.DesignParser;
 import MisfitsPackage.WorkerForArrows;
-import UMLClasses.PatternDetector;
 import UMLClasses.UMLArrows;
 
 public class DesignLoader {
@@ -30,7 +30,6 @@ public class DesignLoader {
 			try {
 				DesignParser.makeReader(className);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			panel.iterateProgBar();
@@ -43,10 +42,9 @@ public class DesignLoader {
 	private void loadPatterns() throws ClassNotFoundException,
 			NoSuchMethodException, InstantiationException,
 			IllegalAccessException, InvocationTargetException {
-		//TODO: parse inputfolder + inputclasses
-
+		
 		for(String pattern : Configurations.getInstance().patternString){
-			Class myClass = Class.forName("UMLClasses." + pattern);
+			Class myClass = Class.forName("Detectors." + pattern);
 			//
 			Class[] types = {Object.class};
 			Constructor constructor = myClass.getConstructor(types);

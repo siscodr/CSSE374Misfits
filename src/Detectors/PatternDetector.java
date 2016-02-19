@@ -1,4 +1,4 @@
-package UMLClasses;
+package Detectors;
 
 import ClassStorage.ClassContainer;
 

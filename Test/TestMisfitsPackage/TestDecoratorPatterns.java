@@ -12,9 +12,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import Detectors.DecoratorDetector;
+import Detectors.PatternDetector;
 import MisfitsPackage.DesignParser;
-import UMLClasses.DecoratorDetector;
-import UMLClasses.PatternDetector;
 import UMLClasses.UMLArrows;
 
 
