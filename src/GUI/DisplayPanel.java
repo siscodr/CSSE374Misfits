@@ -36,6 +36,8 @@ public class DisplayPanel {
 	//TODO Setter for this
 	public String imgLocation;
 	
+	public String displayImg = "docs\\Display.png";
+	
 	private JPanel panel;
 	private BufferedImage img;
 	private String selectedClasses;
@@ -68,14 +70,12 @@ public class DisplayPanel {
 	private void renderImage(ArrayList<String> classes) {
 		String filePath = "";
 			try {
-				filePath= UMLgvPrinter.printClasses("Team Misfits!", classes);
+				filePath= UMLgvPrinter.printClasses("TeamMisfits", classes);
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			// TODO Auto-generated catch block
 		UMLRenderer rend = new UMLRenderer();
-		rend.runGraphViz(filePath);
+		rend.runGraphViz(filePath, displayImg);
 	}
 
 	private void addTopBottomPane() {
@@ -230,7 +230,8 @@ public class DisplayPanel {
 		try {
 			//img = ImageIO.read(new File("UpdatedDocs/Milestone6/MisfitsUMLM6.jpg"));
 			//img = ImageIO.read(new File("docs/MisfitsUML.jpg"));
-			img = ImageIO.read(new File(Configurations.getInstance().getOutputDirectory()));
+			//TODO
+			img = ImageIO.read(new File(displayImg));
 			JPanel pic = new Pic();
 			pic.setPreferredSize(new Dimension(img.getWidth(), img.getHeight()));
 			rightPane = new JScrollPane(pic);

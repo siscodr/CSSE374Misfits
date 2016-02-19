@@ -1,8 +1,8 @@
-Input-Folder: C:\Users\cookmn\Documents\GitHub\CSSE374Misfits\bin
+Input-Folder: C:\Users\siscodr\Documents\GitHub\CSSE374Misfits\bin
 
 Input-Classes: java.io.Reader java.io.BufferedReader java.lang.Runtime jdk.internal.org.objectweb.asm.ClassVisitor
 
-Output-Directory: C:\\Users\\cookmn\\Documents\\GitHub\\CSSE374Misfits\\docs\\Export
+Output-Directory: C:\\Users\\siscodr\\Documents\\GitHub\\CSSE374Misfits\\docs\\Export
 
 Dot-Path: C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe
 
