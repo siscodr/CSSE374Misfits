@@ -116,7 +116,7 @@ public class DisplayPanel {
 		exportItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					ImageIO.write(img, "jpg", new File(Configurations.getInstance().outputDirectory + ".jpg"));
+					ImageIO.write(img, "png", new File(Configurations.getInstance().outputDirectory + ".png"));
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
