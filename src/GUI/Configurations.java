@@ -14,7 +14,7 @@ public class Configurations {
 	public String dotPath;
 	public String phases;
 	public ArrayList<String> patternDelegations;
-	public String[] classes;
+	public ArrayList<String> classString;
 
 	private Configurations(String iFolder, String iClasses, String oDirectory, String dPath, String pha, ArrayList<String> arrayList) {
 		inputFolder = iFolder;
@@ -33,12 +33,13 @@ public class Configurations {
 	}
 	
 	public void setClasses() {
-		classes = ClassFinder.getClasses(inputFolder);
+		String[] classes = ClassFinder.getClasses(inputFolder);
 		ArrayList<String> classesToAdd = new ArrayList<String>();
 		classesToAdd.addAll(Arrays.asList(inputClasses.split(" ")));
 		if(classes != null) {
 			classesToAdd.addAll(Arrays.asList(classes));
 		}
+		classString=classesToAdd;
 	}
 
 	public String getInputFolder() {

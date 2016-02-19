@@ -38,7 +38,7 @@ public class DesignLoader {
 			IllegalAccessException, InvocationTargetException {
 		//TODO: parse inputfolder + inputclasses
 
-		for(String pattern : Configurations.getInstance().getPhases()){
+		for(String pattern : Configurations.getInstance().classString){
 			Class myClass = Class.forName(pattern);
 			//
 			Class[] types = {Object.class};
