@@ -73,7 +73,7 @@ public class DesignParser {
 	 * @throws IOException
 	 *             Exception where string doesn't link to a class
 	 */
-	private static void makeReader(String className) throws IOException {
+	public static void makeReader(String className) throws IOException {
 		ClassReader reader = new ClassReader(className);
 
 		ClassVisitor InterfaceVisitor = new InterfaceDeclarationVisitor(Opcodes.ASM5); // Interface
