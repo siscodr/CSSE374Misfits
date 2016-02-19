@@ -21,7 +21,7 @@ Milestone 6:
 We stored more data about our classes.  This way, we could access more and more accurately detect which patterns are performed.
 
 Milestone 7:
-The design of our core code did not change substantially during this milestone.  The main changes to core code was the addition of stored data about our classes to make implementing future features possible.  We also added GUI code in this milestone.  The GUI code references the core code but the core code does not know about the GUI code.
+The design of our core code did not change substantially during this milestone.  The main changes to core code was the addition of stored data about our classes to make implementing future features possible.  We also added GUI code in this milestone.  The GUI code references the core code but the core code does not know about the GUI.
 
 Who did what 
 Milestone 1:
@@ -56,8 +56,8 @@ Jonathan Soulsby: Updated Decorator Detector and Adapter Detector, updated tests
 
 Milestone 7:
 Morgan Cook: created Config panel, Configurations, LoadPanel and StartPanel; updated UML and README, wrote code to parse through the config file, made about and instructions windows, loaded configs upon start of program, researched how to execute graphviz from Java
-Donald Sisco: implemented the functionality to perform 17/20 dice rolls, helped facilitate the communication between core code and GUI
-Jonathan Soulsby: created DisplayPanel and JCheckBoxTree; wrote DesignLoader, wrote communication between core code and GUI
+Donald Sisco: implemented the functionality to perform 17/20 dice rolls, helped facilitate the communication between core code and GUI, helped figure out how to execute graphviz from Java, wrote the UMLRenderer
+Jonathan Soulsby: created DisplayPanel and JCheckBoxTree; designed GUI structure, wrote DesignLoader, wrote communication between core code and GUI, wrote the progressBar
 
 Instructions for UML (no GUI):
 1)	Download the code into Eclipse
