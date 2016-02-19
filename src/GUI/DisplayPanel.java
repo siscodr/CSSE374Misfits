@@ -131,11 +131,24 @@ public class DisplayPanel {
 				if(selectedClasses.isEmpty()){
 					System.out.println("Select Something");
 				}else{
-					renderImage(selectedClasses);
+					ArrayList<String> allSelectedClasses = getOtherClasses();
+					renderImage(allSelectedClasses);
 					updateRightPane();
 					panel.repaint();
 				}
 				System.out.println("I'm Updating The Image!");
+			}
+
+			private ArrayList<String> getOtherClasses() {
+				// TODO Auto-generated method stub
+				ArrayList<String> cls = new ArrayList<String>();
+				cls=selectedClasses;
+				for(PatternStorage pattern : UMLArrows.getInstance().getPatterns()){
+					if(selectedClasses.contains(pattern.getHeadClass())){
+						cls.addAll(pattern.getListofClasses());
+					}
+				}
+				return cls;
 			}
 		});
 		fileMenu.add(updateItem);
