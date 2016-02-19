@@ -103,7 +103,7 @@ public class DisplayPanel {
 			public void actionPerformed(ActionEvent e) {
 				//TODO remove comments when integrated
 				//UMLRenderer rend = new UMLRenderer();
-				//rend.runGraphViz(selectedClasses);
+				//rend.runGraphViz(UML Input);
 				System.out.println("I'm Updating The Image!");
 			}
 		});
@@ -134,7 +134,7 @@ public class DisplayPanel {
 		JFrame frame = new JFrame("About");
 		frame.setSize(700, 500);
 		frame.setVisible(true);
-		java.nio.file.Path file = Paths.get("C:\\Users\\cookmn\\Documents\\GitHub\\CSSE374Misfits\\docs\\About");
+		java.nio.file.Path file = Paths.get("docs\\About");
 		JLabel label = new JLabel("About label");
 		String toPrint = "<html>";
 		Charset charset = Charset.forName("US-ASCII");
@@ -156,7 +156,7 @@ public class DisplayPanel {
 		JFrame frame = new JFrame("Instructions");
 		frame.setSize(700, 500);
 		frame.setVisible(true);
-		java.nio.file.Path file = Paths.get("C:\\Users\\cookmn\\Documents\\GitHub\\CSSE374Misfits\\docs\\Instructions");
+		java.nio.file.Path file = Paths.get("docs\\Instructions");
 		JLabel label = new JLabel("Instructions label");
 		String toPrint = "<html>";
 		Charset charset = Charset.forName("US-ASCII");
