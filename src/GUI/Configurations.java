@@ -15,6 +15,7 @@ public class Configurations {
 	public String phases;
 	public ArrayList<String> patternDelegations;
 	public ArrayList<String> classString;
+	public ArrayList<String> patternString;
 
 	private Configurations(String iFolder, String iClasses, String oDirectory, String dPath, String pha, ArrayList<String> arrayList) {
 		inputFolder = iFolder;
@@ -40,6 +41,11 @@ public class Configurations {
 			classesToAdd.addAll(Arrays.asList(classes));
 		}
 		classString=classesToAdd;
+	}
+	
+	public void parsePatterns() {
+		patternString = new ArrayList<String>();
+		patternString.addAll(Arrays.asList(phases.split(" ")));
 	}
 
 	public String getInputFolder() {
