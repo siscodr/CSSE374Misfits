@@ -1,5 +1,7 @@
 package GUI;
 
+import java.lang.reflect.InvocationTargetException;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
@@ -8,12 +10,29 @@ public class LoadPanel {
 
 	private JPanel panel;
 
-
-
 	public LoadPanel() {
 		panel = new JPanel();
 		addLoadingLabel(panel);
 		addProgressBar(panel);
+		runDesignLoader();
+		GUIMain.runDisplayPanel();
+	}
+
+	private void runDesignLoader() {
+		DesignLoader loader = new DesignLoader();
+		try {
+			loader.runDesign(this);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private static void addProgressBar(JPanel panel) {
