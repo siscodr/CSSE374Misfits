@@ -3,6 +3,7 @@ package GUI;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 
 import MisfitsPackage.DesignParser;
 import MisfitsPackage.WorkerForArrows;
@@ -13,11 +14,11 @@ public class DesignLoader {
 	
 	public void runDesign(LoadPanel panel) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException{
 		
-		loadDecorators();
+		loadPatterns();
 		
 		
-		String[] classes = MisfitsPackage.ClassFinder.getClasses(Configurations.getInstance().inputFolder);
-		WorkerForArrows.addWhitelist(classes);
+		ArrayList<String> classes = Configurations.getInstance().classString;
+		WorkerForArrows.addWhitelist((String[])classes.toArray());
 		for (String className : classes) {
 			
 			UMLArrows.getInstance().resetUMLArrows(className);
@@ -33,12 +34,12 @@ public class DesignLoader {
 		UMLArrows.getInstance().detect();
 	}
 
-	private void loadDecorators() throws ClassNotFoundException,
+	private void loadPatterns() throws ClassNotFoundException,
 			NoSuchMethodException, InstantiationException,
 			IllegalAccessException, InvocationTargetException {
 		//TODO: parse inputfolder + inputclasses
 
-		for(String pattern : Configurations.getInstance().classString){
+		for(String pattern : Configurations.getInstance().patternString){
 			Class myClass = Class.forName(pattern);
 			//
 			Class[] types = {Object.class};
