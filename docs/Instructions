@@ -9,6 +9,7 @@ Thank you for your interest in PatternDetector.  Here are the instructions on ho
 ---Dot-Path: this is the path to your GraphViz.
 ---Phases: These are the patterns that you want to detect in the order that you want to detect them.
 ---Additional: Any thresholds needed by the pattern detectors.
+------The system currently does not require any thresholds for pattern detection.
 		
 2) Click the launch button to launch the program.
 
