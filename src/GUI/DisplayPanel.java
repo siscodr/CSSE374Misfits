@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -49,7 +50,32 @@ public class DisplayPanel {
 
 	public DisplayPanel() {
 		panel = new JPanel();
+		renderAllPatterns();
 		addTopBottomPane();
+	}
+
+	private void renderAllPatterns() {
+		ArrayList<String> classes = new ArrayList<String>();
+		for(PatternStorage pattern : UMLArrows.getInstance().getPatterns()){
+			classes.add(pattern.getHeadClass());
+			for(String str : pattern.getListofClasses()){
+				classes.add(str);
+			}
+		}
+		renderImage(classes);
+	}
+
+	private void renderImage(ArrayList<String> classes) {
+		String filePath = "";
+			try {
+				filePath= UMLgvPrinter.printClasses("Team Misfits!", classes);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			// TODO Auto-generated catch block
+		UMLRenderer rend = new UMLRenderer();
+		rend.runGraphViz(filePath);
 	}
 
 	private void addTopBottomPane() {
@@ -102,8 +128,7 @@ public class DisplayPanel {
 		updateItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//TODO remove comments when integrated
-				//UMLRenderer rend = new UMLRenderer();
-				//rend.runGraphViz(UML Input);
+				
 				System.out.println("I'm Updating The Image!");
 			}
 		});
@@ -203,9 +228,9 @@ public class DisplayPanel {
 		// JViewport port = new JViewport();
 		JScrollPane rightPane = null;
 		try {
-			// img = ImageIO.read(new
-			// File("UpdatedDocs/Milestone6/MisfitsUMLM6.jpg"));
-			img = ImageIO.read(new File("docs/MisfitsUML.jpg"));
+			//img = ImageIO.read(new File("UpdatedDocs/Milestone6/MisfitsUMLM6.jpg"));
+			//img = ImageIO.read(new File("docs/MisfitsUML.jpg"));
+			img = ImageIO.read(new File(Configurations.getInstance().getOutputDirectory()));
 			JPanel pic = new Pic();
 			pic.setPreferredSize(new Dimension(img.getWidth(), img.getHeight()));
 			rightPane = new JScrollPane(pic);

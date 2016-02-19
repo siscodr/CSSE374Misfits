@@ -22,8 +22,9 @@ public class UMLgvPrinter {
 	 * @return No return value
 	 * @throws FileNotFoundException 
 	 */
-	public static void printClasses(String nameOfDiagram, ArrayList<String> whitelist) throws FileNotFoundException {
-		PrintWriter printFile = new PrintWriter("drawableGraph.gv");
+	public static String printClasses(String nameOfDiagram, ArrayList<String> whitelist) throws FileNotFoundException {
+		String filePath = "drawableGraph.gv";
+		PrintWriter printFile = new PrintWriter(filePath);
 		ArrayList<ClassContainer> classes = UMLArrows.getInstance().getClasses();
 		String pattern;
 		String color;
@@ -59,6 +60,7 @@ public class UMLgvPrinter {
 		}
 		endDiagram(printFile);
 		printFile.close();
+		return filePath;
 	}
 
 	/**
