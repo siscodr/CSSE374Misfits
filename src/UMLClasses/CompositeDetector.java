@@ -20,6 +20,13 @@ public class CompositeDetector implements PatternDetector {
 		this.isDetected = false;
 		this.pattern = "Composite";
 	}
+	
+	public CompositeDetector(Object threshold){
+		this.color = "deepskyblue1";
+		this.fillColor = "coral";
+		this.isDetected = false;
+		this.pattern = "Composite";	
+	}
 
 	public String getPattern() {
 		return this.pattern;

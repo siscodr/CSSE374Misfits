@@ -22,7 +22,16 @@ public class AdapterDetector implements PatternDetector {
 		this.isDetected = false;
 		this.pattern = "Adapter";
 		this.adapteeField = new ArrayList<FieldStorage>();
-		classes = new ArrayList<String>();
+		this.classes = new ArrayList<String>();
+	}
+	
+	public AdapterDetector(Object threshold){
+		this.color = "deeppink";
+		this.fillColor = "grey40";
+		this.isDetected = false;
+		this.pattern = "Adapter";
+		this.adapteeField = new ArrayList<FieldStorage>();
+		this.classes = new ArrayList<String>();
 	}
 
 	public String getPattern() {

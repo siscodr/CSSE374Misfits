@@ -19,6 +19,13 @@ public class DecoratorDetector implements PatternDetector {
 		this.isDetected = false;
 		this.pattern = "Decorator";
 	}
+	
+	public DecoratorDetector(Object threshold){
+		this.color = "green";
+		this.fillColor = "blue";
+		this.isDetected = false;
+		this.pattern = "Decorator";
+	}
 
 	public String getPattern() {
 		return this.pattern;

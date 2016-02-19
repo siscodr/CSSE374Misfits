@@ -20,6 +20,13 @@ public class SingletonDetector implements PatternDetector {
 		this.pattern = "Singleton";
 	}
 
+	public SingletonDetector(Object threshold){
+		this.color = "orange";
+		this.fillColor = "purple";
+		this.isDetected = false;
+		this.pattern = "Singleton";
+	}
+	
 	public String getPattern() {
 		return this.pattern;
 	}
