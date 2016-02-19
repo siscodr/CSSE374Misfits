@@ -13,6 +13,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 import javax.imageio.stream.ImageOutputStream;
@@ -33,7 +34,6 @@ import UMLClasses.UMLArrows;
 
 public class DisplayPanel {
 
-	//TODO Setter for this
 	public String imgLocation;
 	
 	public String displayImg = "docs\\Display.png";
@@ -128,7 +128,6 @@ public class DisplayPanel {
 		JMenuItem updateItem = new JMenuItem("Update");
 		updateItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//TODO remove comments when integrated
 				if(selectedClasses.isEmpty()){
 					System.out.println("Select Something");
 				}else{
@@ -232,11 +231,8 @@ public class DisplayPanel {
 	}
 
 	private JScrollPane addRightPane() {
-		// JViewport port = new JViewport();
 		rightPane = null;
-		//TODO
 			updateRightPane();
-
 		return rightPane;
 	}
 
@@ -252,56 +248,34 @@ public class DisplayPanel {
 	}
 	
 	private JCheckBoxTree checkBoxTree() {
-//		Object[] objects = new Object[4];
-//		objects[0]="Decorator";
-//		objects[1]="Adapter";
-//		objects[2]="Singleton";
-//		objects[3]="Other";
-		//Test
-		UMLArrows.getInstance().addPattern(new PatternStorage("Decorator","DecoratorClass.java",new ArrayList<String>()));
-		UMLArrows.getInstance().addPattern(new PatternStorage("Singleton","SingletonClass.java",new ArrayList<String>()));
-		//UMLArrows.getInstance().addPattern(new PatternStorage("Decorator","DecoratorClass.java",new ArrayList<String>()));
-		
-		 ArrayList<PatternStorage> patterns = UMLArrows.getInstance().getPatterns();
+		ArrayList<PatternStorage> patterns = UMLArrows.getInstance().getPatterns();
 		final JCheckBoxTree tree = new JCheckBoxTree();
 		DefaultMutableTreeNode rootNode= new DefaultMutableTreeNode("All");
+		HashMap<String, DefaultMutableTreeNode> hasPatterns = new HashMap<String, DefaultMutableTreeNode>();
 		for(PatternStorage pattern : patterns){
-			//if(rootNode.getChildCount()==0){
+			if(!hasPatterns.containsKey(pattern.getPattern())){
 				DefaultMutableTreeNode newPatternNode = new DefaultMutableTreeNode(pattern.getPattern());
 				newPatternNode.add(new DefaultMutableTreeNode(pattern.getHeadClass()));
-				rootNode.add(newPatternNode);
-			//}else{
-			//for(int i = 0; i<rootNode.getChildCount();i++){
-				//if(rootNode.getChildAt(i).toString().equals(pattern.getPattern())){
-				//	((DefaultMutableTreeNode)rootNode.getChildAt(i)).add(new DefaultMutableTreeNode(pattern.getHeadClass()));
-				//}else{
-//					DefaultMutableTreeNode newPatternNode = new DefaultMutableTreeNode(pattern.getPattern());
-//					newPatternNode.add(new DefaultMutableTreeNode(pattern.getHeadClass()));
-//					rootNode.add(newPatternNode);
-				//}
-			//}
-			//}
+				hasPatterns.put(pattern.getPattern(), newPatternNode);
+			}else{
+				hasPatterns.get(pattern.getPattern()).add(new DefaultMutableTreeNode(pattern.getHeadClass()));
+			}
+		}
+		for(DefaultMutableTreeNode node : hasPatterns.values()){
+			rootNode.add(node);
 		}
 		DefaultTreeModel model = new DefaultTreeModel(rootNode);
 		
-		
 		tree.setModel(model);
 		
-		
-		
-		//tree.removeSelectionRow(0);
 		tree.addCheckChangeEventListener(new JCheckBoxTree.CheckChangeEventListener() {
 			public void checkStateChanged(JCheckBoxTree.CheckChangeEvent event) {
 				TreePath[] paths = tree.getCheckedPaths();
 				ArrayList<String> classString = new ArrayList<String>();
 				for (TreePath tp : paths) {
 					if(tp.getPath().length==3){
-						//for (Object pathPart : tp.getPath()) {
 						classString.add(tp.getPath()[2].toString());
-							//classString= classString + " " +pathPart;
-						//}
 					}
-					//TODO: format classString better
 					selectedClasses = classString;
 				}
 				System.out.println(classString);
