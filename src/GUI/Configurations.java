@@ -1,13 +1,19 @@
 package GUI;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
+import javax.swing.JPanel;
+
 import MisfitsPackage.ClassFinder;
 
 public class Configurations {
-	private static ArrayList<String> myArray = new ArrayList<String>();
 	private static Configurations ourConfigs; 
 	public String inputFolder;
 	public String inputClasses;
@@ -18,22 +24,18 @@ public class Configurations {
 	public ArrayList<String> classString;
 	public ArrayList<String> patternString;
 	public HashMap<String, Object> thresholds;
+	static int count = 0;
 
-	private Configurations(String iFolder, String iClasses, String oDirectory, String dPath, String pha, ArrayList<String> arrayList) {
-		inputFolder = iFolder;
-		inputClasses = iClasses;
-		outputDirectory = oDirectory;
-		dotPath = dPath;
-		phases = pha;
-		patternDelegations = arrayList;
+	private Configurations() {
+		patternDelegations = new ArrayList<String>();
+		classString = new ArrayList<String>();
+		patternString = new ArrayList<String>();
 		thresholds = new HashMap<String, Object>();
-		parsePatterns();
-		setThreshold();
 	}
 
 	public static Configurations getInstance() {
 		if(ourConfigs == null){
-			ourConfigs = new Configurations("c:\\User1\\Documents\\Lab2-1\\bin", "java.io.Reader,java.io.BufferedReader,java.lang.Runtime,org.asm.ClassVisitor", "C:\\Users\\cookmn\\Documents\\GitHub\\CSSE374Misfits\\docs\\Image", "C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe", "UMLClasses.DecoratorDetector Singleton-Detector", myArray);
+			ourConfigs = new Configurations();
 		}
 		return ourConfigs;
 	}
@@ -117,5 +119,59 @@ public class Configurations {
 		return thresholds.get(pattern);
 	}
 
+	public void update(Path file2) {
+		readConfigText(file2);
+	}
+
+	private void doParsing(String toPrint) {
+		String[] strings = new String[2];
+		if(count == 0){
+			strings = toPrint.split(": ");
+			Configurations.getInstance().setInputFolder(strings[1]);
+			System.out.println("0");
+		} else if(count == 1) {
+			strings = toPrint.split(": ");
+			Configurations.getInstance().setInputClasses(strings[1]);
+			System.out.println("1");
+		} else if(count == 2) {
+			strings = toPrint.split(": ");
+			Configurations.getInstance().setOutputDirectory(strings[1]);
+			System.out.println("2");
+		} else if(count == 3) {
+			strings = toPrint.split(": ");
+			Configurations.getInstance().setDotPath(strings[1]);
+			System.out.println("3");
+		} else if(count == 4) {
+			strings = toPrint.split(": ");
+			Configurations.getInstance().setPhases(strings[1]);
+			System.out.println("4");
+		} else{
+			strings = toPrint.split(": ");
+			Configurations.getInstance().patternDelegations.add(strings[0]);
+			Configurations.getInstance().patternDelegations.add(strings[1]);
+			System.out.println("5");
+			//System.out.println(Configurations.getInstance().patternDelegations);
+		}
+		count++;
+	}
+	
+	private void readConfigText(java.nio.file.Path file){
+		count = 0;
+		int tempCount= 0;
+		Charset charset = Charset.forName("US-ASCII");
+		try (BufferedReader reader = Files.newBufferedReader(file, charset)) {
+		    String line = null;
+		    while ((line = reader.readLine()) != null) {	
+		    	if(tempCount %2 == 0){
+		    		doParsing(line);
+		    	}
+		    	tempCount++;
+		    }
+		} catch (IOException x) {
+		    System.err.format("IOException: %s%n", x);
+		}
+		return;
+	}
+	
 
 }

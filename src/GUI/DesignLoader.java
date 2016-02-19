@@ -18,9 +18,13 @@ public class DesignLoader {
 		
 		
 		ArrayList<String> classes = Configurations.getInstance().classString;
-		WorkerForArrows.addWhitelist((String[])classes.toArray());
+		String[] toWhitelist = new String[classes.size()];
+		for (int i = 0; i < classes.size(); i++) {
+			toWhitelist[i] = classes.get(i);
+		}
+		WorkerForArrows.addWhitelist(toWhitelist);
 		for (String className : classes) {
-			
+			System.out.println(className);
 			UMLArrows.getInstance().resetUMLArrows(className);
 			try {
 				DesignParser.makeReader(className);
@@ -31,7 +35,9 @@ public class DesignLoader {
 		}
 		UMLArrows.getInstance().resetUMLArrows("");
 		//DONE MAKING CLASSES
+		System.out.println("I got to detections");
 		UMLArrows.getInstance().detect();
+		System.out.println("runDesign Exiting...");
 	}
 
 	private void loadPatterns() throws ClassNotFoundException,
@@ -41,7 +47,7 @@ public class DesignLoader {
 
 		for(String pattern : Configurations.getInstance().patternString){
 			System.out.println(pattern);
-			Class myClass = Class.forName(pattern);
+			Class myClass = Class.forName("UMLClasses." + pattern);
 			//
 			Class[] types = {Object.class};
 			Constructor constructor = myClass.getConstructor(types);

@@ -19,7 +19,6 @@ public class ConfigPanel {
 	static int count = 0;
 	static int timeSettingConfig = 0;
 
-
 	public ConfigPanel() {
 		panel = new JPanel();
 		addText(panel);
@@ -46,9 +45,11 @@ public class ConfigPanel {
 		update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				java.nio.file.Path file2 = Paths.get(textArea.getText());
-				String toPrint = setConfigText(file2, panel);
+				Configurations.getInstance().update(file2);
+				setConfigText(file2, panel);
 			}
 		});
+		Configurations.getInstance().update(file);
 		setConfigText(file, panel);
 		panel.add(update);
 		JButton done = new JButton("button");
@@ -57,61 +58,37 @@ public class ConfigPanel {
 		done.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Configurations.getInstance().setClasses();
+				Configurations.getInstance().parsePatterns();
+				Configurations.getInstance().setThreshold();
 				GUIMain.runStartPanel();
 			}
 		});
 		panel.add(done);
 	}
-	
 
-	private static void doParsing(String toPrint) {
-		String[] strings = new String[2];
-		if(count == 0){
-			strings = toPrint.split(": ");
-			Configurations.getInstance().setInputFolder(strings[1]);
-		} else if(count == 1) {
-			strings = toPrint.split(": ");
-			Configurations.getInstance().setInputClasses(strings[1]);
-		} else if(count == 2) {
-			strings = toPrint.split(": ");
-			Configurations.getInstance().setOutputDirectory(strings[1]);
-		} else if(count == 3) {
-			strings = toPrint.split(": ");
-			Configurations.getInstance().setDotPath(strings[1]);
-		} else if(count == 4) {
-			strings = toPrint.split(": ");
-			Configurations.getInstance().setPhases(strings[1]);
-		} else{
-			strings = toPrint.split(": ");
-			Configurations.getInstance().patternDelegations.add(strings[0]);
-			Configurations.getInstance().patternDelegations.add(strings[1]);
-			System.out.println(Configurations.getInstance().patternDelegations);
-		}
-		count++;
-	}
-	
-	public static String setConfigText(java.nio.file.Path file, JPanel panel){
-		int tempCount = 0;
+	public static String setConfigText(java.nio.file.Path file, JPanel panel) {
+		// int tempCount = 0;
 		configs.setText("");
 		String toPrint = "<html>";
 		Charset charset = Charset.forName("US-ASCII");
 		try (BufferedReader reader = Files.newBufferedReader(file, charset)) {
-		    String line = null;
-		    while ((line = reader.readLine()) != null) {
-		    	toPrint += line + "<br>";
-		    	if(timeSettingConfig != 0 && tempCount %2 == 0){
-		    		doParsing(line);
-		    	}
-		    	tempCount++;
-		    }
+			String line = null;
+			while ((line = reader.readLine()) != null) {
+				toPrint += line + "<br>";
+
+				// if(timeSettingConfig != 0 && tempCount %2 == 0){
+				// doParsing(line);
+				// }
+				// tempCount++;
+			}
 		} catch (IOException x) {
-		    System.err.format("IOException: %s%n", x);
+			System.err.format("IOException: %s%n", x);
 		}
 		toPrint += "</html>";
 		configs.setText(toPrint);
 		configs.setBounds(50, 200, 900, 500);
 		panel.add(configs);
-		timeSettingConfig++;
+		// timeSettingConfig++;
 		return toPrint;
 	}
 
