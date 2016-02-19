@@ -16,7 +16,6 @@ public class UMLRenderer {
 			ProcessBuilder pb = new ProcessBuilder(com);
 			Process p = pb.start();
 			p.waitFor();
-			System.out.println(p.exitValue());
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}

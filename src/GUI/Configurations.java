@@ -133,29 +133,22 @@ public class Configurations {
 		if(count == 0){
 			strings = toPrint.split(": ");
 			Configurations.getInstance().setInputFolder(strings[1]);
-			System.out.println("0");
 		} else if(count == 1) {
 			strings = toPrint.split(": ");
 			Configurations.getInstance().setInputClasses(strings[1]);
-			System.out.println("1");
 		} else if(count == 2) {
 			strings = toPrint.split(": ");
 			Configurations.getInstance().setOutputDirectory(strings[1]);
-			System.out.println("2");
 		} else if(count == 3) {
 			strings = toPrint.split(": ");
 			Configurations.getInstance().setDotPath(strings[1]);
-			System.out.println("3");
 		} else if(count == 4) {
 			strings = toPrint.split(": ");
 			Configurations.getInstance().setPhases(strings[1]);
-			System.out.println("4");
 		} else{
 			strings = toPrint.split(": ");
 			Configurations.getInstance().patternDelegations.add(strings[0]);
 			Configurations.getInstance().patternDelegations.add(strings[1]);
-			System.out.println("5");
-			//System.out.println(Configurations.getInstance().patternDelegations);
 		}
 		count++;
 	}
