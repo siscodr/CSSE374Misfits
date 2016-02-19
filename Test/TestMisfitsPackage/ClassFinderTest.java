@@ -13,6 +13,9 @@ public class ClassFinderTest {
 		String[] classes = ClassFinder
 				.getClasses("C:/Users/siscodr/Documents/GitHub/CSSE374Misfits/bin");
 		assertTrue(classes != null);
+		for(String clazz: classes){
+			System.out.println(clazz);
+		}
 	}
 
 }

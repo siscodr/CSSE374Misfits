@@ -3,6 +3,7 @@ package ClassStorage;
 public class ArrowStorage {
 	private String targetType;
 	private String label = "";
+	private String color = "";
 
 	public ArrowStorage(String targetType) {
 		super();
@@ -20,6 +21,17 @@ public class ArrowStorage {
 		return "";
 	}
 
+	public String getColor() {
+		if (color != "") {
+			return "color=\"" + color + "\" ";
+		}
+		return color;
+	}
+	
+	public void setColor(String color) {
+		this.color = color;
+	}
+	
 	public void setLabel(String label) {
 		this.label = label;
 	}

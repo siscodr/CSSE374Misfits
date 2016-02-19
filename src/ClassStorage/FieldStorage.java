@@ -5,12 +5,14 @@ public class FieldStorage {
 	private String name;
 	private String type;
 	private String label;
+	private String color = "";
 
 	public FieldStorage(int access, String type) {
 		super();
 		this.access = access;
 		this.type = type;
 		this.name = null;
+		
 	}
 
 	public FieldStorage(int access, String type, String name) {
@@ -37,6 +39,17 @@ public class FieldStorage {
 			return "label = \" " + label + "\"";
 		}
 		return "";
+	}
+	
+	public String getColor() {
+		if (color != "") {
+			return "color=\"" + color + "\" ";
+		}
+		return color;
+	}
+	
+	public void setColor(String color) {
+		this.color = color;
 	}
 
 	public void setLabel(String label) {

@@ -9,6 +9,7 @@ import jdk.internal.org.objectweb.asm.Type;
 public class ClassContainer {
 	private String className;
 	private String label;
+	private String annotation;
 	private ArrayList<FieldStorage> fields;
 	private ArrayList<MethodStorage> methods;
 	private ArrayList<ArrowStorage> uses;
@@ -35,6 +36,7 @@ public class ClassContainer {
 		this.methodsField = new ArrayList<MethodFieldsStorage>();
 		this.collectionDataTypes = new ArrayList<String>();
 		label = "";
+		annotation = "";
 		color = "";
 		fillColor = "";
 	}
@@ -89,7 +91,16 @@ public class ClassContainer {
 	public void setLabel(String label) {
 		this.label = label;
 	}
-
+	
+	public String getAnnotation(){
+		if(annotation == ""){return "";}
+		return annotation + " \\n";
+	}
+	
+	public void setAnnotation(String annotation){
+		this.annotation = annotation;
+	}
+	
 	public String getClassName() {
 		return className;
 	}

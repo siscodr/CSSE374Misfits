@@ -41,7 +41,7 @@ public class UMLPrinter {
 				color = tempClass.getColor();
 				fillColor = tempClass.getFillColor();
 			System.out.print("   " + tempClass.getClassName() + " [\n     shape=\"record\"  " + color + fillColor
-					+ "    label = \"{" + preLabel + tempClass.getClassName() + pattern + "|"
+					+ "    label = \"{" + preLabel + tempClass.getAnnotation() +  tempClass.getClassName() + pattern + "|"
 					+ tempClass.getfieldBuffer().toString() + "|" + tempClass.getMethodBuffer().toString()
 					+ "\n}\"\n];\n");
 			printArrows(tempClass);
@@ -93,7 +93,7 @@ public class UMLPrinter {
 	private static void printUses(ClassContainer tempClass) {
 		for (ArrowStorage types : tempClass.getUses()) {
 			if (types.getTargetType().contains("_") && !types.getTargetType().equals(tempClass.getClassName())) {
-				System.out.println(tempClass.getClassName() + " -> " + types.getTargetType() + " [ " + types.getLabel()
+				System.out.println(tempClass.getClassName() + " -> " + types.getTargetType() + " [ "+ types.getColor() + " "+ types.getLabel()
 						+ "arrowhead=\"vee\", style=\"dashed\"];");
 			}
 		}
@@ -110,7 +110,7 @@ public class UMLPrinter {
 	private static void printFields(ClassContainer tempClass) {
 		for (FieldStorage field : tempClass.getFields()) {
 			if (field.getType().contains("_") && !field.getType().equals(tempClass.getClassName())) {
-				System.out.println(tempClass.getClassName() + " -> " + field.getType() + " [" + field.getLabel()
+				System.out.println(tempClass.getClassName() + " -> " + field.getType() + " [" + field.getColor() + " "+ field.getLabel()
 						+ "arrowhead=\"vee\"];");
 			}
 		}
@@ -128,7 +128,7 @@ public class UMLPrinter {
 		for (ArrowStorage interf : tempClass.getInterfaces()) {
 			if (interf.getTargetType().contains("_") && !interf.getTargetType().equals(tempClass.getClassName())) {
 				System.out.println(tempClass.getClassName() + " -> " + interf.getTargetType() + " [ "
-						+ interf.getLabel() + "arrowhead=\"onormal\", style=\"dashed\"];");
+						+ interf.getColor() + " "+ interf.getLabel() + "arrowhead=\"onormal\", style=\"dashed\"];");
 			}
 		}
 	}
@@ -148,7 +148,7 @@ public class UMLPrinter {
 		}
 		if (extension.getTargetType().contains("_") && !extension.getTargetType().equals(tempClass.getClassName())) {
 			System.out.println(tempClass.getClassName() + " -> " + tempClass.getSupers().getTargetType() + " ["
-					+ extension.getLabel() + "arrowhead=\"onormal\"];");
+					+ extension.getColor() + " "+ extension.getLabel() + "arrowhead=\"onormal\"];");
 		}
 	}
 }
