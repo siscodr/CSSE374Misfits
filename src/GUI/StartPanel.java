@@ -16,6 +16,7 @@ public class StartPanel {
 		addWelcomeLabel(panel);
 		addConfigButton(panel);
 		addLaunchButton(panel);
+		Configurations.getInstance().loadConfig(Configurations.getInstance().configFile);
 	}
 
 	private static void addWelcomeLabel(JPanel panel) {

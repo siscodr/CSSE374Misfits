@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -20,6 +21,7 @@ public class Configurations {
 	public String outputDirectory;
 	public String dotPath;
 	public String phases;
+	public String configFile;
 	public ArrayList<String> patternDelegations;
 	public ArrayList<String> classString;
 	public ArrayList<String> patternString;
@@ -27,6 +29,7 @@ public class Configurations {
 	static int count = 0;
 
 	private Configurations() {
+		configFile = "docs\\ConfigFile";
 		patternDelegations = new ArrayList<String>();
 		classString = new ArrayList<String>();
 		patternString = new ArrayList<String>();
@@ -78,6 +81,15 @@ public class Configurations {
 	public void setOutputDirectory(String outputDirectory) {
 		this.outputDirectory = outputDirectory;
 	}
+	
+	public String getConfigFile() {
+		return configFile;
+	}
+
+	public void setConfigFile(String configFile) {
+		this.configFile = configFile;
+		loadConfig(configFile);
+	}
 
 	public String getDotPath() {
 		return dotPath;
@@ -110,17 +122,10 @@ public class Configurations {
 	}
 
 	public Object getThreshold(String pattern) {
-		System.out.println("Morgan hi" + pattern);
-		System.out.println(thresholds.toString());
-		System.out.println(patternDelegations);
 		if(!thresholds.containsKey(pattern)){
 			return null;
 		}
 		return thresholds.get(pattern);
-	}
-
-	public void update(Path file2) {
-		readConfigText(file2);
 	}
 
 	private void doParsing(String toPrint) {
@@ -155,8 +160,9 @@ public class Configurations {
 		count++;
 	}
 	
-	private void readConfigText(java.nio.file.Path file){
+	public void loadConfig(String inputPath){
 		count = 0;
+		java.nio.file.Path file = Paths.get(inputPath);
 		int tempCount= 0;
 		Charset charset = Charset.forName("US-ASCII");
 		try (BufferedReader reader = Files.newBufferedReader(file, charset)) {
@@ -170,7 +176,9 @@ public class Configurations {
 		} catch (IOException x) {
 		    System.err.format("IOException: %s%n", x);
 		}
-		return;
+		setClasses();
+		parsePatterns();
+		setThreshold();
 	}
 	
 

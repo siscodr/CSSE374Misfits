@@ -25,7 +25,7 @@ public class ConfigPanel {
 	}
 
 	private static void addText(JPanel panel) {
-		java.nio.file.Path file = Paths.get("docs\\ConfigFile");
+		java.nio.file.Path file = Paths.get(Configurations.getInstance().configFile);
 		JLabel label = new JLabel("config main label");
 		label.setText("Here are your configurations!");
 		panel.setLayout(null);
@@ -44,12 +44,12 @@ public class ConfigPanel {
 		update.setBounds(400, 200, 200, 50);
 		update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				java.nio.file.Path file2 = Paths.get(textArea.getText());
-				Configurations.getInstance().update(file2);
+				String textAreaText = textArea.getText();
+				java.nio.file.Path file2 = Paths.get(textAreaText);
+				Configurations.getInstance().setConfigFile(textAreaText);
 				setConfigText(file2, panel);
 			}
 		});
-		Configurations.getInstance().update(file);
 		setConfigText(file, panel);
 		panel.add(update);
 		JButton done = new JButton("button");
@@ -57,17 +57,13 @@ public class ConfigPanel {
 		done.setBounds(720, 640, 200, 50);
 		done.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Configurations.getInstance().setClasses();
-				Configurations.getInstance().parsePatterns();
-				Configurations.getInstance().setThreshold();
 				GUIMain.runStartPanel();
 			}
 		});
 		panel.add(done);
 	}
 
-	public static String setConfigText(java.nio.file.Path file, JPanel panel) {
-		// int tempCount = 0;
+	public static void setConfigText(java.nio.file.Path file, JPanel panel) {
 		configs.setText("");
 		String toPrint = "<html>";
 		Charset charset = Charset.forName("US-ASCII");
@@ -75,11 +71,6 @@ public class ConfigPanel {
 			String line = null;
 			while ((line = reader.readLine()) != null) {
 				toPrint += line + "<br>";
-
-				// if(timeSettingConfig != 0 && tempCount %2 == 0){
-				// doParsing(line);
-				// }
-				// tempCount++;
 			}
 		} catch (IOException x) {
 			System.err.format("IOException: %s%n", x);
@@ -88,8 +79,6 @@ public class ConfigPanel {
 		configs.setText(toPrint);
 		configs.setBounds(50, 200, 900, 500);
 		panel.add(configs);
-		// timeSettingConfig++;
-		return toPrint;
 	}
 
 	public JPanel getPanel() {
