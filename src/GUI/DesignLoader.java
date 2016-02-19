@@ -45,7 +45,7 @@ public class DesignLoader {
 			Class[] types = {Object.class};
 			Constructor constructor = myClass.getConstructor(types);
 			//
-			Object[] parameters = {Object.class};
+			Object[] parameters = {Configurations.getInstance().getThreshold(pattern)};
 			Object instanceOfMyClass = constructor.newInstance(parameters);
 			
 			UMLArrows.getInstance().addDetector((PatternDetector)instanceOfMyClass);

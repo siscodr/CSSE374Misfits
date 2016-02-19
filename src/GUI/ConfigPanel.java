@@ -83,6 +83,7 @@ public class ConfigPanel {
 			Configurations.getInstance().setPhases(strings[1]);
 		} else{
 			strings = toPrint.split(": ");
+			Configurations.getInstance().patternDelegations.add(strings[0]);
 			Configurations.getInstance().patternDelegations.add(strings[1]);
 			System.out.println(Configurations.getInstance().patternDelegations);
 		}

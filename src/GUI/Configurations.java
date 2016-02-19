@@ -2,6 +2,7 @@ package GUI;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 import MisfitsPackage.ClassFinder;
 
@@ -16,6 +17,7 @@ public class Configurations {
 	public ArrayList<String> patternDelegations;
 	public ArrayList<String> classString;
 	public ArrayList<String> patternString;
+	public HashMap<String, Object> thresholds;
 
 	private Configurations(String iFolder, String iClasses, String oDirectory, String dPath, String pha, ArrayList<String> arrayList) {
 		inputFolder = iFolder;
@@ -24,6 +26,7 @@ public class Configurations {
 		dotPath = dPath;
 		phases = pha;
 		patternDelegations = arrayList;
+		setThreshold();
 	}
 
 	public static Configurations getInstance() {
@@ -94,6 +97,19 @@ public class Configurations {
 
 	public void setPatternDelegations(ArrayList<String> patternDelegations) {
 		this.patternDelegations = patternDelegations;
+	}
+	
+	public void setThreshold() {
+		for(int i = 0; i < patternDelegations.size(); i+=2){
+			thresholds.put(patternDelegations.get(i), patternDelegations.get(i + 1));
+		}
+	}
+
+	public Object getThreshold(String pattern) {
+		if(thresholds.get(pattern) == null){
+			return null;
+		}
+		return thresholds.get(pattern);
 	}
 
 
