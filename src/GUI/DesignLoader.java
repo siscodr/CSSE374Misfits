@@ -40,6 +40,7 @@ public class DesignLoader {
 		//TODO: parse inputfolder + inputclasses
 
 		for(String pattern : Configurations.getInstance().patternString){
+			System.out.println(pattern);
 			Class myClass = Class.forName(pattern);
 			//
 			Class[] types = {Object.class};

@@ -26,12 +26,14 @@ public class Configurations {
 		dotPath = dPath;
 		phases = pha;
 		patternDelegations = arrayList;
+		thresholds = new HashMap<String, Object>();
+		parsePatterns();
 		setThreshold();
 	}
 
 	public static Configurations getInstance() {
 		if(ourConfigs == null){
-			ourConfigs = new Configurations("c:\\User1\\Documents\\Lab2-1\\bin", "java.io.Reader,java.io.BufferedReader,java.lang.Runtime,org.asm.ClassVisitor", "C:\\Users\\cookmn\\Documents\\GitHub\\CSSE374Misfits\\docs\\Image", "C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe", "Loader, Decorator-Detector, Singleton-Detector", myArray);
+			ourConfigs = new Configurations("c:\\User1\\Documents\\Lab2-1\\bin", "java.io.Reader,java.io.BufferedReader,java.lang.Runtime,org.asm.ClassVisitor", "C:\\Users\\cookmn\\Documents\\GitHub\\CSSE374Misfits\\docs\\Image", "C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe", "UMLClasses.DecoratorDetector Singleton-Detector", myArray);
 		}
 		return ourConfigs;
 	}
@@ -106,7 +108,10 @@ public class Configurations {
 	}
 
 	public Object getThreshold(String pattern) {
-		if(thresholds.get(pattern) == null){
+		System.out.println("Morgan hi" + pattern);
+		System.out.println(thresholds.toString());
+		System.out.println(patternDelegations);
+		if(!thresholds.containsKey(pattern)){
 			return null;
 		}
 		return thresholds.get(pattern);

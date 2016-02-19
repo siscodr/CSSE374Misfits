@@ -2,14 +2,14 @@ Input-Folder: C:\EclipseWorkspaces\CSSE374\Lab5-1\bin
 
 Input-Classes: java.io.Reader java.io.BufferedReader java.lang.Runtime org.asm.ClassVisitor
 
-Output-Directory: C:\\Users\\cookmn\\Documents\\GitHub\\CSSE374Misfits\\docs\\Export
+Output-Directory: C:\\Users\\siscodr\\Documents\\GitHub\\CSSE374Misfits\\docs\\Export
 
 Dot-Path: C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe
 
-Phases: Loader, Decorator-Detector, Singleton-Detector
+Phases: DecoratorDetector, SingletonDetector
 
-Adapter-MethodDelegation: 2
+AdapterDetector: 2
 
-Decorator-MethodDelegation: 1
+DecoratorDetector: 1
 
-Singleton-RequireGetInstance: true
+SingletonDetector: true

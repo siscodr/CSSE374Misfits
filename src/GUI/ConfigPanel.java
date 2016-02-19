@@ -26,7 +26,7 @@ public class ConfigPanel {
 	}
 
 	private static void addText(JPanel panel) {
-		java.nio.file.Path file = Paths.get("C:\\Users\\cookmn\\Documents\\GitHub\\CSSE374Misfits\\docs\\ConfigFile");
+		java.nio.file.Path file = Paths.get("docs\\ConfigFile");
 		JLabel label = new JLabel("config main label");
 		label.setText("Here are your configurations!");
 		panel.setLayout(null);
